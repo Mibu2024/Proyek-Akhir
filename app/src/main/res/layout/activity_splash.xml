@@ -12,7 +12,7 @@
         android:id="@+id/image3"
         android:layout_width="382dp"
         android:layout_height="385dp"
-        android:src="@drawable/Logo_Mibu"
+        android:src="@drawable/logo_mibu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"

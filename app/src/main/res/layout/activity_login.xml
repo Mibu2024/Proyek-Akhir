@@ -1,6 +1,146 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:context=".ui.app.login.LoginActivity">
+
+
+            <ImageView
+                android:id="@+id/image2"
+                android:layout_width="197dp"
+                android:layout_height="142dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="0dp"
+                android:contentDescription="@string/logo"
+                android:src="@drawable/logo_mibu_no_text"
+                app:layout_constraintBottom_toBottomOf="@+id/signInTextView" />
+
+            <TextView
+                android:id="@+id/signInTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginTop="5dp"
+                android:text="Login"
+                android:textAlignment="center"
+                android:textSize="34sp"
+                android:textStyle="bold"
+                tools:ignore="RtlCompat" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:text="Welcome Back! Sign in with your email and password."
+                android:textAlignment="viewStart"
+                android:textSize="20sp"
+                tools:ignore="RtlCompat" />
+
+            <com.proyekakhir.mibu.ui.app.custom_view.EmailEditTextView
+                android:id="@+id/emailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/rounded_button"
+                android:padding="12dp" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/passwordTextInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end">
+
+                    <com.proyekakhir.mibu.ui.app.custom_view.PasswordEditTextView
+                        android:id="@+id/passwordEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/rounded_button"
+                        android:padding="12dp" />
+
+                    <com.proyekakhir.mibu.ui.app.custom_view.EyeIconView
+                        android:id="@+id/eyeIcon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right|center_vertical"
+                        android:clickable="true"
+                        android:paddingEnd="8dp" />
+
+                </FrameLayout>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/forgotPasswordTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="24dp"
+                android:text="Forgot Password?"
+                android:textAlignment="center" />
+
+            <com.proyekakhir.mibu.ui.app.custom_view.ButtonLoginView
+                android:id="@+id/logInButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Log In" />
+
+            <com.proyekakhir.mibu.ui.app.custom_view.DontHaveTextView
+                android:id="@+id/registerPromptTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="Don't have an account? Sign Up" />
+        </LinearLayout>
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="false"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="visible" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

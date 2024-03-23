@@ -23,9 +23,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/Logo_Mibu"
+        android:icon="@drawable/logo_mibu"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/Logo_Mibu"
+        android:roundIcon="@drawable/logo_mibu"
         android:supportsRtl="true"
         android:theme="@style/Theme.Mibu"
         tools:targetApi="31">
