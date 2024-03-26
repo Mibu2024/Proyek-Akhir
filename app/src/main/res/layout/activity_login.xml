@@ -16,7 +16,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,12 +57,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
-                android:text="Welcome Back! Sign in with your email and password."
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="5dp"
+                android:text="Selamat Datang! Silahkan isi daftar diri anda terlebih dahulu"
                 android:textAlignment="viewStart"
                 android:textSize="20sp"
                 tools:ignore="RtlCompat" />
+
+            <ImageView
+                android:id="@+id/image3"
+                android:layout_width="115dp"
+                android:layout_height="16dp"
+                android:layout_gravity="left"
+                android:layout_marginBottom="10dp"
+                android:contentDescription="@string/logo"
+                android:src="@drawable/garis"
+                app:layout_constraintBottom_toBottomOf="@+id/signInTextView" />
+
+            <TextView
+                android:id="@+id/emailTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="0dp"
+                android:text="Email"
+                android:textStyle="bold" />
 
             <com.proyekakhir.mibu.ui.app.custom_view.EmailEditTextView
                 android:id="@+id/emailEditText"
@@ -77,6 +97,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp">
+
+                <TextView
+                    android:id="@+id/passwordTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="0dp"
+                    android:text="Your Password"
+                    android:textStyle="bold" />
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -97,7 +127,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="right|center_vertical"
                         android:clickable="true"
-                        android:paddingEnd="8dp" />
+                        android:paddingTop="8dp"
+                        android:paddingEnd="10dp" />
 
                 </FrameLayout>
 
@@ -107,10 +138,11 @@
                 android:id="@+id/forgotPasswordTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_gravity="left"
+                android:layout_marginTop="10dp"
                 android:layout_marginBottom="24dp"
                 android:text="Forgot Password?"
-                android:textAlignment="center" />
+                android:textStyle="bold" />
 
             <com.proyekakhir.mibu.ui.app.custom_view.ButtonLoginView
                 android:id="@+id/logInButton"
@@ -125,7 +157,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                android:text="Don't have an account? Sign Up" />
+                android:text="Belum punya akun? Daftar" />
         </LinearLayout>
     </ScrollView>
 

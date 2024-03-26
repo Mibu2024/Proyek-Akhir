@@ -10,4 +10,12 @@
     <string name="hint_password">Password</string>
     <string name="error_password">Password must be at least 8 characters long!</string>
     <string name="belum_punya_akun">Don\'t have an account?</string>
+    <string name="description_onboard">Monitoring Ibu Hamil dan Balita</string>
+    <string name="text_welcome">Mibu</string>
+    <string name="title_menu1">Catat Kesehatan Bunda</string>
+    <string name="description_menu1">Selamat datang di aplikasi kami! Inilah awal perjalanan Anda untuk Cek Kehamilan dengan mudah dan tertata, di monitoring langsung oleh Bidan anda.</string>
+    <string name="title_menu2">Cek kesehatan lebih mudah dalam satu genggaman</string>
+    <string name="description_menu2">Dapatkan akses cepat dan praktis ke informasi kesehatan Bunda dan anak, cukup dengan satu genggaman.</string>
+
+
 </resources>
