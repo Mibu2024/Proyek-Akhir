@@ -1,4 +1,4 @@
-package com.proyekakhir.mibu.bidan.ui.mainPages.ui.home
+package com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.proyekakhir.mibu.databinding.FragmentHomeBinding
+import com.proyekakhir.mibu.databinding.FragmentBidanArtikelBinding
 
-class HomeFragment : Fragment() {
+class BidanArtikelFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: FragmentBidanArtikelBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -22,14 +22,14 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+        val bidanArtikelViewModel =
+            ViewModelProvider(this).get(BidanArtikelViewModel::class.java)
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentBidanArtikelBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
+        val textView: TextView = binding.textDashboard
+        bidanArtikelViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

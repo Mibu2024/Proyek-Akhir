@@ -29,6 +29,7 @@
         <activity
             android:name=".bidan.ui.mainPages.BidanMainActivity"
             android:exported="true"
+            android:windowSoftInputMode="adjustNothing"
             android:label="@string/title_activity_bidan_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

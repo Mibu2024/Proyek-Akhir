@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.HomeFragment"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.BidanHomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_bidan_home" />
 
     <fragment
         android:id="@+id/navigation_artikel"
-        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.ArtikelFragment"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.BidanArtikelFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_artikel" />
+        tools:layout="@layout/fragment_bidan_artikel" />
 
     <fragment
         android:id="@+id/navigation_settings"
-        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.settings.SettingsFragment"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.settings.BidanSettingsFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_bidan_settings" />
 </navigation>

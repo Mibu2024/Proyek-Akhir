@@ -1,13 +1,13 @@
-package com.proyekakhir.mibu.bidan.ui.mainPages.ui.settings
+package com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class SettingsViewModel : ViewModel() {
+class BidanArtikelViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
+        value = "This is dashboard Fragment"
     }
     val text: LiveData<String> = _text
 }

@@ -31,6 +31,9 @@
     <color name="blue_background">#EBF8FF</color>
     <color name="green_button">#789461</color>
     <color name="navbar_green">#50623A</color>
+    <color name="searchview_green">#DBE7C9</color>
+    <color name="green_button_detail">#80BD71</color>
+    <color name="form_button">#3F6838</color>
 
 
 <!--    extra color     -->
