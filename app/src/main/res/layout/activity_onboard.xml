@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     app:layoutDescription="@xml/activity_onboard_scene"
-    tools:context=".ui.app.ui.mibu_intro.OnboardActivity">
+    tools:context=".user.ui.app.ui.mibu_intro.OnboardActivity">
 
     <TextView
         android:id="@+id/textView4"
