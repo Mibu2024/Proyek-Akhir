@@ -1,6 +1,330 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context=".ui.app.ui.mibu_register.RegisterActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+        <import type="android.graphics.drawable.Drawable"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/linearColumnlogoMibuNoOne"
+        style="@style/groupStyleblue_50"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:id="@+id/scrollViewScrollview"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_23pxv"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:gravity="center_horizontal">
+
+            <LinearLayout
+                android:id="@+id/linearRegister"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_34pxv"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/_25pxh"
+                android:paddingEnd="@dimen/_25pxh">
+
+                <ImageView
+                    android:id="@+id/imageLogomibunoOne"
+                    android:layout_width="@dimen/_125pxh"
+                    android:layout_height="@dimen/_103pxh"
+                    android:layout_gravity="center_horizontal"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/img_logo_mibu_no_text"
+                    tools:ignore="ContentDescription" />
+
+                <TextView
+                    android:id="@+id/txtCreatenew"
+                    style="@style/txtNunitobold24"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:letterSpacing="0.02"
+                    android:layout_marginTop="5dp"
+                    tools:text="@string/msg_create_new_account" />
+
+                <ImageView
+                    android:id="@+id/imageAccentOne"
+                    android:layout_width="@dimen/_99pxh"
+                    android:layout_height="@dimen/_4pxh"
+                    android:layout_gravity="start"
+                    android:layout_marginTop="@dimen/_18pxv"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/img_accent"
+                    tools:ignore="ContentDescription"
+                    tools:src="@drawable/img_accent" />
+
+                <EditText
+                    android:id="@+id/etInputOne"
+                    style="@style/etSolidRoundedOutline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_24pxv"
+                    android:background="@drawable/rectangle_bg_white_a700_border_black_900_33_radius_14"
+                    android:ellipsize="end"
+                    android:hint="@string/lbl_nama_lengkap"
+                    android:inputType="text"
+                    android:paddingStart="@dimen/_16pxh"
+                    android:paddingTop="@dimen/_17pxv"
+                    android:paddingEnd="@dimen/_16pxh"
+                    android:paddingBottom="@dimen/_17pxv"
+                    android:singleLine="true"
+                    android:textColorHint="@color/gray_500"
+                    tools:ignore="Autofill" />
+
+                <EditText
+                    android:id="@+id/etInputThree"
+                    style="@style/etSolidRoundedOutline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_29pxv"
+                    android:background="@drawable/rectangle_bg_white_a700_border_black_900_33_radius_14"
+                    android:ellipsize="end"
+                    android:hint="@string/lbl_alamat"
+                    android:inputType="text"
+                    android:paddingStart="@dimen/_16pxh"
+                    android:paddingTop="@dimen/_17pxv"
+                    android:paddingEnd="@dimen/_16pxh"
+                    android:paddingBottom="@dimen/_17pxv"
+                    android:singleLine="true"
+                    android:textColorHint="@color/gray_500"
+                    tools:ignore="Autofill" />
+
+                <EditText
+                    android:id="@+id/etEmail"
+                    style="@style/etSolidRoundedOutline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_29pxv"
+                    android:background="@drawable/rectangle_bg_white_a700_border_black_900_33_radius_14"
+                    android:ellipsize="end"
+                    android:hint="@string/lbl_email"
+                    android:inputType="text"
+                    android:paddingStart="@dimen/_16pxh"
+                    android:paddingTop="@dimen/_17pxv"
+                    android:paddingEnd="@dimen/_16pxh"
+                    android:paddingBottom="@dimen/_17pxv"
+                    android:singleLine="true"
+                    android:textColorHint="@color/gray_500"
+                    tools:ignore="Autofill" />
+
+                <EditText
+                    android:id="@+id/etInputFive"
+                    style="@style/etSolidRoundedOutline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_29pxv"
+                    android:background="@drawable/rectangle_bg_white_a700_border_black_900_33_radius_14"
+                    android:ellipsize="end"
+                    android:hint="@string/lbl_no_telepon"
+                    android:inputType="text"
+                    android:paddingStart="@dimen/_16pxh"
+                    android:paddingTop="@dimen/_17pxv"
+                    android:paddingEnd="@dimen/_16pxh"
+                    android:paddingBottom="@dimen/_17pxv"
+                    android:singleLine="true"
+                    android:textColorHint="@color/gray_500"
+                    tools:ignore="Autofill" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnDataIbu"
+                    style="@style/btnSolidRounded"
+                    android:layout_width="@dimen/_339pxh"
+                    android:layout_height="@dimen/_56pxv"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/_29pxv"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:letterSpacing="0.01"
+                    android:paddingStart="@dimen/_30pxh"
+                    android:paddingTop="@dimen/_15pxv"
+                    android:paddingEnd="@dimen/_30pxh"
+                    android:paddingBottom="@dimen/_15pxv"
+                    android:singleLine="true"
+                    android:text="@string/lbl_data_ibu"
+                    android:textAllCaps="false"
+                    tools:text="@string/lbl_data_ibu" />
+
+                <EditText
+                    android:id="@+id/etInputSeven"
+                    style="@style/etSolidRoundedOutline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_29pxv"
+                    android:background="@drawable/rectangle_bg_white_a700_border_black_900_33_radius_14"
+                    android:ellipsize="end"
+                    android:hint="@string/lbl_umur_ibu"
+                    android:inputType="text"
+                    android:paddingStart="@dimen/_16pxh"
+                    android:paddingTop="@dimen/_17pxv"
+                    android:paddingEnd="@dimen/_16pxh"
+                    android:paddingBottom="@dimen/_17pxv"
+                    android:singleLine="true"
+                    android:textColorHint="@color/gray_500"
+                    tools:ignore="Autofill" />
+
+                <EditText
+                    android:id="@+id/etInputNine"
+                    style="@style/etSolidRoundedOutline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_29pxv"
+                    android:background="@drawable/rectangle_bg_white_a700_border_black_900_33_radius_14"
+                    android:ellipsize="end"
+                    android:hint="@string/lbl_kehamilan_ke"
+                    android:inputType="text"
+                    android:paddingStart="@dimen/_16pxh"
+                    android:paddingTop="@dimen/_17pxv"
+                    android:paddingEnd="@dimen/_16pxh"
+                    android:paddingBottom="@dimen/_17pxv"
+                    android:singleLine="true"
+                    android:textColorHint="@color/gray_500"
+                    tools:ignore="Autofill" />
+
+                <EditText
+                    android:id="@+id/etInputEleven"
+                    style="@style/etSolidRoundedOutline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_29pxv"
+                    android:background="@drawable/rectangle_bg_white_a700_border_black_900_33_radius_14"
+                    android:ellipsize="end"
+                    android:hint="@string/lbl_nama_suami"
+                    android:inputType="text"
+                    android:paddingStart="@dimen/_16pxh"
+                    android:paddingTop="@dimen/_17pxv"
+                    android:paddingEnd="@dimen/_16pxh"
+                    android:paddingBottom="@dimen/_17pxv"
+                    android:singleLine="true"
+                    android:textColorHint="@color/gray_500"
+                    tools:ignore="Autofill" />
+
+                <EditText
+                    android:id="@+id/etInputThirteen"
+                    style="@style/etSolidRoundedOutline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_29pxv"
+                    android:background="@drawable/rectangle_bg_white_a700_border_black_900_33_radius_14"
+                    android:ellipsize="end"
+                    android:hint="@string/lbl_umur_suami"
+                    android:inputType="text"
+                    android:paddingStart="@dimen/_16pxh"
+                    android:paddingTop="@dimen/_17pxv"
+                    android:paddingEnd="@dimen/_16pxh"
+                    android:paddingBottom="@dimen/_17pxv"
+                    android:singleLine="true"
+                    android:textColorHint="@color/gray_500"
+                    tools:ignore="Autofill" />
+
+                <EditText
+                    android:id="@+id/etInputFifteen"
+                    style="@style/etSolidRoundedOutline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_29pxv"
+                    android:background="@drawable/rectangle_bg_white_a700_border_black_900_33_radius_14"
+                    android:ellipsize="end"
+                    android:hint="@string/lbl_nik_ibu"
+                    android:inputType="text"
+                    android:paddingStart="@dimen/_16pxh"
+                    android:paddingTop="@dimen/_17pxv"
+                    android:paddingEnd="@dimen/_16pxh"
+                    android:paddingBottom="@dimen/_17pxv"
+                    android:singleLine="true"
+                    android:textColorHint="@color/gray_500"
+                    tools:ignore="Autofill" />
+
+                <EditText
+                    android:id="@+id/etPassword"
+                    style="@style/etSolidRoundedOutline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_29pxv"
+                    android:background="@drawable/rectangle_bg_white_a700_border_black_900_33_radius_14"
+                    android:drawablePadding="@dimen/_30pxh"
+                    android:ellipsize="end"
+                    android:hint="@string/lbl_password"
+                    android:inputType="text"
+                    android:paddingStart="@dimen/_16pxh"
+                    android:paddingTop="@dimen/_17pxv"
+                    android:paddingBottom="@dimen/_17pxv"
+                    android:singleLine="true"
+                    android:textColorHint="@color/gray_500"
+                    tools:ignore="Autofill" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnRegister"
+                    style="@style/btnSolidRounded_1"
+                    android:layout_width="@dimen/_339pxh"
+                    android:layout_height="@dimen/_48pxv"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/_29pxv"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:lineSpacingExtra="@dimen/_8pxh"
+                    android:paddingStart="@dimen/_30pxh"
+                    android:paddingTop="@dimen/_12pxv"
+                    android:paddingEnd="@dimen/_30pxh"
+                    android:paddingBottom="@dimen/_12pxv"
+                    android:singleLine="true"
+                    android:text="@string/lbl_register"
+                    android:textAllCaps="false"
+                    tools:text="@string/lbl_register" />
+
+                <LinearLayout
+                    android:id="@+id/linearSignup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical"
+                    android:padding="5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <com.proyekakhir.mibu.ui.app.custom_view.DontHaveTextView
+                        android:id="@+id/registerPromptTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:text="Sudah punya akun? Login" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="false"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
