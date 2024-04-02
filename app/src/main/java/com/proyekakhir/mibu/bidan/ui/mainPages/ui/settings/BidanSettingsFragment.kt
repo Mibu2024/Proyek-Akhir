@@ -28,10 +28,6 @@ class BidanSettingsFragment : Fragment() {
         _binding = FragmentBidanSettingsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
-        bidanSettingsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
         return root
     }
 
