@@ -43,20 +43,6 @@
         <activity
             android:name=".bidan.ui.auth.BidanRegisterActivity"
             android:exported="false" />
-        <activity
-            android:name=".user.ui.app.ui.mibu_intro.OnboardActivity"
-            android:exported="false" />
-        <activity
-            android:name=".user.ui.app.ui.mibu_login.LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".user.ui.app.ui.mibu_intro.SplashScreenActivity"
-            android:exported="false" >
-
-        </activity>
-        <activity
-            android:name=".user.MainActivity"
-            android:exported="true" />
     </application>
 
 </manifest>

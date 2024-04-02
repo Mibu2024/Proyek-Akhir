@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:background="@color/blue_background"
-    tools:context=".bidan.ui.mainPages.ui.home.catatan.AddCatatanNifasFragment">
+    tools:context=".bidan.ui.mainPages.ui.home.catatan.AddDataAnakFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -28,7 +28,7 @@
             android:layout_width="187dp"
             android:layout_height="15dp"
             android:gravity="center"
-            android:text="@string/catatan_nifas_ibu_hamil"
+            android:text="@string/catatan_anak"
             android:textSize="14sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/iv_back"
@@ -37,14 +37,48 @@
             app:layout_constraintTop_toTopOf="@+id/iv_back" />
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/tv_nama"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="32dp"
-            android:text="@string/tanggal_periksa"
+            android:text="@string/nama"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_back" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/namaEditTextLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:elevation="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_nama">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/ed_nama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_et_default"
+                android:drawablePadding="12dp"
+                android:ems="10"
+                android:hint="@string/nama"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/tanggal_lahir"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/namaEditTextLayout" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tanggalEditTextLayout"
@@ -60,29 +94,29 @@
             app:layout_constraintTop_toBottomOf="@+id/textView12">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/ed_tanggal_periksa"
+                android:id="@+id/ed_tanggal_lahir"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_et_default"
                 android:drawableLeft="@drawable/baseline_calendar_month_24"
                 android:drawablePadding="12dp"
                 android:ems="10"
-                android:hint="@string/tanggal_periksa"
+                android:hint="@string/tanggal_lahir"
                 android:inputType="date" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/tv_kunjungan_ke"
+            android:id="@+id/tv_umur"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
-            android:text="@string/kunjungan_ke"
+            android:text="@string/umur"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tanggalEditTextLayout" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/kunjunganEditTextLayout"
+            android:id="@+id/umurEditTextLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -92,31 +126,31 @@
             android:elevation="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_kunjungan_ke">
+            app:layout_constraintTop_toBottomOf="@+id/tv_umur">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/ed_kunjungan"
+                android:id="@+id/ed_umur"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_et_default"
                 android:drawablePadding="12dp"
                 android:ems="10"
-                android:hint="@string/kunjungan_ke"
+                android:hint="@string/umur"
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/tv_periksa_asi"
+            android:id="@+id/tv_berat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
-            android:text="@string/periksa_asi"
+            android:text="@string/berat_badan"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/kunjunganEditTextLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/umurEditTextLayout" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/periksaAsiEditTextLayout"
+            android:id="@+id/beratEditTextLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -126,99 +160,31 @@
             android:elevation="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_periksa_asi">
+            app:layout_constraintTop_toBottomOf="@+id/tv_berat">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/ed_periksa_asi"
+                android:id="@+id/ed_berat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_et_default"
                 android:drawablePadding="12dp"
                 android:ems="10"
-                android:hint="@string/periksa_asi"
-                android:inputType="text" />
+                android:hint="@string/berat_badan"
+                android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/tv_periksa_pendarahan"
+            android:id="@+id/tv_polio2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
-            android:text="@string/periksa_pendarahan"
+            android:text="@string/polio2"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/periksaAsiEditTextLayout" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/periksaPendaraanEditTextLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            android:elevation="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_periksa_pendarahan">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/ed_periksa_pendarahan"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_et_default"
-                android:drawablePadding="12dp"
-                android:ems="10"
-                android:hint="@string/periksa_pendarahan"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:id="@+id/tv_jalan_lahir"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/jalan_lahir"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/periksaPendaraanEditTextLayout" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/jalanLahirEditTextLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="24dp"
-            android:elevation="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_jalan_lahir">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/ed_jalan_lahir"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_et_default"
-                android:drawablePadding="12dp"
-                android:ems="10"
-                android:hint="@string/jalan_lahir"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:id="@+id/tv_vit_a"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:text="@string/vitamin_a"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/jalanLahirEditTextLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/beratEditTextLayout" />
 
         <Spinner
-            android:id="@+id/spin_vit_a"
+            android:id="@+id/spin_polio2"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginStart="24dp"
@@ -227,20 +193,174 @@
             android:background="@drawable/bg_et_default"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_vit_a" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_polio2" />
 
         <TextView
-            android:id="@+id/tv_masalah"
+            android:id="@+id/tv_polio3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
-            android:text="@string/masalah"
+            android:text="@string/polio3"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spin_vit_a" />
+            app:layout_constraintTop_toBottomOf="@+id/spin_polio2" />
+
+        <Spinner
+            android:id="@+id/spin_polio3"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/bg_et_default"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_polio3" />
+
+        <TextView
+            android:id="@+id/tv_polio4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/polio4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spin_polio3" />
+
+        <Spinner
+            android:id="@+id/spin_polio4"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/bg_et_default"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_polio4" />
+
+        <TextView
+            android:id="@+id/tv_campak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/campak"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spin_polio4" />
+
+        <Spinner
+            android:id="@+id/spin_campak"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/bg_et_default"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_campak" />
+
+        <TextView
+            android:id="@+id/tv_hib1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/hib1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spin_campak" />
+
+        <Spinner
+            android:id="@+id/spin_hib1"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/bg_et_default"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_hib1" />
+
+        <TextView
+            android:id="@+id/tv_rubella1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/rubella1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spin_hib1" />
+
+        <Spinner
+            android:id="@+id/spin_rubella1"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/bg_et_default"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_rubella1" />
+
+        <TextView
+            android:id="@+id/tv_rubelladt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/rubelladt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spin_rubella1" />
+
+        <Spinner
+            android:id="@+id/spin_rubelladt"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/bg_et_default"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_rubelladt" />
+
+        <TextView
+            android:id="@+id/tv_tetanus"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/tetanus"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spin_rubelladt" />
+
+        <Spinner
+            android:id="@+id/spin_tetanus"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/bg_et_default"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tetanus" />
+
+        <TextView
+            android:id="@+id/tv_nama_pemeriksa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/nama_pemeriksa"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spin_tetanus" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/masalahEditTextLayout"
+            android:id="@+id/namaPemeriksaEditTextLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -250,31 +370,31 @@
             android:elevation="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_masalah">
+            app:layout_constraintTop_toBottomOf="@+id/tv_nama_pemeriksa">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/ed_masalah"
+                android:id="@+id/ed_nama_pemeriksa"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@drawable/bg_stroke_only"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_et_default"
                 android:drawablePadding="12dp"
                 android:ems="10"
-                android:hint="@string/masalah"
+                android:hint="@string/nama_pemeriksa"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
-            android:id="@+id/tv_tindakan"
+            android:id="@+id/tv_periksa_selanjutnya"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
-            android:text="@string/tindakan"
+            android:text="@string/periksa_selanjutnya"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/masalahEditTextLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/namaPemeriksaEditTextLayout" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tindakanEditTextLayout"
+            android:id="@+id/periksaSelanjutnyaEditTextLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -284,17 +404,18 @@
             android:elevation="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_tindakan">
+            app:layout_constraintTop_toBottomOf="@+id/tv_periksa_selanjutnya">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/ed_tindakan"
+                android:id="@+id/ed_periksa_selanjutnya"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
-                android:background="@drawable/bg_stroke_only"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_et_default"
+                android:drawableLeft="@drawable/baseline_calendar_month_24"
                 android:drawablePadding="12dp"
                 android:ems="10"
-                android:hint="@string/tindakan"
-                android:inputType="text" />
+                android:hint="@string/periksa_selanjutnya"
+                android:inputType="date" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
@@ -304,11 +425,14 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
+            android:layout_marginBottom="8dp"
             android:backgroundTint="@color/form_button"
-            android:text="@string/tambah_catatan"
+            android:text="@string/simpan"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tindakanEditTextLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/periksaSelanjutnyaEditTextLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
