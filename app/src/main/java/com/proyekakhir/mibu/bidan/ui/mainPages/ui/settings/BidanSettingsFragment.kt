@@ -30,6 +30,12 @@ class BidanSettingsFragment : Fragment() {
         _binding = FragmentBidanSettingsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        val username = FirebaseAuth.getInstance().currentUser?.displayName
+        val email = FirebaseAuth.getInstance().currentUser?.email
+
+        binding.username.text = username
+        binding.email.text = email
+
         binding.itemLogout.setOnClickListener {
             logout()
         }

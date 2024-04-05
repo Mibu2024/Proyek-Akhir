@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.auth.FirebaseAuth
 import com.proyekakhir.mibu.databinding.FragmentBidanHomeBinding
 
 class BidanHomeFragment : Fragment() {
@@ -24,6 +25,10 @@ class BidanHomeFragment : Fragment() {
 
         _binding = FragmentBidanHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        val firebaseUsername = FirebaseAuth.getInstance().currentUser?.displayName
+        binding.tvUsername.text = firebaseUsername
+
 
         return root
     }
