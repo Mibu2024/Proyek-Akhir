@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "282989855105",
+    "firebase_url": "https://mibu-770f7-default-rtdb.firebaseio.com",
+    "project_id": "mibu-770f7",
+    "storage_bucket": "mibu-770f7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282989855105:android:7b1d227fe5975760be2880",
+        "android_client_info": {
+          "package_name": "com.proyekakhir.mibu"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7l-qyuaQMFku8e3TlHmWC_IFPd75dHQk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
