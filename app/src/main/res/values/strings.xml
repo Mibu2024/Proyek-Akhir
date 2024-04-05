@@ -110,4 +110,11 @@
     <string name="lbl_sudah">Sudah</string>
     <string name="lbl_belum">Belum</string>
     <string name="msg_denyut_jantung_janin_menit">Denyut Jantung Janin/Menit</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_catatan_kehamilan">Catatan Kehamilan</string>
+    <string name="title_catatan_anak">Catatan Anak</string>
+    <string name="title_settings">Settings</string>
 </resources>
