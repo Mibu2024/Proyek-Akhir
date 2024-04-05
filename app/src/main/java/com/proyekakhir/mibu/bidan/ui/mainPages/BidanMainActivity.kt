@@ -1,5 +1,6 @@
 package com.proyekakhir.mibu.bidan.ui.mainPages
 
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
@@ -10,7 +11,9 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.proyekakhir.mibu.R
+import com.proyekakhir.mibu.bidan.ui.auth.BidanLoginActivity
 import com.proyekakhir.mibu.databinding.ActivityBidanMainBinding
 
 class BidanMainActivity : AppCompatActivity() {
@@ -63,6 +66,15 @@ class BidanMainActivity : AppCompatActivity() {
 
     private fun showBottomNav() {
         binding.navView.visibility = View.VISIBLE
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        if (currentUser == null) {
+            startActivity(Intent(this@BidanMainActivity, BidanLoginActivity::class.java))
+            finish()
+        }
     }
 
 }

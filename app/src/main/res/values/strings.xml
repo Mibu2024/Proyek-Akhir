@@ -118,4 +118,12 @@
     <string name="mibu">Mibu</string>
     <string name="about_mibu">Adalah sebuah aplikasi yang di khususkan untuk Ibu Hamil agar bisa memantau kesehatan dan memantau tumbuh kembang anak</string>
     <string name="tentang_aplikasi">Tentang Aplikasi</string>
+    <string name="alert_email_empty">Email tidak boleh kosong</string>
+    <string name="alert_pass_empty">Password Tidak Boleh Kosong</string>
+    <string name="alert_pass_error">Password minimum 8 characters</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="email">Email</string>
+    <string name="send">Send</string>
+    <string name="sign_up_success">Sign Up Success</string>
+    <string name="sign_up_failed">Sign up failed or email already exist</string>
 </resources>
