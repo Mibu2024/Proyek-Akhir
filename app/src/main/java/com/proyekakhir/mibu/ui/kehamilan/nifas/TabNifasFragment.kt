@@ -1,4 +1,4 @@
-package com.proyekakhir.mibu.ui.nifas
+package com.proyekakhir.mibu.ui.kehamilan.nifas
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.proyekakhir.mibu.databinding.FragmentCatatanNifasBinding
+import com.proyekakhir.mibu.databinding.FragmentTabNifasBinding
 
-class CatatanNifasFragment : Fragment() {
+class TabNifasFragment : Fragment() {
 
-    private var _binding: FragmentCatatanNifasBinding? = null
+    private var _binding: FragmentTabNifasBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -25,13 +25,9 @@ class CatatanNifasFragment : Fragment() {
         val catatanNifasViewModel =
             ViewModelProvider(this).get(CatatanNifasViewModel::class.java)
 
-        _binding = FragmentCatatanNifasBinding.inflate(inflater, container, false)
+        _binding = FragmentTabNifasBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
-        catatanNifasViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
         return root
     }
 

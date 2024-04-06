@@ -1,4 +1,4 @@
-package com.proyekakhir.mibu.ui.nifas
+package com.proyekakhir.mibu.ui.kehamilan.nifas
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
