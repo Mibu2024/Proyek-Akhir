@@ -17,14 +17,14 @@
         android:label="@string/title_catatan_kehamilan"
         tools:layout="@layout/fragment_catatan_kehamilan" />
     <fragment
-        android:id="@+id/catatanAnakFragment"
+        android:id="@+id/navigation_catatan_anak"
         android:name="com.proyekakhir.mibu.ui.anak.CatatanAnakFragment"
-        android:label="fragment_catatan_anak"
+        android:label="@string/title_catatan_anak"
         tools:layout="@layout/fragment_catatan_anak" />
     <fragment
-        android:id="@+id/settingsFragment"
+        android:id="@+id/navigation_settings"
         android:name="com.proyekakhir.mibu.ui.settings.SettingsFragment"
-        android:label="fragment_settings"
+        android:label="@string/title_settings"
         tools:layout="@layout/fragment_settings" />
 
 

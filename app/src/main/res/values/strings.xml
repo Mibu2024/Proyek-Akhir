@@ -114,7 +114,21 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="title_catatan_kehamilan">Catatan Kehamilan</string>
-    <string name="title_catatan_anak">Catatan Anak</string>
+    <string name="title_catatan_kehamilan">Catatan</string>
+    <string name="title_catatan_anak">Anak</string>
     <string name="title_settings">Settings</string>
+    <string name="title_menu_1">Catat Kesehatan Bunda</string>
+    <string name="desc_menu_1">Selamat datang di aplikasi kami! Inilah awal perjalanan Anda untuk Cek Kehamilan dengan mudah dan tertata, di monitoring langsung oleh Bidan anda</string>
+    <string name="mulai">Mulai</string>
+    <string name="title_menu_3">Monitoring Kehamilan Bunda</string>
+    <string name="desc_menu_3">Dapatkan layanan monitoring kehamilan dengan aplikasi ponsel genggam.</string>
+    <string name="title_menu_2">Cek kesehatan lebih mudah dalam satu genggaman</string>
+    <string name="desc_menu_2">Dapatkan akses cepat dan praktis ke informasi kesehatan Bunda dan anak, cukup dengan satu genggaman.</string>
+    <string name="title_menu_4">Periksa Imunisasi Anak</string>
+    <string name="desc_menu_4">Pantau status imunisasi anak anda di aplikasi.</string>
+    <string name="saya_ibu_hamil">Saya Ibu Hamil</string>
+    <string name="saya_bidan">Saya Bidan</string>
+    <string name="lanjut_ibu">Lanjut Sebagai Ibu Hamil</string>
+    <string name="lanjut_bidan">Lanjut Sebagai Bidan</string>
+    <string name="title_splash">Monitoring Ibu Hamil dan Balita</string>
 </resources>
