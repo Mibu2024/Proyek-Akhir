@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true"
-    android:background="@color/blue_background">
+    android:background="@color/blue_background"
+    tools:context=".bidan.ui.mainPages.ui.home.catatan.DetailNifasFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

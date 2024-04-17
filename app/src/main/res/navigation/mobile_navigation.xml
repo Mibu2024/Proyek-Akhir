@@ -10,7 +10,11 @@
         android:name="com.proyekakhir.mibu.ui.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" />
-
+    <fragment
+        android:id="@+id/navigation_artikel"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.BidanArtikelFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_bidan_artikel" />
     <fragment
         android:id="@+id/navigation_catatan_kehamilan"
         android:name="com.proyekakhir.mibu.ui.kehamilan.CatatanKehamilanFragment"

@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true"
-    android:background="@color/blue_background">
+    android:background="@color/blue_background"
+    tools:context=".bidan.ui.mainPages.ui.settings.DataPribadiFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -107,7 +108,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/hint_nama_suami"
+            android:text="@string/no_str"
             app:layout_constraintStart_toStartOf="@+id/alamatEditTextLayout"
             app:layout_constraintTop_toBottomOf="@+id/alamatEditTextLayout" />
 
@@ -195,37 +196,6 @@
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/textView23"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/kelahiran_ke"
-            app:layout_constraintStart_toStartOf="@+id/telponEditTextLayout"
-            app:layout_constraintTop_toBottomOf="@+id/telponEditTextLayout" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/kelahirankeEditTextLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:elevation="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView23">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/ed_kelahiranke"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_et_default"
-                android:drawablePadding="12dp"
-                android:ems="10"
-                android:inputType="number" />
-        </com.google.android.material.textfield.TextInputLayout>
-
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_simpan"
             android:layout_width="match_parent"
@@ -233,11 +203,11 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
-            android:backgroundTint="@color/primary_bg"
+            android:backgroundTint="@color/form_button"
             android:text="@string/simpan"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/kelahirankeEditTextLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/telponEditTextLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
