@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DataAnak;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class DataAnakController extends Controller
 {
@@ -91,4 +92,40 @@ class DataAnakController extends Controller
         toast('Data Berhasil Dihapus','success');
         return redirect(route('data-anak.index'));
     }
+
+    public function download()
+    {
+        $data_anaks = DataAnak::all();
+
+        $csvData = $this->generateCSV($data_anaks);
+
+        $headers = array(
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename=data_anak_mibu.csv',
+        );
+
+        return Response::make($csvData, 200, $headers);
+    }
+
+    private function generateCSV($data)
+    {
+        $csv = '';
+
+        $csv .= "Data Anak - MIBU \n \n";
+
+        $csv .= "No,Tanggal Periksa,Nama Ibu,Nama Anak,Tanggal Lahir,Umur,Berat Badan\n";
+
+        $counter = 1;
+
+        foreach ($data as $row) {
+            $berat_badan          = $row->berat_badan . " Kg";
+
+            $csv .= "{$counter},{$row->tanggal},{$row->nama_ibu},{$row->nama_anak},{$row->tanggal_lahir},{$row->umur},{$berat_badan}\n";
+            
+            $counter++;
+        }
+
+        return $csv;
+    }
+
 }

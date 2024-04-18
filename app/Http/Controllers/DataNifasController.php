@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DataNifas;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class DataNifasController extends Controller
 {
@@ -103,5 +104,38 @@ class DataNifasController extends Controller
         $data_nifas->delete();
         toast('Data Berhasil Dihapus','success');
         return redirect(route('data-nifas.index'));
+    }
+
+    public function download()
+    {
+        $data_nifas = DataNifas::all();
+
+        $csvData = $this->generateCSV($data_nifas);
+
+        $headers = array(
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename=data_nifas_mibu.csv',
+        );
+
+        return Response::make($csvData, 200, $headers);
+    }
+
+    private function generateCSV($data)
+    {
+        $csv = '';
+
+        $csv .= "Data Nifas - MIBU \n \n";
+
+        $csv .= "No,Tanggal Periksa,Nama Ibu,Kunjungan Nifas,Hasil Periksa Payudara,Hasil Periksa Pendarahan,Hasil Periksa Jalan Lahir,Vitamin A,Masalah,Tindakan\n";
+
+        $counter = 1;
+
+        foreach ($data as $row) {
+            $csv .= "{$counter},{$row->tanggal},{$row->nama},{$row->kunjungan_nifas},{$row->hasil_periksa_payudara},{$row->hasil_periksa_pendarahan},{$row->hasil_periksa_jalan_lahir},{$row->vitamin_a},{$row->masalah},{$row->tindakan}\n";
+            
+            $counter++;
+        }
+
+        return $csv;
     }
 }

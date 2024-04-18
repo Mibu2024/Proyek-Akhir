@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DataImunisasi;
+use Illuminate\Support\Facades\Response;
 
 class DataImunisasiController extends Controller
 {
@@ -113,4 +114,38 @@ class DataImunisasiController extends Controller
         toast('Data Berhasil Dihapus','success');
         return redirect(route('data-imunisasi.index'));
     }
+
+    public function download()
+    {
+        $data_imunisasis = DataImunisasi::all();
+
+        $csvData = $this->generateCSV($data_imunisasis);
+
+        $headers = array(
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename=data_imunisasi_mibu.csv',
+        );
+
+        return Response::make($csvData, 200, $headers);
+    }
+
+    private function generateCSV($data)
+    {
+        $csv = '';
+
+        $csv .= "Data Imunisasi - MIBU \n \n";
+
+        $csv .= "No,Tanggal Periksa,Nama Anak,Imunisasi DPT-HB-Hib 1 Polio 2,Imunisasi DPT-HB-Hib 2 Polio 3,Imunisasi DPT-HB-Hib 3 Polio 4,Imunisasi Campak,Imunisasi DPT-HB-Hib 1 Dosis,Imunisasi Campak Rubella 1 Dosis,Imunisasi Campak Rubella dan DT,Imunisasi Tetanus Diphteria TD,Nama Pemeriksa\n";
+
+        $counter = 1;
+
+        foreach ($data as $row) {
+            $csv .= "{$counter},{$row->tanggal},{$row->nama_anak},{$row->imunisasi_dpt_hb_hib_1_polio_2},{$row->imunisasi_dpt_hb_hib_2_polio_3},{$row->imunisasi_dpt_hb_hib_3_polio_4},{$row->imunisasi_campak},{$row->imunisasi_dpt_hb_hib_1_dosis},{$row->imunisasi_campak_rubella_1_dosis},{$row->imunisasi_campak_rubella_dan_dt},{$row->imunisasi_tetanus_diphteria_td},{$row->nama_pemeriksa}\n";
+            
+            $counter++;
+        }
+
+        return $csv;
+    }
+
 }

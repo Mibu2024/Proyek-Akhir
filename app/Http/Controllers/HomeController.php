@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\DataIbuHamil;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class HomeController extends Controller
@@ -148,5 +149,44 @@ class HomeController extends Controller
         toast('Data Berhasil Dihapus','success');
         return redirect(route('home'));
     }
+
+    public function download()
+    {
+        $data_ibu_hamils = DataIbuHamil::all();
+
+        $csvData = $this->generateCSV($data_ibu_hamils);
+
+        $headers = array(
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => 'attachment; filename=data_ibu_hamil_mibu.csv',
+        );
+
+        return Response::make($csvData, 200, $headers);
+    }
+
+    private function generateCSV($data)
+    {
+        $csv = '';
+
+        $csv .= "Data Ibu Hamil - MIBU \n \n";
+
+        $csv .= "No,Tanggal Periksa,Nama Ibu,Keluhan,Tekanan Darah,Berat Badan,Umur Kehamilan,Tinggi Fundus,Letak Janin,Denyut Jantung Janin,Hasil Lab,Tindakan,Kaki Bengkak,Nasihat\n";
+
+        $counter = 1;
+
+        foreach ($data as $row) {
+            $tekanan_darah        = $row->tekanan_darah . " mmHg";
+            $berat_badan          = $row->berat_badan . " Kg";
+            $tinggi_fundus        = $row->tinggi_fundus . " Cm";
+            $denyut_jantung_janin = $row->denyut_jantung_janin . " BPM";
+
+            $csv .= "{$counter},{$row->tanggal},{$row->nama},{$row->keluhan},{$tekanan_darah},{$berat_badan},{$row->umur_kehamilan},{$tinggi_fundus},{$row->letak_janin},{$denyut_jantung_janin},{$row->hasil_lab},{$row->tindakan},{$row->kaki_bengkak},{$row->nasihat}\n";
+            
+            $counter++;
+        }
+
+        return $csv;
+    }
+
 
 }

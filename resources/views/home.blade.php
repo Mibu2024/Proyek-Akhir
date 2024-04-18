@@ -206,7 +206,11 @@
                                             <div class="col-3"></div>
                                             <div class="col-5 text-right">
                                                 <a href="{{ route('data-ibu-hamil.create') }}" type="button" class="btn btn-success"><i
-                                                        class="flaticon2-add-1"></i><strong>Data Baru</strong></a>
+                                                        class="flaticon2-add-1"></i><strong>Data Baru</strong>
+                                                </a>
+                                                <a href="{{ route('data-ibu-hamil.download') }}" type="button" class="btn btn-primary ml-2">
+                                                    <i class="flaticon2-download"></i><strong>Download Data</strong>
+                                                </a>
                                             </div>
                                         </div>
 

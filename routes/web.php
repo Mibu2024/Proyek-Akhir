@@ -27,6 +27,7 @@ Route::post('/store-data-ibu-hamil', [App\Http\Controllers\HomeController::class
 Route::get('/data-ibu-hamil/{id}/edit', [App\Http\Controllers\HomeController::class, 'edit'])->name('data-ibu-hamil.edit');
 Route::put('/data-ibu-hamil/{id}', [App\Http\Controllers\HomeController::class, 'update'])->name('data-ibu-hamil.update');
 Route::delete('/data-ibu-hamil/{id}', [App\Http\Controllers\HomeController::class, 'delete'])->name('data-ibu-hamil.delete');
+Route::get('data-ibu-hamil/download', [App\Http\Controllers\HomeController::class, 'download'])->name('data-ibu-hamil.download');
 
 // route buat halaman data nifas
 Route::get('/data-nifas', [App\Http\Controllers\DataNifasController::class, 'index'])->name('data-nifas.index');
@@ -35,6 +36,7 @@ Route::post('/store-data-nifas', [App\Http\Controllers\DataNifasController::clas
 Route::get('/data-nifas/{id}/edit', [App\Http\Controllers\DataNifasController::class, 'edit'])->name('data-nifas.edit');
 Route::put('/data-nifas/{id}', [App\Http\Controllers\DataNifasController::class, 'update'])->name('data-nifas.update');
 Route::delete('/data-nifas/{id}', [App\Http\Controllers\DataNifasController::class, 'delete'])->name('data-nifas.delete');
+Route::get('data-nifas/download', [App\Http\Controllers\DataNifasController::class, 'download'])->name('data-nifas.download');
 
 // route buat halaman data anak
 Route::get('/data-anak', [App\Http\Controllers\DataAnakController::class, 'index'])->name('data-anak.index');
@@ -43,6 +45,7 @@ Route::post('/store-data-anak', [App\Http\Controllers\DataAnakController::class,
 Route::get('/data-anak/{id}/edit', [App\Http\Controllers\DataAnakController::class, 'edit'])->name('data-anak.edit');
 Route::put('/data-anak/{id}', [App\Http\Controllers\DataAnakController::class, 'update'])->name('data-anak.update');
 Route::delete('/data-anak/{id}', [App\Http\Controllers\DataAnakController::class, 'delete'])->name('data-anak.delete');
+Route::get('data-anak/download', [App\Http\Controllers\DataAnakController::class, 'download'])->name('data-anak.download');
 
 // route buat halaman data imunsias
 Route::get('/data-imunisasi', [App\Http\Controllers\DataImunisasiController::class, 'index'])->name('data-imunisasi.index');
@@ -51,6 +54,8 @@ Route::post('/store-data-imunisasi', [App\Http\Controllers\DataImunisasiControll
 Route::get('/data-imunisasi/{id}/edit', [App\Http\Controllers\DataImunisasiController::class, 'edit'])->name('data-imunisasi.edit');
 Route::put('/data-imunisasi/{id}', [App\Http\Controllers\DataImunisasiController::class, 'update'])->name('data-imunisasi.update');
 Route::delete('/data-imunisasi/{id}', [App\Http\Controllers\DataImunisasiController::class, 'delete'])->name('data-imunisasi.delete');
+Route::get('data-imunisasi/download', [App\Http\Controllers\DataImunisasiController::class, 'download'])->name('data-imunisasi.download');
+
 
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
