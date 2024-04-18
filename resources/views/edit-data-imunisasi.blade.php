@@ -83,7 +83,7 @@
                                         <span class="menu-text">Data Nifas</span>
                                     </a>
                                 </li>
-                                <li class="menu-item menu-item" aria-haspopup="true">
+                                <li class="menu-item menu-item-active" aria-haspopup="true">
                                     <a href="{{ route('data-anak.index') }}" class="menu-link">
                                         <i class="menu-icon fas fa-child"></i>
                                         <span class="menu-text">Data Anak</span>
@@ -178,7 +178,10 @@
                                     <ul
                                         class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                                         <li class="breadcrumb-item text-muted">
-                                            <a href="" class="text-muted">Data imunisasi</a>
+                                            <a href="{{ route('data-imunisasi.index') }}" class="text-muted">Data Imunisasi</a>
+                                        </li>
+                                        <li class="breadcrumb-item text-muted">
+                                            <a href="javascript:void(0)" class="text-muted">Edit Data</a>
                                         </li>
                                     </ul>
                                     <!--end::Breadcrumb-->
@@ -187,134 +190,175 @@
                             </div>
                         </div>
                         <!--end::Subheader-->
-                            <!--begin::Container-->
-                            <div class="container">
-                                <div class="card card-custom">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <div class="col-4">
-                                                <form action="{{ route('data-imunisasi.index') }}" method="GET">
-                                                    <div class="form-group">
-                                                        <div class="input-icon input-icon-right">
-                                                            <input type="text" name="search" value="{{ request('search') }}"
-                                                                class="form-control" placeholder="Search..." />
-                                                            <span><i class="flaticon2-search-1 icon-md"></i></span>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <div class="col-3"></div>
-                                            <div class="col-5 text-right">
-                                                <a href="{{ route('data-imunisasi.create') }}" type="button" class="btn btn-success"><i
-                                                        class="flaticon2-add-1"></i><strong>Data Baru</strong></a>
-                                            </div>
-                                        </div>
+                            <!-- Main content -->
+                                <div class="container-fluid">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <a href="{{ route('data-imunisasi.index') }}">
+                                                <i class="flaticon2-back icon-xm text-success"> Kembali</i>
+                                            </a>
+                                            <h3 class="text-dark font-weight-bold mt-5 "><b>Edit Data Imunisasi</b></h3>
 
-                                        <div class="row table-responsive">
-                                            <table class="table text-center">
-                                                <thead>
-                                                    <tr>
-                                                        <th>No</th>
-                                                        <th>Tanggal Periksa</th>
-                                                        <th>Nama Anak</th>
-                                                        <th>Imunisasi DPT-HB-Hib 1 Polio 2</th>
-                                                        <th>Imunisasi DPT-HB-Hib 2 Polio 3</th>
-                                                        <th>Imunisasi DPT-HB-Hib 3 Polio 4</th>
-                                                        <th>Imunisasi Campak</th>
-                                                        <th>Imunisasi DPT-HB-Hib 1 Dosis</th>
-                                                        <th>Imunisasi Campak Rubella 1 Dosis</th>
-                                                        <th>Imunisasi Campak Rubella dan DT</th>
-                                                        <th>Imunisasi Tetanus Diphteria TD</th>
-                                                        <th>Nama Pemeriksa</th>
-                                                        <th>Aksi</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @php
-                                                         $num = ($data_imunisasis->currentPage() - 1) * $data_imunisasis->perPage() + 1;
-                                                    @endphp
-                                                    @forelse ($data_imunisasis as $di)
-                                                        <tr>
-                                                            <td>{{ $num++ }}</td>
-                                                            <td>{{ $di->tanggal }}</td>
-                                                            <td>{{ $di->nama_anak }}</td>
-                                                            <td>{{ $di->imunisasi_dpt_hb_hib_1_polio_2 }}</td>
-                                                            <td>{{ $di->imunisasi_dpt_hb_hib_2_polio_3 }}</td>
-                                                            <td>{{ $di->imunisasi_dpt_hb_hib_3_polio_4 }}</td>
-                                                            <td>{{ $di->imunisasi_campak }}</td>
-                                                            <td>{{ $di->imunisasi_dpt_hb_hib_1_dosis }}</td>
-                                                            <td>{{ $di->imunisasi_campak_rubella_1_dosis }}</td>
-                                                            <td>{{ $di->imunisasi_campak_rubella_dan_dt }}</td>
-                                                            <td>{{ $di->imunisasi_tetanus_diphteria_td }}</td>
-                                                            <td>{{ $di->nama_pemeriksa }}</td>
-                                                            <td>
-                                                                <!-- Action buttons -->
-                                                                <a href="{{ route('data-imunisasi.edit', $di->id) }}"><i class="flaticon2-edit mr-3"></i></a>
-                                                                <a data-toggle="modal" data-target="#deleteModal-{{ $di->id }}"><i class="flaticon2-trash mr-3"></i></a>
-                                                                
-                                                                <!-- Delete Modal -->
-                                                                <div class="modal fade" id="deleteModal-{{ $di->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
-                                                                aria-hidden="true">
-                                                                    <div class="modal-dialog" role="document">
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title" id="deleteModalLabel">Delete Data Anak</h5>
-                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                                    <span aria-hidden="true">&times;</span>
-                                                                                </button>
-                                                                            </div>
-                                                                            <div class="modal-body">
-                                                                                Yakin Ingin Menghapus Data Ini?
-                                                                            </div>
-                                                                            <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                                <form id="deleteForm-{{ $di->id }}" action="{{ route('data-imunisasi.delete', $di->id) }}" method="POST">
-                                                                                    @csrf
-                                                                                    @method('DELETE')
-                                                                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                                                                </form>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                        </tr>
-                                                    @empty
-                                                    <tr>
-                                                        <td colspan="15" style="text-align: center;">Tidak Ada Data Ditemukan</td>
-                                                    </tr>
-                                                    @endforelse
-                                                </tbody>
-                                            </table>
-
-                                            <div class="d-flex justify-content-between align-items-center flex-wrap">
-                                                <div class="d-flex align-items-center py-3">
-                                                    <div class="d-flex align-items-center">
-                                                        <span class="text-muted mr-2">Show</span>
-                                                    </div>
-
-                                                    <form method="GET" action="data-imunisasi.index">
-                                                        <select id="entries"
-                                                            class="form-control form-control-sm font-weight-bold mr-4 border-0 bg-light"
-                                                            style="width: 75px;" name="per_page" onchange="this.form.submit()">
-                                                            <option value="5" {{ request('per_page') == 5 ? 'selected' : '' }}>5</option>
-                                                            <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
-                                                            <option value="20" {{ request('per_page') == 20 ? 'selected' : '' }}>20</option>
-                                                            <option value="30" {{ request('per_page') == 30 ? 'selected' : '' }}>30</option>
-                                                            <!-- Tambahkan lebih banyak opsi jika diperlukan -->
-                                                        </select>
-                                                    </form>
+                                            <form action="{{ route('data-imunisasi.update', $data_imunisasis->id) }}" method="POST">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="form-group mt-5">
+                                                    <label for="tanggal"><strong>Tanggal Periksa</strong></label>
+                                                    <input type="date" name="tanggal" id="tanggal" class="form-control @error('tanggal') is-invalid @enderror" value="{{ $data_imunisasis->tanggal }}"
+                                                        placeholder="Pilih Tanggal Periksa">
+                                                    @error('tanggal')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
 
-                                                <div id="paginationLinks">
-                                                    {{ $data_imunisasis->links() }}
+                                                <div class="form-group mt-5">
+                                                    <label for=""><strong>Nama Anak</strong></label>
+                                                    <input type="text" name="nama_anak" id="nama_anak" class="form-control @error('nama_anak') is-invalid @enderror" value="{{ $data_imunisasis->nama_anak }}"
+                                                        placeholder="Masukkan Nama Anak">
+                                                    @error('nama_anak')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
                                                 </div>
-                                            </div>
+
+                                                <div class="form-group mt-5">
+                                                    <label for="" class="form-label">Apakah Sudah Imunisasi DPT-HB-Hib 1 Polio 2?</label>
+                                                    <select class="form-control @error('imunisasi_dpt_hb_hib_1_polio_2') is-invalid @enderror" id="imunisasi_dpt_hb_hib_1_polio_2" name="imunisasi_dpt_hb_hib_1_polio_2" title="Pilih Jawaban">
+                                                        <option value="" disabled selected hidden>Pilih Jawaban</option>
+                                                        <option value="Sudah" @if($data_imunisasis->imunisasi_dpt_hb_hib_1_polio_2 == 'Sudah') selected @endif>Sudah</option>
+                                                        <option value="Belum" @if($data_imunisasis->imunisasi_dpt_hb_hib_1_polio_2 == 'Belum') selected @endif>Belum</option>
+                                                    </select>
+                                                    @error('imunisasi_dpt_hb_hib_1_polio_2')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span> 
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group mt-5">
+                                                    <label for="" class="form-label">Apakah Sudah Imunisasi DPT-HB-Hib 2 Polio 3?</label>
+                                                    <select class="form-control @error('imunisasi_dpt_hb_hib_2_polio_3') is-invalid @enderror" id="imunisasi_dpt_hb_hib_2_polio_3" name="imunisasi_dpt_hb_hib_2_polio_3" title="Pilih Jawaban">
+                                                        <option value="" disabled selected hidden>Pilih Jawaban</option>
+                                                        <option value="Sudah" @if($data_imunisasis->imunisasi_dpt_hb_hib_2_polio_3 == 'Sudah') selected @endif>Sudah</option>
+                                                        <option value="Belum" @if($data_imunisasis->imunisasi_dpt_hb_hib_2_polio_3 == 'Belum') selected @endif>Belum</option>
+                                                    </select>
+                                                    @error('imunisasi_dpt_hb_hib_2_polio_3')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>     
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group mt-5">
+                                                    <label for="" class="form-label">Apakah Sudah Imunisasi DPT-HB-Hib 3 Polio 4?</label>
+                                                    <select class="form-control @error('imunisasi_dpt_hb_hib_3_polio_4') is-invalid @enderror" id="imunisasi_dpt_hb_hib_3_polio_4" name="imunisasi_dpt_hb_hib_3_polio_4" title="Pilih Jawaban">
+                                                        <option value="" disabled selected hidden>Pilih Jawaban</option>
+                                                        <option value="Sudah" @if($data_imunisasis->imunisasi_dpt_hb_hib_3_polio_4 == 'Sudah') selected @endif>Sudah</option>
+                                                        <option value="Belum" @if($data_imunisasis->imunisasi_dpt_hb_hib_3_polio_4 == 'Belum') selected @endif>Belum</option>
+                                                    </select>
+                                                    @error('imunisasi_dpt_hb_hib_3_polio_4')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span> 
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group mt-5">
+                                                    <label for="" class="form-label">Apakah Sudah Imunisasi Campak?</label>
+                                                    <select class="form-control @error('imunisasi_campak') is-invalid @enderror" id="imunisasi_campak" name="imunisasi_campak" title="Pilih Jawaban">
+                                                        <option value="" disabled selected hidden>Pilih Jawaban</option>
+                                                        <option value="Sudah" @if($data_imunisasis->imunisasi_campak == 'Sudah') selected @endif>Sudah</option>
+                                                        <option value="Belum" @if($data_imunisasis->imunisasi_campak == 'Belum') selected @endif>Belum</option>
+                                                    </select>
+                                                    @error('imunisasi_campak')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group mt-5">
+                                                    <label for="" class="form-label">Apakah Sudah Imunisasi DPT-HB-Hib 1 Dosis?</label>
+                                                    <select class="form-control @error('imunisasi_dpt_hb_hib_1_dosis') is-invalid @enderror" id="imunisasi_dpt_hb_hib_1_dosis" name="imunisasi_dpt_hb_hib_1_dosis" title="Pilih Jawaban">
+                                                        <option value="" disabled selected hidden>Pilih Jawaban</option>
+                                                        <option value="Sudah" @if($data_imunisasis->imunisasi_dpt_hb_hib_1_dosis == 'Sudah') selected @endif>Sudah</option>
+                                                        <option value="Belum" @if($data_imunisasis->imunisasi_dpt_hb_hib_1_dosis == 'Belum') selected @endif>Belum</option>
+                                                    </select>
+                                                    @error('imunisasi_dpt_hb_hib_1_dosis')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group mt-5">
+                                                    <label for="" class="form-label">Apakah Sudah Imunisasi Campak Rubella 1 Dosis?</label>
+                                                    <select class="form-control @error('imunisasi_campak_rubella_1_dosis') is-invalid @enderror" id="imunisasi_campak_rubella_1_dosis" name="imunisasi_campak_rubella_1_dosis" title="Pilih Jawaban">
+                                                        <option value="" disabled selected hidden>Pilih Jawaban</option>
+                                                        <option value="Sudah" @if($data_imunisasis->imunisasi_campak_rubella_1_dosis == 'Sudah') selected @endif>Sudah</option>
+                                                        <option value="Belum" @if($data_imunisasis->imunisasi_campak_rubella_1_dosis == 'Belum') selected @endif>Belum</option>
+                                                    </select>
+                                                    @error('imunisasi_campak_rubella_1_dosis')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group mt-5">
+                                                    <label for="" class="form-label">Apakah Sudah Imunisasi Campak Rubella dan DT?</label>
+                                                    <select class="form-control @error('imunisasi_campak_rubella_dan_dt') is-invalid @enderror" id="imunisasi_campak_rubella_dan_dt" name="imunisasi_campak_rubella_dan_dt" title="Pilih Jawaban">
+                                                        <option value="" disabled selected hidden>Pilih Jawaban</option>
+                                                        <option value="Sudah" @if($data_imunisasis->imunisasi_campak_rubella_dan_dt == 'Sudah') selected @endif>Sudah</option>
+                                                        <option value="Belum" @if($data_imunisasis->imunisasi_campak_rubella_dan_dt == 'Belum') selected @endif>Belum</option>
+                                                    </select>
+                                                    @error('imunisasi_campak_rubella_dan_dt')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group mt-5">
+                                                    <label for="" class="form-label">Apakah Sudah Imunisasi Tetanus Diphteria TD?</label>
+                                                    <select class="form-control @error('imunisasi_tetanus_diphteria_td') is-invalid @enderror" id="imunisasi_tetanus_diphteria_td" name="imunisasi_tetanus_diphteria_td" title="Pilih Jawaban">
+                                                        <option value="" disabled selected hidden>Pilih Jawaban</option>
+                                                        <option value="Sudah" @if($data_imunisasis->imunisasi_tetanus_diphteria_td == 'Sudah') selected @endif>Sudah</option>
+                                                        <option value="Belum" @if($data_imunisasis->imunisasi_tetanus_diphteria_td == 'Belum') selected @endif>Belum</option>
+                                                    </select>
+                                                    @error('imunisasi_tetanus_diphteria_td')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group mt-5">
+                                                    <label for=""><strong>Nama Pemeriksa</strong></label>
+                                                    <input type="text" name="nama_pemeriksa" id="nama_pemeriksa" class="form-control @error('nama_pemeriksa') is-invalid @enderror" value="{{ $data_imunisasis->nama_pemeriksa }}"
+                                                        placeholder="Masukkan Nama Pemeriksa">
+                                                    @error('nama_pemeriksa')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="text-right">
+                                                    <a href="{{ route('data-imunisasi.index') }}" class="btn btn-outline-danger mr-2"
+                                                        role="button">Batal</a>
+                                                    <button type="submit" class="btn btn-success">Simpan</button>
+                                                </div>
+                                            </form>
+
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <!--end::Container-->
+
+                                </div><!-- /.container-fluid -->
+                            <!--end::content-->
                     </div>
                     <!--end::Content-->
                 </div>
@@ -387,17 +431,6 @@
             <!--end::Content-->
         </div>
         <!-- end::User Panel-->
-
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                $(document).on('change', '#entries', function() {
-                    window.location =
-                        "{{ route('data-imunisasi.index') }}?search={{ request('search') }}&per_page=" + $(this)
-                        .val();
-                });
-            });
-        </script>
     </body>
     <!--end::Body-->
 @endsection
