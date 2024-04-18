@@ -90,7 +90,7 @@
                                     </a>
                                 </li>
                                 <li class="menu-item menu-item" aria-haspopup="true">
-                                    <a href="index.html" class="menu-link">
+                                    <a href="{{ route('data-imunisasi.index') }}" class="menu-link">
                                         <i class="menu-icon flaticon2-hospital"></i>
                                         <span class="menu-text">Data Imunisasi</span>
                                     </a>

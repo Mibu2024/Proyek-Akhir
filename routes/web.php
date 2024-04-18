@@ -44,6 +44,14 @@ Route::get('/data-anak/{id}/edit', [App\Http\Controllers\DataAnakController::cla
 Route::put('/data-anak/{id}', [App\Http\Controllers\DataAnakController::class, 'update'])->name('data-anak.update');
 Route::delete('/data-anak/{id}', [App\Http\Controllers\DataAnakController::class, 'delete'])->name('data-anak.delete');
 
+// route buat halaman data imunsias
+Route::get('/data-imunisasi', [App\Http\Controllers\DataImunisasiController::class, 'index'])->name('data-imunisasi.index');
+Route::get('/create-data-imunisasi', [App\Http\Controllers\DataImunisasiController::class, 'create'])->name('data-imunisasi.create');
+Route::post('/store-data-imunisasi', [App\Http\Controllers\DataImunisasiController::class, 'store'])->name('data-imunisasi.store');
+Route::get('/data-imunisasi/{id}/edit', [App\Http\Controllers\DataImunisasiController::class, 'edit'])->name('data-imunisasi.edit');
+Route::put('/data-imunisasi/{id}', [App\Http\Controllers\DataImunisasiController::class, 'update'])->name('data-imunisasi.update');
+Route::delete('/data-imunisasi/{id}', [App\Http\Controllers\DataImunisasiController::class, 'delete'])->name('data-imunisasi.delete');
+
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
 

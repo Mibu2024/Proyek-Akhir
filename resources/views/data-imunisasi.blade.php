@@ -70,7 +70,7 @@
                             data-menu-dropdown-timeout="500">
                             <!--begin::Menu Nav-->
                             <ul class="menu-nav">
-                                <li class="menu-item menu-item-active" aria-haspopup="true">
+                                <li class="menu-item menu-item" aria-haspopup="true">
                                     <a href="{{ route('home') }}" class="menu-link">
                                         <i class="menu-icon flaticon2-user"></i>
                                         <span class="menu-text">Data Ibu Hamil</span>
@@ -89,7 +89,7 @@
                                         <span class="menu-text">Data Anak</span>
                                     </a>
                                 </li>
-                                <li class="menu-item menu-item" aria-haspopup="true">
+                                <li class="menu-item menu-item-active" aria-haspopup="true">
                                     <a href="{{ route('data-imunisasi.index') }}" class="menu-link">
                                         <i class="menu-icon flaticon2-hospital"></i>
                                         <span class="menu-text">Data Imunisasi</span>
@@ -168,7 +168,7 @@
                                 <!--begin::Info-->
                                 <div class="d-flex align-items-center flex-wrap mr-2">
                                     <!--begin::Page Title-->
-                                    <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Data Ibu Hamil</h5>
+                                    <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Data Imunisasi</h5>
                                     <!--end::Page Title-->
                                 </div>
                                 <!--end::Info-->
@@ -178,10 +178,7 @@
                                     <ul
                                         class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                                         <li class="breadcrumb-item text-muted">
-                                            <a href="{{ route('home') }}" class="text-muted">Data Ibu Hamil</a>
-                                        </li>
-                                        <li class="breadcrumb-item text-muted">
-                                            <a href="javascript:void(0)" class="text-muted">Data Baru</a>
+                                            <a href="" class="text-muted">Data imunisasi</a>
                                         </li>
                                     </ul>
                                     <!--end::Breadcrumb-->
@@ -190,173 +187,134 @@
                             </div>
                         </div>
                         <!--end::Subheader-->
-                            <!-- Main content -->
-                                <div class="container-fluid">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <a href="{{ route('home') }}">
-                                                <i class="flaticon2-back icon-xm text-success"> Kembali</i>
-                                            </a>
-                                            <h3 class="text-dark font-weight-bold mt-5 "><b>Tambah Data Baru</b></h3>
+                            <!--begin::Container-->
+                            <div class="container">
+                                <div class="card card-custom">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <form action="{{ route('data-imunisasi.index') }}" method="GET">
+                                                    <div class="form-group">
+                                                        <div class="input-icon input-icon-right">
+                                                            <input type="text" name="search" value="{{ request('search') }}"
+                                                                class="form-control" placeholder="Search..." />
+                                                            <span><i class="flaticon2-search-1 icon-md"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="col-3"></div>
+                                            <div class="col-5 text-right">
+                                                <a href="{{ route('data-imunisasi.create') }}" type="button" class="btn btn-success"><i
+                                                        class="flaticon2-add-1"></i><strong>Data Baru</strong></a>
+                                            </div>
+                                        </div>
 
-                                            <form action="{{ route('data-ibu-hamil.store') }}" method="post">
-                                                @csrf
+                                        <div class="row table-responsive">
+                                            <table class="table text-center">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Tanggal Periksa</th>
+                                                        <th>Nama Anak</th>
+                                                        <th>Imunisasi DPT-HB-Hib 1 Polio 2</th>
+                                                        <th>Imunisasi DPT-HB-Hib 2 Polio 3</th>
+                                                        <th>Imunisasi DPT-HB-Hib 3 Polio 4</th>
+                                                        <th>Imunisasi Campak</th>
+                                                        <th>Imunisasi DPT-HB-Hib 1 Dosis</th>
+                                                        <th>Imunisasi Campak Rubella 1 Dosis</th>
+                                                        <th>Imunisasi Campak Rubella dan DT</th>
+                                                        <th>Imunisasi Tetanus Diphteria TD</th>
+                                                        <th>Nama Pemeriksa</th>
+                                                        <th>Aksi</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @php
+                                                         $num = ($data_imunisasis->currentPage() - 1) * $data_imunisasis->perPage() + 1;
+                                                    @endphp
+                                                    @forelse ($data_imunisasis as $di)
+                                                        <tr>
+                                                            <td>{{ $num++ }}</td>
+                                                            <td>{{ $di->tanggal }}</td>
+                                                            <td>{{ $di->nama_anak }}</td>
+                                                            <td>{{ $di->imunisasi_dpt_hb_hib_1_polio_2 }}</td>
+                                                            <td>{{ $di->imunisasi_dpt_hb_hib_2_polio_3 }}</td>
+                                                            <td>{{ $di->imunisasi_dpt_hb_hib_3_polio_4 }}</td>
+                                                            <td>{{ $di->imunisasi_campak }}</td>
+                                                            <td>{{ $di->imunisasi_dpt_hb_hib_1_dosis }}</td>
+                                                            <td>{{ $di->imunisasi_campak_rubella_1_dosis }}</td>
+                                                            <td>{{ $di->imunisasi_campak_rubella_dan_dt }}</td>
+                                                            <td>{{ $di->imunisasi_tetanus_diphteria_td }}</td>
+                                                            <td>{{ $di->nama_pemeriksa }}</td>
+                                                            <td>
+                                                                <!-- Action buttons -->
+                                                                {{-- <a href="{{ route('data-anak.edit', $da->id) }}"><i class="flaticon2-edit mr-3"></i></a>
+                                                                <a data-toggle="modal" data-target="#deleteModal-{{ $da->id }}"><i class="flaticon2-trash mr-3"></i></a> --}}
+                                                                
+                                                                <!-- Delete Modal -->
+                                                                {{-- <div class="modal fade" id="deleteModal-{{ $da->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+                                                                aria-hidden="true">
+                                                                    <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="deleteModalLabel">Delete Data Anak</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                Yakin Ingin Menghapus Data Ini?
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                                <form id="deleteForm-{{ $da->id }}" action="{{ route('data-anak.delete', $da->id) }}" method="POST">
+                                                                                    @csrf
+                                                                                    @method('DELETE')
+                                                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div> --}}
+                                                            </td>
+                                                        </tr>
+                                                    @empty
+                                                    <tr>
+                                                        <td colspan="15" style="text-align: center;">Tidak Ada Data Ditemukan</td>
+                                                    </tr>
+                                                    @endforelse
+                                                </tbody>
+                                            </table>
 
-                                                <div class="form-group mt-5">
-                                                    <label for="tanggal"><strong>Tanggal Periksa</strong></label>
-                                                    <input type="date" name="tanggal" id="tanggal" class="form-control @error('tanggal') is-invalid @enderror"
-                                                        placeholder="Pilih Tanggal Periksa">
-                                                    @error('tanggal')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
+                                            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                                                <div class="d-flex align-items-center py-3">
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="text-muted mr-2">Show</span>
+                                                    </div>
+
+                                                    <form method="GET" action="data-imunisasi.index">
+                                                        <select id="entries"
+                                                            class="form-control form-control-sm font-weight-bold mr-4 border-0 bg-light"
+                                                            style="width: 75px;" name="per_page" onchange="this.form.submit()">
+                                                            <option value="5" {{ request('per_page') == 5 ? 'selected' : '' }}>5</option>
+                                                            <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
+                                                            <option value="20" {{ request('per_page') == 20 ? 'selected' : '' }}>20</option>
+                                                            <option value="30" {{ request('per_page') == 30 ? 'selected' : '' }}>30</option>
+                                                            <!-- Tambahkan lebih banyak opsi jika diperlukan -->
+                                                        </select>
+                                                    </form>
                                                 </div>
 
-                                                <div class="form-group mt-5">
-                                                    <label for=""><strong>Nama Ibu Hamil</strong></label>
-                                                    <input type="text" name="nama" id="nama" class="form-control @error('nama') is-invalid @enderror"
-                                                        placeholder="Masukkan Nama Ibu Hamil">
-                                                    @error('nama')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
+                                                <div id="paginationLinks">
+                                                    {{ $data_imunisasis->links() }}
                                                 </div>
-
-                                                <div class="form-group mt-5">
-                                                    <label for=""><strong>Keluhan yang Dialami</strong></label>
-                                                    <input type="text" name="keluhan" id="keluhan" class="form-control @error('keluhan') is-invalid @enderror"
-                                                        placeholder="Masukkan Keluhan yang Dialami">
-                                                    @error('keluhan')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="form-group mt-5">
-                                                    <label for=""><strong>Tekanan Darah (<span class="text-success">mmHg</span>)</strong></label>
-                                                    <input type="text" name="tekanan_darah" id="tekanan_darah" class="form-control @error('tekanan_darah') is-invalid @enderror"
-                                                        placeholder="Masukkan Tekanan Darah Ibu Hamil (Hanya Angka Saja)">
-                                                    @error('tekanan_darah')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="form-group mt-5">
-                                                    <label for=""><strong>Berat Badan (<span class="text-success">Kg</span>)</strong></label>
-                                                    <input type="text" name="berat_badan" id="berat_badan" class="form-control @error('berat_badan') is-invalid @enderror"
-                                                        placeholder="Masukkan Berat Badan Ibu Hamil (Hanya Angka Saja)">
-                                                    @error('berat_badan')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="form-group mt-5">
-                                                    <label for=""><strong>Umur Kehamilan (<span class="text-success">Hari/Minggu/bulan</span>)</strong></label>
-                                                    <input type="text" name="umur_kehamilan" id="umur_kehamilan" class="form-control @error('umur_kehamilan') is-invalid @enderror"
-                                                        placeholder="Masukkan Umur Kehamilan (Contoh: 1 Hari/1 Minggu/1 Bulan)">
-                                                    @error('umur_kehamilan')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="form-group mt-5">
-                                                    <label for=""><strong>Tinggi Fundus (<span class="text-success">Cm</span>)</strong></label>
-                                                    <input type="text" name="tinggi_fundus" id="tinggi_fundus" class="form-control @error('tinggi_fundus') is-invalid @enderror"
-                                                        placeholder="Masukkan Tinggi Fundus (Hanya Angka Saja)">
-                                                    @error('tinggi_fundus')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="form-group mt-5">
-                                                    <label for=""><strong>Letak Janin (<span class="text-success">Kep/Su/Li</span>)</strong></label>
-                                                    <input type="text" name="letak_janin" id="letak_janin" class="form-control @error('letak_janin') is-invalid @enderror"
-                                                        placeholder="Masukkan Letak Janin">
-                                                    @error('letak_janin')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="form-group mt-5">
-                                                    <label for=""><strong>Denyut Jantung Janin (<span class="text-success">BPM</span>)</strong></label>
-                                                    <input type="text" name="denyut_jantung_janin" id="denyut_jantung_janin" class="form-control @error('denyut_jantung_janin') is-invalid @enderror"
-                                                        placeholder="Masukkan Denyut Jantung Janin (Hanya Angka Saja)">
-                                                    @error('denyut_jantung_janin')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="form-group mt-5">
-                                                    <label for=""><strong>Hasil Pemeriksaan Lab</strong></label>
-                                                    <input type="text" name="hasil_lab" id="hasil_lab" class="form-control @error('hasil_lab') is-invalid @enderror"
-                                                        placeholder="Masukkan Hasil Pemeriksaan Lab">
-                                                    @error('hasil_lab')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="form-group mt-5">
-                                                    <label for=""><strong>Tindakan yang Dilakukan</strong></label>
-                                                    <input type="text" name="tindakan" id="tindakan" class="form-control @error('tindakan') is-invalid @enderror"
-                                                        placeholder="Masukkan Tindakan yang Dilakukan">
-                                                    @error('tindakan')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="form-group mt-5">
-                                                    <label for=""><strong>Apakah Kaki Bengkak?</strong></label>
-                                                    <input type="text" name="kaki_bengkak" id="kaki_bengkak" class="form-control @error('kaki_bengkak') is-invalid @enderror"
-                                                        placeholder="Kaki Ibu Hamil bengkak atau tidak?">
-                                                    @error('kaki_bengkak')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="form-group mt-5">
-                                                    <label for=""><strong>Nasihat untuk Ibu Hamil</strong></label>
-                                                    <input type="text" name="nasihat" id="nasihat" class="form-control @error('nasihat') is-invalid @enderror"
-                                                        placeholder="Masukkan Nasihat untuk Ibu Hamil">
-                                                    @error('nasihat')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="text-right">
-                                                    <a href="{{ route('home') }}" class="btn btn-outline-danger mr-2"
-                                                        role="button">Batal</a>
-                                                    <button type="submit" class="btn btn-success">Simpan</button>
-                                                </div>
-                                            </form>
-
+                                            </div>
                                         </div>
                                     </div>
-
-                                </div><!-- /.container-fluid -->
-                            <!--end::content-->
+                                </div>
+                            </div>
+                            <!--end::Container-->
                     </div>
                     <!--end::Content-->
                 </div>
@@ -429,7 +387,17 @@
             <!--end::Content-->
         </div>
         <!-- end::User Panel-->
-        @include('sweetalert::alert')
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $(document).on('change', '#entries', function() {
+                    window.location =
+                        "{{ route('data-imunisasi.index') }}?search={{ request('search') }}&per_page=" + $(this)
+                        .val();
+                });
+            });
+        </script>
     </body>
     <!--end::Body-->
 @endsection
