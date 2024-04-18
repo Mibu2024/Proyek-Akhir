@@ -31,19 +31,25 @@
             android:exported="false"
             android:windowSoftInputMode="adjustNothing"
             android:label="@string/title_activity_bidan_main" />
+        <activity
             android:name=".ui.activity.OnBoardActivity"
             android:exported="false"/>
         <activity
             android:name=".bidan.ui.auth.BidanLoginActivity"
-            android:exported="true" >
+            android:exported="true" />
+        <activity
             android:name=".ui.activity.SplashActivity"
             android:exported="false" >
-
         </activity>
         <activity
-            android:name=".ui.activity.MainActivity"
-            android:exported="true"
-            android:label="@string/title_activity_main">
+            android:name=".bidan.ui.auth.BidanRegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".auth.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".auth.LoginActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -51,13 +57,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".bidan.ui.auth.BidanRegisterActivity"
-            android:exported="false" />
-            android:name=".auth.RegisterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".auth.LoginActivity"
-            android:exported="false" />
+            android:name=".ui.activity.MainActivity"
+            android:exported="true"
+            android:label="@string/title_activity_main">
+        </activity>
     </application>
 
 </manifest>

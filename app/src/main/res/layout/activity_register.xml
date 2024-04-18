@@ -162,6 +162,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/noTeleponEditTextLayout">
 
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end">
+
             <com.proyekakhir.mibu.custom_view.PasswordEditText
                 android:id="@+id/bidan_register_password"
                 android:layout_width="match_parent"
@@ -170,6 +175,19 @@
                 android:ems="10"
                 android:hint="@string/hint_password"
                 android:inputType="textPassword" />
+
+                <com.proyekakhir.mibu.custom_view.EyeIconView
+                    android:id="@+id/eyeIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center_vertical"
+                    android:clickable="true"
+                    android:paddingEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </FrameLayout>
+
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView

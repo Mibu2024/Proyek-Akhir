@@ -29,7 +29,7 @@
             android:id="@+id/iv_logo"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:src="@drawable/logowithbg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -123,6 +123,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView6">
 
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end">
+
             <com.proyekakhir.mibu.bidan.ui.customViewBidan.PasswordEditText
                 android:id="@+id/bidan_login_password"
                 android:layout_width="match_parent"
@@ -132,8 +137,20 @@
                 android:drawablePadding="12dp"
                 android:ems="10"
                 android:inputType="textPassword" />
-        </com.google.android.material.textfield.TextInputLayout>
 
+            <com.proyekakhir.mibu.bidan.ui.customViewBidan.EyeIconView
+                android:id="@+id/eyeIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:clickable="true"
+                android:paddingEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            </FrameLayout>
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/bidan_forgot_password"
