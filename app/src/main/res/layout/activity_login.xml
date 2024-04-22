@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:background="@color/blue_background"
-    tools:context=".auth.LoginActivity">
+    tools:context=".user.auth.LoginActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -89,7 +89,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3">
 
-            <com.proyekakhir.mibu.custom_view.EmailEditText
+            <com.proyekakhir.mibu.user.custom_view.EmailEditText
                 android:id="@+id/bidan_login_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -123,7 +123,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView6">
 
-            <com.proyekakhir.mibu.custom_view.PasswordEditText
+            <com.proyekakhir.mibu.user.custom_view.PasswordEditText
                 android:id="@+id/bidan_login_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

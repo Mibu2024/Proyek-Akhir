@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/activity_on_board_scene"
-    tools:context=".ui.activity.OnBoardActivity">
+    tools:context=".user.ui.activity.OnBoardActivity">
 
     <ImageView
         android:id="@+id/imageView"
