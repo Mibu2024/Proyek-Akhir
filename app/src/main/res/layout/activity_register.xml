@@ -70,7 +70,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/bidan_register_fullname"
+                android:id="@+id/user_register_fullname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_et_default"
@@ -93,7 +93,7 @@
             app:layout_constraintTop_toBottomOf="@+id/fullnameEditTextLayout">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/bidan_register_alamat"
+                android:id="@+id/user_register_alamat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_et_default"
@@ -116,7 +116,7 @@
             app:layout_constraintTop_toBottomOf="@+id/alamatEditTextLayout">
 
             <com.proyekakhir.mibu.custom_view.EmailEditText
-                android:id="@+id/bidan_register_email"
+                android:id="@+id/user_register_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_et_default"
@@ -139,7 +139,7 @@
             app:layout_constraintTop_toBottomOf="@+id/emailEditTextLayout">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/bidan_register_no_telepon"
+                android:id="@+id/user_register_no_telepon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_et_default"
@@ -163,7 +163,7 @@
             app:layout_constraintTop_toBottomOf="@+id/noTeleponEditTextLayout">
 
             <com.proyekakhir.mibu.custom_view.PasswordEditText
-                android:id="@+id/bidan_register_password"
+                android:id="@+id/user_register_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_et_default"
@@ -199,7 +199,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView2">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/bidan_umur"
+                android:id="@+id/umur"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_et_default"
@@ -223,7 +223,7 @@
             app:layout_constraintTop_toBottomOf="@+id/umurEditTextLayout">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/bidan_kehamilanke"
+                android:id="@+id/kehamilanke"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_et_default"
@@ -247,7 +247,7 @@
             app:layout_constraintTop_toBottomOf="@+id/kehamilanEditTextLayout">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/bidan_nama_suami"
+                android:id="@+id/nama_suami"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_et_default"
@@ -271,7 +271,7 @@
             app:layout_constraintTop_toBottomOf="@+id/namaSuamiEditTextLayout">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/bidan_umur_suami"
+                android:id="@+id/user_umur_suami"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_et_default"
@@ -295,7 +295,7 @@
             app:layout_constraintTop_toBottomOf="@+id/umurSuamiEditTextLayout">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/bidan_nik"
+                android:id="@+id/user_nik"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_et_default"
@@ -305,7 +305,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_register_bidan"
+            android:id="@+id/btn_register_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
