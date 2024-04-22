@@ -42,14 +42,15 @@ class FirebaseRepository : FirebaseService {
                                     "email" to email,
                                     "noTelepon" to noTelepon,
                                     "str" to str,
-                                    "uid" to user?.uid
+                                    "uid" to user?.uid,
+                                    "role" to "bidan"
                                 )
 
 
                                 //insert data to firestore
                                 val uid = user?.uid
                                 if (uid != null){
-                                    firestore.collection("bidan").document(uid)
+                                    firestore.collection("users").document(uid)
                                         .set(bidanData)
                                         .addOnSuccessListener {
                                             onComplete(true)

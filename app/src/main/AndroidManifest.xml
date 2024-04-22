@@ -11,18 +11,14 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission
-        android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@drawable/logo_mibu"
+        android:icon="@drawable/logowithbg"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/logo_mibu"
+        android:roundIcon="@drawable/logowithbg"
         android:supportsRtl="true"
         android:theme="@style/Theme.Mibu"
         tools:targetApi="31">

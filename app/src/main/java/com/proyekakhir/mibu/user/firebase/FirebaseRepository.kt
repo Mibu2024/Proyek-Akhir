@@ -51,7 +51,8 @@ class FirebaseRepository : FirebaseService {
                                     "namaSuami" to namaSuami,
                                     "umurSuami" to umurSuami,
                                     "nik" to nik,
-                                    "uid" to user?.uid
+                                    "uid" to user?.uid,
+                                    "role" to "user"
                                 )
 
 

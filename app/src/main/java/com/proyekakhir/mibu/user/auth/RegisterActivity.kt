@@ -3,13 +3,16 @@ package com.proyekakhir.mibu.user.auth
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.proyekakhir.mibu.R
+import com.proyekakhir.mibu.bidan.ui.auth.BidanLoginActivity
 import com.proyekakhir.mibu.user.auth.viewmodel.SignUpViewModel
 import com.proyekakhir.mibu.databinding.ActivityRegisterBinding
 import com.proyekakhir.mibu.user.factory.ViewModelFactory
 import com.proyekakhir.mibu.user.firebase.FirebaseRepository
+import com.proyekakhir.mibu.user.ui.activity.MainActivity
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
@@ -69,5 +72,32 @@ class RegisterActivity : AppCompatActivity() {
                 viewModel.signup(fullname, alamat, email, noTelepon, umur, kehamilanKe, namaSuami, umurSuami, nik, pass)
             }
         }
+
+        viewModel.isLoading.observe(this, { isLoading ->
+            binding.pbRegister.visibility = if (isLoading) View.VISIBLE else View.GONE
+        })
+
+        viewModel.isSignupSuccessful.observe(this, { isSuccessful ->
+            if (isSuccessful) {
+                Toast.makeText(
+                    applicationContext,
+                    R.string.sign_up_success,
+                    Toast.LENGTH_SHORT
+                ).show()
+                startActivity(
+                    Intent(
+                        this@RegisterActivity,
+                        MainActivity::class.java
+                    )
+                )
+                finish()
+            } else {
+                Toast.makeText(
+                    baseContext,
+                    R.string.sign_up_failed,
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        })
     }
 }

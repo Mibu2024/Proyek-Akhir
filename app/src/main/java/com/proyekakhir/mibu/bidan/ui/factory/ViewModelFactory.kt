@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.proyekakhir.mibu.bidan.ui.auth.viewmodel.BidanLoginViewModel
 import com.proyekakhir.mibu.bidan.ui.auth.viewmodel.BidanSignUpViewModel
 import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
+import com.proyekakhir.mibu.user.auth.viewmodel.LoginViewModel
+import com.proyekakhir.mibu.user.auth.viewmodel.SignUpViewModel
 
 class ViewModelFactory(private val repository: FirebaseRepository) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
