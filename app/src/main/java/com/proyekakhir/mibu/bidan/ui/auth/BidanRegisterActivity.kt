@@ -7,15 +7,14 @@ import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.proyekakhir.mibu.R
-import com.proyekakhir.mibu.bidan.ui.auth.viewmodel.LoginViewModel
-import com.proyekakhir.mibu.bidan.ui.auth.viewmodel.SignUpViewModel
+import com.proyekakhir.mibu.bidan.ui.auth.viewmodel.BidanSignUpViewModel
 import com.proyekakhir.mibu.bidan.ui.factory.ViewModelFactory
 import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
 import com.proyekakhir.mibu.databinding.ActivityBidanRegisterBinding
 
 class BidanRegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBidanRegisterBinding
-    private lateinit var viewModel: SignUpViewModel
+    private lateinit var viewModel: BidanSignUpViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBidanRegisterBinding.inflate(layoutInflater)
@@ -23,7 +22,7 @@ class BidanRegisterActivity : AppCompatActivity() {
 
         val repository = FirebaseRepository()
         val factory = ViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, factory).get(SignUpViewModel::class.java)
+        viewModel = ViewModelProvider(this, factory).get(BidanSignUpViewModel::class.java)
 
         binding.tvToLogin.setOnClickListener {
             startActivity(Intent(this@BidanRegisterActivity, BidanLoginActivity::class.java))

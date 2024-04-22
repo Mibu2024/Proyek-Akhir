@@ -14,7 +14,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.proyekakhir.mibu.R
-import com.proyekakhir.mibu.bidan.ui.auth.viewmodel.LoginViewModel
+import com.proyekakhir.mibu.bidan.ui.auth.viewmodel.BidanLoginViewModel
 import com.proyekakhir.mibu.bidan.ui.customViewBidan.EmailEditText
 import com.proyekakhir.mibu.bidan.ui.factory.ViewModelFactory
 import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
@@ -23,7 +23,7 @@ import com.proyekakhir.mibu.databinding.ActivityBidanLoginBinding
 
 class BidanLoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBidanLoginBinding
-    private lateinit var viewModel: LoginViewModel
+    private lateinit var viewModel: BidanLoginViewModel
     val firebaseAuth = FirebaseAuth.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +32,7 @@ class BidanLoginActivity : AppCompatActivity() {
 
         val repository = FirebaseRepository()
         val factory = ViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, factory).get(LoginViewModel::class.java)
+        viewModel = ViewModelProvider(this, factory).get(BidanLoginViewModel::class.java)
 
 
         binding.btnLoginBidan.setOnClickListener {

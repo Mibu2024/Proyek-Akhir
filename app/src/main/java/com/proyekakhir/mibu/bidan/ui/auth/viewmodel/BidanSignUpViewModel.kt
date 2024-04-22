@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
 
-class SignUpViewModel(private val repository: FirebaseRepository) : ViewModel() {
+class BidanSignUpViewModel(private val repository: FirebaseRepository) : ViewModel() {
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 

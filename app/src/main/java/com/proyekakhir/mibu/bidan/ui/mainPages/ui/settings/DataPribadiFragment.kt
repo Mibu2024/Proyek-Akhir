@@ -35,7 +35,7 @@ class DataPribadiFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_data_pribadi, container, false)
+        return inflater.inflate(R.layout.fragment_data_pribadi_bidan, container, false)
     }
 
     companion object {
