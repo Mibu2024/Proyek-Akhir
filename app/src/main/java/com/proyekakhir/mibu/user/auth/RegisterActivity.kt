@@ -1,13 +1,19 @@
 package com.proyekakhir.mibu.user.auth
 
+import android.content.ContentValues
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.bidan.ui.auth.BidanLoginActivity
+import com.proyekakhir.mibu.bidan.ui.auth.preferences.PreferenceManager
+import com.proyekakhir.mibu.bidan.ui.mainPages.BidanMainActivity
 import com.proyekakhir.mibu.user.auth.viewmodel.SignUpViewModel
 import com.proyekakhir.mibu.databinding.ActivityRegisterBinding
 import com.proyekakhir.mibu.user.factory.ViewModelFactory
@@ -79,18 +85,31 @@ class RegisterActivity : AppCompatActivity() {
 
         viewModel.isSignupSuccessful.observe(this, { isSuccessful ->
             if (isSuccessful) {
-                Toast.makeText(
-                    applicationContext,
-                    R.string.sign_up_success,
-                    Toast.LENGTH_SHORT
-                ).show()
-                startActivity(
-                    Intent(
-                        this@RegisterActivity,
-                        MainActivity::class.java
-                    )
-                )
-                finish()
+                val db = FirebaseFirestore.getInstance()
+                val currentUser = FirebaseAuth.getInstance().currentUser?.uid
+                val docRef = currentUser?.let { db.collection("users").document(it) }
+                if (docRef != null) {
+                    docRef.get().addOnSuccessListener { document ->
+                        if (document != null) {
+                            val role = document.getString("role")
+                            if (role == "bidan") {
+                                val preferenceManager = PreferenceManager(this)
+                                preferenceManager.setUserRole("bidan")
+                                startActivity(Intent(this@RegisterActivity, BidanMainActivity::class.java))
+                                finish()
+                            } else {
+                                val preferenceManager = PreferenceManager(this)
+                                preferenceManager.setUserRole("user")
+                                startActivity(Intent(this@RegisterActivity, MainActivity::class.java))
+                                finish()
+                            }
+                        } else {
+                            Log.d(ContentValues.TAG, "No such document")
+                        }
+                    }.addOnFailureListener { exception ->
+                        Log.d(ContentValues.TAG, "get failed with ", exception)
+                    }
+                }
             } else {
                 Toast.makeText(
                     baseContext,

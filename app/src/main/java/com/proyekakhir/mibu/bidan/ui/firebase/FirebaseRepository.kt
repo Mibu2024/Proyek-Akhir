@@ -1,16 +1,21 @@
 package com.proyekakhir.mibu.bidan.ui.firebase
 
+import android.content.ContentValues.TAG
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.firestore.FirebaseFirestore
+import com.proyekakhir.mibu.bidan.ui.auth.preferences.PreferenceManager
+import timber.log.Timber
 
 class FirebaseRepository : FirebaseService {
     private val auth = FirebaseAuth.getInstance()
     private val firestore = FirebaseFirestore.getInstance()
+
     override fun login(email: String, password: String, onComplete: (Boolean) -> Unit) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
+                val userId = auth?.uid
                 onComplete(task.isSuccessful)
             }
     }
