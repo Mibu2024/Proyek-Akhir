@@ -4,8 +4,12 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.auth.User
+import com.google.firebase.firestore.toObject
 import com.proyekakhir.mibu.bidan.ui.auth.preferences.PreferenceManager
+import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.IbuHamilData
 import timber.log.Timber
 
 class FirebaseRepository : FirebaseService {
@@ -80,4 +84,25 @@ class FirebaseRepository : FirebaseService {
                 }
             }
     }
+
+    override fun getAllIbuHamil(
+        role: String,
+        onDataChange: (List<IbuHamilData>) -> Unit,
+        onCancelled: (DatabaseError) -> Unit
+    ) {
+        firestore.collection("users")
+            .whereEqualTo("role", role)
+            .get()
+            .addOnSuccessListener { documents ->
+                val list = documents.mapNotNull { document ->
+                    val ibu = document.toObject(IbuHamilData::class.java)
+                    ibu
+                }
+                onDataChange(list)
+            }
+            .addOnFailureListener { e ->
+                onCancelled(error(e))
+            }
+    }
+
 }

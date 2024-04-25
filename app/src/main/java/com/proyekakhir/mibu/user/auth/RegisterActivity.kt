@@ -14,8 +14,8 @@ import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.bidan.ui.auth.BidanLoginActivity
 import com.proyekakhir.mibu.bidan.ui.auth.preferences.PreferenceManager
 import com.proyekakhir.mibu.bidan.ui.mainPages.BidanMainActivity
-import com.proyekakhir.mibu.user.auth.viewmodel.SignUpViewModel
 import com.proyekakhir.mibu.databinding.ActivityRegisterBinding
+import com.proyekakhir.mibu.user.auth.viewmodel.SignUpViewModel
 import com.proyekakhir.mibu.user.factory.ViewModelFactory
 import com.proyekakhir.mibu.user.firebase.FirebaseRepository
 import com.proyekakhir.mibu.user.ui.activity.MainActivity
