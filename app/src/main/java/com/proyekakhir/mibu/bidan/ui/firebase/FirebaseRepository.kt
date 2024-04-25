@@ -16,6 +16,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.proyekakhir.mibu.bidan.ui.auth.preferences.PreferenceManager
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.ArtikelData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.IbuHamilData
+import com.proyekakhir.mibu.bidan.ui.mainPages.ui.settings.UserData
 import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -162,6 +163,29 @@ class FirebaseRepository : FirebaseService {
                 onCancelled(databaseError)
             }
         })
+    }
+
+    override fun getUserData(onDataChange: (UserData?) -> Unit, onCancelled: (Exception) -> Unit) {
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
+        val db = FirebaseFirestore.getInstance()
+
+        if (uid != null) {
+            db.collection("users").document(uid)
+                .get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        val userData = document.toObject(UserData::class.java)
+                        onDataChange(userData)
+                    } else {
+                        onDataChange(null)
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    onCancelled(exception)
+                }
+        } else {
+            onCancelled(Exception("User not logged in"))
+        }
     }
 
     private fun saveArtikelToDatabase(judul: String, isiArtikel: String, imageUrl: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {

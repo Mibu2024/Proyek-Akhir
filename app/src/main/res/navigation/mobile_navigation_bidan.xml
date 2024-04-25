@@ -25,10 +25,27 @@
         android:id="@+id/navigation_settings"
         android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.settings.BidanSettingsFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_bidan_settings" />
+        tools:layout="@layout/fragment_bidan_settings" >
+        <action
+            android:id="@+id/action_navigation_settings_to_aboutAppFragment"
+            app:destination="@id/aboutAppFragment" />
+        <action
+            android:id="@+id/action_navigation_settings_to_dataPribadiFragment"
+            app:destination="@id/dataPribadiFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addArtikelFragment"
         android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.AddArtikelFragment"
         android:label="fragment_add_artikel"
         tools:layout="@layout/fragment_add_artikel" />
+    <fragment
+        android:id="@+id/aboutAppFragment"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.settings.AboutAppFragment"
+        android:label="fragment_about_app"
+        tools:layout="@layout/fragment_about_app" />
+    <fragment
+        android:id="@+id/dataPribadiFragment"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.settings.DataPribadiFragment"
+        android:label="fragment_data_pribadi_bidan"
+        tools:layout="@layout/fragment_data_pribadi_bidan" />
 </navigation>
