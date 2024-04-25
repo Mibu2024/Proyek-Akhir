@@ -164,8 +164,9 @@
                 android:layout_height="200dp"
                 android:drawablePadding="12dp"
                 android:ems="10"
+                android:minLines="2"
                 android:background="@drawable/bg_stroke_only"
-                android:inputType="text" />
+                android:inputType="textMultiLine" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton

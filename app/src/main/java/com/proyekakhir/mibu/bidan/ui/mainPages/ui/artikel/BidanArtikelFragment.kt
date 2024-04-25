@@ -6,8 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.bidan.ui.factory.ViewModelFactory
 import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
@@ -17,6 +20,9 @@ class BidanArtikelFragment : Fragment() {
 
     private var _binding: FragmentBidanArtikelBinding? = null
     private val binding get() = _binding!!
+    private lateinit var listArtikel: ArrayList<ArtikelData>
+    private lateinit var adapter: ListArtikelAdapter
+    private lateinit var rvArtikel: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,6 +39,32 @@ class BidanArtikelFragment : Fragment() {
         binding.layoutAddArtikel.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_artikel_to_addArtikelFragment)
         }
+
+        listArtikel = arrayListOf<ArtikelData>()
+        adapter = ListArtikelAdapter(listArtikel)
+        rvArtikel = binding.rvArtikel
+        rvArtikel.layoutManager = LinearLayoutManager(requireContext())
+        rvArtikel.setHasFixedSize(true)
+        rvArtikel.adapter = adapter
+
+        bidanArtikelViewModel.getArtikelByUser(
+            onDataChange = { list ->
+                // Update your adapter with the new list
+                adapter.setData(list)
+            },
+            onCancelled = { error ->
+                // Handle the error
+            }
+        )
+
+        val progressBar = binding.pbArtikel
+        bidanArtikelViewModel.isLoading.observe(requireActivity(), Observer { isLoading ->
+            if (isLoading) {
+                progressBar.visibility = View.VISIBLE
+            } else {
+                progressBar.visibility = View.GONE
+            }
+        })
 
         return root
     }

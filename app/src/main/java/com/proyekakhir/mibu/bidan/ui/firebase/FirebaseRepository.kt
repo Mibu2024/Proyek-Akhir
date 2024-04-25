@@ -5,8 +5,10 @@ import android.net.Uri
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.auth.User
 import com.google.firebase.firestore.toObject
@@ -134,6 +136,32 @@ class FirebaseRepository : FirebaseService {
                     onFailure(e)
                 }
         }
+    }
+
+    override fun getArtikelByUser(
+        onDataChange: (List<ArtikelData>) -> Unit,
+        onCancelled: (DatabaseError) -> Unit
+    ) {
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
+        val refDatabase = FirebaseDatabase.getInstance().getReference("artikel")
+        val artikelList = mutableListOf<ArtikelData>()
+
+        refDatabase.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                artikelList.clear()
+                for (postSnapshot in dataSnapshot.children) {
+                    val artikel = postSnapshot.getValue(ArtikelData::class.java)
+                    if (artikel != null && artikel.uid == uid) {
+                        artikelList.add(artikel)
+                    }
+                }
+                onDataChange(artikelList)
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                onCancelled(databaseError)
+            }
+        })
     }
 
     private fun saveArtikelToDatabase(judul: String, isiArtikel: String, imageUrl: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {
