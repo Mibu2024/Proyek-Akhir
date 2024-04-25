@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.adapter.ParentRvAdapter
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.ChildItem
+import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.IbuHamilData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.ParentItem
 import com.proyekakhir.mibu.databinding.FragmentBidanHomeBinding
 import com.proyekakhir.mibu.databinding.FragmentDetailIbuBinding
@@ -26,6 +27,12 @@ class DetailIbuFragment : Fragment() {
     ): View? {
         _binding = FragmentDetailIbuBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        val itemData = arguments?.getSerializable("itemData") as IbuHamilData
+
+        binding.tvNamaIbu.text = itemData.fullname
+        binding.tvUmurIbu.text = itemData.umur
+        binding.tvNoTelponIbu.text = itemData.noTelepon
 
         parentRv = binding.parentRecyclerView
         parentRv.setHasFixedSize(true)

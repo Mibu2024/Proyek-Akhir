@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.BidanHomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_bidan_home" />
+        tools:layout="@layout/fragment_bidan_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_detailIbuFragment"
+            app:destination="@id/detailIbuFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_artikel"
@@ -48,4 +52,9 @@
         android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.settings.DataPribadiFragment"
         android:label="fragment_data_pribadi_bidan"
         tools:layout="@layout/fragment_data_pribadi_bidan" />
+    <fragment
+        android:id="@+id/detailIbuFragment"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.DetailIbuFragment"
+        android:label="fragment_detail_ibu"
+        tools:layout="@layout/fragment_detail_ibu" />
 </navigation>

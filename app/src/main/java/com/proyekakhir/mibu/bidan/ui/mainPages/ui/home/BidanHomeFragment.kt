@@ -5,12 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
+import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.bidan.ui.factory.ViewModelFactory
 import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.adapter.ListIbuAdapter
@@ -74,6 +76,30 @@ class BidanHomeFragment : Fragment() {
             }
 
         })
+
+        adapter.listener = object : ListIbuAdapter.OnItemClickListener {
+            override fun onItemClick(item: IbuHamilData) {
+                // Create a new instance of DetailIbuFragment
+                val detailIbuFragment = DetailIbuFragment()
+
+                // Create a bundle to hold the data
+                val bundle = Bundle()
+
+                // Add the clicked item's data to the bundle
+                bundle.putSerializable("itemData", item)
+
+                // Set the fragment's arguments to the bundle
+                detailIbuFragment.arguments = bundle
+
+                // Use the FragmentManager to replace the current fragment with the DetailIbuFragment
+                val fragmentManager = (context as AppCompatActivity).supportFragmentManager
+                fragmentManager.beginTransaction()
+                    .add(R.id.container, detailIbuFragment)
+                    .addToBackStack("detailIbuFragment") // Add this transaction to the back stack
+                    .commit()
+            }
+        }
+
 
         return root
     }
