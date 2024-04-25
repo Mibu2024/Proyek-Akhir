@@ -7,14 +7,15 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.proyekakhir.mibu.R
+import com.proyekakhir.mibu.bidan.ui.factory.ViewModelFactory
+import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
 import com.proyekakhir.mibu.databinding.FragmentBidanArtikelBinding
 
 class BidanArtikelFragment : Fragment() {
 
     private var _binding: FragmentBidanArtikelBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -22,11 +23,17 @@ class BidanArtikelFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val bidanArtikelViewModel =
-            ViewModelProvider(this).get(BidanArtikelViewModel::class.java)
+        val repository = FirebaseRepository()
+        val factory = ViewModelFactory(repository)
+        val bidanArtikelViewModel = ViewModelProvider(this,factory).get(BidanArtikelViewModel::class.java)
 
         _binding = FragmentBidanArtikelBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        binding.layoutAddArtikel.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_artikel_to_addArtikelFragment)
+        }
+
         return root
     }
 

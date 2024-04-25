@@ -1,16 +1,24 @@
 package com.proyekakhir.mibu.bidan.ui.firebase
 
 import android.content.ContentValues.TAG
+import android.net.Uri
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.auth.User
 import com.google.firebase.firestore.toObject
+import com.google.firebase.storage.FirebaseStorage
 import com.proyekakhir.mibu.bidan.ui.auth.preferences.PreferenceManager
+import com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.ArtikelData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.IbuHamilData
 import timber.log.Timber
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
+import java.util.UUID
 
 class FirebaseRepository : FirebaseService {
     private val auth = FirebaseAuth.getInstance()
@@ -102,6 +110,59 @@ class FirebaseRepository : FirebaseService {
             }
             .addOnFailureListener { e ->
                 onCancelled(error(e))
+            }
+    }
+
+    override fun uploadArtikel(
+        judul: String,
+        isiArtikel: String,
+        selectedImageUri: Uri?,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        if (selectedImageUri != null) {
+            val fileName = UUID.randomUUID().toString() + ".jpg"
+            val refStorage = FirebaseStorage.getInstance().reference.child("posterArtikel/$fileName")
+
+            refStorage.putFile(selectedImageUri)
+                .addOnSuccessListener { taskSnapshot ->
+                    taskSnapshot.storage.downloadUrl.addOnSuccessListener { imageUrl ->
+                        saveArtikelToDatabase(judul, isiArtikel, imageUrl.toString(), onSuccess, onFailure)
+                    }
+                }
+                .addOnFailureListener { e ->
+                    onFailure(e)
+                }
+        }
+    }
+
+    private fun saveArtikelToDatabase(judul: String, isiArtikel: String, imageUrl: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {
+        val uid = FirebaseAuth.getInstance().currentUser?.uid.toString()
+        val db = FirebaseFirestore.getInstance()
+
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        val currentDate = sdf.format(Date())
+
+        db.collection("users").document(uid).get()
+            .addOnSuccessListener { document ->
+                if (document != null) {
+                    val fullName = document.getString("fullname") // replace "fullName" with the actual field name in your Firestore document
+                    val artikel = ArtikelData(judul, isiArtikel, imageUrl, uid, currentDate, fullName)
+                    val refDatabase = FirebaseDatabase.getInstance().getReference("artikel").push()
+
+                    refDatabase.setValue(artikel)
+                        .addOnSuccessListener {
+                            onSuccess()
+                        }
+                        .addOnFailureListener { e ->
+                            onFailure(e)
+                        }
+                } else {
+                    Log.d("Firestore", "No such document")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.d("Firestore", "get failed with ", exception)
             }
     }
 

@@ -94,4 +94,7 @@ dependencies {
 
     implementation ("com.jakewharton.timber:timber:5.0.1")
 
+    //imagepicker
+    implementation ("com.github.dhaval2404:imagepicker:2.1")
+
 }

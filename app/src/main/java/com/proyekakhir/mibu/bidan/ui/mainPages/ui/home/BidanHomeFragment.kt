@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import androidx.databinding.adapters.SearchViewBindingAdapter.setOnQueryTextListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -36,7 +35,6 @@ class BidanHomeFragment : Fragment() {
 
         val repository = FirebaseRepository()
         val factory = ViewModelFactory(repository)
-
         bidanHomeViewModel = ViewModelProvider(requireActivity(), factory).get(BidanHomeViewModel::class.java)
 
         _binding = FragmentBidanHomeBinding.inflate(inflater, container, false)
