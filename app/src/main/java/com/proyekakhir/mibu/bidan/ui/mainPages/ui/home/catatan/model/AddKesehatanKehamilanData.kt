@@ -13,5 +13,6 @@ data class AddKesehatanKehamilanData(
     val tindakan: String? = "",
     val kakiBengkak: String? = "",
     val nasihat: String? = "",
-    val uid: String? = ""
+    val uid: String? = "",
+    val nama: String? = ""
 )

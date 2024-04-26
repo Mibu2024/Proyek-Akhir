@@ -94,10 +94,11 @@ class AddCatatanKesehatanFragment : Fragment() {
                 binding.edTindakan.setError("Isi tindakan")
             } else {
                 val uid = itemData.uid
-                val formData = AddKesehatanKehamilanData(tanggalPeriksa, keluhan, tekananDarah, beratBadan, umurKehamilan, tinggiFundus, letakJanin, denyutJanin, hasilLab, tindakan, kakiBengkak, nasihat, uid)
+                val nama = itemData.fullname
+                val formData = AddKesehatanKehamilanData(tanggalPeriksa, keluhan, tekananDarah, beratBadan, umurKehamilan, tinggiFundus, letakJanin, denyutJanin, hasilLab, tindakan, kakiBengkak, nasihat, uid, nama)
 
                 if (uid != null) {
-                    viewModel.uploadForm(uid, formData)
+                    viewModel.uploadCatatanKesehatan(uid, formData)
                 }
 
                 viewModel.successMessage.observe(viewLifecycleOwner, { message ->

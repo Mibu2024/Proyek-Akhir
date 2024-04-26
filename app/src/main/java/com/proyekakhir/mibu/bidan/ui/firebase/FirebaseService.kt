@@ -4,7 +4,9 @@ import android.net.Uri
 import com.google.firebase.database.DatabaseError
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.ArtikelData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.AddCatatanKesehatanFragment
+import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddDataAnak
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddKesehatanKehamilanData
+import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddNifasData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.IbuHamilData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.settings.UserData
 
@@ -16,5 +18,7 @@ interface FirebaseService {
     fun getArtikelByUser(onDataChange: (List<ArtikelData>) -> Unit, onCancelled: (DatabaseError) -> Unit)
     fun getUserData(onDataChange: (UserData?) -> Unit, onCancelled: (Exception) -> Unit)
     fun uploadCatatanKesehatan(uid: String, formData: AddKesehatanKehamilanData, onComplete: (Boolean) -> Unit, onFailure: (Exception) -> Unit)
+    fun uploadCatatanNifas(uid: String, formData: AddNifasData, onComplete: (Boolean) -> Unit, onFailure: (Exception) -> Unit)
+    fun uploadDataAnak(uid: String, formData: AddDataAnak, onComplete: (Boolean) -> Unit, onFailure: (Exception) -> Unit)
 
 }

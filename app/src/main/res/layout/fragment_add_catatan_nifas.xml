@@ -72,7 +72,6 @@
                 android:drawableLeft="@drawable/baseline_calendar_month_24"
                 android:drawablePadding="12dp"
                 android:ems="10"
-                android:hint="@string/tanggal_periksa"
                 android:inputType="date" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -106,7 +105,6 @@
                 android:background="@drawable/bg_et_default"
                 android:drawablePadding="12dp"
                 android:ems="10"
-                android:hint="@string/kunjungan_ke"
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -140,7 +138,6 @@
                 android:background="@drawable/bg_et_default"
                 android:drawablePadding="12dp"
                 android:ems="10"
-                android:hint="@string/periksa_asi"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -174,7 +171,6 @@
                 android:background="@drawable/bg_et_default"
                 android:drawablePadding="12dp"
                 android:ems="10"
-                android:hint="@string/periksa_pendarahan"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -208,7 +204,6 @@
                 android:background="@drawable/bg_et_default"
                 android:drawablePadding="12dp"
                 android:ems="10"
-                android:hint="@string/jalan_lahir"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -229,6 +224,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="24dp"
+            android:paddingLeft="5dp"
             android:background="@drawable/bg_et_default"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -264,7 +260,6 @@
                 android:background="@drawable/bg_stroke_only"
                 android:drawablePadding="12dp"
                 android:ems="10"
-                android:hint="@string/masalah"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -298,7 +293,6 @@
                 android:background="@drawable/bg_stroke_only"
                 android:drawablePadding="12dp"
                 android:ems="10"
-                android:hint="@string/tindakan"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -309,8 +303,22 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
             android:backgroundTint="@color/form_button"
             android:text="@string/tambah_catatan"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tindakanEditTextLayout" />
+
+        <ProgressBar
+            android:id="@+id/pb_add_nifas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_tambah_catatan_nifas"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tindakanEditTextLayout" />
