@@ -13,5 +13,6 @@ data class IbuHamilData(
     val noTelepon: String? = "",
     val role: String? = "",
     val umur: String? = "",
-    val umurSuami: String? = ""
+    val umurSuami: String? = "",
+    val uid: String? = ""
 ) : Serializable

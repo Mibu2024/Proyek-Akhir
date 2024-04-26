@@ -7,6 +7,7 @@ import com.proyekakhir.mibu.bidan.ui.auth.viewmodel.BidanSignUpViewModel
 import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.BidanArtikelViewModel
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.BidanHomeViewModel
+import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.AddCatatanViewModel
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.settings.BidanSettingsViewModel
 
 class ViewModelFactory(private val repository: FirebaseRepository) : ViewModelProvider.Factory {
@@ -30,6 +31,10 @@ class ViewModelFactory(private val repository: FirebaseRepository) : ViewModelPr
 
             modelClass.isAssignableFrom(BidanSettingsViewModel::class.java) -> {
                 BidanSettingsViewModel(repository) as T
+            }
+
+            modelClass.isAssignableFrom(AddCatatanViewModel::class.java) -> {
+                AddCatatanViewModel(repository) as T
             }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class")

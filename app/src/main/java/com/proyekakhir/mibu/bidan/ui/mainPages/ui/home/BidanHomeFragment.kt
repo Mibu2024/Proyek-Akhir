@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.bidan.ui.factory.ViewModelFactory
@@ -94,12 +95,11 @@ class BidanHomeFragment : Fragment() {
                 // Use the FragmentManager to replace the current fragment with the DetailIbuFragment
                 val fragmentManager = (context as AppCompatActivity).supportFragmentManager
                 fragmentManager.beginTransaction()
-                    .add(R.id.container, detailIbuFragment)
+                    .add(R.id.nav_host_fragment_activity_bidan_main, detailIbuFragment)
                     .addToBackStack("detailIbuFragment") // Add this transaction to the back stack
                     .commit()
             }
         }
-
 
         return root
     }

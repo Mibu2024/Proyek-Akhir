@@ -72,7 +72,6 @@
                 android:drawableLeft="@drawable/baseline_calendar_month_24"
                 android:drawablePadding="12dp"
                 android:ems="10"
-                android:hint="@string/tanggal_periksa"
                 android:inputType="date" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -106,7 +105,6 @@
                 android:background="@drawable/bg_et_default"
                 android:drawablePadding="12dp"
                 android:ems="10"
-                android:hint="@string/keluhan"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -141,7 +139,6 @@
                 android:background="@drawable/bg_et_default"
                 android:drawablePadding="12dp"
                 android:ems="10"
-                android:hint="@string/tekanan_darah"
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -176,7 +173,6 @@
                 android:background="@drawable/bg_et_default"
                 android:drawablePadding="12dp"
                 android:ems="10"
-                android:hint="@string/berat_badan"
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -211,7 +207,6 @@
                 android:background="@drawable/bg_et_default"
                 android:drawablePadding="12dp"
                 android:ems="10"
-                android:hint="@string/umur_kehamilan"
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -246,7 +241,6 @@
                 android:background="@drawable/bg_et_default"
                 android:drawablePadding="12dp"
                 android:ems="10"
-                android:hint="@string/tinggi_fundus"
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -280,7 +274,6 @@
                 android:background="@drawable/bg_et_default"
                 android:drawablePadding="12dp"
                 android:ems="10"
-                android:hint="@string/letak_janin"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -314,7 +307,6 @@
                 android:background="@drawable/bg_et_default"
                 android:drawablePadding="12dp"
                 android:ems="10"
-                android:hint="@string/detak_janin"
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -348,7 +340,6 @@
                 android:background="@drawable/bg_et_default"
                 android:drawablePadding="12dp"
                 android:ems="10"
-                android:hint="@string/hasil_lab"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -382,7 +373,6 @@
                 android:background="@drawable/bg_et_default"
                 android:drawablePadding="12dp"
                 android:ems="10"
-                android:hint="@string/tindakan"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -438,8 +428,8 @@
                 android:background="@drawable/bg_stroke_only"
                 android:drawablePadding="12dp"
                 android:ems="10"
-                android:hint="@string/nasihat"
-                android:inputType="text" />
+                android:minLines="2"
+                android:inputType="textMultiLine" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
@@ -449,8 +439,22 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
             android:backgroundTint="@color/form_button"
             android:text="@string/tambah_catatan"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nasihatEditTextLayout" />
+
+        <ProgressBar
+            android:id="@+id/pb_add_kesehatan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@+id/btn_tambah_catatan_kesehatan"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/nasihatEditTextLayout" />

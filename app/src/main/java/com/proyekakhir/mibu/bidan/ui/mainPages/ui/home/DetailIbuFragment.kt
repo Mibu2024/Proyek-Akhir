@@ -5,14 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.adapter.ParentRvAdapter
+import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.AddCatatanKesehatanFragment
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.ChildItem
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.IbuHamilData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.ParentItem
-import com.proyekakhir.mibu.databinding.FragmentBidanHomeBinding
 import com.proyekakhir.mibu.databinding.FragmentDetailIbuBinding
 
 class DetailIbuFragment : Fragment() {
@@ -42,6 +45,27 @@ class DetailIbuFragment : Fragment() {
         prepareData()
         val adapter = ParentRvAdapter(parentList)
         parentRv.adapter = adapter
+
+        binding.btnAddCatatanKesehatan.setOnClickListener {
+            val addCatatanKesehatan = AddCatatanKesehatanFragment()
+            val bundle = Bundle()
+            bundle.putSerializable("itemData", itemData)
+            addCatatanKesehatan.arguments = bundle
+
+            val fragmentManager = (context as AppCompatActivity).supportFragmentManager
+            fragmentManager.beginTransaction()
+                .add(R.id.nav_host_fragment_activity_bidan_main, addCatatanKesehatan)
+                .addToBackStack(null) // Add this transaction to the back stack
+                .commit()
+        }
+
+        binding.btnAddCatatanNifas.setOnClickListener {
+
+        }
+
+        binding.btnAddAnak.setOnClickListener {
+
+        }
 
         return root
     }

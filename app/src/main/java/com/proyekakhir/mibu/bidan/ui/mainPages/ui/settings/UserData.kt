@@ -12,5 +12,6 @@ data class UserData(
     val umur: String? = "",
     val umurSuami: String? = "",
     val str: String? = "",
-    val profileImage: String? = ""
+    val profileImage: String? = "",
+    val uid: String? = ""
 )

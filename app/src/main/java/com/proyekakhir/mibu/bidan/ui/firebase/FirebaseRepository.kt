@@ -15,6 +15,7 @@ import com.google.firebase.firestore.toObject
 import com.google.firebase.storage.FirebaseStorage
 import com.proyekakhir.mibu.bidan.ui.auth.preferences.PreferenceManager
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.ArtikelData
+import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddKesehatanKehamilanData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.IbuHamilData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.settings.UserData
 import timber.log.Timber
@@ -186,6 +187,24 @@ class FirebaseRepository : FirebaseService {
         } else {
             onCancelled(Exception("User not logged in"))
         }
+    }
+
+    override fun uploadCatatanKesehatan(
+        uid: String,
+        formData: AddKesehatanKehamilanData,
+        onComplete: (Boolean) -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        val database = FirebaseDatabase.getInstance().getReference("CatatanKesehatanKehamilan").child(uid).push()
+
+        database.setValue(formData)
+            .addOnSuccessListener {
+                onComplete(true)
+            }
+            .addOnFailureListener { exception ->
+                onFailure(exception)
+            }
+
     }
 
     private fun saveArtikelToDatabase(judul: String, isiArtikel: String, imageUrl: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {

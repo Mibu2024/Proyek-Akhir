@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_navigation_home_to_detailIbuFragment"
             app:destination="@id/detailIbuFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_addCatatanKesehatanFragment2"
+            app:destination="@id/addCatatanKesehatanFragment2" />
     </fragment>
 
     <fragment
@@ -56,5 +59,14 @@
         android:id="@+id/detailIbuFragment"
         android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.DetailIbuFragment"
         android:label="fragment_detail_ibu"
-        tools:layout="@layout/fragment_detail_ibu" />
+        tools:layout="@layout/fragment_detail_ibu" >
+        <action
+            android:id="@+id/action_detailIbuFragment_to_addCatatanKesehatanFragment2"
+            app:destination="@id/addCatatanKesehatanFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/addCatatanKesehatanFragment2"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.AddCatatanKesehatanFragment"
+        android:label="fragment_add_catatan_kesehatan"
+        tools:layout="@layout/fragment_add_catatan_kesehatan" />
 </navigation>
