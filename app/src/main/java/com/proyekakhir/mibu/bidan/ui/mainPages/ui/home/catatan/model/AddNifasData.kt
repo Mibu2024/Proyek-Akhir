@@ -11,4 +11,6 @@ data class AddNifasData(
     val tindakan: String? = "",
     val uid: String? = "",
     val nama: String? = "",
+    var key: String? = "",
+    var firstChildKey: String? = "",
 )

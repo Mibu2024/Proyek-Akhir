@@ -14,5 +14,7 @@ data class AddKesehatanKehamilanData(
     val kakiBengkak: String? = "",
     val nasihat: String? = "",
     val uid: String? = "",
-    val nama: String? = ""
+    val nama: String? = "",
+    var key: String? = "",
+    var firstChildKey: String? = "",
 )

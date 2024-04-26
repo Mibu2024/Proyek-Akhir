@@ -17,14 +17,14 @@ class ChildRvAdapter(private val childList: List<ChildItem>)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.child_item_detail_ibu, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_detail_kesehatan, parent, false)
         return MyViewHolder(view)
     }
 
     override fun getItemCount() = childList.size
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.hari.text = childList[position].hari
-        holder.tanggal.text = childList[position].tanggal
+//        holder.hari.text = childList[position].hari
+        holder.tanggal.text = childList[position].tanggalPeriksa
     }
 }

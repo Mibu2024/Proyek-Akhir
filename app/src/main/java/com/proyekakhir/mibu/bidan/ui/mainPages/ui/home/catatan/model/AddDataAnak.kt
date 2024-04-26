@@ -16,5 +16,7 @@ data class AddDataAnak(
     val namaPemeriksa: String? = "",
     val periksaSelanjutnya: String? = "",
     val uid: String? = "",
-    val namaIbu: String? = ""
+    val namaIbu: String? = "",
+    var key: String? = "",
+    var firstChildKey: String? = "",
 )

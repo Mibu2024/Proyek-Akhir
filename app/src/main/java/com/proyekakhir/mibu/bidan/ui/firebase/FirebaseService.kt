@@ -7,6 +7,7 @@ import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.AddCatatanKesehat
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddDataAnak
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddKesehatanKehamilanData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddNifasData
+import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.ChildItem
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.IbuHamilData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.settings.UserData
 
@@ -20,5 +21,9 @@ interface FirebaseService {
     fun uploadCatatanKesehatan(uid: String, formData: AddKesehatanKehamilanData, onComplete: (Boolean) -> Unit, onFailure: (Exception) -> Unit)
     fun uploadCatatanNifas(uid: String, formData: AddNifasData, onComplete: (Boolean) -> Unit, onFailure: (Exception) -> Unit)
     fun uploadDataAnak(uid: String, formData: AddDataAnak, onComplete: (Boolean) -> Unit, onFailure: (Exception) -> Unit)
+    fun getCatatanKesehatan(uid: String, onDataChanged: (ArrayList<AddKesehatanKehamilanData>) -> Unit, onIsEmpty: (String) -> Unit, onIsLoading: (Boolean) -> Unit, onCancelled: (DatabaseError) -> Unit)
+    fun getCatatanNifas(uid: String, onDataChanged: (ArrayList<AddNifasData>) -> Unit, onIsEmpty: (String) -> Unit, onIsLoading: (Boolean) -> Unit, onCancelled: (DatabaseError) -> Unit)
+    fun getCatatanAnak(uid: String, onDataChanged: (ArrayList<AddDataAnak>) -> Unit, onIsEmpty: (String) -> Unit, onIsLoading: (Boolean) -> Unit, onCancelled: (DatabaseError) -> Unit)
+
 
 }

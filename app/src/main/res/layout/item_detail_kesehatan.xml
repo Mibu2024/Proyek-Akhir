@@ -24,18 +24,33 @@
             android:background="@color/amber_100">
 
             <TextView
-                android:id="@+id/tv_nama_anak"
+                android:id="@+id/tv_tanggal"
+                android:layout_width="223dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:maxLines="3"
+                android:textColor="#979797"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/tv_keluhan"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/tv_keluhan"
+                app:layout_constraintTop_toBottomOf="@+id/tv_keluhan"
+                tools:text="Tanggal" />
+
+            <TextView
+                android:id="@+id/tv_keluhan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Nama Anak" />
+                tools:text="Sakit Perut" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

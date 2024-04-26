@@ -148,4 +148,8 @@
     <string name="tab_kesehatan">Catatan Kesehatan</string>
     <string name="tab_nifas">Catatan Nifas</string>
     <string name="title_catatan_kehamilan">Catatan\nKehamilan</string>
+    <string name="history_catatan_kesehatan">History Catatan Kesehatan</string>
+    <string name="history_catatan_nifas">History Catatan Nifas</string>
+    <string name="catatan_anak">Catatan Anak</string>
+    <string name="no_data">No Data Found</string>
 </resources>
