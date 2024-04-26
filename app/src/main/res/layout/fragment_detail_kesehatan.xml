@@ -275,32 +275,32 @@
 
                 <TextView
                     android:id="@+id/tv_tekanan_darah"
-                    android:layout_width="wrap_content"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/textView9"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textView9"
+                    app:layout_constraintStart_toStartOf="@+id/tv_berat_badan"
                     app:layout_constraintTop_toTopOf="@+id/textView9"
                     tools:text=": 120/80 mmHg" />
 
                 <TextView
                     android:id="@+id/tv_berat_badan"
-                    android:layout_width="wrap_content"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/textView10"
-                    app:layout_constraintStart_toStartOf="@+id/tv_tekanan_darah"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/textView10"
                     app:layout_constraintTop_toTopOf="@+id/textView10"
                     tools:text=": 50 Kg" />
 
                 <TextView
                     android:id="@+id/tv_umur_kehamilan"
-                    android:layout_width="wrap_content"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -311,7 +311,7 @@
 
                 <TextView
                     android:id="@+id/tv_tinggi_fundus"
-                    android:layout_width="wrap_content"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -322,7 +322,7 @@
 
                 <TextView
                     android:id="@+id/tv_letak_janin"
-                    android:layout_width="wrap_content"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -333,7 +333,7 @@
 
                 <TextView
                     android:id="@+id/tv_denyut_janin"
-                    android:layout_width="wrap_content"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -344,7 +344,7 @@
 
                 <TextView
                     android:id="@+id/tv_kaki_bengkak_value"
-                    android:layout_width="wrap_content"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -355,7 +355,7 @@
 
                 <TextView
                     android:id="@+id/tv_hasil_lab_value"
-                    android:layout_width="wrap_content"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -366,7 +366,7 @@
 
                 <TextView
                     android:id="@+id/tv_tindakan_value"
-                    android:layout_width="wrap_content"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -526,7 +526,7 @@
 
                 <TextView
                     android:id="@+id/tv_nama_pemeriksa_value"
-                    android:layout_width="wrap_content"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -538,7 +538,7 @@
 
                 <TextView
                     android:id="@+id/tv_tempat_periksa_value"
-                    android:layout_width="wrap_content"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textStyle="bold"
@@ -549,7 +549,7 @@
 
                 <TextView
                     android:id="@+id/tv_tgl_periksa_selanjutnya"
-                    android:layout_width="wrap_content"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textStyle="bold"

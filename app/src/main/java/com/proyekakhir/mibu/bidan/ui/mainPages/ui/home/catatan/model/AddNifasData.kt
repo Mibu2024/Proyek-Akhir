@@ -1,5 +1,7 @@
 package com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model
 
+import java.io.Serializable
+
 data class AddNifasData(
     val tanggalPeriksa: String? = "",
     val kunjunganKe: String? = "",
@@ -13,4 +15,4 @@ data class AddNifasData(
     val nama: String? = "",
     var key: String? = "",
     var firstChildKey: String? = "",
-)
+) : Serializable

@@ -1,5 +1,7 @@
 package com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model
 
+import java.io.Serializable
+
 data class AddKesehatanKehamilanData(
     val tanggalPeriksa: String? = "",
     val keluhan: String? = "",
@@ -15,6 +17,9 @@ data class AddKesehatanKehamilanData(
     val nasihat: String? = "",
     val uid: String? = "",
     val nama: String? = "",
+    val namaPemeriksa: String? = "",
+    val tempatPeriksa: String? = "",
+    val periksaSelanjutnya: String? = "",
     var key: String? = "",
     var firstChildKey: String? = "",
-)
+) : Serializable

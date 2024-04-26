@@ -46,6 +46,16 @@ class AddCatatanKesehatanFragment : Fragment() {
             DatePickerHandler.showDatePicker(requireContext(), binding.edTanggalPeriksa)
         }
 
+        binding.edTanggalPeriksaSelanjutnya.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus) {
+                DatePickerHandler.showDatePicker(requireContext(), binding.edTanggalPeriksaSelanjutnya)
+            }
+        }
+
+        binding.edTanggalPeriksaSelanjutnya.setOnClickListener{
+            DatePickerHandler.showDatePicker(requireContext(), binding.edTanggalPeriksaSelanjutnya)
+        }
+
         val spinner: Spinner = binding.spinKakiBengkak
         val spinAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, arrayOf("Ya", "Tidak"))
         spinAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -64,6 +74,9 @@ class AddCatatanKesehatanFragment : Fragment() {
             val tindakan = binding.edTindakan.text.toString()
             val kakiBengkak = binding.spinKakiBengkak.selectedItem.toString()
             val nasihat = binding.edNasihat.text.toString()
+            val namaPemeriksa = binding.edNamaPemeriksa.text.toString()
+            val tempatPeriksa = binding.edTempatPemeriksa.text.toString()
+            val periksaSelanjutnya = binding.edTanggalPeriksaSelanjutnya.text.toString()
 
             if (tanggalPeriksa.isNullOrEmpty()){
                 Toast.makeText(requireContext(), "Isi tanggal periksa", Toast.LENGTH_SHORT).show()
@@ -89,13 +102,24 @@ class AddCatatanKesehatanFragment : Fragment() {
             } else if (denyutJanin.isNullOrEmpty()){
                 Toast.makeText(requireContext(), "Isi denyut jantung janin", Toast.LENGTH_SHORT).show()
                 binding.edDetakJanin.setError("Isi denyut jantung janin")
-            } else if (tindakan.isNullOrEmpty()){
+            } else if (tindakan.isNullOrEmpty()) {
                 Toast.makeText(requireContext(), "Isi tindakan", Toast.LENGTH_SHORT).show()
                 binding.edTindakan.setError("Isi tindakan")
+            } else if (namaPemeriksa.isNullOrEmpty()) {
+                Toast.makeText(requireContext(), "Isi nama pemeriksa", Toast.LENGTH_SHORT).show()
+                binding.edNamaPemeriksa.setError("Isi nama pemeriksa")
+            } else if (tempatPeriksa.isNullOrEmpty()) {
+                Toast.makeText(requireContext(), "Isi tempat pemeriksaan", Toast.LENGTH_SHORT).show()
+                binding.edTempatPemeriksa.setError("Isi tempat pemeriksaan")
+            } else if (periksaSelanjutnya.isNullOrEmpty()) {
+                Toast.makeText(requireContext(), "Isi tanggal periksa selanjutnya", Toast.LENGTH_SHORT).show()
+                binding.edTanggalPeriksaSelanjutnya.setError("Isi tanggal periksa selanjutnya")
             } else {
                 val uid = itemData.uid
                 val nama = itemData.fullname
-                val formData = AddKesehatanKehamilanData(tanggalPeriksa, keluhan, tekananDarah, beratBadan, umurKehamilan, tinggiFundus, letakJanin, denyutJanin, hasilLab, tindakan, kakiBengkak, nasihat, uid, nama)
+                val formData = AddKesehatanKehamilanData(tanggalPeriksa, keluhan, tekananDarah, beratBadan,
+                    umurKehamilan, tinggiFundus, letakJanin, denyutJanin, hasilLab, tindakan, kakiBengkak,
+                    nasihat, uid, nama, namaPemeriksa, tempatPeriksa, periksaSelanjutnya)
 
                 if (uid != null) {
                     viewModel.uploadCatatanKesehatan(uid, formData)
