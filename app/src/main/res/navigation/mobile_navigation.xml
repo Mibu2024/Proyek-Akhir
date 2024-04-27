@@ -41,7 +41,14 @@
         android:id="@+id/navigation_settings"
         android:name="com.proyekakhir.mibu.user.ui.settings.SettingsFragment"
         android:label="@string/title_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_navigation_settings_to_dataPribadiFragment2"
+            app:destination="@id/dataPribadiFragment2" />
+        <action
+            android:id="@+id/action_navigation_settings_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
+    </fragment>
     <fragment
         android:id="@+id/detailArtikelFragment2"
         android:name="com.proyekakhir.mibu.user.ui.artikel.DetailArtikelFragment"
@@ -59,6 +66,14 @@
         android:id="@+id/detailAnakUserFragment"
         android:name="com.proyekakhir.mibu.user.ui.anak.DetailAnakUserFragment"
         android:label="DetailAnakUserFragment" />
+    <fragment
+        android:id="@+id/dataPribadiFragment2"
+        android:name="com.proyekakhir.mibu.user.ui.settings.DataPribadiFragment"
+        android:label="DataPribadiFragment" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.proyekakhir.mibu.user.ui.settings.AboutFragment"
+        android:label="AboutFragment" />
 
 
 </navigation>
