@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.bidan.ui.factory.ViewModelFactory
 import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
+import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.adapter.ListIbuAdapter
+import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.IbuHamilData
 import com.proyekakhir.mibu.databinding.FragmentBidanArtikelBinding
 
 class BidanArtikelFragment : Fragment() {
@@ -56,6 +58,14 @@ class BidanArtikelFragment : Fragment() {
                 // Handle the error
             }
         )
+
+        adapter.listener = object : ListArtikelAdapter.OnItemClickListener {
+            override fun onItemClick(item: ArtikelData) {
+                val bundle = Bundle()
+                bundle.putSerializable("itemData", item)
+                findNavController().navigate(R.id.action_navigation_artikel_to_detailArtikelFragment, bundle)
+            }
+        }
 
         val progressBar = binding.pbArtikel
         bidanArtikelViewModel.isLoading.observe(requireActivity(), Observer { isLoading ->

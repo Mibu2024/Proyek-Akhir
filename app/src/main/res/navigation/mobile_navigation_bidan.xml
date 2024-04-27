@@ -23,6 +23,9 @@
         <action
             android:id="@+id/action_navigation_artikel_to_addArtikelFragment"
             app:destination="@id/addArtikelFragment" />
+        <action
+            android:id="@+id/action_navigation_artikel_to_detailArtikelFragment"
+            app:destination="@id/detailArtikelFragment" />
     </fragment>
 
     <fragment
@@ -104,5 +107,9 @@
         android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.DetailAnakFragment"
         android:label="fragment_detail_anak"
         tools:layout="@layout/fragment_detail_anak" />
+    <fragment
+        android:id="@+id/detailArtikelFragment"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.DetailArtikelFragment"
+        android:label="DetailArtikelFragment" />
 
 </navigation>
