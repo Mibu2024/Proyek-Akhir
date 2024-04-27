@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.bidan.ui.factory.ViewModelFactory
 import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
@@ -34,7 +35,11 @@ class AddCatatanKesehatanFragment : Fragment() {
         val factory = ViewModelFactory(repository)
         viewModel = ViewModelProvider(requireActivity(), factory).get(AddCatatanViewModel::class.java)
 
-        val itemData = arguments?.getSerializable("itemData") as IbuHamilData
+        val itemData = arguments?.getSerializable("itemData") as? IbuHamilData
+
+        binding.arrowBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
         binding.edTanggalPeriksa.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
@@ -115,8 +120,8 @@ class AddCatatanKesehatanFragment : Fragment() {
                 Toast.makeText(requireContext(), "Isi tanggal periksa selanjutnya", Toast.LENGTH_SHORT).show()
                 binding.edTanggalPeriksaSelanjutnya.setError("Isi tanggal periksa selanjutnya")
             } else {
-                val uid = itemData.uid
-                val nama = itemData.fullname
+                val uid = itemData?.uid
+                val nama = itemData?.fullname
                 val formData = AddKesehatanKehamilanData(tanggalPeriksa, keluhan, tekananDarah, beratBadan,
                     umurKehamilan, tinggiFundus, letakJanin, denyutJanin, hasilLab, tindakan, kakiBengkak,
                     nasihat, uid, nama, namaPemeriksa, tempatPeriksa, periksaSelanjutnya)
@@ -127,7 +132,7 @@ class AddCatatanKesehatanFragment : Fragment() {
 
                 viewModel.successMessage.observe(viewLifecycleOwner, { message ->
                     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-                    parentFragmentManager.popBackStack()
+                    findNavController().popBackStack()
                 })
 
                 viewModel.errorMessage.observe(viewLifecycleOwner, { message ->

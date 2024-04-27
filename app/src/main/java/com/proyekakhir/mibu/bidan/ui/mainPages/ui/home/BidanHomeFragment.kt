@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -80,24 +81,9 @@ class BidanHomeFragment : Fragment() {
 
         adapter.listener = object : ListIbuAdapter.OnItemClickListener {
             override fun onItemClick(item: IbuHamilData) {
-                // Create a new instance of DetailIbuFragment
-                val detailIbuFragment = DetailIbuFragment()
-
-                // Create a bundle to hold the data
                 val bundle = Bundle()
-
-                // Add the clicked item's data to the bundle
                 bundle.putSerializable("itemData", item)
-
-                // Set the fragment's arguments to the bundle
-                detailIbuFragment.arguments = bundle
-
-                // Use the FragmentManager to replace the current fragment with the DetailIbuFragment
-                val fragmentManager = (context as AppCompatActivity).supportFragmentManager
-                fragmentManager.beginTransaction()
-                    .add(R.id.nav_host_fragment_activity_bidan_main, detailIbuFragment)
-                    .addToBackStack("detailIbuFragment") // Add this transaction to the back stack
-                    .commit()
+                findNavController().navigate(R.id.action_navigation_home_to_detailIbuFragment, bundle)
             }
         }
 

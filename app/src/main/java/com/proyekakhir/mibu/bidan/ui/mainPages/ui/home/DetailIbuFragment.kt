@@ -4,10 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.proyekakhir.mibu.R
@@ -16,13 +16,7 @@ import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.adapter.CatatanAnakAdapter
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.adapter.CatatanKesehatanAdapter
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.adapter.CatatanNifasAdapter
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.adapter.ListIbuAdapter
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.AddCatatanKesehatanFragment
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.AddCatatanNifasFragment
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.AddCatatanViewModel
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.AddDataAnakFragment
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.DetailKesehatanFragment
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.DetailNifasFragment
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddDataAnak
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddKesehatanKehamilanData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddNifasData
@@ -55,57 +49,48 @@ class DetailIbuFragment : Fragment() {
         viewModel =
             ViewModelProvider(requireActivity(), factory).get(AddCatatanViewModel::class.java)
 
-        val itemData = arguments?.getSerializable("itemData") as IbuHamilData
+        val itemData = arguments?.getSerializable("itemData") as? IbuHamilData
 
         binding.arrowBack.setOnClickListener {
-            parentFragmentManager.popBackStack()
+            findNavController().popBackStack()
         }
 
         binding.tvBack.setOnClickListener {
-            parentFragmentManager.popBackStack()
+            findNavController().popBackStack()
         }
 
-        binding.tvNamaIbu.text = itemData.fullname
-        binding.tvUmurIbu.text = itemData.umur
-        binding.tvNoTelponIbu.text = itemData.noTelepon
+        binding.tvNamaIbu.text = ": ${itemData?.fullname}"
+        binding.tvUmurIbu.text = ": ${itemData?.umur}"
+        binding.tvNoTelponIbu.text = ": ${itemData?.noTelepon}"
+        binding.tvNikIbu.text = ": ${itemData?.nik}"
+        binding.tvNamaSuami.text = ": ${itemData?.namaSuami}"
+        binding.tvAlamat.text = ": ${itemData?.alamat}"
 
         binding.btnAddCatatanKesehatan.setOnClickListener {
-            val addCatatanKesehatan = AddCatatanKesehatanFragment()
             val bundle = Bundle()
             bundle.putSerializable("itemData", itemData)
-            addCatatanKesehatan.arguments = bundle
-
-            val fragmentManager = (context as AppCompatActivity).supportFragmentManager
-            fragmentManager.beginTransaction()
-                .add(R.id.nav_host_fragment_activity_bidan_main, addCatatanKesehatan)
-                .addToBackStack(null) // Add this transaction to the back stack
-                .commit()
+            findNavController().navigate(
+                R.id.action_detailIbuFragment_to_addCatatanKesehatanFragment,
+                bundle
+            )
         }
 
         binding.btnAddCatatanNifas.setOnClickListener {
-            val addCatatanNifas = AddCatatanNifasFragment()
             val bundle = Bundle()
             bundle.putSerializable("itemData", itemData)
-            addCatatanNifas.arguments = bundle
-
-            val fragmentManager = (context as AppCompatActivity).supportFragmentManager
-            fragmentManager.beginTransaction()
-                .add(R.id.nav_host_fragment_activity_bidan_main, addCatatanNifas)
-                .addToBackStack(null) // Add this transaction to the back stack
-                .commit()
+            findNavController().navigate(
+                R.id.action_detailIbuFragment_to_addCatatanNifasFragment,
+                bundle
+            )
         }
 
         binding.btnAddAnak.setOnClickListener {
-            val addDataAnak = AddDataAnakFragment()
             val bundle = Bundle()
             bundle.putSerializable("itemData", itemData)
-            addDataAnak.arguments = bundle
-
-            val fragmentManager = (context as AppCompatActivity).supportFragmentManager
-            fragmentManager.beginTransaction()
-                .add(R.id.nav_host_fragment_activity_bidan_main, addDataAnak)
-                .addToBackStack(null) // Add this transaction to the back stack
-                .commit()
+            findNavController().navigate(
+                R.id.action_detailIbuFragment_to_addDataAnakFragment,
+                bundle
+            )
         }
 
         kesehatanList = arrayListOf<AddKesehatanKehamilanData>()
@@ -129,13 +114,13 @@ class DetailIbuFragment : Fragment() {
         rvAnak.setHasFixedSize(true)
         rvAnak.adapter = adapterAnak
 
-        val uid = itemData.uid
+        val uid = itemData?.uid
         if (uid != null) {
             viewModel.getCatatanKesehatanList(uid)
-            viewModel.catatanKesehatanList.observe(viewLifecycleOwner, Observer { list->
+            viewModel.catatanKesehatanList.observe(viewLifecycleOwner, Observer { list ->
                 adapterKesehatan.setData(list)
                 adapterKesehatan.notifyDataSetChanged()
-                if (list.isEmpty()){
+                if (list.isEmpty()) {
                     binding.tvNoDataKesehatan.visibility = View.VISIBLE
                 } else {
                     binding.tvNoDataKesehatan.visibility = View.GONE
@@ -146,7 +131,7 @@ class DetailIbuFragment : Fragment() {
             viewModel.catatanNifasList.observe(viewLifecycleOwner, Observer { list ->
                 adapterNifas.setData(list)
                 adapterNifas.notifyDataSetChanged()
-                if (list.isEmpty()){
+                if (list.isEmpty()) {
                     binding.tvNoDataNifas.visibility = View.VISIBLE
                 } else {
                     binding.tvNoDataNifas.visibility = View.GONE
@@ -157,7 +142,7 @@ class DetailIbuFragment : Fragment() {
             viewModel.catatanAnakList.observe(viewLifecycleOwner, Observer { list ->
                 adapterAnak.setData(list)
                 adapterAnak.notifyDataSetChanged()
-                if (list.isEmpty()){
+                if (list.isEmpty()) {
                     binding.tvNoDataAnak.visibility = View.VISIBLE
                 } else {
                     binding.tvNoDataAnak.visibility = View.GONE
@@ -182,47 +167,34 @@ class DetailIbuFragment : Fragment() {
 
         adapterKesehatan.listener = object : CatatanKesehatanAdapter.OnItemClickListener {
             override fun onItemClick(item: AddKesehatanKehamilanData) {
-                // Create a new instance of DetailIbuFragment
-                val detailKesehatan = DetailKesehatanFragment()
-
-                // Create a bundle to hold the data
                 val bundle = Bundle()
-
-                // Add the clicked item's data to the bundle
                 bundle.putSerializable("itemData", item)
-
-                // Set the fragment's arguments to the bundle
-                detailKesehatan.arguments = bundle
-
-                // Use the FragmentManager to replace the current fragment with the DetailIbuFragment
-                val fragmentManager = (context as AppCompatActivity).supportFragmentManager
-                fragmentManager.beginTransaction()
-                    .add(R.id.nav_host_fragment_activity_bidan_main, detailKesehatan)
-                    .addToBackStack("detailKesehatan") // Add this transaction to the back stack
-                    .commit()
+                findNavController().navigate(
+                    R.id.action_detailIbuFragment_to_detailKesehatanFragment2,
+                    bundle
+                )
             }
         }
 
         adapterNifas.listener = object : CatatanNifasAdapter.OnItemClickListener {
             override fun onItemClick(item: AddNifasData) {
-                // Create a new instance of DetailIbuFragment
-                val detailNifas = DetailNifasFragment()
-
-                // Create a bundle to hold the data
                 val bundle = Bundle()
-
-                // Add the clicked item's data to the bundle
                 bundle.putSerializable("itemData", item)
+                findNavController().navigate(
+                    R.id.action_detailIbuFragment_to_detailNifasFragment,
+                    bundle
+                )
+            }
+        }
 
-                // Set the fragment's arguments to the bundle
-                detailNifas.arguments = bundle
-
-                // Use the FragmentManager to replace the current fragment with the DetailIbuFragment
-                val fragmentManager = (context as AppCompatActivity).supportFragmentManager
-                fragmentManager.beginTransaction()
-                    .add(R.id.nav_host_fragment_activity_bidan_main, detailNifas)
-                    .addToBackStack("detailNifas") // Add this transaction to the back stack
-                    .commit()
+        adapterAnak.listener = object : CatatanAnakAdapter.OnItemClickListener {
+            override fun onItemClick(item: AddDataAnak) {
+                val bundle = Bundle()
+                bundle.putSerializable("itemData", item)
+                findNavController().navigate(
+                    R.id.action_detailIbuFragment_to_detailAnakFragment,
+                    bundle
+                )
             }
         }
 

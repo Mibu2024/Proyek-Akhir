@@ -21,23 +21,23 @@ class DetailKesehatanFragment : Fragment() {
         _binding = FragmentDetailKesehatanBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val itemData = arguments?.getSerializable("itemData") as AddKesehatanKehamilanData
+        val itemData = arguments?.getSerializable("itemData") as? AddKesehatanKehamilanData
 
-        binding.tvTekananDarah.text = ": ${itemData.tekananDarah}"
-        binding.tvBeratBadan.text = ": ${itemData.beratBadan}"
-        binding.tvUmurKehamilan.text = ": ${itemData.umurKehamilan}"
-        binding.tvTinggiFundus.text = ": ${itemData.tinggiFundus}"
-        binding.tvLetakJanin.text = ": ${itemData.letakJanin}"
-        binding.tvDenyutJanin.text = ": ${itemData.denyutJanin}"
-        binding.tvKakiBengkakValue.text = ": ${itemData.kakiBengkak}"
-        binding.tvTindakanValue.text = ": ${itemData.hasilLab}"
-        binding.tvHasilLabValue.text = ": ${itemData.tindakan}"
-        binding.tvKeluhanValue.text = "${itemData.keluhan}"
-        binding.tvNamaPemeriksaValue.text = ": ${itemData.namaPemeriksa}"
-        binding.tvTempatPeriksaValue.text = ": ${itemData.tempatPeriksa}"
-        binding.tvTglPeriksaSelanjutnya.text = ": ${itemData.periksaSelanjutnya}"
-        binding.tvSaran.text = ": ${itemData.nasihat}"
-        binding.tvTanggal.text = itemData.tanggalPeriksa
+        binding.tvTekananDarah.text = ": ${itemData?.tekananDarah} mmHg"
+        binding.tvBeratBadan.text = ": ${itemData?.beratBadan} Kg"
+        binding.tvUmurKehamilan.text = ": ${itemData?.umurKehamilan} Minggu"
+        binding.tvTinggiFundus.text = ": ${itemData?.tinggiFundus} Cm"
+        binding.tvLetakJanin.text = ": ${itemData?.letakJanin}"
+        binding.tvDenyutJanin.text = ": ${itemData?.denyutJanin} Bpm"
+        binding.tvKakiBengkakValue.text = ": ${itemData?.kakiBengkak}"
+        binding.tvTindakanValue.text = ": ${itemData?.hasilLab}"
+        binding.tvHasilLabValue.text = ": ${itemData?.tindakan}"
+        binding.tvKeluhanValue.text = "${itemData?.keluhan}"
+        binding.tvNamaPemeriksaValue.text = ": ${itemData?.namaPemeriksa}"
+        binding.tvTempatPeriksaValue.text = ": ${itemData?.tempatPeriksa}"
+        binding.tvTglPeriksaSelanjutnya.text = ": ${itemData?.periksaSelanjutnya}"
+        binding.tvSaran.text = ": ${itemData?.nasihat}"
+        binding.tvTanggal.text = itemData?.tanggalPeriksa
         binding.ivBack.setOnClickListener {
             parentFragmentManager.popBackStack()
         }

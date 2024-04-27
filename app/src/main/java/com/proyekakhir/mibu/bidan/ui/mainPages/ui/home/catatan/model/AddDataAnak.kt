@@ -1,5 +1,7 @@
 package com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model
 
+import java.io.Serializable
+
 data class AddDataAnak(
     val namaAnak: String? = "",
     val tanggalLahir: String? = "",
@@ -19,4 +21,4 @@ data class AddDataAnak(
     val namaIbu: String? = "",
     var key: String? = "",
     var firstChildKey: String? = "",
-)
+) : Serializable

@@ -23,21 +23,24 @@
         android:theme="@style/Theme.Mibu"
         tools:targetApi="31">
         <activity
+            android:name=".bidan.ui.mainPages.ui.home.catatan.AddCatatanActivity"
+            android:exported="false" />
+        <activity
             android:name=".user.ui.activity.OnBoardActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".bidan.ui.auth.BidanRegisterActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".bidan.ui.auth.BidanLoginActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".bidan.ui.mainPages.BidanMainActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".user.ui.activity.SplashActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,8 +50,7 @@
         <activity
             android:name=".user.ui.activity.MainActivity"
             android:exported="false"
-            android:label="@string/title_activity_main">
-        </activity>
+            android:label="@string/title_activity_main"></activity>
         <activity
             android:name=".user.auth.RegisterActivity"
             android:exported="false" />

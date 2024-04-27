@@ -139,7 +139,7 @@
                 android:background="@drawable/bg_et_default"
                 android:drawablePadding="12dp"
                 android:ems="10"
-                android:inputType="number" />
+                android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -438,7 +438,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
-            android:text="@string/nama_pemeriksa"
+            android:text="@string/tempat_periksa"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/pemeriksaEditTextLayout" />
 
