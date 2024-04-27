@@ -44,7 +44,7 @@
     <string name="mibu">Mibu</string>
     <string name="about_mibu">"Adalah sebuah aplikasi yang di khususkan untuk Ibu Hamil agar bisa memantau kesehatan dan memantau tumbuh kembang anak "</string>
     <string name="tambah_artikel">Tambah Artikel</string>
-    <string name="poster_artikel">Poster Artikel</string>
+    <string name="poster_artikel">Poster Artikel (Opsional)</string>
     <string name="preview_gambar">Preview Gambar</string>
     <string name="add_gambar">Add Gambar</string>
     <string name="judul_artikel">Judul Artikel</string>

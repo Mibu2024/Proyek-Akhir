@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -14,8 +13,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.bidan.ui.factory.ViewModelFactory
 import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.adapter.ListIbuAdapter
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.IbuHamilData
 import com.proyekakhir.mibu.databinding.FragmentBidanArtikelBinding
 
 class BidanArtikelFragment : Fragment() {
@@ -33,7 +30,8 @@ class BidanArtikelFragment : Fragment() {
     ): View {
         val repository = FirebaseRepository()
         val factory = ViewModelFactory(repository)
-        val bidanArtikelViewModel = ViewModelProvider(this,factory).get(BidanArtikelViewModel::class.java)
+        val bidanArtikelViewModel =
+            ViewModelProvider(this, factory).get(BidanArtikelViewModel::class.java)
 
         _binding = FragmentBidanArtikelBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -63,7 +61,10 @@ class BidanArtikelFragment : Fragment() {
             override fun onItemClick(item: ArtikelData) {
                 val bundle = Bundle()
                 bundle.putSerializable("itemData", item)
-                findNavController().navigate(R.id.action_navigation_artikel_to_detailArtikelFragment, bundle)
+                findNavController().navigate(
+                    R.id.action_navigation_artikel_to_detailArtikelFragment,
+                    bundle
+                )
             }
         }
 

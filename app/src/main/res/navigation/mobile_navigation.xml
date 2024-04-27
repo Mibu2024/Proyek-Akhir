@@ -9,7 +9,11 @@
         android:id="@+id/navigation_home"
         android:name="com.proyekakhir.mibu.user.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_detailArtikelFragment2"
+            app:destination="@id/detailArtikelFragment2" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_catatan_kehamilan"
@@ -26,6 +30,10 @@
         android:name="com.proyekakhir.mibu.user.ui.settings.SettingsFragment"
         android:label="@string/title_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/detailArtikelFragment2"
+        android:name="com.proyekakhir.mibu.user.ui.artikel.DetailArtikelFragment"
+        android:label="DetailArtikelFragment" />
 
 
 </navigation>

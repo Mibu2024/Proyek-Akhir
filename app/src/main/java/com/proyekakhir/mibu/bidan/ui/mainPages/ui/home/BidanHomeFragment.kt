@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.proyekakhir.mibu.R
@@ -19,6 +20,7 @@ import com.proyekakhir.mibu.bidan.ui.factory.ViewModelFactory
 import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.adapter.ListIbuAdapter
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.IbuHamilData
+import com.proyekakhir.mibu.bidan.ui.mainPages.ui.settings.BidanSettingsViewModel
 import com.proyekakhir.mibu.databinding.FragmentBidanHomeBinding
 import java.util.Locale
 
@@ -30,6 +32,7 @@ class BidanHomeFragment : Fragment() {
     private lateinit var rvIbu: RecyclerView
     private lateinit var ibuArrayList : ArrayList<IbuHamilData>
     private lateinit var adapter: ListIbuAdapter
+    private lateinit var settingsViewModel: BidanSettingsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,12 +43,24 @@ class BidanHomeFragment : Fragment() {
         val repository = FirebaseRepository()
         val factory = ViewModelFactory(repository)
         bidanHomeViewModel = ViewModelProvider(requireActivity(), factory).get(BidanHomeViewModel::class.java)
+        settingsViewModel = ViewModelProvider(requireActivity(), factory).get(BidanSettingsViewModel::class.java)
 
         _binding = FragmentBidanHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val firebaseUsername = FirebaseAuth.getInstance().currentUser?.displayName
         binding.tvUsername.text = firebaseUsername
+
+        settingsViewModel.fetchUserData()
+        settingsViewModel.userData.observe(viewLifecycleOwner, Observer { data ->
+            if (!data?.profileImage.isNullOrEmpty()) {
+                Glide.with(requireActivity())
+                    .load(data?.profileImage)
+                    .into(binding.ivAvatar)
+            } else {
+                binding.ivAvatar.setImageResource(R.drawable.avatar)
+            }
+        })
 
         ibuArrayList = arrayListOf<IbuHamilData>()
         adapter = ListIbuAdapter(ibuArrayList)
@@ -94,7 +109,8 @@ class BidanHomeFragment : Fragment() {
         if (query != null){
             val searchedList = ArrayList<IbuHamilData>()
             for (i in ibuArrayList){
-                if (i.fullname?.lowercase(Locale.ROOT)?.contains(query) == true){
+                if (i.fullname?.lowercase(Locale.ROOT)?.contains(query) == true
+                    || i.nik?.lowercase(Locale.ROOT)?.contains(query) == true ){
                     searchedList.add(i)
                 }
             }

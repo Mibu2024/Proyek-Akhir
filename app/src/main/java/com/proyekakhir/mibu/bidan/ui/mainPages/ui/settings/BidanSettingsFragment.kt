@@ -21,6 +21,7 @@ import com.proyekakhir.mibu.bidan.ui.auth.BidanLoginActivity
 import com.proyekakhir.mibu.bidan.ui.factory.ViewModelFactory
 import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
 import com.proyekakhir.mibu.databinding.FragmentBidanSettingsBinding
+import com.proyekakhir.mibu.user.ui.activity.OnBoardActivity
 import kotlinx.coroutines.launch
 
 class BidanSettingsFragment : Fragment() {
@@ -75,7 +76,7 @@ class BidanSettingsFragment : Fragment() {
 
     private fun logout() {
         FirebaseAuth.getInstance().signOut()
-        val intent = Intent(requireContext(), BidanLoginActivity::class.java)
+        val intent = Intent(requireContext(), OnBoardActivity::class.java)
 
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)

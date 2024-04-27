@@ -3,7 +3,16 @@ package com.proyekakhir.mibu.user.firebase
 import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.auth.User
+import com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.ArtikelData
+import com.proyekakhir.mibu.bidan.ui.mainPages.ui.settings.UserData
+import com.proyekakhir.mibu.user.ui.home.model.ArtikelModel
+import com.proyekakhir.mibu.user.ui.home.model.UserModel
 
 class FirebaseRepository : FirebaseService {
 
@@ -83,5 +92,53 @@ class FirebaseRepository : FirebaseService {
                     onComplete (false)
                 }
             }
+    }
+
+    override fun getUserData(onDataChange: (UserModel?) -> Unit, onCancelled: (Exception) -> Unit) {
+        val uid = FirebaseAuth.getInstance().currentUser?.uid
+        val db = FirebaseFirestore.getInstance()
+
+        if (uid != null) {
+            db.collection("users").document(uid)
+                .get()
+                .addOnSuccessListener { document ->
+                    if (document != null) {
+                        val userModel = document.toObject(UserModel::class.java)
+                        onDataChange(userModel)
+                    } else {
+                        onDataChange(null)
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    onCancelled(exception)
+                }
+        } else {
+            onCancelled(Exception("User not logged in"))
+        }
+    }
+
+    override fun getArtikel(
+        onDataChange: (List<ArtikelModel>) -> Unit,
+        onCancelled: (DatabaseError) -> Unit
+    ) {
+        val refDatabase = FirebaseDatabase.getInstance().getReference("artikel")
+        val artikelList = mutableListOf<ArtikelModel>()
+
+        refDatabase.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                artikelList.clear()
+                for (postSnapshot in dataSnapshot.children) {
+                    val artikel = postSnapshot.getValue(ArtikelModel::class.java)
+                    if (artikel != null) {
+                        artikelList.add(artikel)
+                    }
+                }
+                onDataChange(artikelList)
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                onCancelled(databaseError)
+            }
+        })
     }
 }
