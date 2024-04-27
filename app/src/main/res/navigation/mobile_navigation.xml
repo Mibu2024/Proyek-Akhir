@@ -19,12 +19,24 @@
         android:id="@+id/navigation_catatan_kehamilan"
         android:name="com.proyekakhir.mibu.user.ui.kehamilan.CatatanKehamilanFragment"
         android:label="@string/title_catatan_kehamilan"
-        tools:layout="@layout/fragment_catatan_kehamilan" />
+        tools:layout="@layout/fragment_catatan_kehamilan" >
+        <action
+            android:id="@+id/action_navigation_catatan_kehamilan_to_detailNifasFragment2"
+            app:destination="@id/detailNifasFragment2" />
+        <action
+            android:id="@+id/action_navigation_catatan_kehamilan_to_detailKesehatanFragment"
+            app:destination="@id/detailKesehatanFragment" />
+
+    </fragment>
     <fragment
         android:id="@+id/navigation_catatan_anak"
         android:name="com.proyekakhir.mibu.user.ui.anak.CatatanAnakFragment"
         android:label="@string/title_catatan_anak"
-        tools:layout="@layout/fragment_catatan_anak" />
+        tools:layout="@layout/fragment_catatan_anak" >
+        <action
+            android:id="@+id/action_navigation_catatan_anak_to_detailAnakUserFragment"
+            app:destination="@id/detailAnakUserFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_settings"
         android:name="com.proyekakhir.mibu.user.ui.settings.SettingsFragment"
@@ -34,6 +46,19 @@
         android:id="@+id/detailArtikelFragment2"
         android:name="com.proyekakhir.mibu.user.ui.artikel.DetailArtikelFragment"
         android:label="DetailArtikelFragment" />
+
+    <fragment
+        android:id="@+id/detailNifasFragment2"
+        android:name="com.proyekakhir.mibu.user.ui.kehamilan.nifas.DetailNifasFragment"
+        android:label="DetailNifasFragment" />
+    <fragment
+        android:id="@+id/detailKesehatanFragment"
+        android:name="com.proyekakhir.mibu.user.ui.kehamilan.kesehatan.DetailKesehatanFragment"
+        android:label="DetailKesehatanFragment" />
+    <fragment
+        android:id="@+id/detailAnakUserFragment"
+        android:name="com.proyekakhir.mibu.user.ui.anak.DetailAnakUserFragment"
+        android:label="DetailAnakUserFragment" />
 
 
 </navigation>

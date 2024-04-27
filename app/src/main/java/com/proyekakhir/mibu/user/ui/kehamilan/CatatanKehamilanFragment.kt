@@ -33,8 +33,6 @@ class CatatanKehamilanFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val catatanKehamilanViewModel =
-            ViewModelProvider(this).get(CatatanKehamilanViewModel::class.java)
 
         _binding = FragmentCatatanKehamilanBinding.inflate(inflater, container, false)
         val root: View = binding.root

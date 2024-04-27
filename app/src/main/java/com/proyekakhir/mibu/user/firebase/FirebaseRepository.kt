@@ -10,9 +10,15 @@ import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.auth.User
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.ArtikelData
+import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddDataAnak
+import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddKesehatanKehamilanData
+import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddNifasData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.settings.UserData
+import com.proyekakhir.mibu.user.ui.anak.model.AnakModel
 import com.proyekakhir.mibu.user.ui.home.model.ArtikelModel
 import com.proyekakhir.mibu.user.ui.home.model.UserModel
+import com.proyekakhir.mibu.user.ui.kehamilan.model.KesehatanModel
+import com.proyekakhir.mibu.user.ui.kehamilan.model.NifasModel
 
 class FirebaseRepository : FirebaseService {
 
@@ -138,6 +144,117 @@ class FirebaseRepository : FirebaseService {
 
             override fun onCancelled(databaseError: DatabaseError) {
                 onCancelled(databaseError)
+            }
+        })
+    }
+
+    override fun getCatatanKesehatan(
+        uid: String,
+        onDataChanged: (ArrayList<KesehatanModel>) -> Unit,
+        onIsEmpty: (String) -> Unit,
+        onIsLoading: (Boolean) -> Unit,
+        onCancelled: (DatabaseError) -> Unit
+    ) {
+        onIsLoading(true)
+        val database = FirebaseDatabase.getInstance().getReference("CatatanKesehatanKehamilan")
+        database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val list = arrayListOf<KesehatanModel>()
+                snapshot.children.forEach { firstChild ->
+                    val firstChildKey = firstChild.key
+                    firstChild.children.forEach { secondChild ->
+                        val data = secondChild.getValue(KesehatanModel::class.java)
+                        val key = secondChild.key
+                        if (data != null) {
+                            data.key = key // Set the key
+                            data.firstChildKey = firstChildKey
+                            if (data.uid == uid){
+                                list.add(data)
+                            }
+                        }
+                    }
+                }
+                onDataChanged(list)
+                onIsEmpty(if (list.isEmpty()) "No Data Found" else "")
+                onIsLoading(false)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                onCancelled(error)
+            }
+        })
+    }
+
+    override fun getCatatanNifas(
+        uid: String,
+        onDataChanged: (ArrayList<NifasModel>) -> Unit,
+        onIsEmpty: (String) -> Unit,
+        onIsLoading: (Boolean) -> Unit,
+        onCancelled: (DatabaseError) -> Unit
+    ) {
+        onIsLoading(true)
+        val database = FirebaseDatabase.getInstance().getReference("CatatanNifas")
+        database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val list = arrayListOf<NifasModel>()
+                snapshot.children.forEach { firstChild ->
+                    val firstChildKey = firstChild.key
+                    firstChild.children.forEach { secondChild ->
+                        val data = secondChild.getValue(NifasModel::class.java)
+                        val key = secondChild.key
+                        if (data != null) {
+                            data.key = key // Set the key
+                            data.firstChildKey = firstChildKey
+                            if (data.uid == uid){
+                                list.add(data)
+                            }
+                        }
+                    }
+                }
+                onDataChanged(list)
+                onIsEmpty(if (list.isEmpty()) "No Data Found" else "")
+                onIsLoading(false)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                onCancelled(error)
+            }
+        })
+    }
+
+    override fun getCatatanAnak(
+        uid: String,
+        onDataChanged: (ArrayList<AnakModel>) -> Unit,
+        onIsEmpty: (String) -> Unit,
+        onIsLoading: (Boolean) -> Unit,
+        onCancelled: (DatabaseError) -> Unit
+    ) {
+        onIsLoading(true)
+        val database = FirebaseDatabase.getInstance().getReference("CatatanAnak")
+        database.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val list = arrayListOf<AnakModel>()
+                snapshot.children.forEach { firstChild ->
+                    val firstChildKey = firstChild.key
+                    firstChild.children.forEach { secondChild ->
+                        val data = secondChild.getValue(AnakModel::class.java)
+                        val key = secondChild.key
+                        if (data != null) {
+                            data.key = key // Set the key
+                            data.firstChildKey = firstChildKey
+                            if (data.uid == uid){
+                                list.add(data)
+                            }
+                        }
+                    }
+                }
+                onDataChanged(list)
+                onIsEmpty(if (list.isEmpty()) "No Data Found" else "")
+                onIsLoading(false)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                onCancelled(error)
             }
         })
     }

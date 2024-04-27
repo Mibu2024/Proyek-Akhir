@@ -46,8 +46,7 @@ class DetailIbuFragment : Fragment() {
 
         val repository = FirebaseRepository()
         val factory = ViewModelFactory(repository)
-        viewModel =
-            ViewModelProvider(requireActivity(), factory).get(AddCatatanViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity(), factory).get(AddCatatanViewModel::class.java)
 
         val itemData = arguments?.getSerializable("itemData") as? IbuHamilData
 
