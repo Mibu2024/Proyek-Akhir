@@ -84,17 +84,17 @@
     </fragment>
     <fragment
         android:id="@+id/addCatatanKesehatanFragment"
-        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.AddCatatanKesehatanFragment"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.addCatatan.AddCatatanKesehatanFragment"
         android:label="fragment_add_catatan_kesehatan"
         tools:layout="@layout/fragment_add_catatan_kesehatan" />
     <fragment
         android:id="@+id/addCatatanNifasFragment"
-        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.AddCatatanNifasFragment"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.addCatatan.AddCatatanNifasFragment"
         android:label="fragment_add_catatan_nifas"
         tools:layout="@layout/fragment_add_catatan_nifas" />
     <fragment
         android:id="@+id/addDataAnakFragment"
-        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.AddDataAnakFragment"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.addCatatan.AddDataAnakFragment"
         android:label="fragment_add_data_anak"
         tools:layout="@layout/fragment_add_data_anak" />
     <fragment

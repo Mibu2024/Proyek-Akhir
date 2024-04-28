@@ -1,4 +1,4 @@
-package com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan
+package com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.addCatatan
 
 import android.app.AlertDialog
 import android.graphics.Color
@@ -19,11 +19,10 @@ import androidx.navigation.fragment.findNavController
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.bidan.ui.factory.ViewModelFactory
 import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
+import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.DatePickerHandler
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddKesehatanKehamilanData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.IbuHamilData
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.settings.BidanSettingsViewModel
 import com.proyekakhir.mibu.databinding.FragmentAddCatatanKesehatanBinding
-import com.proyekakhir.mibu.databinding.FragmentDetailIbuBinding
 
 class AddCatatanKesehatanFragment : Fragment() {
     private var _binding: FragmentAddCatatanKesehatanBinding? = null
@@ -58,7 +57,10 @@ class AddCatatanKesehatanFragment : Fragment() {
 
         binding.edTanggalPeriksaSelanjutnya.setOnFocusChangeListener { v, hasFocus ->
             if (hasFocus) {
-                DatePickerHandler.showDatePicker(requireContext(), binding.edTanggalPeriksaSelanjutnya)
+                DatePickerHandler.showDatePicker(
+                    requireContext(),
+                    binding.edTanggalPeriksaSelanjutnya
+                )
             }
         }
 

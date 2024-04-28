@@ -3,11 +3,9 @@ package com.proyekakhir.mibu.bidan.ui.firebase
 import android.net.Uri
 import com.google.firebase.database.DatabaseError
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.ArtikelData
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.AddCatatanKesehatanFragment
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddDataAnak
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddKesehatanKehamilanData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddNifasData
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.ChildItem
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.IbuHamilData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.settings.UserData
 
@@ -26,4 +24,6 @@ interface FirebaseService {
     fun getCatatanAnak(uid: String, onDataChanged: (ArrayList<AddDataAnak>) -> Unit, onIsEmpty: (String) -> Unit, onIsLoading: (Boolean) -> Unit, onCancelled: (DatabaseError) -> Unit)
     fun deleteArtikel(artikelId: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit)
     fun updateArtikel(itemKey: String, updatedArtikel: ArtikelData, onComplete: (Boolean) -> Unit)
+    fun updateKesehatan(uid: String, itemKey: String, updatedKesehatan: AddKesehatanKehamilanData, onComplete: (Boolean) -> Unit)
+    fun deleteKesehatan(uid: String, itemKey: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit)
 }

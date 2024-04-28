@@ -1,8 +1,9 @@
-package com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan
+package com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.addCatatan
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
+import com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.ArtikelData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddDataAnak
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddKesehatanKehamilanData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddNifasData
@@ -123,5 +124,13 @@ class AddCatatanViewModel(val repository: FirebaseRepository) : ViewModel() {
                 // Handle error here
             }
         )
+    }
+
+    fun updateKesehatan(uid: String, itemKey: String, updatedKesehatan: AddKesehatanKehamilanData, onComplete: (Boolean) -> Unit) {
+        isLoading.value = true
+        repository.updateKesehatan(uid, itemKey, updatedKesehatan) { success ->
+            onComplete(success)
+            isLoading.value = false
+        }
     }
 }

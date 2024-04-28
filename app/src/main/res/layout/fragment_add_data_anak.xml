@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:background="@color/blue_background"
-    tools:context=".bidan.ui.mainPages.ui.home.catatan.AddDataAnakFragment">
+    tools:context=".bidan.ui.mainPages.ui.home.catatan.addCatatan.AddDataAnakFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

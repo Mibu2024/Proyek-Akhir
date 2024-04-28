@@ -3,6 +3,7 @@ package com.proyekakhir.mibu.bidan.ui.firebase
 import android.content.ContentValues.TAG
 import android.net.Uri
 import android.util.Log
+import androidx.databinding.adapters.NumberPickerBindingAdapter.setValue
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.database.DataSnapshot
@@ -402,6 +403,51 @@ class FirebaseRepository : FirebaseService {
                 onComplete(false)
             }
     }
+
+    override fun updateKesehatan(
+        uid: String,
+        itemKey: String,
+        updatedKesehatan: AddKesehatanKehamilanData,
+        onComplete: (Boolean) -> Unit
+    ) {
+        val databaseReference = FirebaseDatabase.getInstance().getReference("CatatanKesehatanKehamilan")
+
+        // Construct the path to the specific child node based on uid and itemKey
+        val childPath = "$uid/$itemKey"
+
+        databaseReference.child(childPath).setValue(updatedKesehatan)
+            .addOnSuccessListener {
+                // Handle success (if needed)
+                onComplete(true)
+            }
+            .addOnFailureListener { e ->
+                // Handle failure (if needed)
+                onComplete(false)
+            }
+    }
+
+    override fun deleteKesehatan(
+        uid: String,
+        itemKey: String,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        // Construct the reference to the specific article node
+        val databaseReference: DatabaseReference = FirebaseDatabase.getInstance().getReference("CatatanKesehatanKehamilan")
+        val childPath = "$uid/$itemKey"
+
+        // Remove the article from the database
+        databaseReference.child(childPath).removeValue()
+            .addOnSuccessListener {
+                // Article deleted successfully
+                onSuccess()
+            }
+            .addOnFailureListener { e ->
+                // Handle the error
+                onFailure(e)
+            }
+    }
+
 
     private fun saveArtikelToDatabase(judul: String, isiArtikel: String, imageUrl: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {
         val uid = FirebaseAuth.getInstance().currentUser?.uid.toString()

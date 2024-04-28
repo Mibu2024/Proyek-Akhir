@@ -1,4 +1,4 @@
-package com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan
+package com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.addCatatan
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

@@ -33,7 +33,7 @@
                 android:textColor="#979797"
                 android:textSize="13sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/iv_delete_kendaraan"
+                app:layout_constraintBottom_toTopOf="@+id/iv_delete_kesehatan"
                 app:layout_constraintEnd_toEndOf="@+id/tv_keluhan"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/tv_keluhan"
@@ -92,7 +92,7 @@
                 app:layout_constraintTop_toTopOf="@+id/tv_view" />
 
             <ImageView
-                android:id="@+id/iv_delete_kendaraan"
+                android:id="@+id/iv_delete_kesehatan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"

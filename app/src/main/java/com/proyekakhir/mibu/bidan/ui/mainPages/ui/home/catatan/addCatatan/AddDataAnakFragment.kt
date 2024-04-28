@@ -1,4 +1,4 @@
-package com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan
+package com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.addCatatan
 
 import android.app.AlertDialog
 import android.graphics.Color
@@ -19,10 +19,9 @@ import androidx.navigation.fragment.findNavController
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.bidan.ui.factory.ViewModelFactory
 import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
+import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.DatePickerHandler
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddDataAnak
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddKesehatanKehamilanData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.IbuHamilData
-import com.proyekakhir.mibu.databinding.FragmentAddCatatanKesehatanBinding
 import com.proyekakhir.mibu.databinding.FragmentAddDataAnakBinding
 
 class AddDataAnakFragment : Fragment() {

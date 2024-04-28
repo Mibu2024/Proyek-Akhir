@@ -16,7 +16,7 @@ import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.adapter.CatatanAnakAdapter
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.adapter.CatatanKesehatanAdapter
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.adapter.CatatanNifasAdapter
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.AddCatatanViewModel
+import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.addCatatan.AddCatatanViewModel
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddDataAnak
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddKesehatanKehamilanData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddNifasData
