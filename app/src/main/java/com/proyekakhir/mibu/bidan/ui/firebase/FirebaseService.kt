@@ -26,4 +26,6 @@ interface FirebaseService {
     fun updateArtikel(itemKey: String, updatedArtikel: ArtikelData, onComplete: (Boolean) -> Unit)
     fun updateKesehatan(uid: String, itemKey: String, updatedKesehatan: AddKesehatanKehamilanData, onComplete: (Boolean) -> Unit)
     fun deleteKesehatan(uid: String, itemKey: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit)
+    fun updateNifas(uid: String, itemKey: String, updatedNifas: AddNifasData, onComplete: (Boolean) -> Unit)
+    fun updateAnak(uid: String, itemKey: String, updatedAnak: AddDataAnak, onComplete: (Boolean) -> Unit)
 }

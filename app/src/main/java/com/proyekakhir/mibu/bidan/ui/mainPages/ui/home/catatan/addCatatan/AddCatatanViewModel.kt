@@ -133,4 +133,20 @@ class AddCatatanViewModel(val repository: FirebaseRepository) : ViewModel() {
             isLoading.value = false
         }
     }
+
+    fun updateNifas(uid: String, itemKey: String, updatedNifas: AddNifasData, onComplete: (Boolean) -> Unit) {
+        isLoading.value = true
+        repository.updateNifas(uid, itemKey, updatedNifas) { success ->
+            onComplete(success)
+            isLoading.value = false
+        }
+    }
+
+    fun updateAnak(uid: String, itemKey: String, updatedAnak: AddDataAnak, onComplete: (Boolean) -> Unit) {
+        isLoading.value = true
+        repository.updateAnak(uid, itemKey, updatedAnak) { success ->
+            onComplete(success)
+            isLoading.value = false
+        }
+    }
 }

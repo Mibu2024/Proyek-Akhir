@@ -448,6 +448,50 @@ class FirebaseRepository : FirebaseService {
             }
     }
 
+    override fun updateNifas(
+        uid: String,
+        itemKey: String,
+        updatedNifas: AddNifasData,
+        onComplete: (Boolean) -> Unit
+    ) {
+        val databaseReference = FirebaseDatabase.getInstance().getReference("CatatanNifas")
+
+        // Construct the path to the specific child node based on uid and itemKey
+        val childPath = "$uid/$itemKey"
+
+        databaseReference.child(childPath).setValue(updatedNifas)
+            .addOnSuccessListener {
+                // Handle success (if needed)
+                onComplete(true)
+            }
+            .addOnFailureListener { e ->
+                // Handle failure (if needed)
+                onComplete(false)
+            }
+    }
+
+    override fun updateAnak(
+        uid: String,
+        itemKey: String,
+        updatedAnak: AddDataAnak,
+        onComplete: (Boolean) -> Unit
+    ) {
+        val databaseReference = FirebaseDatabase.getInstance().getReference("CatatanAnak")
+
+        // Construct the path to the specific child node based on uid and itemKey
+        val childPath = "$uid/$itemKey"
+
+        databaseReference.child(childPath).setValue(updatedAnak)
+            .addOnSuccessListener {
+                // Handle success (if needed)
+                onComplete(true)
+            }
+            .addOnFailureListener { e ->
+                // Handle failure (if needed)
+                onComplete(false)
+            }
+    }
+
 
     private fun saveArtikelToDatabase(judul: String, isiArtikel: String, imageUrl: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {
         val uid = FirebaseAuth.getInstance().currentUser?.uid.toString()
