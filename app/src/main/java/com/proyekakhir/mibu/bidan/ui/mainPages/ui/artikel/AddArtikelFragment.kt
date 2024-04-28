@@ -1,13 +1,18 @@
 package com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -59,11 +64,10 @@ class AddArtikelFragment : Fragment() {
             } else {
                 viewModel.uploadArtikel(judul, isi, selectedImageUri,
                     onSuccess = {
-                        findNavController().popBackStack()
-                        Toast.makeText(context, "Article saved to database.", Toast.LENGTH_SHORT).show()
+                        alertUpload(getString(R.string.success), getString(R.string.upload_success))
                     },
                     onFailure = { e ->
-                        Toast.makeText(context, "Failed to save article: ${e.message}", Toast.LENGTH_SHORT).show()
+                        alertUpload(getString(R.string.failed), getString(R.string.upload_failed))
                     })
             }
         }
@@ -78,6 +82,31 @@ class AddArtikelFragment : Fragment() {
         })
 
         return root
+    }
+
+    private fun alertUpload(titleFill: String, descFill: String) {
+        val builder = AlertDialog.Builder(requireContext())
+
+        val customView = LayoutInflater.from(requireContext())
+            .inflate(R.layout.custom_layout_dialog_1_option, null)
+        builder.setView(customView)
+
+        val title = customView.findViewById<TextView>(R.id.tv_title)
+        val desc = customView.findViewById<TextView>(R.id.tv_desc)
+        val btnOk = customView.findViewById<Button>(R.id.ok_btn_id)
+
+        title.text = titleFill
+        desc.text = descFill
+
+        val dialog = builder.create()
+
+        btnOk.setOnClickListener {
+            findNavController().popBackStack()
+            dialog.dismiss()
+        }
+
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

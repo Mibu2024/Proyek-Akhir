@@ -127,10 +127,10 @@ class FirebaseRepository : FirebaseService {
         onSuccess: () -> Unit,
         onFailure: (Exception) -> Unit
     ) {
-        if (selectedImageUri != null) {
-            val fileName = UUID.randomUUID().toString() + ".jpg"
-            val refStorage = FirebaseStorage.getInstance().reference.child("posterArtikel/$fileName")
+        val fileName = UUID.randomUUID().toString() + ".jpg"
+        val refStorage = FirebaseStorage.getInstance().reference.child("posterArtikel/$fileName")
 
+        if (selectedImageUri != null) {
             refStorage.putFile(selectedImageUri)
                 .addOnSuccessListener { taskSnapshot ->
                     taskSnapshot.storage.downloadUrl.addOnSuccessListener { imageUrl ->
@@ -140,8 +140,12 @@ class FirebaseRepository : FirebaseService {
                 .addOnFailureListener { e ->
                     onFailure(e)
                 }
+        } else {
+            // Handle the case when selectedImageUri is null (e.g., upload article without an image)
+            saveArtikelToDatabase(judul, isiArtikel, "", onSuccess, onFailure)
         }
     }
+
 
     override fun getArtikelByUser(
         onDataChange: (List<ArtikelData>) -> Unit,

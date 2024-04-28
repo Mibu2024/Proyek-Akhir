@@ -1,11 +1,17 @@
 package com.proyekakhir.mibu.bidan.ui.auth
 
+import android.app.AlertDialog
 import android.content.ContentValues
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
@@ -80,16 +86,11 @@ class BidanRegisterActivity : AppCompatActivity() {
                     docRef.get().addOnSuccessListener { document ->
                         if (document != null) {
                             val role = document.getString("role")
-                            if (role == "bidan") {
-                                val preferenceManager = PreferenceManager(this)
-                                preferenceManager.setUserRole("bidan")
-                                startActivity(Intent(this@BidanRegisterActivity, BidanMainActivity::class.java))
-                                finish()
-                            } else {
-                                val preferenceManager = PreferenceManager(this)
-                                preferenceManager.setUserRole("user")
-                                startActivity(Intent(this@BidanRegisterActivity, MainActivity::class.java))
-                                finish()
+                            val email = FirebaseAuth.getInstance().currentUser?.email
+                            if (email != null) {
+                                if (role != null) {
+                                    alertRegisterSuccess(getString(R.string.welcome), email, role)
+                                }
                             }
                         } else {
                             Log.d(ContentValues.TAG, "No such document")
@@ -106,5 +107,40 @@ class BidanRegisterActivity : AppCompatActivity() {
                 ).show()
             }
         })
+    }
+
+    private fun alertRegisterSuccess(titleFill: String, descFill: String, role: String) {
+        val builder = AlertDialog.Builder(this)
+
+        val customView = LayoutInflater.from(this)
+            .inflate(R.layout.custom_layout_dialog_1_option, null)
+        builder.setView(customView)
+
+        val title = customView.findViewById<TextView>(R.id.tv_title)
+        val desc = customView.findViewById<TextView>(R.id.tv_desc)
+        val btnOk = customView.findViewById<Button>(R.id.ok_btn_id)
+
+        title.text = titleFill
+        desc.text = descFill
+
+        val dialog = builder.create()
+
+        btnOk.setOnClickListener {
+            if (role == "bidan") {
+                val preferenceManager = PreferenceManager(this)
+                preferenceManager.setUserRole("bidan")
+                startActivity(Intent(this@BidanRegisterActivity, BidanMainActivity::class.java))
+                finish()
+            } else {
+                val preferenceManager = PreferenceManager(this)
+                preferenceManager.setUserRole("user")
+                startActivity(Intent(this@BidanRegisterActivity, MainActivity::class.java))
+                finish()
+            }
+            dialog.dismiss()
+        }
+
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
     }
 }

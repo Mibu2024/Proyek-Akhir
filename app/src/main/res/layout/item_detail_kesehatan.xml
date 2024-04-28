@@ -7,7 +7,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginStart="2dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="2dp"
@@ -20,7 +20,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:background="@color/amber_100">
 
             <TextView
@@ -33,7 +33,7 @@
                 android:textColor="#979797"
                 android:textSize="13sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/iv_delete_kendaraan"
                 app:layout_constraintEnd_toEndOf="@+id/tv_keluhan"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/tv_keluhan"
@@ -56,6 +56,52 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Sakit Perut" />
+
+            <TextView
+                android:id="@+id/tv_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/rounded_button_tertiary"
+                android:paddingLeft="20dp"
+                android:paddingTop="8dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="8dp"
+                android:text="@string/view"
+                android:textColor="@color/navbar_green"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/rounded_button_tertiary"
+                android:paddingLeft="20dp"
+                android:paddingTop="8dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="8dp"
+                android:text="@string/edit"
+                android:textColor="@color/navbar_green"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_view"
+                app:layout_constraintEnd_toStartOf="@+id/tv_view"
+                app:layout_constraintTop_toTopOf="@+id/tv_view" />
+
+            <ImageView
+                android:id="@+id/iv_delete_kendaraan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_filled_red"
+                android:padding="8dp"
+                android:src="@drawable/baseline_delete_24"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_edit"
+                app:layout_constraintEnd_toStartOf="@+id/tv_edit"
+                app:layout_constraintTop_toTopOf="@+id/tv_edit" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

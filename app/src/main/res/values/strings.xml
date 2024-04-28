@@ -160,4 +160,18 @@
     <string name="detail_pemeriksa">Detail Pemeriksa</string>
     <string name="tanggal_periksa_selanjutnya">Tanggal Periksa Selanjutnya</string>
     <string name="detail_anak">Detail Anak:</string>
+    <string name="alert">Alert</string>
+    <string name="want_to_logout">Are you sure want to logout?</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="warning">Warning</string>
+    <string name="want_to_edit_profile">Are you sure want to edit your profile?</string>
+    <string name="thanks_for_watching">Thanks</string>
+    <string name="ok">Ok</string>
+    <string name="success">Success</string>
+    <string name="upload_success">Upload Success!</string>
+    <string name="failed">Failed</string>
+    <string name="upload_failed">Upload Failed!</string>
+    <string name="bpm">Bpm</string>
+    <string name="edit">Edit</string>
 </resources>

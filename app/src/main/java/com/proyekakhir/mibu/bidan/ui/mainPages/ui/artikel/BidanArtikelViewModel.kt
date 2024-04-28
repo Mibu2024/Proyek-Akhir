@@ -16,18 +16,16 @@ class BidanArtikelViewModel(val repository: FirebaseRepository) : ViewModel() {
     val dataList: LiveData<List<ArtikelData>> get() = this._dataList
 
     fun uploadArtikel(judul: String, isiArtikel: String, selectedImageUri: Uri?, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {
-        if (selectedImageUri != null) {
-            _isLoading.value = true
-            repository.uploadArtikel(judul, isiArtikel, selectedImageUri,
-                onSuccess = {
-                    _isLoading.value = false
-                    onSuccess()
-                },
-                onFailure = { e ->
-                    _isLoading.value = false
-                    onFailure(e)
-                })
-        }
+        _isLoading.value = true
+        repository.uploadArtikel(judul, isiArtikel, selectedImageUri,
+            onSuccess = {
+                _isLoading.value = false
+                onSuccess()
+            },
+            onFailure = { e ->
+                _isLoading.value = false
+                onFailure(e)
+            })
     }
 
     fun getArtikelByUser(onDataChange: (List<ArtikelData>) -> Unit, onCancelled: (DatabaseError) -> Unit) {

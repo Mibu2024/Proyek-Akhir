@@ -1,15 +1,21 @@
 package com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan
 
+import android.app.AlertDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.common.base.Strings.isNullOrEmpty
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.bidan.ui.factory.ViewModelFactory
@@ -93,12 +99,11 @@ class AddCatatanNifasFragment : Fragment() {
                 }
 
                 viewModel.successMessage.observe(viewLifecycleOwner, { message ->
-                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-                    parentFragmentManager.popBackStack()
+                    alertUpload(getString(R.string.success), message)
                 })
 
                 viewModel.errorMessage.observe(viewLifecycleOwner, { message ->
-                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                    alertUpload(getString(R.string.failed), message)
                 })
             }
         }
@@ -113,6 +118,31 @@ class AddCatatanNifasFragment : Fragment() {
         })
 
         return root
+    }
+
+    private fun alertUpload(titleFill: String, descFill: String) {
+        val builder = AlertDialog.Builder(requireContext())
+
+        val customView = LayoutInflater.from(requireContext())
+            .inflate(R.layout.custom_layout_dialog_1_option, null)
+        builder.setView(customView)
+
+        val title = customView.findViewById<TextView>(R.id.tv_title)
+        val desc = customView.findViewById<TextView>(R.id.tv_desc)
+        val btnOk = customView.findViewById<Button>(R.id.ok_btn_id)
+
+        title.text = titleFill
+        desc.text = descFill
+
+        val dialog = builder.create()
+
+        btnOk.setOnClickListener {
+            findNavController().popBackStack()
+            dialog.dismiss()
+        }
+
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
     }
 
 }

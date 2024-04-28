@@ -1,19 +1,23 @@
 package com.proyekakhir.mibu.user.ui.settings
 
 import android.content.Intent
-import androidx.lifecycle.ViewModelProvider
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.bidan.ui.auth.BidanLoginActivity
-import com.proyekakhir.mibu.databinding.FragmentBidanSettingsBinding
 import com.proyekakhir.mibu.databinding.FragmentSettingsBinding
 import com.proyekakhir.mibu.user.factory.ViewModelFactory
 import com.proyekakhir.mibu.user.firebase.FirebaseRepository
@@ -43,7 +47,7 @@ class SettingsFragment : Fragment() {
         binding.email.text = email
 
         binding.itemLogout.setOnClickListener {
-            logout()
+            alertLogout(getString(R.string.warning), getString(R.string.want_to_logout))
         }
 
         binding.itemAbout.setOnClickListener {
@@ -66,6 +70,33 @@ class SettingsFragment : Fragment() {
         })
 
         return root
+    }
+
+    private fun alertLogout(titleFill: String, descFill: String) {
+        val builder = AlertDialog.Builder(requireContext())
+        val customView = LayoutInflater.from(requireContext())
+            .inflate(R.layout.custom_layout_dialog_2_option, null)
+        builder.setView(customView)
+        val dialog = builder.create()
+
+        val title = customView.findViewById<TextView>(R.id.tv_title)
+        val desc = customView.findViewById<TextView>(R.id.tv_desc)
+        val btnYes = customView.findViewById<Button>(R.id.yes_btn_id)
+        val btnNo = customView.findViewById<Button>(R.id.no_btn_id)
+
+        title.text = titleFill
+        desc.text = descFill
+
+        btnYes.setOnClickListener {
+            logout()
+            dialog.dismiss()
+        }
+
+        btnNo.setOnClickListener {
+            dialog.cancel()
+        }
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
     }
 
     private fun logout() {
