@@ -43,4 +43,13 @@ class BidanArtikelViewModel(val repository: FirebaseRepository) : ViewModel() {
         )
     }
 
+    fun updateArtikel(itemKey: String, updatedArtikel: ArtikelData, onComplete: (Boolean) -> Unit) {
+        _isLoading.value = true
+        repository.updateArtikel(itemKey, updatedArtikel) { success ->
+            onComplete(success)
+            _isLoading.value = false
+        }
+    }
+
+
 }

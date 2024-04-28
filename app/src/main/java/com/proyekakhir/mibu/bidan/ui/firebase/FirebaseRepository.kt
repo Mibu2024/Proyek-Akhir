@@ -384,6 +384,25 @@ class FirebaseRepository : FirebaseService {
             }
     }
 
+    override fun updateArtikel(
+        itemKey: String,
+        updatedArtikel: ArtikelData,
+        onComplete: (Boolean) -> Unit
+    ) {
+        val databaseReference = FirebaseDatabase.getInstance().getReference("artikel")
+
+        // Update the article data
+        databaseReference.child(itemKey).setValue(updatedArtikel)
+            .addOnSuccessListener {
+                // Handle success (if needed)
+                onComplete(true)
+            }
+            .addOnFailureListener { e ->
+                // Handle failure (if needed)
+                onComplete(false)
+            }
+    }
+
     private fun saveArtikelToDatabase(judul: String, isiArtikel: String, imageUrl: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {
         val uid = FirebaseAuth.getInstance().currentUser?.uid.toString()
         val db = FirebaseFirestore.getInstance()
@@ -413,5 +432,6 @@ class FirebaseRepository : FirebaseService {
                 Log.d("Firestore", "get failed with ", exception)
             }
     }
+
 
 }

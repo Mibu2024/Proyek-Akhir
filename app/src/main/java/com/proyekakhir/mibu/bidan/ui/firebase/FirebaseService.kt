@@ -25,5 +25,5 @@ interface FirebaseService {
     fun getCatatanNifas(uid: String, onDataChanged: (ArrayList<AddNifasData>) -> Unit, onIsEmpty: (String) -> Unit, onIsLoading: (Boolean) -> Unit, onCancelled: (DatabaseError) -> Unit)
     fun getCatatanAnak(uid: String, onDataChanged: (ArrayList<AddDataAnak>) -> Unit, onIsEmpty: (String) -> Unit, onIsLoading: (Boolean) -> Unit, onCancelled: (DatabaseError) -> Unit)
     fun deleteArtikel(artikelId: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit)
-
+    fun updateArtikel(itemKey: String, updatedArtikel: ArtikelData, onComplete: (Boolean) -> Unit)
 }
