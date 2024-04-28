@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_navigation_artikel_to_detailArtikelFragment"
             app:destination="@id/detailArtikelFragment" />
+        <action
+            android:id="@+id/action_navigation_artikel_to_editArtikelFragmant"
+            app:destination="@id/editArtikelFragmant" />
     </fragment>
 
     <fragment
@@ -111,5 +114,9 @@
         android:id="@+id/detailArtikelFragment"
         android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.DetailArtikelFragment"
         android:label="DetailArtikelFragment" />
+    <dialog
+        android:id="@+id/editArtikelFragmant"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.EditArtikelFragmant"
+        android:label="EditArtikelFragmant" />
 
 </navigation>

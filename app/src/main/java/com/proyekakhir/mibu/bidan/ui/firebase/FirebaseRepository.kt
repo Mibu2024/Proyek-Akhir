@@ -7,6 +7,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
@@ -158,12 +159,15 @@ class FirebaseRepository : FirebaseService {
         refDatabase.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 artikelList.clear()
-                for (postSnapshot in dataSnapshot.children) {
-                    val artikel = postSnapshot.getValue(ArtikelData::class.java)
+                dataSnapshot.children.forEach {
+                    val key = it.key
+                    val artikel = it.getValue(ArtikelData::class.java)
                     if (artikel != null && artikel.uid == uid) {
+                        artikel.key = key
                         artikelList.add(artikel)
                     }
                 }
+
                 onDataChange(artikelList)
             }
 
@@ -357,6 +361,27 @@ class FirebaseRepository : FirebaseService {
                 onCancelled(error)
             }
         })
+    }
+
+    override fun deleteArtikel(
+        artikelId: String,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        // Construct the reference to the specific article node
+        val databaseReference: DatabaseReference = FirebaseDatabase.getInstance().reference
+        val artikelRef = databaseReference.child("artikel").child(artikelId)
+
+        // Remove the article from the database
+        artikelRef.removeValue()
+            .addOnSuccessListener {
+                // Article deleted successfully
+                onSuccess()
+            }
+            .addOnFailureListener { e ->
+                // Handle the error
+                onFailure(e)
+            }
     }
 
     private fun saveArtikelToDatabase(judul: String, isiArtikel: String, imageUrl: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {

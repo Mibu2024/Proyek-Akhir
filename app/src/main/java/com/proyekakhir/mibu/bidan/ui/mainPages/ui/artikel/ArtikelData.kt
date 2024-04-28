@@ -8,5 +8,6 @@ data class ArtikelData(
     val imageUrl: String? = "",
     val uid: String? = "",
     val tanggal: String? = "",
-    val nama: String? = ""
+    val nama: String? = "",
+    var key: String? = ""
 ) : Serializable

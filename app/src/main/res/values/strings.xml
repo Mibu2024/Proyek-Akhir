@@ -174,4 +174,7 @@
     <string name="upload_failed">Upload Failed!</string>
     <string name="bpm">Bpm</string>
     <string name="edit">Edit</string>
+    <string name="edit_artikel">Edit Artikel</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
 </resources>

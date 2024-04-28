@@ -84,4 +84,5 @@ class BidanArtikelFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }
