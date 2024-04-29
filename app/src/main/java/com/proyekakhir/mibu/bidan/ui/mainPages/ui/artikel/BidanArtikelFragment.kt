@@ -51,6 +51,11 @@ class BidanArtikelFragment : Fragment() {
             onDataChange = { list ->
                 // Update your adapter with the new list
                 adapter.setData(list)
+                if (list.isEmpty()){
+                    binding.tvNoData.visibility = View.VISIBLE
+                } else {
+                    binding.tvNoData.visibility = View.GONE
+                }
             },
             onCancelled = { error ->
                 // Handle the error

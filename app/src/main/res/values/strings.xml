@@ -179,4 +179,5 @@
     <string name="cancel">Cancel</string>
     <string name="edit_catatan_kesehatan">Edit Catatan Kesehatan</string>
     <string name="edit_catatan_nifas">Edit Catatan Nifas</string>
+    <string name="edit_anak">Edit Data Anak</string>
 </resources>

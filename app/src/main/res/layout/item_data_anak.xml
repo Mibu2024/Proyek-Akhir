@@ -32,7 +32,7 @@
                 android:layout_marginBottom="16dp"
                 android:textSize="25sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/iv_delete_kendaraan"
+                app:layout_constraintBottom_toTopOf="@+id/iv_delete_anak"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Nama Anak" />
@@ -72,7 +72,7 @@
                 app:layout_constraintTop_toTopOf="@+id/tv_view" />
 
             <ImageView
-                android:id="@+id/iv_delete_kendaraan"
+                android:id="@+id/iv_delete_anak"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
