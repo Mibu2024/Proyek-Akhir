@@ -25,11 +25,11 @@ class DetailAnakUserFragment : Fragment() {
 
         val itemData = arguments?.getSerializable("itemData") as AnakModel
 
-        binding.tvNamaAnak.text = itemData.namaAnak
-        binding.tvTanggalLahir.text = itemData.tanggalLahir
-        binding.tvUmurBayi.text = itemData.umur
-        binding.tvBeratBayi.text = itemData.beratBadan
-        binding.tvNamaIbu.text = itemData.namaIbu
+        binding.tvNamaAnak.text = ": ${itemData.namaAnak}"
+        binding.tvTanggalLahir.text = ": ${itemData.tanggalLahir}"
+        binding.tvUmurBayi.text = ": ${itemData.umur}"
+        binding.tvBeratBayi.text = ": ${itemData.beratBadan}"
+        binding.tvNamaIbu.text = ": ${itemData.namaIbu}"
 
         when (itemData.dptHb1Polio2){
             "Sudah" -> {

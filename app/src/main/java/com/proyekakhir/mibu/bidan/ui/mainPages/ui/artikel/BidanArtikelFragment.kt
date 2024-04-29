@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.bidan.ui.factory.ViewModelFactory
 import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
+import com.proyekakhir.mibu.bidan.ui.network.NetworkConnection
 import com.proyekakhir.mibu.databinding.FragmentBidanArtikelBinding
 
 class BidanArtikelFragment : Fragment() {
@@ -28,6 +30,7 @@ class BidanArtikelFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         val repository = FirebaseRepository()
         val factory = ViewModelFactory(repository)
         val bidanArtikelViewModel =
@@ -83,6 +86,32 @@ class BidanArtikelFragment : Fragment() {
         })
 
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        //check connection
+        val networkConnection = NetworkConnection(requireContext())
+        networkConnection.observe(requireActivity()) {
+            if (isAdded) {
+                if (it) {
+                    binding.ivConnection.visibility = View.GONE
+                    binding.tvConnection.visibility = View.GONE
+                    binding.rvArtikel.visibility = View.VISIBLE
+                    binding.layoutAddArtikel.visibility = View.VISIBLE
+                    binding.textView15.visibility = View.VISIBLE
+                } else {
+                    Toast.makeText(requireContext(), "Not Connected", Toast.LENGTH_SHORT).show()
+                    binding.ivConnection.visibility = View.VISIBLE
+                    binding.tvConnection.visibility = View.VISIBLE
+                    binding.pbArtikel.visibility = View.GONE
+                    binding.rvArtikel.visibility = View.GONE
+                    binding.tvNoData.visibility = View.GONE
+                    binding.layoutAddArtikel.visibility = View.GONE
+                    binding.textView15.visibility = View.GONE
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {

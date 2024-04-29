@@ -29,6 +29,7 @@ import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.bidan.ui.factory.ViewModelFactory
 import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.BidanHomeViewModel
+import com.proyekakhir.mibu.bidan.ui.network.NetworkConnection
 import com.proyekakhir.mibu.databinding.FragmentBidanHomeBinding
 import com.proyekakhir.mibu.databinding.FragmentDataPribadiBidanBinding
 import com.proyekakhir.mibu.databinding.FragmentDataPribadiBinding

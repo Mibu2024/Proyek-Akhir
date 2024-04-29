@@ -25,6 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.proyekakhir.mibu.R
+import com.proyekakhir.mibu.bidan.ui.network.NetworkConnection
 import com.proyekakhir.mibu.databinding.FragmentDataPribadiBinding
 import com.proyekakhir.mibu.user.factory.ViewModelFactory
 import com.proyekakhir.mibu.user.firebase.FirebaseRepository
@@ -201,6 +202,25 @@ class DataPribadiFragment : Fragment() {
                     progressDialog.dismiss()
                     Toast.makeText(requireContext(), "Update Failed", Toast.LENGTH_SHORT).show()
                 }
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        //check connection
+        val networkConnection = NetworkConnection(requireContext())
+        networkConnection.observe(requireActivity()) {
+            if (isAdded) {
+                if (it) {
+                    binding.btnSimpan.isEnabled = true
+                    binding.btnSimpan.text = "Simpan"
+                } else {
+                    Toast.makeText(requireContext(), "Not Connected", Toast.LENGTH_SHORT).show()
+                    binding.btnSimpan.isEnabled = false
+                    binding.btnSimpan.text = "Connection Error"
+
+                }
+            }
         }
     }
 

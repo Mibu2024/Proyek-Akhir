@@ -6,11 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.proyekakhir.mibu.R
+import com.proyekakhir.mibu.bidan.ui.network.NetworkConnection
 import com.proyekakhir.mibu.databinding.FragmentCatatanAnakBinding
 import com.proyekakhir.mibu.databinding.FragmentTabNifasBinding
 import com.proyekakhir.mibu.user.factory.ViewModelFactory
@@ -79,6 +81,31 @@ class CatatanAnakFragment : Fragment() {
         }
 
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        //check connection
+        val networkConnection = NetworkConnection(requireContext())
+        networkConnection.observe(requireActivity()) {
+            if (isAdded) {
+                if (it) {
+                    binding.ivConnection.visibility = View.GONE
+                    binding.tvConnection.visibility = View.GONE
+                    binding.rvDataAnak.visibility = View.VISIBLE
+                    binding.textView5.visibility = View.VISIBLE
+                } else {
+                    Toast.makeText(requireContext(), "Not Connected", Toast.LENGTH_SHORT).show()
+                    binding.ivConnection.visibility = View.VISIBLE
+                    binding.tvConnection.visibility = View.VISIBLE
+                    binding.rvDataAnak.visibility = View.GONE
+                    binding.textView5.visibility = View.GONE
+                    binding.tvNoDataAnak.visibility = View.GONE
+                    binding.progressBar.visibility = View.GONE
+
+                }
+            }
+        }
     }
 
 }

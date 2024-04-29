@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -21,6 +22,7 @@ import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.adapter.ListIbuAdapter
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.IbuHamilData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.settings.BidanSettingsViewModel
+import com.proyekakhir.mibu.bidan.ui.network.NetworkConnection
 import com.proyekakhir.mibu.databinding.FragmentBidanHomeBinding
 import java.util.Locale
 
@@ -104,6 +106,28 @@ class BidanHomeFragment : Fragment() {
 
         return root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        //check connection
+        val networkConnection = NetworkConnection(requireContext())
+        networkConnection.observe(viewLifecycleOwner) { isConnected ->
+            if (isAdded) { // Check if the fragment is added
+                if (isConnected) {
+                    binding.ivConnection.visibility = View.GONE
+                    binding.tvConnection.visibility = View.GONE
+                    binding.rvIbuHamil.visibility = View.VISIBLE
+                } else {
+                    Toast.makeText(requireContext(), "Not Connected", Toast.LENGTH_SHORT).show()
+                    binding.ivConnection.visibility = View.VISIBLE
+                    binding.tvConnection.visibility = View.VISIBLE
+                    binding.pbHome.visibility = View.GONE
+                    binding.rvIbuHamil.visibility = View.GONE
+                }
+            }
+        }
+    }
+
 
     private fun searchList(query: String?){
         if (query != null){
