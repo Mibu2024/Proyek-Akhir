@@ -24,8 +24,8 @@ import com.proyekakhir.mibu.user.ui.kehamilan.model.NifasModel
 
 class FirebaseRepository : FirebaseService {
 
-    private val auth = FirebaseAuth.getInstance()
-    private val firestore = FirebaseFirestore.getInstance()
+    var auth = FirebaseAuth.getInstance()
+    var firestore = FirebaseFirestore.getInstance()
     override fun login(email: String, password: String, onComplete: (Boolean) -> Unit) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->

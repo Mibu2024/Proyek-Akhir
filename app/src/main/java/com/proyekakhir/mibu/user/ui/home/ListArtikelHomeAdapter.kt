@@ -3,6 +3,7 @@ package com.proyekakhir.mibu.user.ui.home
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +23,7 @@ class ListArtikelHomeAdapter (private var listArtikel : ArrayList<ArtikelModel>)
         val poster: ImageView = itemView.findViewById(R.id.iv_item_photo)
         val title: TextView = itemView.findViewById(R.id.tv_item_name)
         val desc: TextView = itemView.findViewById(R.id.tv_item_description)
+        val view: Button = itemView.findViewById(R.id.btn_view)
     }
 
     override fun onCreateViewHolder(
@@ -49,6 +51,10 @@ class ListArtikelHomeAdapter (private var listArtikel : ArrayList<ArtikelModel>)
         }
 
         holder.itemView.setOnClickListener {
+            listener?.onItemClick(currentItem)
+        }
+
+        holder.view.setOnClickListener {
             listener?.onItemClick(currentItem)
         }
     }

@@ -22,6 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mibu"
         tools:targetApi="31">
+
         <activity
             android:name=".bidan.ui.mainPages.ui.home.catatan.addCatatan.AddCatatanActivity"
             android:exported="false" />

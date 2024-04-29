@@ -133,8 +133,7 @@ class BidanHomeFragment : Fragment() {
         if (query != null){
             val searchedList = ArrayList<IbuHamilData>()
             for (i in ibuArrayList){
-                if (i.fullname?.lowercase(Locale.ROOT)?.contains(query) == true
-                    || i.nik?.lowercase(Locale.ROOT)?.contains(query) == true ){
+                if (i.fullname?.lowercase(Locale.ROOT)?.contains(query) == true){
                     searchedList.add(i)
                 }
             }

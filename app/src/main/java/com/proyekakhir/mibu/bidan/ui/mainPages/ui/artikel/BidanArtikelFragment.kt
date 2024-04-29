@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -24,6 +25,7 @@ class BidanArtikelFragment : Fragment() {
     private lateinit var listArtikel: ArrayList<ArtikelData>
     private lateinit var adapter: ListArtikelAdapter
     private lateinit var rvArtikel: RecyclerView
+    private lateinit var tvNoData: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -49,15 +51,16 @@ class BidanArtikelFragment : Fragment() {
         rvArtikel.layoutManager = LinearLayoutManager(requireContext())
         rvArtikel.setHasFixedSize(true)
         rvArtikel.adapter = adapter
+        tvNoData = binding.tvNoData
 
         bidanArtikelViewModel.getArtikelByUser(
             onDataChange = { list ->
                 // Update your adapter with the new list
                 adapter.setData(list)
                 if (list.isEmpty()){
-                    binding.tvNoData.visibility = View.VISIBLE
+                    tvNoData.visibility = View.VISIBLE
                 } else {
-                    binding.tvNoData.visibility = View.GONE
+                    tvNoData.visibility = View.GONE
                 }
             },
             onCancelled = { error ->

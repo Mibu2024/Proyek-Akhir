@@ -33,7 +33,7 @@ class DetailArtikelFragment : Fragment() {
                 .load(itemData.imageUrl)
                 .into(binding.ivPosterArtikel)
         } else {
-            binding.ivPosterArtikel.visibility = View.GONE
+            binding.cardView3.visibility = View.GONE
         }
 
         binding.arrowBack.setOnClickListener {

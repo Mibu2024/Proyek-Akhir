@@ -145,7 +145,6 @@
             android:id="@+id/fab_hubungi_bidan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             android:backgroundTint="@color/light_blue_300"
             android:text="@string/hubungi_bidan"
@@ -154,7 +153,8 @@
             app:icon="@drawable/baseline_chat_24"
             app:iconTint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -124,7 +124,7 @@
     <string name="msg_tips_kehamilan_sehat">Tips Kehamilan Sehat</string>
     <string name="view">View</string>
     <string name="title_home">Home</string>
-    <string name="title_catatan_anak">Catatan Anak</string>
+    <string name="title_catatan_anak">Anak</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notification</string>
     <string name="artikel">Artikel</string>
@@ -147,7 +147,7 @@
     <string name="sign_up_failed">Sign Up Failed!</string>
     <string name="tab_kesehatan">Catatan Kesehatan</string>
     <string name="tab_nifas">Catatan Nifas</string>
-    <string name="title_catatan_kehamilan">Catatan\nKehamilan</string>
+    <string name="title_catatan_kehamilan">Kehamilan</string>
     <string name="history_catatan_kesehatan">History Catatan Kesehatan</string>
     <string name="history_catatan_nifas">History Catatan Nifas</string>
     <string name="catatan_anak">Catatan Anak</string>

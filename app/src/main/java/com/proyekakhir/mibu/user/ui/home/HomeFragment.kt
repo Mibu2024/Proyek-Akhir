@@ -113,6 +113,7 @@ class HomeFragment : Fragment() {
                     binding.tvConnection.visibility = View.GONE
                     binding.textView4.visibility = View.VISIBLE
                     binding.cardView.visibility = View.VISIBLE
+                    binding.fabHubungiBidan.visibility = View.VISIBLE
                 } else {
                     Toast.makeText(requireContext(), "Not Connected", Toast.LENGTH_SHORT).show()
                     binding.ivConnection.visibility = View.VISIBLE
@@ -120,6 +121,7 @@ class HomeFragment : Fragment() {
                     binding.textView4.visibility = View.GONE
                     binding.cardView.visibility = View.GONE
                     binding.pbArtikelHome.visibility = View.GONE
+                    binding.fabHubungiBidan.visibility = View.GONE
 
                 }
             }
