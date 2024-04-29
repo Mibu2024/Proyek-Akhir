@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_navigation_home_to_detailArtikelFragment2"
             app:destination="@id/detailArtikelFragment2" />
+        <action
+            android:id="@+id/action_navigation_home_to_chatBidanFragment"
+            app:destination="@id/chatBidanFragment" />
     </fragment>
 
     <fragment
@@ -74,6 +77,10 @@
         android:id="@+id/aboutFragment"
         android:name="com.proyekakhir.mibu.user.ui.settings.AboutFragment"
         android:label="AboutFragment" />
+    <dialog
+        android:id="@+id/chatBidanFragment"
+        android:name="com.proyekakhir.mibu.user.ui.home.ChatBidanFragment"
+        android:label="ChatBidanFragment" />
 
 
 </navigation>

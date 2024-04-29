@@ -181,4 +181,7 @@
     <string name="edit_catatan_nifas">Edit Catatan Nifas</string>
     <string name="edit_anak">Edit Data Anak</string>
     <string name="network_error">Network Error</string>
+    <string name="hubungi_bidan">Hubungi Bidan</string>
+    <string name="list_bidan">List Bidan</string>
+    <string name="alert_invalid_phone_number">Tuliskan Kode Negara, Contoh: 628092837261</string>
 </resources>

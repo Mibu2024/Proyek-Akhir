@@ -95,6 +95,9 @@ class HomeFragment : Fragment() {
             }
         })
 
+        binding.fabHubungiBidan.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_home_to_chatBidanFragment)
+        }
 
         return root
     }

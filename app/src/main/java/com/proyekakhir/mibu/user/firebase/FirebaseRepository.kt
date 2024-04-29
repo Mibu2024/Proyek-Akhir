@@ -13,9 +13,11 @@ import com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.ArtikelData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddDataAnak
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddKesehatanKehamilanData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddNifasData
+import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.IbuHamilData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.settings.UserData
 import com.proyekakhir.mibu.user.ui.anak.model.AnakModel
 import com.proyekakhir.mibu.user.ui.home.model.ArtikelModel
+import com.proyekakhir.mibu.user.ui.home.model.BidanData
 import com.proyekakhir.mibu.user.ui.home.model.UserModel
 import com.proyekakhir.mibu.user.ui.kehamilan.model.KesehatanModel
 import com.proyekakhir.mibu.user.ui.kehamilan.model.NifasModel
@@ -257,5 +259,25 @@ class FirebaseRepository : FirebaseService {
                 onCancelled(error)
             }
         })
+    }
+
+    override fun getAllBidan(
+        role: String,
+        onDataChange: (List<BidanData>) -> Unit,
+        onCancelled: (DatabaseError) -> Unit
+    ) {
+        firestore.collection("users")
+            .whereEqualTo("role", role)
+            .get()
+            .addOnSuccessListener { documents ->
+                val list = documents.mapNotNull { document ->
+                    val bidan = document.toObject(BidanData::class.java)
+                    bidan
+                }
+                onDataChange(list)
+            }
+            .addOnFailureListener { e ->
+                onCancelled(error(e))
+            }
     }
 }

@@ -5,7 +5,6 @@ import android.content.ContentValues
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,6 +12,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -51,23 +51,26 @@ class BidanRegisterActivity : AppCompatActivity() {
             val pass = binding.bidanRegisterPassword.text.toString()
             val emailError = binding.bidanRegisterEmail.isError
             val passError = binding.bidanRegisterPassword.isError
+            val teleponError = binding.bidanRegisterNoTelepon.isError
 
             if (passError) {
                 Toast.makeText(this, "Password minimum 8 characters", Toast.LENGTH_SHORT).show()
             } else if (emailError) {
                 Toast.makeText(this, "Please check your email format!", Toast.LENGTH_SHORT).show()
-            } else if (email.isNullOrEmpty()){
+            } else if (email.isNullOrEmpty()) {
                 Toast.makeText(this, "Tolong isi email", Toast.LENGTH_SHORT).show()
-            } else if (alamat.isNullOrEmpty()){
+            } else if (alamat.isNullOrEmpty()) {
                 Toast.makeText(this, "Tolong isi alamat", Toast.LENGTH_SHORT).show()
-            } else if (fullname.isNullOrEmpty()){
+            } else if (fullname.isNullOrEmpty()) {
                 Toast.makeText(this, "Tolong isi nama lengkap", Toast.LENGTH_SHORT).show()
-            } else if (str.isNullOrEmpty()){
+            } else if (str.isNullOrEmpty()) {
                 Toast.makeText(this, "Tolong isi no STR", Toast.LENGTH_SHORT).show()
             } else if (pass.isNullOrEmpty()) {
                 Toast.makeText(this, "Tolong isi password", Toast.LENGTH_SHORT).show()
-            } else if (noTelepon.isNullOrEmpty()){
+            } else if (noTelepon.isNullOrEmpty()) {
                 Toast.makeText(this, "Tolong isi Nomor Telepon", Toast.LENGTH_SHORT).show()
+            } else if (teleponError) {
+                Toast.makeText(this, "Tolong isi Nomor Telepon Dengan Kode Negara", Toast.LENGTH_SHORT).show()
             } else {
                 viewModel.signup(fullname, alamat, email, noTelepon, str, pass)
             }
