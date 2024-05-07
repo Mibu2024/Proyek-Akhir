@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\DataAnak;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DataImunisasi extends Model
 {
@@ -24,4 +25,9 @@ class DataImunisasi extends Model
         'imunisasi_tetanus_diphteria_td',
         'nama_pemeriksa',
     ];
+
+    public function anak()
+    {
+        return $this->belongsTo(DataAnak::class, 'nama_anak');
+    }
 }

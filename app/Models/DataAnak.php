@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\DataImunisasi;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DataAnak extends Model
 {
@@ -19,4 +20,9 @@ class DataAnak extends Model
         'umur',
         'berat_badan',
     ];
+
+    public function imunisasi()
+    {
+        return $this->hasMany(DataImunisasi::class, 'nama_anak');
+    }
 }
