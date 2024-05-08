@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataNifas;
+use App\Models\DataIbuHamil;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
@@ -19,7 +20,8 @@ class DataNifasController extends Controller
 
     public function create()
     {
-        return view('create-data-nifas');
+        $data_ibu_hamils = DataIbuHamil::all();
+        return view('create-data-nifas', compact('data_ibu_hamils'));
     }
 
     public function store(Request $request)
@@ -54,8 +56,9 @@ class DataNifasController extends Controller
 
     public function edit($id)
     {
+        $data_ibu_hamils = DataIbuHamil::all();
         $data_nifas = DataNifas::find($id);
-        return view('edit-data-nifas', compact('data_nifas'));
+        return view('edit-data-nifas', compact('data_nifas', 'data_ibu_hamils'));
     }
 
     public function update(Request $request, $id)
