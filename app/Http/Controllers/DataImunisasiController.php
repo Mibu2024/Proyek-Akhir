@@ -65,8 +65,11 @@ class DataImunisasiController extends Controller
 
     public function edit($id)
     {
+        // Query untuk mendapatkan data anak-anak dari tabel `data_anaks`
+        $data_anaks = DataAnak::all();
+
         $data_imunisasis = DataImunisasi::find($id);
-        return view('edit-data-imunisasi', compact('data_imunisasis'));
+        return view('edit-data-imunisasi', compact('data_imunisasis', 'data_anaks'));
     }
 
     public function update(Request $request, $id)

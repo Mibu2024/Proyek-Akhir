@@ -91,7 +91,7 @@
                                         <span class="menu-text">Data Nifas</span>
                                     </a>
                                 </li>
-                                <li class="menu-item menu-item-active" aria-haspopup="true">
+                                <li class="menu-item menu-item" aria-haspopup="true">
                                     <a href="{{ route('data-anak.index') }}" class="menu-link">
                                         <i class="menu-icon fas fa-child"></i>
                                         <span class="menu-text">Data Anak</span>

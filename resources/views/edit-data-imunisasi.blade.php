@@ -91,7 +91,7 @@
                                         <span class="menu-text">Data Nifas</span>
                                     </a>
                                 </li>
-                                <li class="menu-item menu-item-active" aria-haspopup="true">
+                                <li class="menu-item menu-item" aria-haspopup="true">
                                     <a href="{{ route('data-anak.index') }}" class="menu-link">
                                         <i class="menu-icon fas fa-child"></i>
                                         <span class="menu-text">Data Anak</span>
@@ -221,15 +221,14 @@
                                                     @enderror
                                                 </div>
 
-                                                <div class="form-group mt-5">
-                                                    <label for=""><strong>Nama Anak</strong></label>
-                                                    <input type="text" name="nama_anak" id="nama_anak" class="form-control @error('nama_anak') is-invalid @enderror" value="{{ $data_imunisasis->nama_anak }}"
-                                                        placeholder="Masukkan Nama Anak">
-                                                    @error('nama_anak')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
+                                                <div class="form-group"> 
+                                                    <label for="nama">Nama Anak</label> 
+                                                    <select name="nama_anak" id="nama_anak" class="form-control @error('nama_anak') is-invalid @enderror">
+                                                        @foreach ($data_anaks as $anak) 
+                                                            <option value="{{$anak->nama_anak}}" {{$anak->nama_anak == $data_imunisasis->nama_anak ? 'selected' : ''}}>{{$anak->nama_anak}}</option> 
+                                                        @endforeach 
+                                                    </select>
+                                                     
                                                 </div>
 
                                                 <div class="form-group mt-5">
