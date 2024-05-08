@@ -20,11 +20,9 @@ class DataImunisasiController extends Controller
 
     public function create()
     {
-        // Query untuk mendapatkan data anak-anak dari tabel `data_anaks`
         $data_anaks = DataAnak::all();
 
-        // Mengirim data anak-anak ke view `create-data-imunisasi`
-        return view('create-data-imunisasi', ['data_anaks' => $data_anaks]);
+        return view('create-data-imunisasi', compact('data_anaks'));
     }
 
     public function store(Request $request)

@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\DataIbuHamil;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DataNifas extends Model
 {
@@ -22,4 +23,9 @@ class DataNifas extends Model
         'masalah',
         'tindakan',
     ];
+
+    public function ibuHamil()
+    {
+        return $this->belongsTo(DataIbuHamil::class, 'nama_ibu');
+    }
 }

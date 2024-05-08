@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\DataKesehatan;
+use App\Models\DataIbuHamil;
 use Illuminate\Http\Request;
+use App\Models\DataKesehatan;
 use Illuminate\Support\Facades\Response;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -35,7 +36,9 @@ class DataKesehatanController extends Controller
 
     public function create()
     {
-        return view('create-data-kesehatan');
+        $data_ibu_hamils = DataIbuHamil::all();
+
+        return view('create-data-kesehatan', compact('data_ibu_hamils'));
     }
 
     public function store(Request $request)
@@ -82,8 +85,9 @@ class DataKesehatanController extends Controller
 
     public function edit($id)
     {
+        $data_ibu_hamils = DataIbuHamil::all();
         $data_kesehatans = DataKesehatan::find($id);
-        return view('edit-data-kesehatan', compact('data_kesehatans'));
+        return view('edit-data-kesehatan', compact('data_kesehatans', 'data_ibu_hamils'));
     }
 
     public function update(Request $request, $id)
@@ -139,7 +143,7 @@ class DataKesehatanController extends Controller
         $data_kesehatans->save();
 
         toast('Data Berhasil Diubah','success');
-        return redirect()->route('home');
+        return redirect()->route('data-kesehatan.index');
     }
 
     public function delete($id)
@@ -147,7 +151,7 @@ class DataKesehatanController extends Controller
         $data_kesehatans = DataKesehatan::find($id);
         $data_kesehatans->delete();
         toast('Data Berhasil Dihapus','success');
-        return redirect(route('home'));
+        return redirect(route('data-kesehatan.index'));
     }
 
     public function download()

@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\DataKesehatan;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DataIbuHamil extends Model
 {
@@ -22,4 +23,19 @@ class DataIbuHamil extends Model
         'nama_suami',
         'umur_suami',
     ];
+
+    public function kesehatan()
+    {
+        return $this->hasMany(DataKesehatan::class, 'nama_ibu');
+    }
+
+    public function nifas()
+    {
+        return $this->hasMany(DataKesehatan::class, 'nama_ibu');
+    }
+
+    public function anak()
+    {
+        return $this->hasMany(DataKesehatan::class, 'nama_ibu');
+    }
 }

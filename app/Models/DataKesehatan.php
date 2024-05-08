@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\DataIbuHamil;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class DataKesehatan extends Model
 {
@@ -26,4 +27,9 @@ class DataKesehatan extends Model
         'kaki_bengkak',
         'nasihat',
     ];
+
+    public function ibuHamil()
+    {
+        return $this->belongsTo(DataIbuHamil::class, 'nama_ibu');
+    }
 }
