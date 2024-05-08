@@ -221,14 +221,17 @@
                                                     @enderror
                                                 </div>
 
-                                                <div class="form-group mt-5">
-                                                    <label for=""><strong>Nama Ibu</strong></label>
-                                                    <input type="text" name="nama_ibu" id="nama_ibu" class="form-control @error('nama_ibu') is-invalid @enderror" value="{{ $data_anaks->nama_ibu }}"
-                                                        placeholder="Masukkan Nama Ibu">
+                                                <div class="form-group mt-5"> 
+                                                    <label for="nama_ibu">Nama Ibu Hamil</label> 
+                                                    <select name="nama_ibu" id="nama_ibu" class="form-control @error('nama_ibu') is-invalid @enderror">
+                                                        @foreach ($data_ibu_hamils as $ibu) 
+                                                            <option value="{{$ibu->nama_ibu}}" {{$ibu->nama_ibu == $data_anaks->nama_ibu ? 'selected' : ''}}>{{$ibu->nama_ibu}}</option> 
+                                                        @endforeach 
+                                                    </select>
                                                     @error('nama_ibu')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
                                                     @enderror
                                                 </div>
 

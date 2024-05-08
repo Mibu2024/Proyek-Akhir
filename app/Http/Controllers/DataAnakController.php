@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataAnak;
+use App\Models\DataIbuHamil;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
@@ -19,7 +20,8 @@ class DataAnakController extends Controller
 
     public function create()
     {
-        return view('create-data-anak');
+        $data_ibu_hamils = DataIbuHamil::all();
+        return view('create-data-anak', compact('data_ibu_hamils'));
     }
 
     public function store(Request $request)
@@ -49,8 +51,9 @@ class DataAnakController extends Controller
 
     public function edit($id)
     {
+        $data_ibu_hamils = DataIbuHamil::all();
         $data_anaks = DataAnak::find($id);
-        return view('edit-data-anak', compact('data_anaks'));
+        return view('edit-data-anak', compact('data_anaks', 'data_ibu_hamils'));
     }
 
     public function update(Request $request, $id)
