@@ -77,6 +77,14 @@
                                     </a>
                                 </li>
                                 <li class="menu-item menu-item" aria-haspopup="true">
+                                    <a href="{{ route('data-kesehatan.index') }}" class="menu-link">
+                                        <i
+                                            class="menu-icon 
+                                            fas fa-notes-medical"></i>
+                                        <span class="menu-text">Data Kesehatan</span>
+                                    </a>
+                                </li>
+                                <li class="menu-item menu-item" aria-haspopup="true">
                                     <a href="{{ route('data-nifas.index') }}" class="menu-link">
                                         <i class="menu-icon 
                                         fas fa-hospital-user"></i>

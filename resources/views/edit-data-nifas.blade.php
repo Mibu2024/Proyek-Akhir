@@ -76,6 +76,14 @@
                                         <span class="menu-text">Data Ibu Hamil</span>
                                     </a>
                                 </li>
+                                <li class="menu-item menu-item" aria-haspopup="true">
+                                    <a href="{{ route('data-kesehatan.index') }}" class="menu-link">
+                                        <i
+                                            class="menu-icon 
+                                            fas fa-notes-medical"></i>
+                                        <span class="menu-text">Data Kesehatan</span>
+                                    </a>
+                                </li>
                                 <li class="menu-item menu-item-active" aria-haspopup="true">
                                     <a href="{{ route('data-nifas.index') }}" class="menu-link">
                                         <i class="menu-icon 
@@ -215,9 +223,9 @@
 
                                                 <div class="form-group mt-5">
                                                     <label for=""><strong>Nama Ibu Hamil</strong></label>
-                                                    <input type="text" name="nama" id="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ $data_nifas->nama }}"
+                                                    <input type="text" name="nama_ibu" id="nama_ibu" class="form-control @error('nama_ibu') is-invalid @enderror" value="{{ $data_nifas->nama_ibu }}"
                                                         placeholder="Masukkan Nama Ibu Hamil">
-                                                    @error('nama')
+                                                    @error('nama_ibu')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>

@@ -70,7 +70,7 @@
                             data-menu-dropdown-timeout="500">
                             <!--begin::Menu Nav-->
                             <ul class="menu-nav">
-                                <li class="menu-item menu-item" aria-haspopup="true">
+                                <li class="menu-item menu-item-active" aria-haspopup="true">
                                     <a href="{{ route('home') }}" class="menu-link">
                                         <i class="menu-icon flaticon2-user"></i>
                                         <span class="menu-text">Data Ibu Hamil</span>
@@ -91,7 +91,7 @@
                                         <span class="menu-text">Data Nifas</span>
                                     </a>
                                 </li>
-                                <li class="menu-item menu-item-active" aria-haspopup="true">
+                                <li class="menu-item menu-item" aria-haspopup="true">
                                     <a href="{{ route('data-anak.index') }}" class="menu-link">
                                         <i class="menu-icon fas fa-child"></i>
                                         <span class="menu-text">Data Anak</span>
@@ -176,7 +176,7 @@
                                 <!--begin::Info-->
                                 <div class="d-flex align-items-center flex-wrap mr-2">
                                     <!--begin::Page Title-->
-                                    <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Data Anak</h5>
+                                    <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Data Ibu Hamil</h5>
                                     <!--end::Page Title-->
                                 </div>
                                 <!--end::Info-->
@@ -186,10 +186,7 @@
                                     <ul
                                         class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                                         <li class="breadcrumb-item text-muted">
-                                            <a href="{{ route('data-anak.index') }}" class="text-muted">Data Anak</a>
-                                        </li>
-                                        <li class="breadcrumb-item text-muted">
-                                            <a href="javascript:void(0)" class="text-muted">Edit Data</a>
+                                            <a href="" class="text-muted">Data Ibu Hamil</a>
                                         </li>
                                     </ul>
                                     <!--end::Breadcrumb-->
@@ -198,96 +195,142 @@
                             </div>
                         </div>
                         <!--end::Subheader-->
-                            <!-- Main content -->
-                                <div class="container-fluid">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <a href="{{ route('data-anak.index') }}">
-                                                <i class="flaticon2-back icon-xm text-success"> Kembali</i>
-                                            </a>
-                                            <h3 class="text-dark font-weight-bold mt-5 "><b>Edit Data Anak</b></h3>
+                            <!--begin::Container-->
+                            <div class="container">
+                                <div class="card card-custom">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <form action="{{ route('home') }}" method="GET">
+                                                    <div class="form-group">
+                                                        <div class="input-icon input-icon-right">
+                                                            <input type="text" name="search" value="{{ request('search') }}"
+                                                                class="form-control" placeholder="Search..." />
+                                                            <span><i class="flaticon2-search-1 icon-md"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="col-3"></div>
+                                            <div class="col-5 text-right">
+                                                <a href="{{ route('data-ibu-hamil.create') }}" type="button" class="btn btn-success"><i
+                                                        class="flaticon2-add-1"></i><strong>Data Baru</strong>
+                                                </a>
+                                                <a href="{{ route('data-ibu-hamil.download') }}" type="button" class="btn btn-primary ml-2">
+                                                    <i class="flaticon2-download"></i><strong>Download Data</strong>
+                                                </a>
+                                            </div>
+                                        </div>
 
-                                            <form action="{{ route('data-anak.update', $data_anaks->id) }}" method="POST">
-                                                @csrf
-                                                @method('PUT')
-                                                <div class="form-group mt-5">
-                                                    <label for="tanggal"><strong>Tanggal Periksa</strong></label>
-                                                    <input type="date" name="tanggal" id="tanggal" class="form-control @error('tanggal') is-invalid @enderror" value="{{ $data_anaks->tanggal }}"
-                                                        placeholder="Pilih Tanggal Periksa">
-                                                    @error('tanggal')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
+                                        <div class="row table-responsive">
+                                            <table class="table text-center">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Tanggal Periksa</th>
+                                                        <th>Nama Ibu</th>
+                                                        <th>Keluhan</th>
+                                                        <th>Tekanan Darah</th>
+                                                        <th>Berat Badan</th>
+                                                        <th>Umur Kehamilan</th>
+                                                        <th>Tinggi Fundus</th>
+                                                        <th>Letak Janin <br> Kep/Su/Li</th>
+                                                        <th>Denyut Jantung Janin</th>
+                                                        <th>Hasil Pemeriksaan Lab</th>
+                                                        <th>Tindakan</th>
+                                                        <th>Kaki Bengkak</th>
+                                                        <th>Nasihat Untuk Pasien</th>
+                                                        <th>Aksi</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @php
+                                                         $num = ($data_ibu_hamils->currentPage() - 1) * $data_ibu_hamils->perPage() + 1;
+                                                    @endphp
+                                                    @forelse ($data_ibu_hamils as $dih)
+                                                        <tr>
+                                                            <td>{{ $num++ }}</td>
+                                                            <td>{{ $dih->tanggal }}</td>
+                                                            <td>{{ $dih->nama }}</td>
+                                                            <td>{{ $dih->keluhan }}</td>
+                                                            <td>{{ $dih->tekanan_darah }} mmHg</td>
+                                                            <td>{{ $dih->berat_badan }} Kg</td>
+                                                            <td>{{ $dih->umur_kehamilan }}</td>
+                                                            <td>{{ $dih->tinggi_fundus }} Cm</td>
+                                                            <td>{{ $dih->letak_janin }}</td>
+                                                            <td>{{ $dih->denyut_jantung_janin }} BPM</td>
+                                                            <td>{{ $dih->hasil_lab }}</td>
+                                                            <td>{{ $dih->tindakan }}</td>
+                                                            <td>{{ $dih->kaki_bengkak }}</td>
+                                                            <td>{{ $dih->nasihat }}</td>
+                                                            <td>
+                                                                <!-- Action buttons -->
+                                                                <a href="{{ route('data-ibu-hamil.edit', $dih->id) }}"><i class="flaticon2-edit mr-3"></i></a>
+                                                                <a data-toggle="modal" data-target="#deleteModal-{{ $dih->id }}"><i class="flaticon2-trash mr-3"></i></a>
+                                                                
+                                                                <!-- Delete Modal -->
+                                                                <div class="modal fade" id="deleteModal-{{ $dih->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+                                                                aria-hidden="true">
+                                                                    <div class="modal-dialog" role="document">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <h5 class="modal-title" id="deleteModalLabel">Delete Data Ibu Hamil</h5>
+                                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                    <span aria-hidden="true">&times;</span>
+                                                                                </button>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                Yakin Ingin Menghapus Data Ini?
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                                <form id="deleteForm-{{ $dih->id }}" action="{{ route('data-ibu-hamil.delete', $dih->id) }}" method="POST">
+                                                                                    @csrf
+                                                                                    @method('DELETE')
+                                                                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                                                                </form>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    @empty
+                                                    <tr>
+                                                        <td colspan="15" style="text-align: center;">Tidak Ada Data Ditemukan</td>
+                                                    </tr>
+                                                    @endforelse
+                                                </tbody>
+                                            </table>
+
+                                            <div class="d-flex justify-content-between align-items-center flex-wrap">
+                                                <div class="d-flex align-items-center py-3">
+                                                    <div class="d-flex align-items-center">
+                                                        <span class="text-muted mr-2">Show</span>
+                                                    </div>
+
+                                                    <form method="GET" action="{{ route('home') }}">
+                                                        <select id="entries"
+                                                            class="form-control form-control-sm font-weight-bold mr-4 border-0 bg-light"
+                                                            style="width: 75px;" name="per_page" onchange="this.form.submit()">
+                                                            <option value="5" {{ request('per_page') == 5 ? 'selected' : '' }}>5</option>
+                                                            <option value="10" {{ request('per_page') == 10 ? 'selected' : '' }}>10</option>
+                                                            <option value="20" {{ request('per_page') == 20 ? 'selected' : '' }}>20</option>
+                                                            <option value="30" {{ request('per_page') == 30 ? 'selected' : '' }}>30</option>
+                                                            <!-- Tambahkan lebih banyak opsi jika diperlukan -->
+                                                        </select>
+                                                    </form>
                                                 </div>
 
-                                                <div class="form-group mt-5">
-                                                    <label for=""><strong>Nama Ibu</strong></label>
-                                                    <input type="text" name="nama_ibu" id="nama_ibu" class="form-control @error('nama_ibu') is-invalid @enderror" value="{{ $data_anaks->nama_ibu }}"
-                                                        placeholder="Masukkan Nama Ibu">
-                                                    @error('nama_ibu')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
+                                                <div id="paginationLinks">
+                                                    {{ $data_ibu_hamils->links() }}
                                                 </div>
-
-                                                <div class="form-group mt-5">
-                                                    <label for=""><strong>Nama Anak</strong></label>
-                                                    <input type="text" name="nama_anak" id="nama_anak" class="form-control @error('nama_anak') is-invalid @enderror" value="{{ $data_anaks->nama_anak }}"
-                                                        placeholder="Masukkan Nama Anak">
-                                                    @error('nama_anak')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="form-group mt-5">
-                                                    <label for="tanggal"><strong>Tanggal Lahir Anak</strong></label>
-                                                    <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control @error('tanggal_lahir') is-invalid @enderror" value="{{ $data_anaks->tanggal_lahir }}"
-                                                        placeholder="Pilih Tanggal Lahir Anak">
-                                                    @error('tanggal_lahir')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="form-group mt-5">
-                                                    <label for=""><strong>Umur Anak</strong></label>
-                                                    <input type="text" name="umur" id="umur" class="form-control @error('umur') is-invalid @enderror" value="{{ $data_anaks->umur }}"
-                                                        placeholder="Masukkan Umur Anak">
-                                                    @error('umur')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="form-group mt-5">
-                                                    <label for=""><strong>Berat Badan Anak (<span class="text-success">Kg</span>)</strong></label>
-                                                    <input type="text" name="berat_badan" id="berat_badan" class="form-control @error('berat_badan') is-invalid @enderror" value="{{ $data_anaks->berat_badan }}"
-                                                        placeholder="Masukkan Berat Badan Anak (Hanya Angka Saja)">
-                                                    @error('berat_badan')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="text-right">
-                                                    <a href="{{ route('data-anak.index') }}" class="btn btn-outline-danger mr-2"
-                                                        role="button">Batal</a>
-                                                    <button type="submit" class="btn btn-success">Simpan</button>
-                                                </div>
-                                            </form>
-
+                                            </div>
                                         </div>
                                     </div>
-
-                                </div><!-- /.container-fluid -->
-                            <!--end::content-->
+                                </div>
+                            </div>
+                            <!--end::Container-->
                     </div>
                     <!--end::Content-->
                 </div>
@@ -360,6 +403,17 @@
             <!--end::Content-->
         </div>
         <!-- end::User Panel-->
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(document).on('change', '#entries', function() {
+                window.location =
+                    "{{ route('home') }}?search={{ request('search') }}&per_page=" + $(this)
+                    .val();
+            });
+        });
+    </script>
     </body>
     <!--end::Body-->
 @endsection

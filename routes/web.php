@@ -29,6 +29,15 @@ Route::put('/data-ibu-hamil/{id}', [App\Http\Controllers\HomeController::class, 
 Route::delete('/data-ibu-hamil/{id}', [App\Http\Controllers\HomeController::class, 'delete'])->name('data-ibu-hamil.delete');
 Route::get('data-ibu-hamil/download', [App\Http\Controllers\HomeController::class, 'download'])->name('data-ibu-hamil.download');
 
+// route buat halaman data kesehatan
+Route::get('/data-kesehatan', [App\Http\Controllers\DataKesehatanController::class, 'index'])->name('data-kesehatan.index');
+Route::get('/create-data-kesehatan', [App\Http\Controllers\DataKesehatanController::class, 'create'])->name('data-kesehatan.create');
+Route::post('/store-data-kesehatan', [App\Http\Controllers\DataKesehatanController::class, 'store'])->name('data-kesehatan.store');
+Route::get('/data-kesehatan/{id}/edit', [App\Http\Controllers\DataKesehatanController::class, 'edit'])->name('data-kesehatan.edit');
+Route::put('/data-kesehatan/{id}', [App\Http\Controllers\DataKesehatanController::class, 'update'])->name('data-kesehatan.update');
+Route::delete('/data-kesehatan/{id}', [App\Http\Controllers\DataKesehatanController::class, 'delete'])->name('data-kesehatan.delete');
+Route::get('data-kesehatan/download', [App\Http\Controllers\DataKesehatanController::class, 'download'])->name('data-kesehatan.download');
+
 // route buat halaman data nifas
 Route::get('/data-nifas', [App\Http\Controllers\DataNifasController::class, 'index'])->name('data-nifas.index');
 Route::get('/create-data-nifas', [App\Http\Controllers\DataNifasController::class, 'create'])->name('data-nifas.create');
@@ -47,7 +56,7 @@ Route::put('/data-anak/{id}', [App\Http\Controllers\DataAnakController::class, '
 Route::delete('/data-anak/{id}', [App\Http\Controllers\DataAnakController::class, 'delete'])->name('data-anak.delete');
 Route::get('data-anak/download', [App\Http\Controllers\DataAnakController::class, 'download'])->name('data-anak.download');
 
-// route buat halaman data imunsias
+// route buat halaman data imunisasi
 Route::get('/data-imunisasi', [App\Http\Controllers\DataImunisasiController::class, 'index'])->name('data-imunisasi.index');
 Route::get('/create-data-imunisasi', [App\Http\Controllers\DataImunisasiController::class, 'create'])->name('data-imunisasi.create');
 Route::post('/store-data-imunisasi', [App\Http\Controllers\DataImunisasiController::class, 'store'])->name('data-imunisasi.store');

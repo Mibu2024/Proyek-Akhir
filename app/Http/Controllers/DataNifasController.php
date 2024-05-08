@@ -12,7 +12,7 @@ class DataNifasController extends Controller
     {
         $search      = $request->input('search');
         $perPage     = $request->input('per_page', 5);
-        $data_nifas  = DataNifas::where('nama', 'like', "%$search%")->paginate($perPage);
+        $data_nifas  = DataNifas::where('nama_ibu', 'like', "%$search%")->paginate($perPage);
         $currentPage = $data_nifas->currentPage();
         return view('data-nifas', compact('data_nifas', 'currentPage'));
     }
@@ -26,7 +26,7 @@ class DataNifasController extends Controller
     {
         $request->validate([
             'tanggal'                   => 'required',
-            'nama'                      => 'required',
+            'nama_ibu'                  => 'required',
             'kunjungan_nifas'           => 'required',
             'hasil_periksa_payudara'    => 'required',
             'hasil_periksa_pendarahan'  => 'required',
@@ -36,7 +36,7 @@ class DataNifasController extends Controller
             'tindakan'                  => 'required',
         ], [
             'tanggal.required'                   => 'Tanggal wajib diisi.',
-            'nama.required'                      => 'Nama wajib diisi.',
+            'nama_ibu.required'                  => 'Nama Ibu wajib diisi.',
             'kunjungan_nifas.required'           => 'Kunjungan Nifas wajib diisi.',
             'hasil_periksa_payudara.required'    => 'Hasil Periksa Payudara wajib diisi.',
             'hasil_periksa_pendarahan.required'  => 'Hasil Periksa Pendarahan wajib diisi.',
@@ -62,7 +62,7 @@ class DataNifasController extends Controller
     {
         $request->validate([
             'tanggal'                   => 'required',
-            'nama'                      => 'required',
+            'nama_ibu'                  => 'required',
             'kunjungan_nifas'           => 'required',
             'hasil_periksa_payudara'    => 'required',
             'hasil_periksa_pendarahan'  => 'required',
@@ -72,7 +72,7 @@ class DataNifasController extends Controller
             'tindakan'                  => 'required',
         ], [
             'tanggal.required'                   => 'Tanggal wajib diisi.',
-            'nama.required'                      => 'Nama wajib diisi.',
+            'nama_ibu.required'                  => 'Nama Ibu wajib diisi.',
             'kunjungan_nifas.required'           => 'Kunjungan Nifas wajib diisi.',
             'hasil_periksa_payudara.required'    => 'Hasil Periksa Payudara wajib diisi.',
             'hasil_periksa_pendarahan.required'  => 'Hasil Periksa Pendarahan wajib diisi.',
@@ -84,7 +84,7 @@ class DataNifasController extends Controller
         
         $data_nifas                            = DataNifas::find($id);
         $data_nifas->tanggal                   = $request->tanggal;
-        $data_nifas->nama                      = $request->nama;
+        $data_nifas->nama_ibu                  = $request->nama_ibu;
         $data_nifas->kunjungan_nifas           = $request->kunjungan_nifas;
         $data_nifas->hasil_periksa_payudara    = $request->hasil_periksa_payudara;
         $data_nifas->hasil_periksa_pendarahan  = $request->hasil_periksa_pendarahan;
@@ -131,7 +131,7 @@ class DataNifasController extends Controller
         $counter = 1;
 
         foreach ($data as $row) {
-            $csv .= "{$counter},{$row->tanggal},{$row->nama},{$row->kunjungan_nifas},{$row->hasil_periksa_payudara},{$row->hasil_periksa_pendarahan},{$row->hasil_periksa_jalan_lahir},{$row->vitamin_a},{$row->masalah},{$row->tindakan}\n";
+            $csv .= "{$counter},{$row->tanggal},{$row->nama_ibu},{$row->kunjungan_nifas},{$row->hasil_periksa_payudara},{$row->hasil_periksa_pendarahan},{$row->hasil_periksa_jalan_lahir},{$row->vitamin_a},{$row->masalah},{$row->tindakan}\n";
             
             $counter++;
         }

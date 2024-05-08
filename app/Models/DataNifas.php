@@ -13,7 +13,7 @@ class DataNifas extends Model
     
     protected $fillable =  [
         'tanggal',
-        'nama',
+        'nama_ibu',
         'kunjungan_nifas',
         'hasil_periksa_payudara',
         'hasil_periksa_pendarahan',

@@ -76,6 +76,14 @@
                                         <span class="menu-text">Data Ibu Hamil</span>
                                     </a>
                                 </li>
+                                <li class="menu-item menu-item" aria-haspopup="true">
+                                    <a href="{{ route('data-kesehatan.index') }}" class="menu-link">
+                                        <i
+                                            class="menu-icon 
+                                            fas fa-notes-medical"></i>
+                                        <span class="menu-text">Data Kesehatan</span>
+                                    </a>
+                                </li>
                                 <li class="menu-item menu-item-active" aria-haspopup="true">
                                     <a href="{{ route('data-nifas.index') }}" class="menu-link">
                                         <i class="menu-icon 
@@ -239,7 +247,7 @@
                                                         <tr>
                                                             <td>{{ $num++ }}</td>
                                                             <td>{{ $dn->tanggal }}</td>
-                                                            <td>{{ $dn->nama }}</td>
+                                                            <td>{{ $dn->nama_ibu }}</td>
                                                             <td>{{ $dn->kunjungan_nifas }}</td>
                                                             <td>{{ $dn->hasil_periksa_payudara }}</td>
                                                             <td>{{ $dn->hasil_periksa_pendarahan }}</td>

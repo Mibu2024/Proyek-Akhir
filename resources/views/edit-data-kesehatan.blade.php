@@ -70,17 +70,15 @@
                             data-menu-dropdown-timeout="500">
                             <!--begin::Menu Nav-->
                             <ul class="menu-nav">
-                                <li class="menu-item menu-item" aria-haspopup="true">
+                                <li class="menu-item menu-item-active" aria-haspopup="true">
                                     <a href="{{ route('home') }}" class="menu-link">
                                         <i class="menu-icon flaticon2-user"></i>
                                         <span class="menu-text">Data Ibu Hamil</span>
                                     </a>
                                 </li>
-                                <li class="menu-item menu-item" aria-haspopup="true">
+                                <li class="menu-item menu-item-active" aria-haspopup="true">
                                     <a href="{{ route('data-kesehatan.index') }}" class="menu-link">
-                                        <i
-                                            class="menu-icon 
-                                            fas fa-notes-medical"></i>
+                                        <i class="menu-icon flaticon-list"></i>
                                         <span class="menu-text">Data Kesehatan</span>
                                     </a>
                                 </li>
@@ -91,7 +89,7 @@
                                         <span class="menu-text">Data Nifas</span>
                                     </a>
                                 </li>
-                                <li class="menu-item menu-item-active" aria-haspopup="true">
+                                <li class="menu-item menu-item" aria-haspopup="true">
                                     <a href="{{ route('data-anak.index') }}" class="menu-link">
                                         <i class="menu-icon fas fa-child"></i>
                                         <span class="menu-text">Data Anak</span>
@@ -176,7 +174,7 @@
                                 <!--begin::Info-->
                                 <div class="d-flex align-items-center flex-wrap mr-2">
                                     <!--begin::Page Title-->
-                                    <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Data Anak</h5>
+                                    <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Data Ibu Hamil</h5>
                                     <!--end::Page Title-->
                                 </div>
                                 <!--end::Info-->
@@ -186,7 +184,7 @@
                                     <ul
                                         class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                                         <li class="breadcrumb-item text-muted">
-                                            <a href="{{ route('data-anak.index') }}" class="text-muted">Data Anak</a>
+                                            <a href="{{ route('home') }}" class="text-muted">Data Ibu Hamil</a>
                                         </li>
                                         <li class="breadcrumb-item text-muted">
                                             <a href="javascript:void(0)" class="text-muted">Edit Data</a>
@@ -202,17 +200,17 @@
                                 <div class="container-fluid">
                                     <div class="card">
                                         <div class="card-body">
-                                            <a href="{{ route('data-anak.index') }}">
+                                            <a href="{{ route('home') }}">
                                                 <i class="flaticon2-back icon-xm text-success"> Kembali</i>
                                             </a>
-                                            <h3 class="text-dark font-weight-bold mt-5 "><b>Edit Data Anak</b></h3>
+                                            <h3 class="text-dark font-weight-bold mt-5 "><b>Edit Data Ibu Hamil</b></h3>
 
-                                            <form action="{{ route('data-anak.update', $data_anaks->id) }}" method="POST">
+                                            <form action="{{ route('data-ibu-hamil.update', $data_ibu_hamils->id) }}" method="POST">
                                                 @csrf
                                                 @method('PUT')
                                                 <div class="form-group mt-5">
                                                     <label for="tanggal"><strong>Tanggal Periksa</strong></label>
-                                                    <input type="date" name="tanggal" id="tanggal" class="form-control @error('tanggal') is-invalid @enderror" value="{{ $data_anaks->tanggal }}"
+                                                    <input type="date" name="tanggal" id="tanggal" class="form-control  @error('tanggal') is-invalid @enderror" value="{{ $data_ibu_hamils->tanggal }}"
                                                         placeholder="Pilih Tanggal Periksa">
                                                     @error('tanggal')
                                                         <span class="invalid-feedback" role="alert">
@@ -222,10 +220,10 @@
                                                 </div>
 
                                                 <div class="form-group mt-5">
-                                                    <label for=""><strong>Nama Ibu</strong></label>
-                                                    <input type="text" name="nama_ibu" id="nama_ibu" class="form-control @error('nama_ibu') is-invalid @enderror" value="{{ $data_anaks->nama_ibu }}"
-                                                        placeholder="Masukkan Nama Ibu">
-                                                    @error('nama_ibu')
+                                                    <label for=""><strong>Nama Ibu Hamil</strong></label>
+                                                    <input type="text" name="nama" id="nama" class="form-control @error('nama') is-invalid @enderror" value="{{ $data_ibu_hamils->nama }}"
+                                                        placeholder="Masukkan Nama Ibu Hamil">
+                                                    @error('nama')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -233,10 +231,10 @@
                                                 </div>
 
                                                 <div class="form-group mt-5">
-                                                    <label for=""><strong>Nama Anak</strong></label>
-                                                    <input type="text" name="nama_anak" id="nama_anak" class="form-control @error('nama_anak') is-invalid @enderror" value="{{ $data_anaks->nama_anak }}"
-                                                        placeholder="Masukkan Nama Anak">
-                                                    @error('nama_anak')
+                                                    <label for=""><strong>Keluhan yang Dialami</strong></label>
+                                                    <input type="text" name="keluhan" id="keluhan" class="form-control @error('keluhan') is-invalid @enderror" value="{{ $data_ibu_hamils->keluhan }}"
+                                                        placeholder="Masukkan Keluhan yang Dialami">
+                                                    @error('keluhan')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -244,10 +242,10 @@
                                                 </div>
 
                                                 <div class="form-group mt-5">
-                                                    <label for="tanggal"><strong>Tanggal Lahir Anak</strong></label>
-                                                    <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control @error('tanggal_lahir') is-invalid @enderror" value="{{ $data_anaks->tanggal_lahir }}"
-                                                        placeholder="Pilih Tanggal Lahir Anak">
-                                                    @error('tanggal_lahir')
+                                                    <label for=""><strong>Tekanan Darah (<span class="text-success">mmHg</span>)</strong></label>
+                                                    <input type="text" name="tekanan_darah" id="tekanan_darah" class="form-control @error('tekanan_darah') is-invalid @enderror" value="{{ $data_ibu_hamils->tekanan_darah }}"
+                                                        placeholder="Masukkan Tekanan Darah Ibu Hamil (Hanya Angka Saja)">
+                                                    @error('tekanan_darah')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -255,20 +253,9 @@
                                                 </div>
 
                                                 <div class="form-group mt-5">
-                                                    <label for=""><strong>Umur Anak</strong></label>
-                                                    <input type="text" name="umur" id="umur" class="form-control @error('umur') is-invalid @enderror" value="{{ $data_anaks->umur }}"
-                                                        placeholder="Masukkan Umur Anak">
-                                                    @error('umur')
-                                                        <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $message }}</strong>
-                                                        </span>
-                                                    @enderror
-                                                </div>
-
-                                                <div class="form-group mt-5">
-                                                    <label for=""><strong>Berat Badan Anak (<span class="text-success">Kg</span>)</strong></label>
-                                                    <input type="text" name="berat_badan" id="berat_badan" class="form-control @error('berat_badan') is-invalid @enderror" value="{{ $data_anaks->berat_badan }}"
-                                                        placeholder="Masukkan Berat Badan Anak (Hanya Angka Saja)">
+                                                    <label for=""><strong>Berat Badan (<span class="text-success">Kg</span>)</strong></label>
+                                                    <input type="text" name="berat_badan" id="berat_badan" class="form-control @error('berat_badan') is-invalid @enderror" value="{{ $data_ibu_hamils->berat_badan }}"
+                                                        placeholder="Masukkan Berat Badan Ibu Hamil (Hanya Angka Saja)">
                                                     @error('berat_badan')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -276,8 +263,96 @@
                                                     @enderror
                                                 </div>
 
+                                                <div class="form-group mt-5">
+                                                    <label for=""><strong>Umur Kehamilan (<span class="text-success">Hari/Minggu/bulan</span>)</strong></label>
+                                                    <input type="text" name="umur_kehamilan" id="umur_kehamilan" class="form-control @error('umur_kehamilan') is-invalid @enderror" value="{{ $data_ibu_hamils->umur_kehamilan }}"
+                                                        placeholder="Masukkan Umur Kehamilan (Contoh: 1 Hari/1 Minggu/1 Bulan)">
+                                                    @error('umur_kehamilan')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group mt-5">
+                                                    <label for=""><strong>Tinggi Fundus (<span class="text-success">Cm</span>)</strong></label>
+                                                    <input type="text" name="tinggi_fundus" id="tinggi_fundus" class="form-control @error('tinggi_fundus') is-invalid @enderror" value="{{ $data_ibu_hamils->tinggi_fundus }}"
+                                                        placeholder="Masukkan Tinggi Fundus (Hanya Angka Saja)">
+                                                    @error('tinggi_fundus')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group mt-5">
+                                                    <label for=""><strong>Letak Janin (<span class="text-success">Kep/Su/Li</span>)</strong></label>
+                                                    <input type="text" name="letak_janin" id="letak_janin" class="form-control @error('letak_janin') is-invalid @enderror" value="{{ $data_ibu_hamils->letak_janin }}"
+                                                        placeholder="Masukkan Letak Janin">
+                                                    @error('letak_janin')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group mt-5">
+                                                    <label for=""><strong>Denyut Jantung Janin (<span class="text-success">BPM</span>)</strong></label>
+                                                    <input type="text" name="denyut_jantung_janin" id="denyut_jantung_janin" class="form-control @error('denyut_jantung_janin') is-invalid @enderror" value="{{ $data_ibu_hamils->denyut_jantung_janin }}"
+                                                        placeholder="Masukkan Denyut Jantung Janin (Hanya Angka Saja)">
+                                                    @error('denyut_jantung_janin')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group mt-5">
+                                                    <label for=""><strong>Hasil Pemeriksaan Lab</strong></label>
+                                                    <input type="text" name="hasil_lab" id="hasil_lab" class="form-control @error('hasil_lab') is-invalid @enderror" value="{{ $data_ibu_hamils->hasil_lab }}"
+                                                        placeholder="Masukkan Hasil Pemeriksaan Lab">
+                                                    @error('hasil_lab')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group mt-5">
+                                                    <label for=""><strong>Tindakan yang Dilakukan</strong></label>
+                                                    <input type="text" name="tindakan" id="tindakan" class="form-control @error('tindakan') is-invalid @enderror" value="{{ $data_ibu_hamils->tindakan }}"
+                                                        placeholder="Masukkan Tindakan yang Dilakukan">
+                                                    @error('tindakan')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group mt-5">
+                                                    <label for=""><strong>Apakah Kaki Bengkak?</strong></label>
+                                                    <input type="text" name="kaki_bengkak" id="kaki_bengkak" class="form-control @error('kaki_bengkak') is-invalid @enderror" value="{{ $data_ibu_hamils->kaki_bengkak }}"
+                                                        placeholder="Kaki Ibu Hamil bengkak atau tidak?">
+                                                    @error('kaki_bengkak')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group mt-5">
+                                                    <label for=""><strong>Nasihat untuk Ibu Hamil</strong></label>
+                                                    <input type="text" name="nasihat" id="nasihat" class="form-control @error('nasihat') is-invalid @enderror" value="{{ $data_ibu_hamils->nasihat }}"
+                                                        placeholder="Masukkan Nasihat untuk Ibu Hamil">
+                                                    @error('nasihat')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
                                                 <div class="text-right">
-                                                    <a href="{{ route('data-anak.index') }}" class="btn btn-outline-danger mr-2"
+                                                    <a href="{{ route('home') }}" class="btn btn-outline-danger mr-2"
                                                         role="button">Batal</a>
                                                     <button type="submit" class="btn btn-success">Simpan</button>
                                                 </div>
@@ -360,6 +435,7 @@
             <!--end::Content-->
         </div>
         <!-- end::User Panel-->
+        @include('sweetalert::alert')
     </body>
     <!--end::Body-->
 @endsection
