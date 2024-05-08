@@ -70,13 +70,13 @@
                             data-menu-dropdown-timeout="500">
                             <!--begin::Menu Nav-->
                             <ul class="menu-nav">
-                                <li class="menu-item menu-item-active" aria-haspopup="true">
+                                <li class="menu-item menu-item" aria-haspopup="true">
                                     <a href="{{ route('home') }}" class="menu-link">
                                         <i class="menu-icon flaticon2-user"></i>
                                         <span class="menu-text">Data Ibu Hamil</span>
                                     </a>
                                 </li>
-                                <li class="menu-item menu-item" aria-haspopup="true">
+                                <li class="menu-item menu-item-active" aria-haspopup="true">
                                     <a href="{{ route('data-kesehatan.index') }}" class="menu-link">
                                         <i
                                             class="menu-icon 
@@ -176,7 +176,7 @@
                                 <!--begin::Info-->
                                 <div class="d-flex align-items-center flex-wrap mr-2">
                                     <!--begin::Page Title-->
-                                    <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Data Ibu Hamil</h5>
+                                    <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Data Kesehatan</h5>
                                     <!--end::Page Title-->
                                 </div>
                                 <!--end::Info-->
@@ -186,7 +186,7 @@
                                     <ul
                                         class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                                         <li class="breadcrumb-item text-muted">
-                                            <a href="" class="text-muted">Data Ibu Hamil</a>
+                                            <a href="javascript:void(0)" class="text-muted">Data Kesehatan</a>
                                         </li>
                                     </ul>
                                     <!--end::Breadcrumb-->
@@ -201,7 +201,7 @@
                                     <div class="card-body">
                                         <div class="row">
                                             <div class="col-4">
-                                                <form action="{{ route('home') }}" method="GET">
+                                                <form action="{{ route('data-kesehatan.index') }}" method="GET">
                                                     <div class="form-group">
                                                         <div class="input-icon input-icon-right">
                                                             <input type="text" name="search" value="{{ request('search') }}"
@@ -213,10 +213,10 @@
                                             </div>
                                             <div class="col-3"></div>
                                             <div class="col-5 text-right">
-                                                <a href="{{ route('data-ibu-hamil.create') }}" type="button" class="btn btn-success"><i
+                                                <a href="{{ route('data-kesehatan.create') }}" type="button" class="btn btn-success"><i
                                                         class="flaticon2-add-1"></i><strong>Data Baru</strong>
                                                 </a>
-                                                <a href="{{ route('data-ibu-hamil.download') }}" type="button" class="btn btn-primary ml-2">
+                                                <a href="{{ route('data-kesehatan.download') }}" type="button" class="btn btn-primary ml-2">
                                                     <i class="flaticon2-download"></i><strong>Download Data</strong>
                                                 </a>
                                             </div>
@@ -245,31 +245,31 @@
                                                 </thead>
                                                 <tbody>
                                                     @php
-                                                         $num = ($data_ibu_hamils->currentPage() - 1) * $data_ibu_hamils->perPage() + 1;
+                                                         $num = ($data_kesehatans->currentPage() - 1) * $data_kesehatans->perPage() + 1;
                                                     @endphp
-                                                    @forelse ($data_ibu_hamils as $dih)
+                                                    @forelse ($data_kesehatans as $dk)
                                                         <tr>
                                                             <td>{{ $num++ }}</td>
-                                                            <td>{{ $dih->tanggal }}</td>
-                                                            <td>{{ $dih->nama }}</td>
-                                                            <td>{{ $dih->keluhan }}</td>
-                                                            <td>{{ $dih->tekanan_darah }} mmHg</td>
-                                                            <td>{{ $dih->berat_badan }} Kg</td>
-                                                            <td>{{ $dih->umur_kehamilan }}</td>
-                                                            <td>{{ $dih->tinggi_fundus }} Cm</td>
-                                                            <td>{{ $dih->letak_janin }}</td>
-                                                            <td>{{ $dih->denyut_jantung_janin }} BPM</td>
-                                                            <td>{{ $dih->hasil_lab }}</td>
-                                                            <td>{{ $dih->tindakan }}</td>
-                                                            <td>{{ $dih->kaki_bengkak }}</td>
-                                                            <td>{{ $dih->nasihat }}</td>
+                                                            <td>{{ $dk->tanggal }}</td>
+                                                            <td>{{ $dk->nama_ibu }}</td>
+                                                            <td>{{ $dk->keluhan }}</td>
+                                                            <td>{{ $dk->tekanan_darah }} mmHg</td>
+                                                            <td>{{ $dk->berat_badan }} Kg</td>
+                                                            <td>{{ $dk->umur_kehamilan }}</td>
+                                                            <td>{{ $dk->tinggi_fundus }} Cm</td>
+                                                            <td>{{ $dk->letak_janin }}</td>
+                                                            <td>{{ $dk->denyut_jantung_janin }} BPM</td>
+                                                            <td>{{ $dk->hasil_lab }}</td>
+                                                            <td>{{ $dk->tindakan }}</td>
+                                                            <td>{{ $dk->kaki_bengkak }}</td>
+                                                            <td>{{ $dk->nasihat }}</td>
                                                             <td>
                                                                 <!-- Action buttons -->
-                                                                <a href="{{ route('data-ibu-hamil.edit', $dih->id) }}"><i class="flaticon2-edit mr-3"></i></a>
-                                                                <a data-toggle="modal" data-target="#deleteModal-{{ $dih->id }}"><i class="flaticon2-trash mr-3"></i></a>
+                                                                <a href="{{ route('data-kesehatan.edit', $dk->id) }}"><i class="flaticon2-edit mr-3"></i></a>
+                                                                <a data-toggle="modal" data-target="#deleteModal-{{ $dk->id }}"><i class="flaticon2-trash mr-3"></i></a>
                                                                 
                                                                 <!-- Delete Modal -->
-                                                                <div class="modal fade" id="deleteModal-{{ $dih->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+                                                                <div class="modal fade" id="deleteModal-{{ $dk->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
                                                                 aria-hidden="true">
                                                                     <div class="modal-dialog" role="document">
                                                                         <div class="modal-content">
@@ -284,7 +284,7 @@
                                                                             </div>
                                                                             <div class="modal-footer">
                                                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                                <form id="deleteForm-{{ $dih->id }}" action="{{ route('data-ibu-hamil.delete', $dih->id) }}" method="POST">
+                                                                                <form id="deleteForm-{{ $dk->id }}" action="{{ route('data-kesehatan.delete', $dk->id) }}" method="POST">
                                                                                     @csrf
                                                                                     @method('DELETE')
                                                                                     <button type="submit" class="btn btn-danger">Delete</button>
@@ -309,7 +309,7 @@
                                                         <span class="text-muted mr-2">Show</span>
                                                     </div>
 
-                                                    <form method="GET" action="{{ route('home') }}">
+                                                    <form method="GET" action="{{ route('data-kesehatan.index') }}">
                                                         <select id="entries"
                                                             class="form-control form-control-sm font-weight-bold mr-4 border-0 bg-light"
                                                             style="width: 75px;" name="per_page" onchange="this.form.submit()">
@@ -323,7 +323,7 @@
                                                 </div>
 
                                                 <div id="paginationLinks">
-                                                    {{ $data_ibu_hamils->links() }}
+                                                    {{ $data_kesehatans->links() }}
                                                 </div>
                                             </div>
                                         </div>

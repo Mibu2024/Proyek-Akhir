@@ -12,18 +12,14 @@ class DataIbuHamil extends Model
     protected $table = 'data_ibu_hamils';
     
     protected $fillable =  [
-        'tanggal',
-        'nama',
-        'keluhan',
-        'tekanan_darah',
-        'berat_badan',
-        'umur_kehamilan',
-        'tinggi_fundus',
-        'letak_janin',
-        'denyut_jantung_janin',
-        'hasil_lab',
-        'tindakan',
-        'kaki_bengkak',
-        'nasihat',
+        'nama_ibu',
+        'umur_ibu',
+        'alamat',
+        'email',
+        'nik',
+        'no_telepon',
+        'kehamilan_ke',
+        'nama_suami',
+        'umur_suami',
     ];
 }

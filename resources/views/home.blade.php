@@ -187,7 +187,7 @@
                                     <ul
                                         class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                                         <li class="breadcrumb-item text-muted">
-                                            <a href="" class="text-muted">Data Ibu Hamil</a>
+                                            <a href="javascript:void(0)" class="text-muted">Data Ibu Hamil</a>
                                         </li>
                                     </ul>
                                     <!--end::Breadcrumb-->
@@ -231,19 +231,15 @@
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
-                                                    <th>Tanggal Periksa</th>
                                                     <th>Nama Ibu</th>
-                                                    <th>Keluhan</th>
-                                                    <th>Tekanan Darah</th>
-                                                    <th>Berat Badan</th>
-                                                    <th>Umur Kehamilan</th>
-                                                    <th>Tinggi Fundus</th>
-                                                    <th>Letak Janin <br> Kep/Su/Li</th>
-                                                    <th>Denyut Jantung Janin</th>
-                                                    <th>Hasil Pemeriksaan Lab</th>
-                                                    <th>Tindakan</th>
-                                                    <th>Kaki Bengkak</th>
-                                                    <th>Nasihat Untuk Pasien</th>
+                                                    <th>Umur Ibu</th>
+                                                    <th>Alamat</th>
+                                                    <th>Email</th>
+                                                    <th>NIK</th>
+                                                    <th>Nomor Telepon</th>
+                                                    <th>Kehamilan Ke</th>
+                                                    <th>Nama Suami</th>
+                                                    <th>Umur Suami</th>
                                                     <th>Aksi</th>
                                                 </tr>
                                             </thead>
@@ -257,19 +253,15 @@
                                                 @forelse ($data_ibu_hamils as $dih)
                                                     <tr>
                                                         <td>{{ $num++ }}</td>
-                                                        <td>{{ $dih->tanggal }}</td>
-                                                        <td>{{ $dih->nama }}</td>
-                                                        <td>{{ $dih->keluhan }}</td>
-                                                        <td>{{ $dih->tekanan_darah }} mmHg</td>
-                                                        <td>{{ $dih->berat_badan }} Kg</td>
-                                                        <td>{{ $dih->umur_kehamilan }}</td>
-                                                        <td>{{ $dih->tinggi_fundus }} Cm</td>
-                                                        <td>{{ $dih->letak_janin }}</td>
-                                                        <td>{{ $dih->denyut_jantung_janin }} BPM</td>
-                                                        <td>{{ $dih->hasil_lab }}</td>
-                                                        <td>{{ $dih->tindakan }}</td>
-                                                        <td>{{ $dih->kaki_bengkak }}</td>
-                                                        <td>{{ $dih->nasihat }}</td>
+                                                        <td>{{ $dih->nama_ibu }}</td>
+                                                        <td>{{ $dih->umur_ibu }} Tahun</td>
+                                                        <td>{{ $dih->alamat }}</td>
+                                                        <td>{{ $dih->email }}</td>
+                                                        <td>{{ $dih->nik }}</td>
+                                                        <td>{{ $dih->no_telepon }}</td>
+                                                        <td>{{ $dih->kehamilan_ke }}</td>
+                                                        <td>{{ $dih->nama_suami }}</td>
+                                                        <td>{{ $dih->umur_suami }} Tahun</td>
                                                         <td>
                                                             <!-- Action buttons -->
                                                             <a href="{{ route('data-ibu-hamil.edit', $dih->id) }}"><i

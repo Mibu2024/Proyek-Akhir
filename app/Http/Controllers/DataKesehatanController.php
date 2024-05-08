@@ -158,7 +158,7 @@ class DataKesehatanController extends Controller
 
         $headers = array(
             'Content-Type' => 'text/csv',
-            'Content-Disposition' => 'attachment; filename=data_ibu_hamil_mibu.csv',
+            'Content-Disposition' => 'attachment; filename=data_kesehatan_mibu.csv',
         );
 
         return Response::make($csvData, 200, $headers);

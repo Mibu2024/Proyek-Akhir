@@ -13,19 +13,15 @@ return new class extends Migration
     {
         Schema::create('data_ibu_hamils', function (Blueprint $table) {
             $table->id();
-            $table->date('tanggal');
-            $table->string('nama');
-            $table->string('keluhan');
-            $table->integer('tekanan_darah');
-            $table->integer('berat_badan');
-            $table->string('umur_kehamilan');
-            $table->integer('tinggi_fundus');
-            $table->string('letak_janin');
-            $table->integer('denyut_jantung_janin');
-            $table->string('hasil_lab');
-            $table->string('tindakan');
-            $table->string('kaki_bengkak');
-            $table->string('nasihat');
+            $table->string('nama_ibu');
+            $table->integer('umur_ibu');
+            $table->string('alamat');
+            $table->string('email');
+            $table->string('nik');
+            $table->string('no_telepon');
+            $table->integer('kehamilan_ke');
+            $table->string('nama_suami');
+            $table->integer('umur_suami');
             $table->timestamps();
             });
 

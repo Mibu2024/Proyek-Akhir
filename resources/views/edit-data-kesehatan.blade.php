@@ -70,7 +70,7 @@
                             data-menu-dropdown-timeout="500">
                             <!--begin::Menu Nav-->
                             <ul class="menu-nav">
-                                <li class="menu-item menu-item-active" aria-haspopup="true">
+                                <li class="menu-item menu-item" aria-haspopup="true">
                                     <a href="{{ route('home') }}" class="menu-link">
                                         <i class="menu-icon flaticon2-user"></i>
                                         <span class="menu-text">Data Ibu Hamil</span>
@@ -174,7 +174,7 @@
                                 <!--begin::Info-->
                                 <div class="d-flex align-items-center flex-wrap mr-2">
                                     <!--begin::Page Title-->
-                                    <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Data Ibu Hamil</h5>
+                                    <h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Data Kesehatan</h5>
                                     <!--end::Page Title-->
                                 </div>
                                 <!--end::Info-->
@@ -184,7 +184,7 @@
                                     <ul
                                         class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2 font-size-sm">
                                         <li class="breadcrumb-item text-muted">
-                                            <a href="{{ route('home') }}" class="text-muted">Data Ibu Hamil</a>
+                                            <a href="{{ route('data-kesehatan.index') }}" class="text-muted">Data Kesehatan</a>
                                         </li>
                                         <li class="breadcrumb-item text-muted">
                                             <a href="javascript:void(0)" class="text-muted">Edit Data</a>
@@ -200,12 +200,12 @@
                                 <div class="container-fluid">
                                     <div class="card">
                                         <div class="card-body">
-                                            <a href="{{ route('home') }}">
+                                            <a href="{{ route('data-kesehatan.index') }}">
                                                 <i class="flaticon2-back icon-xm text-success"> Kembali</i>
                                             </a>
-                                            <h3 class="text-dark font-weight-bold mt-5 "><b>Edit Data Ibu Hamil</b></h3>
+                                            <h3 class="text-dark font-weight-bold mt-5 "><b>Edit Data Kesehatan</b></h3>
 
-                                            <form action="{{ route('data-ibu-hamil.update', $data_ibu_hamils->id) }}" method="POST">
+                                            <form action="{{ route('data-kesehatan.update', $data_kesehatans->id) }}" method="POST">
                                                 @csrf
                                                 @method('PUT')
                                                 <div class="form-group mt-5">
@@ -352,7 +352,7 @@
                                                 </div>
 
                                                 <div class="text-right">
-                                                    <a href="{{ route('home') }}" class="btn btn-outline-danger mr-2"
+                                                    <a href="{{ route('data-kesehatan.index') }}" class="btn btn-outline-danger mr-2"
                                                         role="button">Batal</a>
                                                     <button type="submit" class="btn btn-success">Simpan</button>
                                                 </div>
