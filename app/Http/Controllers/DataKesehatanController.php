@@ -80,7 +80,7 @@ class DataKesehatanController extends Controller
 
         DataKesehatan::create($request->all());
         toast('Data Berhasil Ditambahkan','success');
-        return redirect()->route('home');
+        return redirect()->route('data-kesehatan.index');
     }
 
     public function edit($id)
