@@ -3,11 +3,9 @@ package com.proyekakhir.mibu.bidan.ui.network
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import android.content.IntentFilter
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkInfo
-import android.os.Build
 import androidx.lifecycle.LiveData
 
 class NetworkConnection(private val context: Context) : LiveData<Boolean>() {

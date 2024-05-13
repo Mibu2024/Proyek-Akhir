@@ -2,22 +2,17 @@ package com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.common.base.Strings.isNullOrEmpty
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.storage.FirebaseStorage
 import com.proyekakhir.mibu.R
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.adapter.ListIbuAdapter
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.IbuHamilData
+import com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.model.ArtikelData
 
 class ListArtikelAdapter (private var listArtikel : ArrayList<ArtikelData>)
     : RecyclerView.Adapter<ListArtikelAdapter.MyViewHolder>(){
@@ -60,20 +55,16 @@ class ListArtikelAdapter (private var listArtikel : ArrayList<ArtikelData>)
         holder.edit.setOnClickListener {
             val dialog = EditArtikelFragmant()
 
-            // Create a bundle to pass the selected item's values
             val args = Bundle()
             args.putSerializable("selectedItem", currentItem)
             dialog.arguments = args
 
-            // Set the listener to receive the edited data
             dialog.listener = object : EditArtikelFragmant.EditArtikelDialogListener {
                 override fun onDialogPositiveClick(artikel: ArtikelData) {
-                    // Handle the edited asset here
                     notifyDataSetChanged()
                 }
             }
 
-            // Show the dialog
             dialog.show((it.context as AppCompatActivity).supportFragmentManager, "EditArtikelDialogFragmant")
         }
 

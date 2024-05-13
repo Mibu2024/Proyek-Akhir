@@ -1,8 +1,11 @@
 package com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.addCatatan
 
+import android.app.Activity
 import android.app.AlertDialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +19,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.github.dhaval2404.imagepicker.ImagePicker
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.bidan.ui.factory.ViewModelFactory
 import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
@@ -28,6 +32,7 @@ class AddCatatanKesehatanFragment : Fragment() {
     private var _binding: FragmentAddCatatanKesehatanBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: AddCatatanViewModel
+    private var selectedImageUri: Uri? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,6 +48,17 @@ class AddCatatanKesehatanFragment : Fragment() {
 
         binding.arrowBack.setOnClickListener {
             findNavController().popBackStack()
+        }
+
+        binding.layoutAddGambar.setOnClickListener {
+            ImagePicker.with(this)
+                .crop() // Crop image(Optional), Check Customization for more option
+                .compress(1024) // Final image size will be less than 1 MB(Optional)
+                .maxResultSize(
+                    1080,
+                    1080
+                ) // Final image resolution will be less than 1080 x 1080(Optional)
+                .start()
         }
 
         binding.edTanggalPeriksa.setOnFocusChangeListener { v, hasFocus ->
@@ -134,7 +150,7 @@ class AddCatatanKesehatanFragment : Fragment() {
                     nasihat, uid, nama, namaPemeriksa, tempatPeriksa, periksaSelanjutnya)
 
                 if (uid != null) {
-                    viewModel.uploadCatatanKesehatan(uid, formData)
+                    viewModel.uploadCatatanKesehatan(uid, formData, selectedImageUri)
                 }
 
                 viewModel.successMessage.observe(viewLifecycleOwner, { message ->
@@ -184,4 +200,15 @@ class AddCatatanKesehatanFragment : Fragment() {
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            // Image Uri will not be null for RESULT_OK
+            selectedImageUri = data?.data!!
+            // Use Uri object instead of File to avoid storage permissions
+            binding.ivAddPoster.setImageURI(selectedImageUri)
+        }
+    }
+
 }

@@ -63,7 +63,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="700dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
@@ -105,10 +105,11 @@
                     android:id="@+id/imageView4"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:src="@drawable/asi"
-                    app:layout_constraintStart_toStartOf="@+id/imageView3"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_kunjungan_value" />
 
                 <TextView
                     android:id="@+id/textView10"
@@ -126,34 +127,33 @@
                     android:id="@+id/imageView5"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:src="@drawable/blood"
-                    app:layout_constraintStart_toStartOf="@+id/imageView4"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_periksa_asi_value" />
 
                 <TextView
                     android:id="@+id/textView11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
                     android:text="@string/periksa_pendarahan_nifas"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView5"
-                    app:layout_constraintEnd_toStartOf="@+id/tv_pendarahan_value"
                     app:layout_constraintStart_toEndOf="@+id/imageView5"
                     app:layout_constraintTop_toTopOf="@+id/imageView5" />
 
                 <ImageView
                     android:id="@+id/iv_jalan_lahir"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="23dp"
+                    android:layout_height="32dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:src="@drawable/doctor"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_pendarahan_value" />
 
                 <TextView
                     android:id="@+id/tv_jalan_lahir_nifas"
@@ -171,10 +171,11 @@
                     android:id="@+id/iv_vita"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:src="@drawable/vitamina"
-                    app:layout_constraintStart_toStartOf="@+id/iv_jalan_lahir"
-                    app:layout_constraintTop_toBottomOf="@+id/iv_jalan_lahir" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_jalan_lahir_value" />
 
                 <TextView
                     android:id="@+id/tv_vita"
@@ -192,10 +193,11 @@
                     android:id="@+id/iv_masalah"
                     android:layout_width="30dp"
                     android:layout_height="30dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:src="@drawable/problem"
-                    app:layout_constraintStart_toStartOf="@+id/iv_vita"
-                    app:layout_constraintTop_toBottomOf="@+id/iv_vita" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_vita_value" />
 
                 <TextView
                     android:id="@+id/tv_masalah"
@@ -215,11 +217,9 @@
                     android:layout_height="30dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
                     android:src="@drawable/tindakan"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/iv_masalah" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_masalah_value" />
 
                 <TextView
                     android:id="@+id/tv_tindakan"
@@ -235,82 +235,116 @@
 
                 <TextView
                     android:id="@+id/tv_kunjungan_value"
-                    android:layout_width="120dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/bg_filled_light_green"
+                    android:padding="12dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView9"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textView9"
-                    app:layout_constraintTop_toTopOf="@+id/textView9"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView9"
                     tools:text=": 120/80 mmHg" />
 
                 <TextView
                     android:id="@+id/tv_periksa_asi_value"
-                    android:layout_width="120dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg_filled_light_green"
+                    android:padding="12dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView10"
-                    app:layout_constraintStart_toStartOf="@+id/tv_kunjungan_value"
-                    app:layout_constraintTop_toTopOf="@+id/textView10"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView10"
                     tools:text=": 50 Kg" />
 
                 <TextView
                     android:id="@+id/tv_pendarahan_value"
-                    android:layout_width="120dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg_filled_light_green"
+                    android:padding="12dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView11"
-                    app:layout_constraintStart_toStartOf="@+id/tv_periksa_asi_value"
-                    app:layout_constraintTop_toTopOf="@+id/textView11"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView11"
                     tools:text=": 4 Minggu" />
 
                 <TextView
                     android:id="@+id/tv_jalan_lahir_value"
-                    android:layout_width="120dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg_filled_light_green"
+                    android:padding="12dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_jalan_lahir_nifas"
-                    app:layout_constraintStart_toStartOf="@+id/tv_pendarahan_value"
-                    app:layout_constraintTop_toTopOf="@+id/tv_jalan_lahir_nifas"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_jalan_lahir_nifas"
                     tools:text=": 20 Cm" />
 
                 <TextView
                     android:id="@+id/tv_vita_value"
-                    android:layout_width="120dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg_filled_light_green"
+                    android:padding="12dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_vita"
-                    app:layout_constraintStart_toStartOf="@+id/tv_jalan_lahir_value"
-                    app:layout_constraintTop_toTopOf="@+id/tv_vita"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_vita"
                     tools:text=": Kep" />
 
                 <TextView
                     android:id="@+id/tv_masalah_value"
-                    android:layout_width="120dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg_filled_light_green"
+                    android:padding="12dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_masalah"
-                    app:layout_constraintStart_toStartOf="@+id/tv_vita_value"
-                    app:layout_constraintTop_toTopOf="@+id/tv_masalah"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_masalah"
                     tools:text=": 80-85 Bpm" />
 
                 <TextView
                     android:id="@+id/tv_tindakan_value"
-                    android:layout_width="120dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg_filled_light_green"
+                    android:padding="12dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/tv_tindakan"
-                    app:layout_constraintStart_toStartOf="@+id/tv_masalah_value"
-                    app:layout_constraintTop_toTopOf="@+id/tv_tindakan"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_tindakan"
                     tools:text=": Tidak" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

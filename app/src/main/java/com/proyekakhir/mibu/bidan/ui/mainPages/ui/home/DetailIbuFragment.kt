@@ -58,12 +58,12 @@ class DetailIbuFragment : Fragment() {
             findNavController().popBackStack()
         }
 
-        binding.tvNamaIbu.text = ": ${itemData?.fullname}"
-        binding.tvUmurIbu.text = ": ${itemData?.umur}"
-        binding.tvNoTelponIbu.text = ": ${itemData?.noTelepon}"
-        binding.tvNikIbu.text = ": ${itemData?.nik}"
-        binding.tvNamaSuami.text = ": ${itemData?.namaSuami}"
-        binding.tvAlamat.text = ": ${itemData?.alamat}"
+        binding.tvNamaIbu.text = "${itemData?.fullname}"
+        binding.tvUmurIbu.text = "${itemData?.umur}"
+        binding.tvNoTelponIbu.text = "${itemData?.noTelepon}"
+        binding.tvNikIbu.text = "${itemData?.nik}"
+        binding.tvNamaSuami.text = "${itemData?.namaSuami}"
+        binding.tvAlamat.text = "${itemData?.alamat}"
 
         binding.btnAddCatatanKesehatan.setOnClickListener {
             val bundle = Bundle()

@@ -12,17 +12,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.FirebaseDatabase
 import com.proyekakhir.mibu.R
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.edit.EditKesehatanFragment
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.edit.EditNifasFragment
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddKesehatanKehamilanData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddNifasData
 
-class CatatanNifasAdapter(private var listNifas: ArrayList<AddNifasData>) : RecyclerView.Adapter<CatatanNifasAdapter.MyViewHolder>() {
+class CatatanNifasAdapter(private var listNifas: ArrayList<AddNifasData>) :
+    RecyclerView.Adapter<CatatanNifasAdapter.MyViewHolder>() {
     var listener: OnItemClickListener? = null
 
     interface OnItemClickListener {
         fun onItemClick(item: AddNifasData)
     }
+
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val masalah: TextView = itemView.findViewById(R.id.tv_masalah)
         val tanggal: TextView = itemView.findViewById(R.id.tv_tanggal)
@@ -31,7 +31,8 @@ class CatatanNifasAdapter(private var listNifas: ArrayList<AddNifasData>) : Recy
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_detail_nifas, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_detail_nifas, parent, false)
         return MyViewHolder(view)
     }
 
@@ -63,7 +64,10 @@ class CatatanNifasAdapter(private var listNifas: ArrayList<AddNifasData>) : Recy
             }
 
             // Show the dialog
-            dialog.show((it.context as AppCompatActivity).supportFragmentManager, "EditNifasFragment")
+            dialog.show(
+                (it.context as AppCompatActivity).supportFragmentManager,
+                "EditNifasFragment"
+            )
         }
 
         holder.delete.setOnClickListener {

@@ -7,13 +7,13 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -21,10 +21,7 @@ import com.github.dhaval2404.imagepicker.ImagePicker
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.bidan.ui.factory.ViewModelFactory
 import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.BidanHomeViewModel
-import com.proyekakhir.mibu.bidan.ui.network.NetworkConnection
 import com.proyekakhir.mibu.databinding.FragmentAddArtikelBinding
-import com.proyekakhir.mibu.databinding.FragmentBidanArtikelBinding
 
 class AddArtikelFragment : Fragment() {
     private var _binding: FragmentAddArtikelBinding? = null
@@ -40,13 +37,17 @@ class AddArtikelFragment : Fragment() {
 
         val repository = FirebaseRepository()
         val factory = ViewModelFactory(repository)
-        viewModel = ViewModelProvider(requireActivity(), factory).get(BidanArtikelViewModel::class.java)
+        viewModel =
+            ViewModelProvider(requireActivity(), factory).get(BidanArtikelViewModel::class.java)
 
         binding.layoutAddGambar.setOnClickListener {
             ImagePicker.with(this)
                 .crop() // Crop image(Optional), Check Customization for more option
                 .compress(1024) // Final image size will be less than 1 MB(Optional)
-                .maxResultSize(720, 720) // Final image resolution will be less than 1080 x 1080(Optional)
+                .maxResultSize(
+                    720,
+                    720
+                ) // Final image resolution will be less than 1080 x 1080(Optional)
                 .start()
         }
 

@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.proyekakhir.mibu.R
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.ArtikelData
 import com.proyekakhir.mibu.databinding.FragmentDetailArtikelBinding
 import com.proyekakhir.mibu.user.ui.home.model.ArtikelModel
 

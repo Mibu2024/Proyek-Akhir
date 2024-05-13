@@ -104,6 +104,7 @@ dependencies {
     //mockito
     testImplementation ("org.mockito:mockito-core:3.12.4")
     testImplementation ("org.mockito:mockito-inline:3.12.4")
+    implementation ("com.google.android.gms:play-services-tasks:17.2.1")
 
 
 }

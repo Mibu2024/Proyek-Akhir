@@ -10,16 +10,10 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.proyekakhir.mibu.R
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.ArtikelData
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.EditArtikelFragmant
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.edit.EditKesehatanFragment
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddKesehatanKehamilanData
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.ChildItem
-import org.w3c.dom.Text
 
 class CatatanKesehatanAdapter(private var listKesehatan: ArrayList<AddKesehatanKehamilanData>) : RecyclerView.Adapter<CatatanKesehatanAdapter.MyViewHolder>() {
 

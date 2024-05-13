@@ -4,9 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.database.DatabaseError
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.ArtikelData
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.IbuHamilData
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.settings.UserData
 import com.proyekakhir.mibu.user.firebase.FirebaseRepository
 import com.proyekakhir.mibu.user.ui.home.model.ArtikelModel
 import com.proyekakhir.mibu.user.ui.home.model.BidanData
@@ -40,7 +37,10 @@ class HomeViewModel(val repository: FirebaseRepository) : ViewModel() {
         )
     }
 
-    fun getArtikelByUser(onDataChange: (List<ArtikelModel>) -> Unit, onCancelled: (DatabaseError) -> Unit) {
+    fun getArtikelByUser(
+        onDataChange: (List<ArtikelModel>) -> Unit,
+        onCancelled: (DatabaseError) -> Unit
+    ) {
         _isLoading.value = true
         repository.getArtikel(
             onDataChange = { list ->

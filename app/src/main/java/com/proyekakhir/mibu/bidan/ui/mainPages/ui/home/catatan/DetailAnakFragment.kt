@@ -2,15 +2,14 @@ package com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan
 
 import android.graphics.Color
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddDataAnak
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddKesehatanKehamilanData
 import com.proyekakhir.mibu.databinding.FragmentDetailAnakBinding
-import com.proyekakhir.mibu.databinding.FragmentDetailKesehatanBinding
 
 class DetailAnakFragment : Fragment() {
     private var _binding: FragmentDetailAnakBinding? = null
@@ -23,15 +22,19 @@ class DetailAnakFragment : Fragment() {
         _binding = FragmentDetailAnakBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        binding.arrowBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         val itemData = arguments?.getSerializable("itemData") as AddDataAnak
 
-        binding.tvNamaAnak.text = itemData.namaAnak
-        binding.tvTanggalLahir.text = itemData.tanggalLahir
-        binding.tvUmurBayi.text = itemData.umur
-        binding.tvBeratBayi.text = itemData.beratBadan
-        binding.tvNamaIbu.text = itemData.namaIbu
+        binding.tvNamaAnak.text = ": ${itemData.namaAnak}"
+        binding.tvTanggalLahir.text = ": ${itemData.tanggalLahir}"
+        binding.tvUmurBayi.text = ": ${itemData.umur}"
+        binding.tvBeratBayi.text = ": ${itemData.beratBadan}"
+        binding.tvNamaIbu.text = ": ${itemData.namaIbu}"
 
-        when (itemData.dptHb1Polio2){
+        when (itemData.dptHb1Polio2) {
             "Sudah" -> {
                 binding.tvPolio2.setBackgroundResource(R.drawable.bg_filled_green)
                 binding.tvPolio2.setTextColor(Color.WHITE)
@@ -45,7 +48,7 @@ class DetailAnakFragment : Fragment() {
             }
         }
 
-        when (itemData.dptHb2Polio3){
+        when (itemData.dptHb2Polio3) {
             "Sudah" -> {
                 binding.tvPolio3.setBackgroundResource(R.drawable.bg_filled_green)
                 binding.tvPolio3.setTextColor(Color.WHITE)
@@ -59,7 +62,7 @@ class DetailAnakFragment : Fragment() {
             }
         }
 
-        when (itemData.dptHb3Polio4){
+        when (itemData.dptHb3Polio4) {
             "Sudah" -> {
                 binding.tvPolio4.setBackgroundResource(R.drawable.bg_filled_green)
                 binding.tvPolio4.setTextColor(Color.WHITE)
@@ -73,7 +76,7 @@ class DetailAnakFragment : Fragment() {
             }
         }
 
-        when (itemData.campak){
+        when (itemData.campak) {
             "Sudah" -> {
                 binding.tvCampak.setBackgroundResource(R.drawable.bg_filled_green)
                 binding.tvCampak.setTextColor(Color.WHITE)
@@ -87,7 +90,7 @@ class DetailAnakFragment : Fragment() {
             }
         }
 
-        when (itemData.dptHb1Dosis){
+        when (itemData.dptHb1Dosis) {
             "Sudah" -> {
                 binding.tvHib1.setBackgroundResource(R.drawable.bg_filled_green)
                 binding.tvHib1.setTextColor(Color.WHITE)
@@ -101,7 +104,7 @@ class DetailAnakFragment : Fragment() {
             }
         }
 
-        when (itemData.campakRubella1Dosis){
+        when (itemData.campakRubella1Dosis) {
             "Sudah" -> {
                 binding.tvRubella1.setBackgroundResource(R.drawable.bg_filled_green)
                 binding.tvRubella1.setTextColor(Color.WHITE)
@@ -115,7 +118,7 @@ class DetailAnakFragment : Fragment() {
             }
         }
 
-        when (itemData.campakRubellaDt){
+        when (itemData.campakRubellaDt) {
             "Sudah" -> {
                 binding.tvRubellaDt.setBackgroundResource(R.drawable.bg_filled_green)
                 binding.tvRubellaDt.setTextColor(Color.WHITE)
@@ -129,7 +132,7 @@ class DetailAnakFragment : Fragment() {
             }
         }
 
-        when (itemData.tetanus){
+        when (itemData.tetanus) {
             "Sudah" -> {
                 binding.tvTetanus.setBackgroundResource(R.drawable.bg_filled_green)
                 binding.tvTetanus.setTextColor(Color.WHITE)

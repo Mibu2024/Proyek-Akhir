@@ -1,18 +1,14 @@
 package com.proyekakhir.mibu.user.ui.activity
 
-import android.content.ContentValues.TAG
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
-import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.bidan.ui.auth.BidanRegisterActivity
 import com.proyekakhir.mibu.bidan.ui.auth.preferences.PreferenceManager
 import com.proyekakhir.mibu.bidan.ui.mainPages.BidanMainActivity
-import com.proyekakhir.mibu.user.auth.RegisterActivity
 import com.proyekakhir.mibu.databinding.ActivityOnBoardBinding
+import com.proyekakhir.mibu.user.auth.RegisterActivity
 
 class OnBoardActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOnBoardBinding

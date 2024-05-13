@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -14,7 +13,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.bidan.ui.factory.ViewModelFactory
@@ -32,7 +30,7 @@ class BidanHomeFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var bidanHomeViewModel: BidanHomeViewModel
     private lateinit var rvIbu: RecyclerView
-    private lateinit var ibuArrayList : ArrayList<IbuHamilData>
+    private lateinit var ibuArrayList: ArrayList<IbuHamilData>
     private lateinit var adapter: ListIbuAdapter
     private lateinit var settingsViewModel: BidanSettingsViewModel
 
@@ -44,8 +42,10 @@ class BidanHomeFragment : Fragment() {
 
         val repository = FirebaseRepository()
         val factory = ViewModelFactory(repository)
-        bidanHomeViewModel = ViewModelProvider(requireActivity(), factory).get(BidanHomeViewModel::class.java)
-        settingsViewModel = ViewModelProvider(requireActivity(), factory).get(BidanSettingsViewModel::class.java)
+        bidanHomeViewModel =
+            ViewModelProvider(requireActivity(), factory).get(BidanHomeViewModel::class.java)
+        settingsViewModel =
+            ViewModelProvider(requireActivity(), factory).get(BidanSettingsViewModel::class.java)
 
         _binding = FragmentBidanHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -72,6 +72,8 @@ class BidanHomeFragment : Fragment() {
         rvIbu.adapter = adapter
 
         bidanHomeViewModel.dataList.observe(viewLifecycleOwner) { data ->
+            ibuArrayList.clear()
+            ibuArrayList.addAll(data)
             adapter.setData(data)
         }
 
@@ -84,7 +86,7 @@ class BidanHomeFragment : Fragment() {
             }
         })
 
-        binding.svBidanHome.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        binding.svBidanHome.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }
@@ -100,7 +102,10 @@ class BidanHomeFragment : Fragment() {
             override fun onItemClick(item: IbuHamilData) {
                 val bundle = Bundle()
                 bundle.putSerializable("itemData", item)
-                findNavController().navigate(R.id.action_navigation_home_to_detailIbuFragment, bundle)
+                findNavController().navigate(
+                    R.id.action_navigation_home_to_detailIbuFragment,
+                    bundle
+                )
             }
         }
 
@@ -129,11 +134,11 @@ class BidanHomeFragment : Fragment() {
     }
 
 
-    private fun searchList(query: String?){
-        if (query != null){
+    private fun searchList(query: String?) {
+        if (query != null) {
             val searchedList = ArrayList<IbuHamilData>()
-            for (i in ibuArrayList){
-                if (i.fullname?.lowercase(Locale.ROOT)?.contains(query) == true){
+            for (i in ibuArrayList) {
+                if (i.fullname?.lowercase(Locale.ROOT)?.contains(query) == true) {
                     searchedList.add(i)
                 }
             }

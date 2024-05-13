@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,16 +12,11 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
-import com.google.firebase.auth.FirebaseAuth
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.bidan.ui.factory.ViewModelFactory
 import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.ArtikelData
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.BidanArtikelViewModel
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.EditArtikelFragmant
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.addCatatan.AddCatatanViewModel
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddKesehatanKehamilanData
-import com.proyekakhir.mibu.databinding.FragmentEditArtikelFragmantBinding
 import com.proyekakhir.mibu.databinding.FragmentEditKesehatanBinding
 
 class EditKesehatanFragment : DialogFragment() {

@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,9 +19,7 @@ import com.proyekakhir.mibu.bidan.ui.factory.ViewModelFactory
 import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.addCatatan.AddCatatanViewModel
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddDataAnak
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddKesehatanKehamilanData
 import com.proyekakhir.mibu.databinding.FragmentEditAnakBinding
-import com.proyekakhir.mibu.databinding.FragmentEditKesehatanBinding
 
 class EditAnakFragment : DialogFragment() {
     private var _binding: FragmentEditAnakBinding? = null
@@ -44,49 +41,81 @@ class EditAnakFragment : DialogFragment() {
         val currentItem = arguments?.getSerializable("selectedItem") as AddDataAnak
         currentItem?.let {
             val spinnerPolio2: Spinner = binding.spinPolio2
-            val spinAdapterPolio2 = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, arrayOf("Sudah", "Belum"))
+            val spinAdapterPolio2 = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_spinner_item,
+                arrayOf("Sudah", "Belum")
+            )
             spinAdapterPolio2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinnerPolio2.adapter = spinAdapterPolio2
             spinnerPolio2.setSelection(if (currentItem.dptHb1Polio2 == "Sudah") 0 else 1) // Set selection based on currentItem data
 
             val spinnerPolio3: Spinner = binding.spinPolio3
-            val spinAdapterPolio3 = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, arrayOf("Sudah", "Belum"))
+            val spinAdapterPolio3 = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_spinner_item,
+                arrayOf("Sudah", "Belum")
+            )
             spinAdapterPolio3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinnerPolio3.adapter = spinAdapterPolio3
             spinnerPolio3.setSelection(if (currentItem.dptHb2Polio3 == "Sudah") 0 else 1)
 
             val spinnerPolio4: Spinner = binding.spinPolio4
-            val spinAdapterPolio4 = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, arrayOf("Sudah", "Belum"))
+            val spinAdapterPolio4 = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_spinner_item,
+                arrayOf("Sudah", "Belum")
+            )
             spinAdapterPolio4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinnerPolio4.adapter = spinAdapterPolio4
             spinnerPolio4.setSelection(if (currentItem.dptHb3Polio4 == "Sudah") 0 else 1)
 
             val spinnerCampak: Spinner = binding.spinCampak
-            val spinAdapterCampak = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, arrayOf("Sudah", "Belum"))
+            val spinAdapterCampak = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_spinner_item,
+                arrayOf("Sudah", "Belum")
+            )
             spinAdapterCampak.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinnerCampak.adapter = spinAdapterCampak
             spinnerCampak.setSelection(if (currentItem.campak == "Sudah") 0 else 1)
 
             val spinnerDpt1Dosis: Spinner = binding.spinHib1
-            val spinAdapterDpt1Dosis = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, arrayOf("Sudah", "Belum"))
+            val spinAdapterDpt1Dosis = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_spinner_item,
+                arrayOf("Sudah", "Belum")
+            )
             spinAdapterDpt1Dosis.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinnerDpt1Dosis.adapter = spinAdapterDpt1Dosis
             spinnerDpt1Dosis.setSelection(if (currentItem.dptHb1Dosis == "Sudah") 0 else 1)
 
             val spinnerRubella1Dosis: Spinner = binding.spinRubella1
-            val spinAdapterRubella1Dosis = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, arrayOf("Sudah", "Belum"))
+            val spinAdapterRubella1Dosis = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_spinner_item,
+                arrayOf("Sudah", "Belum")
+            )
             spinAdapterRubella1Dosis.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinnerRubella1Dosis.adapter = spinAdapterRubella1Dosis
             spinnerRubella1Dosis.setSelection(if (currentItem.campakRubella1Dosis == "Sudah") 0 else 1)
 
             val spinnerRubellaDt: Spinner = binding.spinRubelladt
-            val spinAdapterRubellaDt = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, arrayOf("Sudah", "Belum"))
+            val spinAdapterRubellaDt = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_spinner_item,
+                arrayOf("Sudah", "Belum")
+            )
             spinAdapterRubellaDt.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinnerRubellaDt.adapter = spinAdapterRubellaDt
             spinnerRubellaDt.setSelection(if (currentItem.campakRubellaDt == "Sudah") 0 else 1)
 
             val spinnerTetanus: Spinner = binding.spinTetanus
-            val spinAdapterTetanus = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, arrayOf("Sudah", "Belum"))
+            val spinAdapterTetanus = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_spinner_item,
+                arrayOf("Sudah", "Belum")
+            )
             spinAdapterTetanus.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             spinnerTetanus.adapter = spinAdapterTetanus
             spinnerTetanus.setSelection(if (currentItem.tetanus == "Sudah") 0 else 1)
@@ -116,19 +145,42 @@ class EditAnakFragment : DialogFragment() {
             val periksaSelanjutnya = binding.edPeriksaSelanjutnya.text.toString()
 
             val itemKey = currentItem.key
-            val updatedAnak = AddDataAnak(namaAnak, tanggalLahir, umur, beratBadan, polio2, polio3, polio4,
-                campak, dptHib1dosis, rubella1Dosis, rubellaDt, tetanus, namaPemeriksa, periksaSelanjutnya,
-                currentItem.uid, currentItem.namaIbu, currentItem.key, currentItem.firstChildKey)
+            val updatedAnak = AddDataAnak(
+                namaAnak,
+                tanggalLahir,
+                umur,
+                beratBadan,
+                polio2,
+                polio3,
+                polio4,
+                campak,
+                dptHib1dosis,
+                rubella1Dosis,
+                rubellaDt,
+                tetanus,
+                namaPemeriksa,
+                periksaSelanjutnya,
+                currentItem.uid,
+                currentItem.namaIbu,
+                currentItem.key,
+                currentItem.firstChildKey
+            )
 
             if (itemKey != null) {
                 val uid = currentItem.uid
                 if (uid != null) {
                     viewModel.updateAnak(uid, itemKey, updatedAnak) { success ->
                         if (success) {
-                            alertUpload(getString(R.string.success), getString(R.string.upload_success))
+                            alertUpload(
+                                getString(R.string.success),
+                                getString(R.string.upload_success)
+                            )
                             dialog?.dismiss()
                         } else {
-                            alertUpload(getString(R.string.failed), getString(R.string.upload_failed))
+                            alertUpload(
+                                getString(R.string.failed),
+                                getString(R.string.upload_failed)
+                            )
                             dialog?.dismiss()
                         }
                     }

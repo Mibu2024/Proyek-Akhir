@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.bidan.ui.factory.ViewModelFactory
 import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
+import com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.model.ArtikelData
 import com.proyekakhir.mibu.bidan.ui.network.NetworkConnection
 import com.proyekakhir.mibu.databinding.FragmentBidanArtikelBinding
 

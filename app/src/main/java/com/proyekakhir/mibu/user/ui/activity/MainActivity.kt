@@ -1,6 +1,5 @@
 package com.proyekakhir.mibu.user.ui.activity
 
-import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.View
@@ -10,9 +9,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
-import com.google.firebase.auth.FirebaseAuth
 import com.proyekakhir.mibu.R
-import com.proyekakhir.mibu.user.auth.LoginActivity
 import com.proyekakhir.mibu.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

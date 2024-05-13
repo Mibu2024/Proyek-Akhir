@@ -1,9 +1,7 @@
 package com.proyekakhir.mibu.bidan.ui.firebase
 
-import android.content.ContentValues.TAG
 import android.net.Uri
 import android.util.Log
-import androidx.databinding.adapters.NumberPickerBindingAdapter.setValue
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
 import com.google.firebase.database.DataSnapshot
@@ -12,18 +10,13 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.auth.User
-import com.google.firebase.firestore.toObject
 import com.google.firebase.storage.FirebaseStorage
-import com.proyekakhir.mibu.bidan.ui.auth.preferences.PreferenceManager
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.ArtikelData
+import com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.model.ArtikelData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddDataAnak
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddKesehatanKehamilanData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddNifasData
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.ChildItem
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.IbuHamilData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.settings.UserData
-import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -36,7 +29,6 @@ class FirebaseRepository : FirebaseService {
     override fun login(email: String, password: String, onComplete: (Boolean) -> Unit) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
-                val userId = auth?.uid
                 onComplete(task.isSuccessful)
             }
     }
@@ -52,7 +44,7 @@ class FirebaseRepository : FirebaseService {
     ) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
-                if (task.isSuccessful){
+                if (task.isSuccessful) {
                     // Update user profile with display name
                     val user = auth.currentUser
                     val profileUpdates = UserProfileChangeRequest.Builder()
@@ -61,7 +53,7 @@ class FirebaseRepository : FirebaseService {
 
                     user?.updateProfile(profileUpdates)
                         ?.addOnCompleteListener { profileTask ->
-                            if (profileTask.isSuccessful){
+                            if (profileTask.isSuccessful) {
                                 val bidanData = hashMapOf(
                                     "fullname" to fullname,
                                     "alamat" to alamat,
@@ -75,7 +67,7 @@ class FirebaseRepository : FirebaseService {
 
                                 //insert data to firestore
                                 val uid = user?.uid
-                                if (uid != null){
+                                if (uid != null) {
                                     firestore.collection("users").document(uid)
                                         .set(bidanData)
                                         .addOnSuccessListener {
@@ -97,7 +89,7 @@ class FirebaseRepository : FirebaseService {
                             onComplete(false)
                         }
                 } else {
-                    onComplete (false)
+                    onComplete(false)
                 }
             }
     }
@@ -136,7 +128,13 @@ class FirebaseRepository : FirebaseService {
             refStorage.putFile(selectedImageUri)
                 .addOnSuccessListener { taskSnapshot ->
                     taskSnapshot.storage.downloadUrl.addOnSuccessListener { imageUrl ->
-                        saveArtikelToDatabase(judul, isiArtikel, imageUrl.toString(), onSuccess, onFailure)
+                        saveArtikelToDatabase(
+                            judul,
+                            isiArtikel,
+                            imageUrl.toString(),
+                            onSuccess,
+                            onFailure
+                        )
                     }
                 }
                 .addOnFailureListener { e ->
@@ -204,20 +202,42 @@ class FirebaseRepository : FirebaseService {
     override fun uploadCatatanKesehatan(
         uid: String,
         formData: AddKesehatanKehamilanData,
+        selectedImageUri: Uri?,
         onComplete: (Boolean) -> Unit,
         onFailure: (Exception) -> Unit
     ) {
         val database = FirebaseDatabase.getInstance().getReference("CatatanKesehatanKehamilan").child(uid).push()
+        val storageRef = FirebaseStorage.getInstance().getReference("fotoUsg/${UUID.randomUUID()}")
 
-        database.setValue(formData)
-            .addOnSuccessListener {
-                onComplete(true)
-            }
-            .addOnFailureListener { exception ->
-                onFailure(exception)
-            }
+        if (selectedImageUri != null) {
+            storageRef.putFile(selectedImageUri)
+                .addOnSuccessListener { taskSnapshot ->
+                    taskSnapshot.storage.downloadUrl.addOnSuccessListener { uri ->
+                        formData.fotoUsg = uri.toString()
 
+                        database.setValue(formData)
+                            .addOnSuccessListener {
+                                onComplete(true)
+                            }
+                            .addOnFailureListener { exception ->
+                                onFailure(exception)
+                            }
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    onFailure(exception)
+                }
+        } else {
+            database.setValue(formData)
+                .addOnSuccessListener {
+                    onComplete(true)
+                }
+                .addOnFailureListener { exception ->
+                    onFailure(exception)
+                }
+        }
     }
+
 
     override fun uploadCatatanNifas(
         uid: String,
@@ -273,7 +293,7 @@ class FirebaseRepository : FirebaseService {
                         if (data != null) {
                             data.key = key // Set the key
                             data.firstChildKey = firstChildKey
-                            if (data.uid == uid){
+                            if (data.uid == uid) {
                                 list.add(data)
                             }
                         }
@@ -310,7 +330,7 @@ class FirebaseRepository : FirebaseService {
                         if (data != null) {
                             data.key = key // Set the key
                             data.firstChildKey = firstChildKey
-                            if (data.uid == uid){
+                            if (data.uid == uid) {
                                 list.add(data)
                             }
                         }
@@ -347,7 +367,7 @@ class FirebaseRepository : FirebaseService {
                         if (data != null) {
                             data.key = key // Set the key
                             data.firstChildKey = firstChildKey
-                            if (data.uid == uid){
+                            if (data.uid == uid) {
                                 list.add(data)
                             }
                         }
@@ -410,7 +430,8 @@ class FirebaseRepository : FirebaseService {
         updatedKesehatan: AddKesehatanKehamilanData,
         onComplete: (Boolean) -> Unit
     ) {
-        val databaseReference = FirebaseDatabase.getInstance().getReference("CatatanKesehatanKehamilan")
+        val databaseReference =
+            FirebaseDatabase.getInstance().getReference("CatatanKesehatanKehamilan")
 
         // Construct the path to the specific child node based on uid and itemKey
         val childPath = "$uid/$itemKey"
@@ -433,7 +454,8 @@ class FirebaseRepository : FirebaseService {
         onFailure: (Exception) -> Unit
     ) {
         // Construct the reference to the specific article node
-        val databaseReference: DatabaseReference = FirebaseDatabase.getInstance().getReference("CatatanKesehatanKehamilan")
+        val databaseReference: DatabaseReference =
+            FirebaseDatabase.getInstance().getReference("CatatanKesehatanKehamilan")
         val childPath = "$uid/$itemKey"
 
         // Remove the article from the database
@@ -493,7 +515,13 @@ class FirebaseRepository : FirebaseService {
     }
 
 
-    private fun saveArtikelToDatabase(judul: String, isiArtikel: String, imageUrl: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit) {
+    private fun saveArtikelToDatabase(
+        judul: String,
+        isiArtikel: String,
+        imageUrl: String,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
         val uid = FirebaseAuth.getInstance().currentUser?.uid.toString()
         val db = FirebaseFirestore.getInstance()
 
@@ -503,8 +531,10 @@ class FirebaseRepository : FirebaseService {
         db.collection("users").document(uid).get()
             .addOnSuccessListener { document ->
                 if (document != null) {
-                    val fullName = document.getString("fullname") // replace "fullName" with the actual field name in your Firestore document
-                    val artikel = ArtikelData(judul, isiArtikel, imageUrl, uid, currentDate, fullName)
+                    val fullName =
+                        document.getString("fullname") // replace "fullName" with the actual field name in your Firestore document
+                    val artikel =
+                        ArtikelData(judul, isiArtikel, imageUrl, uid, currentDate, fullName)
                     val refDatabase = FirebaseDatabase.getInstance().getReference("artikel").push()
 
                     refDatabase.setValue(artikel)

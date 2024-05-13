@@ -1,13 +1,12 @@
 package com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.addCatatan
 
+import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.ArtikelData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddDataAnak
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddKesehatanKehamilanData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddNifasData
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.ChildItem
 
 class AddCatatanViewModel(val repository: FirebaseRepository) : ViewModel() {
     val isLoading = MutableLiveData<Boolean>()
@@ -18,23 +17,27 @@ class AddCatatanViewModel(val repository: FirebaseRepository) : ViewModel() {
     val catatanNifasList = MutableLiveData<ArrayList<AddNifasData>>()
     val catatanAnakList = MutableLiveData<ArrayList<AddDataAnak>>()
 
-    fun uploadCatatanKesehatan(uid: String, formData: AddKesehatanKehamilanData) {
+    fun uploadCatatanKesehatan(uid: String, formData: AddKesehatanKehamilanData, selectedImageUri: Uri?) {
         isLoading.value = true
-        repository.uploadCatatanKesehatan(uid, formData, { success ->
-            if (success) {
-                // Handle success case
-                successMessage.value = "Form uploaded successfully"
+        repository.uploadCatatanKesehatan(uid, formData, selectedImageUri,
+            { success ->
+                if (success) {
+                    // Handle success case
+                    successMessage.value = "Form and image uploaded successfully"
+                    isLoading.value = false
+                } else {
+                    // Handle failure case
+                    isLoading.value = false
+                    errorMessage.value = "Failed to upload form and image"
+                }
+            },
+            { exception ->
+                // Handle exception
                 isLoading.value = false
-            } else {
-                // Handle failure case
-                isLoading.value = false
-                errorMessage.value = "Failed to upload form"
-            }
-        }, { exception ->
-            // Handle exception
-            errorMessage.value = exception.message ?: "An error occurred"
-        })
+                errorMessage.value = exception.message ?: "An error occurred"
+            })
     }
+
 
     fun uploadCatatanNifas(uid: String, formData: AddNifasData) {
         isLoading.value = true

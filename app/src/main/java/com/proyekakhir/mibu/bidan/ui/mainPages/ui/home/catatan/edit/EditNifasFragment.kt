@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,9 +16,7 @@ import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.bidan.ui.factory.ViewModelFactory
 import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.addCatatan.AddCatatanViewModel
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddKesehatanKehamilanData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddNifasData
-import com.proyekakhir.mibu.databinding.FragmentEditKesehatanBinding
 import com.proyekakhir.mibu.databinding.FragmentEditNifasBinding
 
 class EditNifasFragment : DialogFragment() {
@@ -60,19 +57,27 @@ class EditNifasFragment : DialogFragment() {
             val tindakan = binding.edTindakan.text.toString()
 
             val itemKey = currentItem.key
-            val updatedNifas = AddNifasData(currentItem.tanggalPeriksa, kunjungan, periksaAsi,
+            val updatedNifas = AddNifasData(
+                currentItem.tanggalPeriksa, kunjungan, periksaAsi,
                 pendarahan, jalanLahir, vitA, masalah, tindakan, currentItem.uid, currentItem.nama,
-                currentItem.key, currentItem.firstChildKey)
+                currentItem.key, currentItem.firstChildKey
+            )
 
             if (itemKey != null) {
                 val uid = currentItem.uid
                 if (uid != null) {
                     viewModel.updateNifas(uid, itemKey, updatedNifas) { success ->
                         if (success) {
-                            alertUpload(getString(R.string.success), getString(R.string.upload_success))
+                            alertUpload(
+                                getString(R.string.success),
+                                getString(R.string.upload_success)
+                            )
                             dialog?.dismiss()
                         } else {
-                            alertUpload(getString(R.string.failed), getString(R.string.upload_failed))
+                            alertUpload(
+                                getString(R.string.failed),
+                                getString(R.string.upload_failed)
+                            )
                             dialog?.dismiss()
                         }
                     }

@@ -6,14 +6,11 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.bidan.ui.auth.BidanLoginActivity
@@ -32,7 +29,7 @@ class BidanMainActivity : AppCompatActivity() {
         setupBottomNav()
     }
 
-    private fun setupBottomNav(){
+    private fun setupBottomNav() {
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         val colorStateList = ColorStateList(
             arrayOf(
@@ -68,6 +65,7 @@ class BidanMainActivity : AppCompatActivity() {
                     // Show the bottom navigation
                     showBottomNav()
                 }
+
                 else -> {
                     // Hide the bottom navigation
                     hideBottomNav()

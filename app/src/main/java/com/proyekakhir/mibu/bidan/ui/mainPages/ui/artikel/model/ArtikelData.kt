@@ -1,4 +1,4 @@
-package com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel
+package com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.model
 
 import java.io.Serializable
 

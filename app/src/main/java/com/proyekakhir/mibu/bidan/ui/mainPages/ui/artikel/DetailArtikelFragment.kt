@@ -5,14 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.proyekakhir.mibu.R
-import com.proyekakhir.mibu.bidan.ui.factory.ViewModelFactory
-import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.IbuHamilData
-import com.proyekakhir.mibu.databinding.FragmentBidanArtikelBinding
+import com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.model.ArtikelData
 import com.proyekakhir.mibu.databinding.FragmentDetailArtikelBinding
 
 class DetailArtikelFragment : Fragment() {

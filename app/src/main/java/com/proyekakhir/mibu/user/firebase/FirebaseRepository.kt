@@ -8,13 +8,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.auth.User
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.ArtikelData
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddDataAnak
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddKesehatanKehamilanData
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddNifasData
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.IbuHamilData
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.settings.UserData
 import com.proyekakhir.mibu.user.ui.anak.model.AnakModel
 import com.proyekakhir.mibu.user.ui.home.model.ArtikelModel
 import com.proyekakhir.mibu.user.ui.home.model.BidanData

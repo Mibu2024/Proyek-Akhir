@@ -75,7 +75,7 @@
     <string name="jalan_lahir">Periksa Jalan Lahir</string>
     <string name="vitamin_a">Vitamin A</string>
     <string name="masalah">Masalah</string>
-    <string name="tambah_data_anak">Tambah Data Anak</string>
+    <string name="tambah_data_anak">+ Data \n Anak</string>
     <string name="nama">Nama</string>
     <string name="tanggal_lahir">Tanggal Lahir</string>
     <string name="umur">Umur</string>
@@ -103,8 +103,8 @@
     <string name="kelahiran_ke">Kelahiran Ke</string>
     <string name="nama_ibu">Nama</string>
     <string name="umur_ibu">Umur</string>
-    <string name="tambah_catatan_kesehatan">Tambah Catatan Kesehatan</string>
-    <string name="tambah_catatan_nifas">Tambah Catatan Nifas</string>
+    <string name="tambah_catatan_kesehatan">+ Catatan Kesehatan</string>
+    <string name="tambah_catatan_nifas">+ Catatan \n Nifas</string>
     <string name="hasil_catatan_kesehatan_ibu_hamil">Hasil Catatan Kesehatan Ibu Hamil</string>
     <string name="detail_kesehatan">Detail Kesehatan</string>
     <string name="umur_kehamilan_detail">Umur Kehamilan</string>
@@ -184,4 +184,5 @@
     <string name="hubungi_bidan">Hubungi Bidan</string>
     <string name="list_bidan">List Bidan</string>
     <string name="alert_invalid_phone_number">Tuliskan Kode Negara, Contoh: 628092837261</string>
+    <string name="add_usg">Foto USG</string>
 </resources>
