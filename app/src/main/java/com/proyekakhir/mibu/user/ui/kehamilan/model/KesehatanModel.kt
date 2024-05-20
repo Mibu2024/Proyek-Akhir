@@ -22,4 +22,5 @@ data class KesehatanModel(
     val periksaSelanjutnya: String? = "",
     var key: String? = "",
     var firstChildKey: String? = "",
+    var fotoUsg: String? = ""
 ) : Serializable

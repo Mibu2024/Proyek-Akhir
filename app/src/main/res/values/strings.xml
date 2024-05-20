@@ -185,4 +185,5 @@
     <string name="list_bidan">List Bidan</string>
     <string name="alert_invalid_phone_number">Tuliskan Kode Negara, Contoh: 628092837261</string>
     <string name="add_usg">Foto USG</string>
+    <string name="hasil_usg">Hasil USG</string>
 </resources>

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddKesehatanKehamilanData
 import com.proyekakhir.mibu.databinding.FragmentDetailKesehatanBinding
@@ -40,6 +41,15 @@ class DetailKesehatanFragment : Fragment() {
         binding.tvTanggal.text = itemData?.tanggalPeriksa
         binding.ivBack.setOnClickListener {
             parentFragmentManager.popBackStack()
+        }
+
+        if (!itemData?.fotoUsg.isNullOrEmpty()) {
+            Glide.with(this)
+                .load(itemData?.fotoUsg)
+                .into(binding.ivUsg)
+        } else {
+            binding.ivUsg.visibility = View.GONE
+            binding.textView44.visibility = View.GONE
         }
 
         return root

@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,7 @@ import com.proyekakhir.mibu.bidan.ui.auth.BidanLoginActivity
 import com.proyekakhir.mibu.databinding.FragmentSettingsBinding
 import com.proyekakhir.mibu.user.factory.ViewModelFactory
 import com.proyekakhir.mibu.user.firebase.FirebaseRepository
+import com.proyekakhir.mibu.user.ui.activity.OnBoardActivity
 import com.proyekakhir.mibu.user.ui.home.HomeViewModel
 
 class SettingsFragment : Fragment() {
@@ -101,7 +103,7 @@ class SettingsFragment : Fragment() {
 
     private fun logout() {
         FirebaseAuth.getInstance().signOut()
-        val intent = Intent(requireContext(), BidanLoginActivity::class.java)
+        val intent = Intent(requireContext(), OnBoardActivity::class.java)
 
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         startActivity(intent)
