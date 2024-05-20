@@ -19,10 +19,30 @@ class FirebaseRepository : FirebaseService {
 
     var auth = FirebaseAuth.getInstance()
     var firestore = FirebaseFirestore.getInstance()
-    override fun login(email: String, password: String, onComplete: (Boolean) -> Unit) {
+    override fun login(email: String, password: String, onComplete: (Boolean, String?) -> Unit) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
-                onComplete(task.isSuccessful)
+                if (task.isSuccessful) {
+                    val user = auth.currentUser
+                    if (user != null) {
+                        user.reload().addOnCompleteListener { reloadTask ->
+                            if (reloadTask.isSuccessful) {
+                                if (user.isEmailVerified) {
+                                    onComplete(true, null)
+                                } else {
+                                    auth.signOut()
+                                    onComplete(false, "Verify Your Email!")
+                                }
+                            } else {
+                                onComplete(false, "Failed!")
+                            }
+                        }
+                    } else {
+                        onComplete(false, null)
+                    }
+                } else {
+                    onComplete(false, null)
+                }
             }
     }
 
@@ -37,60 +57,67 @@ class FirebaseRepository : FirebaseService {
         umurSuami: String,
         nik: String,
         password: String,
-        onComplete: (Boolean) -> Unit
+        onComplete: (Boolean, String?) -> Unit
     ) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
-                if (task.isSuccessful){
-                    // Update user profile with display name
+                if (task.isSuccessful) {
                     val user = auth.currentUser
-                    val profileUpdates = UserProfileChangeRequest.Builder()
-                        .setDisplayName(fullname)
-                        .build()
 
-                    user?.updateProfile(profileUpdates)
-                        ?.addOnCompleteListener { profileTask ->
-                            if (profileTask.isSuccessful){
-                                val userData = hashMapOf(
-                                    "fullname" to fullname,
-                                    "alamat" to alamat,
-                                    "email" to email,
-                                    "noTelepon" to noTelepon,
-                                    "umur" to umur,
-                                    "kehamilanKe" to kehamilanKe,
-                                    "namaSuami" to namaSuami,
-                                    "umurSuami" to umurSuami,
-                                    "nik" to nik,
-                                    "uid" to user?.uid,
-                                    "role" to "user"
-                                )
+                    // Send verification email
+                    user?.sendEmailVerification()
+                        ?.addOnCompleteListener { emailVerificationTask ->
+                            if (emailVerificationTask.isSuccessful) {
+                                // Update user profile with display name
+                                val profileUpdates = UserProfileChangeRequest.Builder()
+                                    .setDisplayName(fullname)
+                                    .build()
 
+                                user.updateProfile(profileUpdates)
+                                    .addOnCompleteListener { profileTask ->
+                                        if (profileTask.isSuccessful) {
+                                            // Upload data to Firestore
+                                            val userData = hashMapOf(
+                                                "fullname" to fullname,
+                                                "alamat" to alamat,
+                                                "email" to email,
+                                                "noTelepon" to noTelepon,
+                                                "umur" to umur,
+                                                "kehamilanKe" to kehamilanKe,
+                                                "namaSuami" to namaSuami,
+                                                "umurSuami" to umurSuami,
+                                                "nik" to nik,
+                                                "uid" to user?.uid,
+                                                "role" to "user"
+                                            )
 
-                                //insert data to firestore
-                                val uid = user?.uid
-                                if (uid != null){
-                                    firestore.collection("users").document(uid)
-                                        .set(userData)
-                                        .addOnSuccessListener {
-                                            onComplete(true)
+                                            // Insert data to Firestore
+                                            firestore.collection("users").document(user.uid)
+                                                .set(userData)
+                                                .addOnSuccessListener {
+                                                    // Sign out the user
+                                                    auth.signOut()
+                                                    onComplete(true, null)
+                                                }
+                                                .addOnFailureListener { e ->
+                                                    onComplete(false, e.message)
+                                                }
+                                        } else {
+                                            onComplete(false, "Failed to update profile.")
                                         }
-                                        .addOnFailureListener {
-                                            Log.d("Firestore Error", it.message!!)
-                                            onComplete(false)
-                                        }
-                                } else {
-                                    onComplete(false)
-                                }
-
+                                    }
+                                    .addOnFailureListener { e ->
+                                        onComplete(false, e.message)
+                                    }
                             } else {
-                                onComplete(false)
+                                onComplete(false, "Failed to send verification email.")
                             }
                         }
-                        ?.addOnFailureListener {
-                            onComplete(false)
+                        ?.addOnFailureListener { e ->
+                            onComplete(false, e.message)
                         }
                 } else {
-                    onComplete (false)
+                    onComplete(false, task.exception?.message)
                 }
             }
     }

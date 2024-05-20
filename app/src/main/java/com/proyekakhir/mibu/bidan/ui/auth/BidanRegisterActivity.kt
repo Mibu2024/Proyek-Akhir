@@ -82,33 +82,15 @@ class BidanRegisterActivity : AppCompatActivity() {
 
         viewModel.isSignupSuccessful.observe(this, { isSuccessful ->
             if (isSuccessful) {
-                val db = FirebaseFirestore.getInstance()
-                val currentUser = FirebaseAuth.getInstance().currentUser?.uid
-                val docRef = currentUser?.let { db.collection("users").document(it) }
-                if (docRef != null) {
-                    docRef.get().addOnSuccessListener { document ->
-                        if (document != null) {
-                            val role = document.getString("role")
-                            val email = FirebaseAuth.getInstance().currentUser?.email
-                            if (email != null) {
-                                if (role != null) {
-                                    alertRegisterSuccess(getString(R.string.welcome), email, role)
-                                }
-                            }
-                        } else {
-                            Log.d(ContentValues.TAG, "No such document")
-                        }
-                    }.addOnFailureListener { exception ->
-                        Log.d(ContentValues.TAG, "get failed with ", exception)
-                    }
-                }
+                val email = binding.bidanRegisterEmail.text.toString()
+                alertRegisterSuccess(getString(R.string.welcome), email, "bidan")
             } else {
-                Toast.makeText(
-                    baseContext,
-                    R.string.sign_up_failed,
-                    Toast.LENGTH_SHORT
-                ).show()
+                Toast.makeText(baseContext, R.string.sign_up_failed, Toast.LENGTH_SHORT).show()
             }
+        })
+
+        viewModel.emailVerificationMessage.observe(this, { message ->
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show()
         })
     }
 
@@ -132,7 +114,7 @@ class BidanRegisterActivity : AppCompatActivity() {
             if (role == "bidan") {
                 val preferenceManager = PreferenceManager(this)
                 preferenceManager.setUserRole("bidan")
-                startActivity(Intent(this@BidanRegisterActivity, BidanMainActivity::class.java))
+                startActivity(Intent(this@BidanRegisterActivity, BidanLoginActivity::class.java))
                 finish()
             } else {
                 val preferenceManager = PreferenceManager(this)

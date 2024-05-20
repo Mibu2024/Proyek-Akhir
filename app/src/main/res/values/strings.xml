@@ -90,7 +90,7 @@
     <string name="nama_pemeriksa">Nama Pemeriksa</string>
     <string name="periksa_selanjutnya">Periksa Selanjutnya</string>
     <string name="artikel_saya">Artikel Saya</string>
-    <string name="welcome">Welcome</string>
+    <string name="welcome">Registration successful. Please check your email to verify your account.</string>
     <string name="cari_ibu_hamil">Cari nama</string>
     <string name="daftar_ibu_hamil">Daftar Pasien</string>
     <string name="title_settings">Settings</string>
@@ -186,4 +186,5 @@
     <string name="alert_invalid_phone_number">Tuliskan Kode Negara, Contoh: 628092837261</string>
     <string name="add_usg">Foto USG</string>
     <string name="hasil_usg">Hasil USG</string>
+    <string name="welcome_home">Welcome!</string>
 </resources>

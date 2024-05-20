@@ -26,12 +26,32 @@ class FirebaseRepository : FirebaseService {
     private val auth = FirebaseAuth.getInstance()
     private val firestore = FirebaseFirestore.getInstance()
 
-    override fun login(email: String, password: String, onComplete: (Boolean) -> Unit) {
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
-                onComplete(task.isSuccessful)
-            }
-    }
+        override fun login(email: String, password: String, onComplete: (Boolean, String?) -> Unit) {
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val user = auth.currentUser
+                        if (user != null) {
+                            user.reload().addOnCompleteListener { reloadTask ->
+                                if (reloadTask.isSuccessful) {
+                                    if (user.isEmailVerified) {
+                                        onComplete(true, null)
+                                    } else {
+                                        auth.signOut()
+                                        onComplete(false, "Verify Your Email!")
+                                    }
+                                } else {
+                                    onComplete(false, "Failed!")
+                                }
+                            }
+                        } else {
+                            onComplete(false, null)
+                        }
+                    } else {
+                        onComplete(false, null)
+                    }
+                }
+        }
 
     override fun signupBidan(
         fullname: String,
@@ -40,59 +60,68 @@ class FirebaseRepository : FirebaseService {
         noTelepon: String,
         str: String,
         password: String,
-        onComplete: (Boolean) -> Unit
+        onComplete: (Boolean, String?) -> Unit
     ) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    // Update user profile with display name
                     val user = auth.currentUser
-                    val profileUpdates = UserProfileChangeRequest.Builder()
-                        .setDisplayName(fullname)
-                        .build()
 
-                    user?.updateProfile(profileUpdates)
-                        ?.addOnCompleteListener { profileTask ->
-                            if (profileTask.isSuccessful) {
-                                val bidanData = hashMapOf(
-                                    "fullname" to fullname,
-                                    "alamat" to alamat,
-                                    "email" to email,
-                                    "noTelepon" to noTelepon,
-                                    "str" to str,
-                                    "uid" to user?.uid,
-                                    "role" to "bidan"
-                                )
+                    // Send verification email
+                    user?.sendEmailVerification()
+                        ?.addOnCompleteListener { emailVerificationTask ->
+                            if (emailVerificationTask.isSuccessful) {
+                                // Update user profile with display name
+                                val profileUpdates = UserProfileChangeRequest.Builder()
+                                    .setDisplayName(fullname)
+                                    .build()
 
+                                user.updateProfile(profileUpdates)
+                                    .addOnCompleteListener { profileTask ->
+                                        if (profileTask.isSuccessful) {
+                                            // Upload data to Firestore
+                                            val bidanData = hashMapOf(
+                                                "fullname" to fullname,
+                                                "alamat" to alamat,
+                                                "email" to email,
+                                                "noTelepon" to noTelepon,
+                                                "str" to str,
+                                                "uid" to user.uid,
+                                                "role" to "bidan"
+                                            )
 
-                                //insert data to firestore
-                                val uid = user?.uid
-                                if (uid != null) {
-                                    firestore.collection("users").document(uid)
-                                        .set(bidanData)
-                                        .addOnSuccessListener {
-                                            onComplete(true)
+                                            // Insert data to Firestore
+                                            firestore.collection("users").document(user.uid)
+                                                .set(bidanData)
+                                                .addOnSuccessListener {
+                                                    // Sign out the user
+                                                    auth.signOut()
+                                                    onComplete(true, null)
+                                                }
+                                                .addOnFailureListener { e ->
+                                                    onComplete(false, e.message)
+                                                }
+                                        } else {
+                                            onComplete(false, "Failed to update profile.")
                                         }
-                                        .addOnFailureListener {
-                                            Log.d("Firestore Error", it.message!!)
-                                            onComplete(false)
-                                        }
-                                } else {
-                                    onComplete(false)
-                                }
-
+                                    }
+                                    .addOnFailureListener { e ->
+                                        onComplete(false, e.message)
+                                    }
                             } else {
-                                onComplete(false)
+                                onComplete(false, "Failed to send verification email.")
                             }
                         }
-                        ?.addOnFailureListener {
-                            onComplete(false)
+                        ?.addOnFailureListener { e ->
+                            onComplete(false, e.message)
                         }
                 } else {
-                    onComplete(false)
+                    onComplete(false, task.exception?.message)
                 }
             }
     }
+
+
 
     override fun getAllIbuHamil(
         role: String,

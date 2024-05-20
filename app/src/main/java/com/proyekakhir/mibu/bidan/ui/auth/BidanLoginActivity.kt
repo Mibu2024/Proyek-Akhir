@@ -68,30 +68,17 @@ class BidanLoginActivity : AppCompatActivity() {
 
         viewModel.isLoginSuccessful.observe(this, { isSuccessful ->
             if (isSuccessful) {
-                val db = FirebaseFirestore.getInstance()
-                val currentUser = FirebaseAuth.getInstance().currentUser?.uid
-                val docRef = currentUser?.let { db.collection("users").document(it) }
-                if (docRef != null) {
-                    docRef.get().addOnSuccessListener { document ->
-                        if (document != null) {
-                            val role = document.getString("role")
-                            val email = FirebaseAuth.getInstance().currentUser?.email
-                            if (email != null) {
-                                if (role != null) {
-                                    alertLoginSuccess(getString(R.string.welcome), email, role)
-                                }
-                            }
-                        } else {
-                            Log.d(ContentValues.TAG, "No such document")
-                        }
-                    }.addOnFailureListener { exception ->
-                        Log.d(ContentValues.TAG, "get failed with ", exception)
-                    }
-                }
+                val email = binding.bidanLoginEmail.text.toString()
+                alertLoginSuccess(getString(R.string.welcome), email, "bidan")
             } else {
-                Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(baseContext, R.string.sign_up_failed, Toast.LENGTH_SHORT).show()
             }
         })
+
+        viewModel.loginErrorMessage.observe(this, { message ->
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+        })
+
 
         binding.tvToSignup.setOnClickListener {
             startActivity(Intent(this@BidanLoginActivity, BidanRegisterActivity::class.java))
