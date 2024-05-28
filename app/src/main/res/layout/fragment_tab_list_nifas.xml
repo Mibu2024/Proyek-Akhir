@@ -15,17 +15,26 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_tab_nifas"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:layout_marginTop="16dp"
             android:overScrollMode="never"
             android:scrollbarSize="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_export"
-            tools:listitem="@layout/item_catatan_kesehatan" />
+            app:layout_constraintTop_toBottomOf="@+id/barChart"
+            app:layout_constraintVertical_bias="0.022" />
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/barChart"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_export" />
 
         <ProgressBar
             android:id="@+id/progressBar"

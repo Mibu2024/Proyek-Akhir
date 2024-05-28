@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -32,6 +33,15 @@ class ListCatatanFragment : Fragment() {
     ): View? {
         _binding = FragmentListCatatanBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        //back
+        binding.ivBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+        binding.tvBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
         // Setup ViewPager2 with Tabs
         val viewPager: ViewPager2 = binding.viewPager

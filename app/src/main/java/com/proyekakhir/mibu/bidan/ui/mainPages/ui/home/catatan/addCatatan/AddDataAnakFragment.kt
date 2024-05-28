@@ -23,6 +23,9 @@ import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.DatePickerHandler
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddDataAnak
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.IbuHamilData
 import com.proyekakhir.mibu.databinding.FragmentAddDataAnakBinding
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class AddDataAnakFragment : Fragment() {
     private var _binding: FragmentAddDataAnakBinding? = null
@@ -119,6 +122,7 @@ class AddDataAnakFragment : Fragment() {
             val periksaSelanjutnya = binding.edPeriksaSelanjutnya.text.toString()
             val uid = itemData.uid
             val namaibu = itemData.fullname
+            val tanggalSubmit = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date())
 
             if (namaAnak.isNullOrEmpty()){
                 Toast.makeText(requireContext(), "Isi nama anak", Toast.LENGTH_SHORT).show()
@@ -139,7 +143,7 @@ class AddDataAnakFragment : Fragment() {
                 Toast.makeText(requireContext(), "Isi tanggal periksa selanjutnya", Toast.LENGTH_SHORT).show()
                 binding.edPeriksaSelanjutnya.setError("Isi tanggal periksa selanjutnyaanak")
             } else {
-                val formData = AddDataAnak(namaAnak, tanggalLahir, umur, beratBadan, polio2, polio3, polio4, campak, dptHib1dosis, rubella1Dosis, rubellaDt, tetanus, namaPemeriksa, periksaSelanjutnya, uid, namaibu)
+                val formData = AddDataAnak(namaAnak, tanggalLahir, umur, beratBadan, polio2, polio3, polio4, campak, dptHib1dosis, rubella1Dosis, rubellaDt, tetanus, namaPemeriksa, periksaSelanjutnya, uid, namaibu, tanggalSubmit)
 
                 if (uid != null) {
                     viewModel.uploadCatatanAnak(uid, formData)

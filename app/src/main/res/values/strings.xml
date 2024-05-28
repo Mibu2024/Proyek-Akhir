@@ -194,4 +194,6 @@
     <string name="list_history_laporan">List Riwayat Catatan</string>
     <string name="tab_anak">Catatan Anak</string>
     <string name="export">Export</string>
+    <string name="chart">Chart</string>
+    <string name="piechart_title">Pie Chart Jumlah Catatan</string>
 </resources>

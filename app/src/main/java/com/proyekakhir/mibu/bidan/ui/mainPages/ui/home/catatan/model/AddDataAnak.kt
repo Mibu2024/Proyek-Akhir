@@ -19,6 +19,7 @@ data class AddDataAnak(
     val periksaSelanjutnya: String? = "",
     val uid: String? = "",
     val namaIbu: String? = "",
+    var tanggalPeriksa: String? = "",
     var key: String? = "",
     var firstChildKey: String? = "",
 ) : Serializable

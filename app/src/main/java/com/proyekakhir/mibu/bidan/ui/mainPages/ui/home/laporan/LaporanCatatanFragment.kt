@@ -3,6 +3,7 @@ package com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.laporan
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.Gravity
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -131,9 +132,10 @@ class LaporanCatatanFragment : DialogFragment() {
         val pieData = PieData(dataSet)
         pieChart.setEntryLabelColor(Color.WHITE) // Set label text color
         pieChart.setEntryLabelTextSize(8f) // Set label text size to 12dp (smaller)
-        pieChart.legend.textSize = 5f
+        pieChart.legend.textSize = 10f
         pieChart.data = pieData
         pieChart.description.isEnabled = false
+
         pieChart.invalidate() // refresh
 
 
