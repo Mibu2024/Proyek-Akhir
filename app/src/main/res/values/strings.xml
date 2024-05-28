@@ -196,4 +196,5 @@
     <string name="export">Export</string>
     <string name="chart">Chart</string>
     <string name="piechart_title">Pie Chart Jumlah Catatan</string>
+    <string name="success_login">Welcome to Mibu family!</string>
 </resources>

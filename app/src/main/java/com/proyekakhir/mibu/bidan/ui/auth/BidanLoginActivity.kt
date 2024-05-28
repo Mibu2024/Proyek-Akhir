@@ -69,7 +69,7 @@ class BidanLoginActivity : AppCompatActivity() {
         viewModel.isLoginSuccessful.observe(this, { isSuccessful ->
             if (isSuccessful) {
                 val email = binding.bidanLoginEmail.text.toString()
-                alertLoginSuccess(getString(R.string.welcome), email, "bidan")
+                alertLoginSuccess(getString(R.string.success_login), email, "bidan")
             } else {
                 Toast.makeText(baseContext, R.string.sign_up_failed, Toast.LENGTH_SHORT).show()
             }
