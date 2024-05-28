@@ -187,4 +187,11 @@
     <string name="add_usg">Foto USG</string>
     <string name="hasil_usg">Hasil USG</string>
     <string name="welcome_home">Welcome!</string>
+    <string name="laporan">Laporan</string>
+    <string name="list_catatan_kesehatan">List Catatan Kesehatan</string>
+    <string name="list_catatan_nifas">List Catatan Nifas</string>
+    <string name="list_catatan_anak">List Catatan Anak</string>
+    <string name="list_history_laporan">List Riwayat Catatan</string>
+    <string name="tab_anak">Catatan Anak</string>
+    <string name="export">Export</string>
 </resources>

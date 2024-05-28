@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "com.proyekakhir.mibu"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -106,5 +106,14 @@ dependencies {
     testImplementation ("org.mockito:mockito-inline:3.12.4")
     implementation ("com.google.android.gms:play-services-tasks:17.2.1")
 
+    //mp chart
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
+    //POI
+    implementation ("org.apache.poi:poi:4.1.2")
+    implementation ("org.apache.poi:poi-ooxml:4.1.2")
+    implementation("javax.xml.stream:stax-api:1.0")
+    implementation("org.apache.xmlbeans:xmlbeans:3.1.0")
+    implementation("com.fasterxml:aalto-xml:1.2.2")
 
 }

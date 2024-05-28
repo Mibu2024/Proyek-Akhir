@@ -1,27 +1,28 @@
-package com.proyekakhir.mibu.user.ui.anak
+package com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.laporan.anak
 
 import android.graphics.Color
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.proyekakhir.mibu.R
+import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddDataAnak
 import com.proyekakhir.mibu.databinding.FragmentDetailAnakUserBinding
+import com.proyekakhir.mibu.databinding.FragmentDetailListAnakBinding
 import com.proyekakhir.mibu.user.ui.anak.model.AnakModel
 
-class DetailAnakUserFragment : Fragment() {
-    private var _binding: FragmentDetailAnakUserBinding? = null
+class DetailListAnakFragment : Fragment() {
+    private var _binding: FragmentDetailListAnakBinding? = null
     private val binding get() = _binding!!
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentDetailAnakUserBinding.inflate(inflater, container, false)
+        _binding = FragmentDetailListAnakBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val itemData = arguments?.getSerializable("itemData") as AnakModel
+        val itemData = arguments?.getSerializable("itemData") as AddDataAnak
 
         binding.tvNamaAnak.text = ": ${itemData.namaAnak}"
         binding.tvTanggalLahir.text = ": ${itemData.tanggalLahir}"
@@ -152,7 +153,7 @@ class DetailAnakUserFragment : Fragment() {
 
         binding.tvPeriksaSelanjutnya.text = itemData.periksaSelanjutnya
 
+
         return root
     }
-
 }

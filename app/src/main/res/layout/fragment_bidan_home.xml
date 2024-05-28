@@ -115,6 +115,20 @@
             app:layout_constraintStart_toStartOf="@+id/iv_connection"
             app:layout_constraintTop_toBottomOf="@+id/iv_connection" />
 
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fabLaporan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:backgroundTint="@color/SupportSuccessDark"
+            android:drawableLeft="@drawable/baseline_bar_chart_24"
+            android:text="@string/laporan"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_username"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView7" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

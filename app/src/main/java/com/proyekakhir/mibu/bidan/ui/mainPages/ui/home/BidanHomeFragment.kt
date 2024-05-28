@@ -18,6 +18,7 @@ import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.bidan.ui.factory.ViewModelFactory
 import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.adapter.ListIbuAdapter
+import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.laporan.LaporanCatatanFragment
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.model.IbuHamilData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.settings.BidanSettingsViewModel
 import com.proyekakhir.mibu.bidan.ui.network.NetworkConnection
@@ -47,7 +48,7 @@ class BidanHomeFragment : Fragment() {
         settingsViewModel =
             ViewModelProvider(requireActivity(), factory).get(BidanSettingsViewModel::class.java)
 
-        _binding = FragmentBidanHomeBinding.inflate(inflater, container, false)
+        _binding = com.proyekakhir.mibu.databinding.FragmentBidanHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val firebaseUsername = FirebaseAuth.getInstance().currentUser?.displayName
@@ -130,6 +131,12 @@ class BidanHomeFragment : Fragment() {
                     binding.rvIbuHamil.visibility = View.GONE
                 }
             }
+        }
+
+        binding.fabLaporan.setOnClickListener {
+//            findNavController().navigate(R.id.action_navigation_home_to_laporanCatatanFragment)
+            val dialogFragment = LaporanCatatanFragment()
+            dialogFragment.show(requireActivity().supportFragmentManager, "LaporanCatatan")
         }
     }
 

@@ -13,6 +13,12 @@
         <action
             android:id="@+id/action_navigation_home_to_detailIbuFragment"
             app:destination="@id/detailIbuFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_laporanCatatanFragment"
+            app:destination="@id/laporanCatatanFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_listCatatanFragment"
+            app:destination="@id/listCatatanFragment" />
     </fragment>
 
     <fragment
@@ -118,5 +124,38 @@
         android:id="@+id/editArtikelFragmant"
         android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.EditArtikelFragmant"
         android:label="EditArtikelFragmant" />
+    <fragment
+        android:id="@+id/laporanCatatanFragment"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.laporan.LaporanCatatanFragment"
+        android:label="fragment_laporan_catatan"
+        tools:layout="@layout/fragment_laporan_catatan" >
+    </fragment>
+    <fragment
+        android:id="@+id/listCatatanFragment"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.laporan.ListCatatanFragment"
+        android:label="ListCatatanFragment" >
+        <action
+            android:id="@+id/action_listCatatanFragment_to_detailListAnakFragment"
+            app:destination="@id/detailListAnakFragment" />
+        <action
+            android:id="@+id/action_listCatatanFragment_to_detailListKesehatanFragment"
+            app:destination="@id/detailListKesehatanFragment" />
+        <action
+            android:id="@+id/action_listCatatanFragment_to_detailListNifasFragment"
+            app:destination="@id/detailListNifasFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailListAnakFragment"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.laporan.anak.DetailListAnakFragment"
+        android:label="DetailListAnakFragment" >
+    </fragment>
+    <fragment
+        android:id="@+id/detailListKesehatanFragment"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.laporan.kesehatan.DetailListKesehatanFragment"
+        android:label="DetailListKesehatanFragment" />
+    <fragment
+        android:id="@+id/detailListNifasFragment"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.laporan.nifas.DetailListNifasFragment"
+        android:label="DetailListNifasFragment" />
 
 </navigation>

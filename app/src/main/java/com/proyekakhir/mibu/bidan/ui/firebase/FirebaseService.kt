@@ -28,4 +28,7 @@ interface FirebaseService {
     fun deleteKesehatan(uid: String, itemKey: String, onSuccess: () -> Unit, onFailure: (Exception) -> Unit)
     fun updateNifas(uid: String, itemKey: String, updatedNifas: AddNifasData, onComplete: (Boolean) -> Unit)
     fun updateAnak(uid: String, itemKey: String, updatedAnak: AddDataAnak, onComplete: (Boolean) -> Unit)
+    fun allCatatanKesehatan(onDataChanged: (ArrayList<AddKesehatanKehamilanData>) -> Unit, onIsEmpty: (String) -> Unit, onIsLoading: (Boolean) -> Unit, onCancelled: (DatabaseError) -> Unit)
+    fun allCatatanNifas(onDataChanged: (ArrayList<AddNifasData>) -> Unit, onIsEmpty: (String) -> Unit, onIsLoading: (Boolean) -> Unit, onCancelled: (DatabaseError) -> Unit)
+    fun allCatatanAnak(onDataChanged: (ArrayList<AddDataAnak>) -> Unit, onIsEmpty: (String) -> Unit, onIsLoading: (Boolean) -> Unit, onCancelled: (DatabaseError) -> Unit)
 }
