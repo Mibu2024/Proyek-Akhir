@@ -197,4 +197,16 @@
     <string name="chart">Chart</string>
     <string name="piechart_title">Pie Chart Jumlah Catatan</string>
     <string name="success_login">Welcome to Mibu family!</string>
+    <string name="faskesTk1">No. JKN Faskes TK 1</string>
+    <string name="faskesRujukan">No. JKN Faskes Rujukan</string>
+    <string name="golDarah">Golongan Darah</string>
+    <string name="pekerjaan">Pekerjaan</string>
+    <string name="trimester">Trimester ke:</string>
+    <string name="trimester1">Trimester 1</string>
+    <string name="trimester2">Trimester 2</string>
+    <string name="trimester3">Trimester 3</string>
+    <string name="tinggi_badan">Tinggi Badan</string>
+    <string name="lingkar_lengan">Ukur Lingkar Lengan Atas</string>
+    <string name="status_imunisasi_tetanus">Status Imunisasi Tetanus</string>
+    <string name="detail_ibu">Data Ibu</string>
 </resources>

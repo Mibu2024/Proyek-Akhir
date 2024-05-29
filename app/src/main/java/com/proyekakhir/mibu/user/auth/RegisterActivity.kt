@@ -55,6 +55,10 @@ class RegisterActivity : AppCompatActivity() {
             val pass = binding.userRegisterPassword.text.toString()
             val emailError = binding.userRegisterEmail.isError
             val passError = binding.userRegisterPassword.isError
+            val faskesTk1 = binding.userFaskesTk1.text.toString()
+            val faskesRujukan = binding.userFaskesRujukan.text.toString()
+            val golDarah = binding.userGolDarah.text.toString()
+            val pekerjaan = binding.userPekerjaan.text.toString()
 
             if (passError) {
                 Toast.makeText(this, "Password minimum 8 characters", Toast.LENGTH_SHORT).show()
@@ -80,8 +84,16 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(this, "Tolong isi Umur Suami", Toast.LENGTH_SHORT).show()
             } else if (nik.isNullOrEmpty()){
                 Toast.makeText(this, "Tolong isi NIK", Toast.LENGTH_SHORT).show()
+            } else if (faskesTk1.isNullOrEmpty()){
+                Toast.makeText(this, "Tolong isi No JKN Faskes TK 1", Toast.LENGTH_SHORT).show()
+            } else if (faskesRujukan.isNullOrEmpty()){
+                Toast.makeText(this, "Tolong isi No JKN Faskes Rujukan", Toast.LENGTH_SHORT).show()
+            } else if (golDarah.isNullOrEmpty()){
+                Toast.makeText(this, "Tolong isi Golongan Darah", Toast.LENGTH_SHORT).show()
+            } else if (pekerjaan.isNullOrEmpty()){
+                Toast.makeText(this, "Tolong isi Pekerjaan", Toast.LENGTH_SHORT).show()
             } else {
-                viewModel.signup(fullname, alamat, email, noTelepon, umur, kehamilanKe, namaSuami, umurSuami, nik, pass)
+                viewModel.signup(fullname, alamat, email, noTelepon, umur, kehamilanKe, namaSuami, umurSuami, nik, faskesTk1, faskesRujukan, golDarah, pekerjaan, pass)
             }
         }
 

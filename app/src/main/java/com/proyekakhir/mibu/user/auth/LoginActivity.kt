@@ -72,7 +72,7 @@ class LoginActivity : AppCompatActivity() {
         viewModel.isLoginSuccessful.observe(this, { isSuccessful ->
             if (isSuccessful) {
                 val email = binding.userLoginEmail.text.toString()
-                alertLoginSuccess(getString(R.string.welcome), email, "user")
+                alertLoginSuccess(getString(R.string.success_login), email, "user")
             } else {
                 Toast.makeText(baseContext, R.string.sign_up_failed, Toast.LENGTH_SHORT).show()
             }

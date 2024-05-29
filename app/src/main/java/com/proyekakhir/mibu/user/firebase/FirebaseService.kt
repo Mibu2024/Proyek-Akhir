@@ -13,7 +13,7 @@ import com.proyekakhir.mibu.user.ui.kehamilan.model.NifasModel
 
 interface FirebaseService {
     fun login(email: String, password: String, onComplete: (Boolean, String?) -> Unit)
-    fun signup(fullname: String, alamat: String, email: String, noTelepon: String, umur: String, kehamilanKe: String, namaSuami: String, umurSuami: String, nik: String, password: String, onComplete: (Boolean, String?) -> Unit)
+    fun signup(fullname: String, alamat: String, email: String, noTelepon: String, umur: String, kehamilanKe: String, namaSuami: String, umurSuami: String, nik: String, faskesTk1: String, faskesRujukan: String, golDarah: String, pekerjaan: String,password: String, onComplete: (Boolean, String?) -> Unit)
     fun getUserData(onDataChange: (UserModel?) -> Unit, onCancelled: (Exception) -> Unit)
     fun getArtikel(onDataChange: (List<ArtikelModel>) -> Unit, onCancelled: (DatabaseError) -> Unit)
     fun getCatatanKesehatan(uid: String, onDataChanged: (ArrayList<KesehatanModel>) -> Unit, onIsEmpty: (String) -> Unit, onIsLoading: (Boolean) -> Unit, onCancelled: (DatabaseError) -> Unit)

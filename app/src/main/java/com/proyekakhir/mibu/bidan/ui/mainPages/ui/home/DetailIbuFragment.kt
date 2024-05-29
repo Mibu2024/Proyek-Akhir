@@ -64,6 +64,10 @@ class DetailIbuFragment : Fragment() {
         binding.tvNikIbu.text = "${itemData?.nik}"
         binding.tvNamaSuami.text = "${itemData?.namaSuami}"
         binding.tvAlamat.text = "${itemData?.alamat}"
+        binding.tvFaskesTk1.text = "${itemData?.faskesTk1}"
+        binding.tvFaskesRujukan.text = "${itemData?.faskesRujukan}"
+        binding.tvGolDarah.text = "${itemData?.golDarah}"
+        binding.tvPekerjaan.text = "${itemData?.pekerjaan}"
 
         binding.btnAddCatatanKesehatan.setOnClickListener {
             val bundle = Bundle()
