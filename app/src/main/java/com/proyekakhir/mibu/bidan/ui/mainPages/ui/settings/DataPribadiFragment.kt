@@ -7,7 +7,6 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -28,11 +27,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.bidan.ui.factory.ViewModelFactory
 import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.BidanHomeViewModel
-import com.proyekakhir.mibu.bidan.ui.network.NetworkConnection
-import com.proyekakhir.mibu.databinding.FragmentBidanHomeBinding
 import com.proyekakhir.mibu.databinding.FragmentDataPribadiBidanBinding
-import com.proyekakhir.mibu.databinding.FragmentDataPribadiBinding
 
 class DataPribadiFragment : Fragment() {
     private var _binding: FragmentDataPribadiBidanBinding? = null

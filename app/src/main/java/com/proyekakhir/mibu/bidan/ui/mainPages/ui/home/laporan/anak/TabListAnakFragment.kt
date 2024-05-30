@@ -25,8 +25,6 @@ import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.laporan.LaporanViewModel
 import com.proyekakhir.mibu.databinding.FragmentTabListAnakBinding
 import com.proyekakhir.mibu.bidan.ui.factory.ViewModelFactory
 import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddKesehatanKehamilanData
-import org.apache.commons.math3.analysis.function.Add
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
