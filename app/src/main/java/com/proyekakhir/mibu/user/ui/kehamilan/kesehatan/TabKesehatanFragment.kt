@@ -24,7 +24,7 @@ import com.proyekakhir.mibu.user.ui.kehamilan.nifas.ListNifasAdapter
 class TabKesehatanFragment : Fragment() {
     private var _binding: FragmentTabKesehatanBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: CatatanKehamilanViewModel
+//    private lateinit var viewModel: CatatanKehamilanViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,9 +33,9 @@ class TabKesehatanFragment : Fragment() {
         _binding = FragmentTabKesehatanBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val repository = FirebaseRepository()
-        val factory = ViewModelFactory(repository)
-        viewModel = ViewModelProvider(requireActivity(), factory).get(CatatanKehamilanViewModel::class.java)
+//        val repository = FirebaseRepository()
+//        val factory = ViewModelFactory(repository)
+//        viewModel = ViewModelProvider(requireActivity(), factory).get(CatatanKehamilanViewModel::class.java)
 
         val list = arrayListOf<KesehatanModel>()
         val adapter = ListKesehatanAdapter(list)
@@ -46,26 +46,26 @@ class TabKesehatanFragment : Fragment() {
 
         val uid = FirebaseAuth.getInstance().currentUser?.uid
         if (uid != null) {
-            viewModel.getCatatanKesehatanList(uid)
-            viewModel.catatanKesehatanList.observe(viewLifecycleOwner, Observer { list ->
-                adapter.setData(list)
-                adapter.notifyDataSetChanged()
-                if (list.isEmpty()) {
-                    binding.tvNoDataKesehatan.visibility = View.VISIBLE
-                } else {
-                    binding.tvNoDataKesehatan.visibility = View.GONE
-                }
-            })
+//            viewModel.getCatatanKesehatanList(uid)
+//            viewModel.catatanKesehatanList.observe(viewLifecycleOwner, Observer { list ->
+//                adapter.setData(list)
+//                adapter.notifyDataSetChanged()
+//                if (list.isEmpty()) {
+//                    binding.tvNoDataKesehatan.visibility = View.VISIBLE
+//                } else {
+//                    binding.tvNoDataKesehatan.visibility = View.GONE
+//                }
+//            })
         }
 
         val progressBar = binding.progressBar
-        viewModel.isLoading.observe(requireActivity(), Observer { isLoading ->
-            if (isLoading) {
-                progressBar.visibility = View.VISIBLE
-            } else {
-                progressBar.visibility = View.GONE
-            }
-        })
+//        viewModel.isLoading.observe(requireActivity(), Observer { isLoading ->
+//            if (isLoading) {
+//                progressBar.visibility = View.VISIBLE
+//            } else {
+//                progressBar.visibility = View.GONE
+//            }
+//        })
 
         adapter.listener = object : ListKesehatanAdapter.OnItemClickListenerHome {
             override fun onItemClick(item: KesehatanModel) {

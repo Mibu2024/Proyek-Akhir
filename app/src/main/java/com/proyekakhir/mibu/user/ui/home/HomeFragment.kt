@@ -28,7 +28,7 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private lateinit var homeViewModel: HomeViewModel
+//    private lateinit var homeViewModel: HomeViewModel
     private lateinit var adapter: ListArtikelHomeAdapter
 
     override fun onCreateView(
@@ -42,23 +42,23 @@ class HomeFragment : Fragment() {
 
         getHplDate()
 
-        val repository = FirebaseRepository()
-        val factory = ViewModelFactory(repository)
-        homeViewModel = ViewModelProvider(requireActivity(), factory).get(HomeViewModel::class.java)
+//        val repository = FirebaseRepository()
+//        val factory = ViewModelFactory(repository)
+//        homeViewModel = ViewModelProvider(requireActivity(), factory).get(HomeViewModel::class.java)
 
         val username = FirebaseAuth.getInstance().currentUser?.displayName
         binding.tvUsername.text = username
 
-        homeViewModel.fetchUserData()
-        homeViewModel.userData.observe(viewLifecycleOwner, Observer { data ->
-            if (!data?.profileImage.isNullOrEmpty()) {
-                Glide.with(requireActivity())
-                    .load(data?.profileImage)
-                    .into(binding.ivAvatar)
-            } else {
-                binding.ivAvatar.setImageResource(R.drawable.avatar)
-            }
-        })
+//        homeViewModel.fetchUserData()
+//        homeViewModel.userData.observe(viewLifecycleOwner, Observer { data ->
+//            if (!data?.profileImage.isNullOrEmpty()) {
+//                Glide.with(requireActivity())
+//                    .load(data?.profileImage)
+//                    .into(binding.ivAvatar)
+//            } else {
+//                binding.ivAvatar.setImageResource(R.drawable.avatar)
+//            }
+//        })
 
         val listArtikel = arrayListOf<ArtikelModel>()
         adapter = ListArtikelHomeAdapter(listArtikel)
@@ -67,20 +67,20 @@ class HomeFragment : Fragment() {
         rvArtikel.setHasFixedSize(true)
         rvArtikel.adapter = adapter
 
-        homeViewModel.getArtikelByUser(
-            onDataChange = { list ->
-                // Update your adapter with the new list
-                adapter.setData(list)
-                if (list.isEmpty()){
-                    binding.noDataHome.visibility = View.VISIBLE
-                } else {
-                    binding.noDataHome.visibility = View.GONE
-                }
-            },
-            onCancelled = { error ->
-                // Handle the error
-            }
-        )
+//        homeViewModel.getArtikelByUser(
+//            onDataChange = { list ->
+//                // Update your adapter with the new list
+//                adapter.setData(list)
+//                if (list.isEmpty()){
+//                    binding.noDataHome.visibility = View.VISIBLE
+//                } else {
+//                    binding.noDataHome.visibility = View.GONE
+//                }
+//            },
+//            onCancelled = { error ->
+//                // Handle the error
+//            }
+//        )
 
         adapter.listener = object : ListArtikelHomeAdapter.OnItemClickListenerHome {
             override fun onItemClick(item: ArtikelModel) {
@@ -94,13 +94,13 @@ class HomeFragment : Fragment() {
         }
 
         val progressBar = binding.pbArtikelHome
-        homeViewModel.isLoading.observe(requireActivity(), Observer { isLoading ->
-            if (isLoading) {
-                progressBar.visibility = View.VISIBLE
-            } else {
-                progressBar.visibility = View.GONE
-            }
-        })
+//        homeViewModel.isLoading.observe(requireActivity(), Observer { isLoading ->
+//            if (isLoading) {
+//                progressBar.visibility = View.VISIBLE
+//            } else {
+//                progressBar.visibility = View.GONE
+//            }
+//        })
 
         binding.fabHubungiBidan.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_chatBidanFragment)

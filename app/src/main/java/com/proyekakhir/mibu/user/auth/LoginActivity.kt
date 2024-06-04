@@ -15,6 +15,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
@@ -32,9 +33,11 @@ import com.proyekakhir.mibu.user.ui.activity.MainActivity
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var viewModel: LoginViewModel
     val firebaseAuth = FirebaseAuth.getInstance()
     private lateinit var progressDialog: ProgressDialog
+    private val viewModel by viewModels<LoginViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -45,10 +48,6 @@ class LoginActivity : AppCompatActivity() {
             setMessage("Registering...")
             setCancelable(false)
         }
-
-        val repository = FirebaseRepository()
-        val factory = ViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, factory).get(LoginViewModel::class.java)
 
         binding.tvToSignup.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
@@ -78,18 +77,15 @@ class LoginActivity : AppCompatActivity() {
             binding.pbLogin.visibility = if (isLoading) View.VISIBLE else View.GONE
         })
 
-        viewModel.isLoginSuccessful.observe(this, { isSuccessful ->
+        viewModel.loginResult.observe(this, { data ->
             progressDialog.dismiss()
-            if (isSuccessful) {
+            if (data.data?.token != null) {
                 val email = binding.userLoginEmail.text.toString()
-                alertLoginSuccess(getString(R.string.success_login), email, "user")
+                alertLoginSuccess(getString(R.string.success_login), email)
+                Log.d("loginapi", data.data?.token.toString())
             } else {
                 Toast.makeText(baseContext, R.string.sign_up_failed, Toast.LENGTH_SHORT).show()
             }
-        })
-
-        viewModel.loginErrorMessage.observe(this, { message ->
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show()
         })
 
         binding.userForgotPassword.setOnClickListener {
@@ -133,7 +129,7 @@ class LoginActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    private fun alertLoginSuccess(titleFill: String, descFill: String, role: String) {
+    private fun alertLoginSuccess(titleFill: String, descFill: String) {
         val builder = AlertDialog.Builder(this)
 
         val customView = LayoutInflater.from(this)
@@ -150,17 +146,8 @@ class LoginActivity : AppCompatActivity() {
         val dialog = builder.create()
 
         btnOk.setOnClickListener {
-            if (role == "bidan") {
-                val preferenceManager = PreferenceManager(this)
-                preferenceManager.setUserRole("bidan")
-                startActivity(Intent(this@LoginActivity, BidanMainActivity::class.java))
-                finish()
-            } else {
-                val preferenceManager = PreferenceManager(this)
-                preferenceManager.setUserRole("user")
-                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                finish()
-            }
+            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+            finish()
             dialog.dismiss()
         }
 

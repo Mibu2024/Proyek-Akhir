@@ -29,7 +29,7 @@ class SettingsFragment : Fragment() {
 
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
-    private lateinit var homeViewModel: HomeViewModel
+//    private lateinit var homeViewModel: HomeViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,9 +38,9 @@ class SettingsFragment : Fragment() {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val repository = FirebaseRepository()
-        val factory = ViewModelFactory(repository)
-        homeViewModel = ViewModelProvider(requireActivity(), factory).get(HomeViewModel::class.java)
+//        val repository = FirebaseRepository()
+//        val factory = ViewModelFactory(repository)
+//        homeViewModel = ViewModelProvider(requireActivity(), factory).get(HomeViewModel::class.java)
 
         val username = FirebaseAuth.getInstance().currentUser?.displayName
         val email = FirebaseAuth.getInstance().currentUser?.email
@@ -60,16 +60,16 @@ class SettingsFragment : Fragment() {
             findNavController().navigate(R.id.action_navigation_settings_to_dataPribadiFragment2)
         }
 
-        homeViewModel.fetchUserData()
-        homeViewModel.userData.observe(viewLifecycleOwner, Observer { data ->
-            if (!data?.profileImage.isNullOrEmpty()) {
-                Glide.with(requireActivity())
-                    .load(data?.profileImage)
-                    .into(binding.profileImage)
-            } else {
-                binding.profileImage.setImageResource(R.drawable.cam_placeholder_logo)
-            }
-        })
+//        homeViewModel.fetchUserData()
+//        homeViewModel.userData.observe(viewLifecycleOwner, Observer { data ->
+//            if (!data?.profileImage.isNullOrEmpty()) {
+//                Glide.with(requireActivity())
+//                    .load(data?.profileImage)
+//                    .into(binding.profileImage)
+//            } else {
+//                binding.profileImage.setImageResource(R.drawable.cam_placeholder_logo)
+//            }
+//        })
 
         return root
     }

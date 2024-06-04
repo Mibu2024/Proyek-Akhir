@@ -26,7 +26,7 @@ class CatatanAnakFragment : Fragment() {
     private var _binding: FragmentCatatanAnakBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var viewModel: CatatanAnakViewModel
+//    private lateinit var viewModel: CatatanAnakViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,9 +35,9 @@ class CatatanAnakFragment : Fragment() {
         _binding = FragmentCatatanAnakBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val repository = FirebaseRepository()
-        val factory = ViewModelFactory(repository)
-        viewModel = ViewModelProvider(requireActivity(), factory).get(CatatanAnakViewModel::class.java)
+//        val repository = FirebaseRepository()
+//        val factory = ViewModelFactory(repository)
+//        viewModel = ViewModelProvider(requireActivity(), factory).get(CatatanAnakViewModel::class.java)
 
         val list = arrayListOf<AnakModel>()
         val adapter = ListAnakAdapter(list)
@@ -48,26 +48,26 @@ class CatatanAnakFragment : Fragment() {
 
         val uid = FirebaseAuth.getInstance().currentUser?.uid
         if (uid != null) {
-            viewModel.getCatatanAnakList(uid)
-            viewModel.catatanAnakList.observe(viewLifecycleOwner, Observer { list ->
-                adapter.setData(list)
-                adapter.notifyDataSetChanged()
-                if (list.isEmpty()) {
-                    binding.tvNoDataAnak.visibility = View.VISIBLE
-                } else {
-                    binding.tvNoDataAnak.visibility = View.GONE
-                }
-            })
+//            viewModel.getCatatanAnakList(uid)
+//            viewModel.catatanAnakList.observe(viewLifecycleOwner, Observer { list ->
+//                adapter.setData(list)
+//                adapter.notifyDataSetChanged()
+//                if (list.isEmpty()) {
+//                    binding.tvNoDataAnak.visibility = View.VISIBLE
+//                } else {
+//                    binding.tvNoDataAnak.visibility = View.GONE
+//                }
+//            })
         }
 
         val progressBar = binding.progressBar
-        viewModel.isLoading.observe(requireActivity(), Observer { isLoading ->
-            if (isLoading) {
-                progressBar.visibility = View.VISIBLE
-            } else {
-                progressBar.visibility = View.GONE
-            }
-        })
+//        viewModel.isLoading.observe(requireActivity(), Observer { isLoading ->
+//            if (isLoading) {
+//                progressBar.visibility = View.VISIBLE
+//            } else {
+//                progressBar.visibility = View.GONE
+//            }
+//        })
 
         adapter.listener = object : ListAnakAdapter.OnItemClickListenerHome {
             override fun onItemClick(item: AnakModel) {

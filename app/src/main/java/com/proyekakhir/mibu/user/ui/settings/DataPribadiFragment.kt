@@ -34,7 +34,7 @@ import com.proyekakhir.mibu.user.ui.home.HomeViewModel
 class DataPribadiFragment : Fragment() {
     private var _binding: FragmentDataPribadiBinding? = null
     private val binding get() = _binding!!
-    private lateinit var homeViewModel: HomeViewModel
+//    private lateinit var homeViewModel: HomeViewModel
     private var currentUserUid = FirebaseAuth.getInstance().currentUser?.uid.toString()
     private var selectedImageUri: Uri? = null
 
@@ -45,9 +45,9 @@ class DataPribadiFragment : Fragment() {
         _binding = FragmentDataPribadiBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val repository = FirebaseRepository()
-        val factory = ViewModelFactory(repository)
-        homeViewModel = ViewModelProvider(requireActivity(), factory).get(HomeViewModel::class.java)
+//        val repository = FirebaseRepository()
+//        val factory = ViewModelFactory(repository)
+//        homeViewModel = ViewModelProvider(requireActivity(), factory).get(HomeViewModel::class.java)
 
         binding.edEmail.isEnabled = false
         binding.edNamaSuami.isEnabled = false
@@ -56,23 +56,23 @@ class DataPribadiFragment : Fragment() {
             findNavController().popBackStack()
         }
 
-        homeViewModel.fetchUserData()
-        homeViewModel.userData.observe(viewLifecycleOwner, Observer { data ->
-            binding.edFullname.setText(data?.fullname)
-            binding.edAlamat.setText(data?.alamat)
-            binding.edNamaSuami.setText(data?.namaSuami)
-            binding.edEmail.setText(data?.email)
-            binding.edTelpon.setText(data?.noTelepon)
-            binding.edKelahiranke.setText(data?.kehamilanKe)
-
-            if (!data?.profileImage.isNullOrEmpty()) {
-                Glide.with(requireActivity())
-                    .load(data?.profileImage)
-                    .into(binding.profileImage)
-            } else {
-                binding.profileImage.setImageResource(R.drawable.cam_placeholder_logo)
-            }
-        })
+//        homeViewModel.fetchUserData()
+//        homeViewModel.userData.observe(viewLifecycleOwner, Observer { data ->
+//            binding.edFullname.setText(data?.fullname)
+//            binding.edAlamat.setText(data?.alamat)
+//            binding.edNamaSuami.setText(data?.namaSuami)
+//            binding.edEmail.setText(data?.email)
+//            binding.edTelpon.setText(data?.noTelepon)
+//            binding.edKelahiranke.setText(data?.kehamilanKe)
+//
+//            if (!data?.profileImage.isNullOrEmpty()) {
+//                Glide.with(requireActivity())
+//                    .load(data?.profileImage)
+//                    .into(binding.profileImage)
+//            } else {
+//                binding.profileImage.setImageResource(R.drawable.cam_placeholder_logo)
+//            }
+//        })
 
         binding.btnSimpan.setOnClickListener {
             alertEditProfile(getString(R.string.warning), getString(R.string.want_to_edit_profile))

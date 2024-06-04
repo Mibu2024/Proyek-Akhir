@@ -3,27 +3,30 @@ package com.proyekakhir.mibu.user.auth.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.proyekakhir.mibu.user.api.UserRepository
+import com.proyekakhir.mibu.user.api.response.RegisterResponse
 import com.proyekakhir.mibu.user.firebase.FirebaseRepository
+import kotlinx.coroutines.launch
+import okhttp3.RequestBody
 
-class SignUpViewModel(private val repository: FirebaseRepository) : ViewModel() {
-    private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> = _isLoading
+class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
+    val isLoading = MutableLiveData<Boolean>()
+    val registerResponse = MutableLiveData<RegisterResponse>()
+    val isRegistrationSuccessful = MutableLiveData<Boolean>()
 
-    private val _isSignupSuccessful = MutableLiveData<Boolean>()
-    val isSignupSuccessful: LiveData<Boolean> = _isSignupSuccessful
-
-    private val _emailVerificationMessage = MutableLiveData<String>()
-    val emailVerificationMessage: LiveData<String> = _emailVerificationMessage
-
-    fun signup(fullname: String, alamat: String, email: String, noTelepon: String, umur: String, kehamilanKe: String, namaSuami: String, umurSuami: String, nik: String, password: String, faskesTk1: String, faskesRujukan: String, golDarah: String, pekerjaan: String) {
-        _isLoading.value = true
-        repository.signup(fullname, alamat, email, noTelepon, umur, kehamilanKe, namaSuami, umurSuami, nik, password, faskesTk1, faskesRujukan, golDarah, pekerjaan) { isSuccessful, message ->
-            _isLoading.value = false
-            _isSignupSuccessful.value = isSuccessful
-            if (isSuccessful) {
-                _emailVerificationMessage.value = "Registration successful. Please check your email to verify your account."
-            } else {
-                _emailVerificationMessage.value = message ?: "Registration failed. Please try again."
+    fun signup(raw: RequestBody) {
+        viewModelScope.launch {
+            isLoading.value = true
+            try {
+                val response: RegisterResponse = repository.register(raw)
+                registerResponse.value = response
+                isRegistrationSuccessful.value = true
+            } catch (e: Exception) {
+                // Handle the error here
+                isRegistrationSuccessful.value = false
+            } finally {
+                isLoading.value = false
             }
         }
     }

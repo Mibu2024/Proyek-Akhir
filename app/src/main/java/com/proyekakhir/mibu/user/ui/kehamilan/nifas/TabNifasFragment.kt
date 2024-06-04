@@ -25,7 +25,7 @@ class TabNifasFragment : Fragment() {
 
     private var _binding: FragmentTabNifasBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: CatatanKehamilanViewModel
+//    private lateinit var viewModel: CatatanKehamilanViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,9 +35,9 @@ class TabNifasFragment : Fragment() {
         _binding = FragmentTabNifasBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val repository = FirebaseRepository()
-        val factory = ViewModelFactory(repository)
-        viewModel = ViewModelProvider(requireActivity(), factory).get(CatatanKehamilanViewModel::class.java)
+//        val repository = FirebaseRepository()
+//        val factory = ViewModelFactory(repository)
+//        viewModel = ViewModelProvider(requireActivity(), factory).get(CatatanKehamilanViewModel::class.java)
 
         val list = arrayListOf<NifasModel>()
         val adapter = ListNifasAdapter(list)
@@ -48,26 +48,26 @@ class TabNifasFragment : Fragment() {
 
         val uid = FirebaseAuth.getInstance().currentUser?.uid
         if (uid != null) {
-            viewModel.getCatatanNifasList(uid)
-            viewModel.catatanNifasList.observe(viewLifecycleOwner, Observer { list ->
-                adapter.setData(list)
-                adapter.notifyDataSetChanged()
-                if (list.isEmpty()) {
-                    binding.tvNoDataNifas.visibility = View.VISIBLE
-                } else {
-                    binding.tvNoDataNifas.visibility = View.GONE
-                }
-            })
+//            viewModel.getCatatanNifasList(uid)
+//            viewModel.catatanNifasList.observe(viewLifecycleOwner, Observer { list ->
+//                adapter.setData(list)
+//                adapter.notifyDataSetChanged()
+//                if (list.isEmpty()) {
+//                    binding.tvNoDataNifas.visibility = View.VISIBLE
+//                } else {
+//                    binding.tvNoDataNifas.visibility = View.GONE
+//                }
+//            })
         }
 
         val progressBar = binding.progressBar
-        viewModel.isLoading.observe(requireActivity(), Observer { isLoading ->
-            if (isLoading) {
-                progressBar.visibility = View.VISIBLE
-            } else {
-                progressBar.visibility = View.GONE
-            }
-        })
+//        viewModel.isLoading.observe(requireActivity(), Observer { isLoading ->
+//            if (isLoading) {
+//                progressBar.visibility = View.VISIBLE
+//            } else {
+//                progressBar.visibility = View.GONE
+//            }
+//        })
 
         adapter.listener = object : ListNifasAdapter.OnItemClickListenerHome {
             override fun onItemClick(item: NifasModel) {
