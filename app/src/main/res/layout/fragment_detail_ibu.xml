@@ -36,7 +36,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="1000dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:layout_marginEnd="24dp"
@@ -330,16 +330,29 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
                     android:background="@drawable/bg_et_default"
                     android:padding="8dp"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/textView49"
                     app:layout_constraintTop_toBottomOf="@+id/textView49"
                     tools:text="Ibu Rumah tangga" />
+
+                <Button
+                    android:id="@+id/btnAddHpl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:backgroundTint="@color/red_400_01"
+                    android:text="@string/add_hpl"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_pekerjaan" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

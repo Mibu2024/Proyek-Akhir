@@ -1,21 +1,31 @@
 package com.proyekakhir.mibu.bidan.ui.mainPages.ui.home
 
+import android.app.AlertDialog
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.auth.FirebaseAuth
 import com.proyekakhir.mibu.R
+import com.proyekakhir.mibu.bidan.ui.customViewBidan.EmailEditText
 import com.proyekakhir.mibu.bidan.ui.factory.ViewModelFactory
 import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.adapter.CatatanAnakAdapter
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.adapter.CatatanKesehatanAdapter
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.adapter.CatatanNifasAdapter
+import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.DatePickerHandler
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.addCatatan.AddCatatanViewModel
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddDataAnak
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddKesehatanKehamilanData
@@ -56,6 +66,10 @@ class DetailIbuFragment : Fragment() {
 
         binding.tvBack.setOnClickListener {
             findNavController().popBackStack()
+        }
+
+        binding.btnAddHpl.setOnClickListener {
+            hplDialog(itemData?.uid.toString())
         }
 
         binding.tvNamaIbu.text = "${itemData?.fullname}"
@@ -203,5 +217,54 @@ class DetailIbuFragment : Fragment() {
 
 
         return root
+    }
+
+    private fun hplDialog(uid: String) {
+        val builder = AlertDialog.Builder(requireContext())
+        val customView = LayoutInflater.from(requireContext()).inflate(R.layout.alert_dialog_add_hpl, null)
+        builder.setView(customView)
+        val dialog = builder.create()
+
+        val edHpl = customView.findViewById<TextInputEditText>(R.id.ed_hpl)
+        val btnSend = customView.findViewById<Button>(R.id.btn_submit)
+        val close = customView.findViewById<ImageView>(R.id.iv_close_reset)
+
+        edHpl.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus){
+                DatePickerHandler.showDatePicker(requireContext(), edHpl)
+            }
+        }
+
+        edHpl.setOnClickListener {
+            DatePickerHandler.showDatePicker(requireContext(), edHpl)
+        }
+
+
+
+        btnSend.setOnClickListener {
+            if (edHpl.text.isNullOrEmpty()){
+                Toast.makeText(requireContext(), "Isi Tanggal HPL!", Toast.LENGTH_SHORT).show()
+            } else {
+                if (uid != null) {
+                    viewModel.addHpl(uid, edHpl.text.toString())
+                }
+                dialog.dismiss()
+            }
+        }
+
+        viewModel.hplSuccessMessage.observe(viewLifecycleOwner, { message ->
+            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        })
+
+        viewModel.hplErrorMessage.observe(viewLifecycleOwner, { message ->
+            Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+        })
+
+        close.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
     }
 }

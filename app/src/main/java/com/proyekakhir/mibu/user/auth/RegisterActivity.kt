@@ -1,6 +1,7 @@
 package com.proyekakhir.mibu.user.auth
 
 import android.app.AlertDialog
+import android.app.ProgressDialog
 import android.content.ContentValues
 import android.content.Intent
 import android.graphics.Color
@@ -29,10 +30,17 @@ import com.proyekakhir.mibu.user.ui.activity.MainActivity
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var viewModel: SignUpViewModel
+    private lateinit var progressDialog: ProgressDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Initialize ProgressDialog
+        progressDialog = ProgressDialog(this).apply {
+            setMessage("Registering...")
+            setCancelable(false)
+        }
 
         val repository = FirebaseRepository()
         val factory = ViewModelFactory(repository)
@@ -93,7 +101,8 @@ class RegisterActivity : AppCompatActivity() {
             } else if (pekerjaan.isNullOrEmpty()){
                 Toast.makeText(this, "Tolong isi Pekerjaan", Toast.LENGTH_SHORT).show()
             } else {
-                viewModel.signup(fullname, alamat, email, noTelepon, umur, kehamilanKe, namaSuami, umurSuami, nik, faskesTk1, faskesRujukan, golDarah, pekerjaan, pass)
+                progressDialog.show()
+                viewModel.signup(fullname, alamat, email, noTelepon, umur, kehamilanKe, namaSuami, umurSuami, nik, pass, faskesTk1, faskesRujukan, golDarah, pekerjaan)
             }
         }
 
@@ -102,6 +111,7 @@ class RegisterActivity : AppCompatActivity() {
         })
 
         viewModel.isSignupSuccessful.observe(this, { isSuccessful ->
+            progressDialog.dismiss()
             if (isSuccessful) {
                 val email = binding.userRegisterEmail.text.toString()
                 alertRegisterSuccess(getString(R.string.welcome), email, "user")
