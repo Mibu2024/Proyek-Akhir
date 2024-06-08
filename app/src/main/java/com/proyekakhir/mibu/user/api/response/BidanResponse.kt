@@ -3,12 +3,13 @@ package com.proyekakhir.mibu.user.api.response
 import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import java.util.Date
 
 @Parcelize
-data class LoginResponse(
+data class BidanResponse(
 
-	@field:SerializedName("data")
-	val data: Data? = null,
+	@field:SerializedName("data_bidan")
+	val dataBidan: List<DataBidanItem?>? = null,
 
 	@field:SerializedName("success")
 	val success: Boolean? = null,
@@ -18,34 +19,31 @@ data class LoginResponse(
 ) : Parcelable
 
 @Parcelize
-data class Data(
+data class DataBidanItem(
 
 	@field:SerializedName("nik")
 	val nik: String? = null,
 
-	@field:SerializedName("nama_suami")
-	val namaSuami: String? = null,
+	@field:SerializedName("updated_at")
+	val updatedAt: String? = null,
 
-	@field:SerializedName("nama_ibu")
-	val namaIbu: String? = null,
+	@field:SerializedName("name")
+	val name: String? = null,
 
-	@field:SerializedName("umur_ibu")
-	val umurIbu: Int? = null,
+	@field:SerializedName("created_at")
+	val createdAt: String? = null,
 
-	@field:SerializedName("umur_suami")
-	val umurSuami: Int? = null,
+	@field:SerializedName("email_verified_at")
+	val emailVerifiedAt: Date? = null,
 
 	@field:SerializedName("id")
 	val id: Int? = null,
 
-	@field:SerializedName("kehamilan_ke")
-	val kehamilanKe: Int? = null,
+	@field:SerializedName("no_str")
+	val noStr: String? = null,
 
 	@field:SerializedName("email")
 	val email: String? = null,
-
-	@field:SerializedName("token")
-	val token: String? = null,
 
 	@field:SerializedName("alamat")
 	val alamat: String? = null,

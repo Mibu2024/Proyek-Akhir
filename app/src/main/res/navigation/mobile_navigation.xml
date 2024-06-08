@@ -16,10 +16,13 @@
         <action
             android:id="@+id/action_navigation_home_to_chatBidanFragment"
             app:destination="@id/chatBidanFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_artikelFragment"
+            app:destination="@id/artikelFragment" />
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_catatan_kehamilan"
+        android:id="@+id/navigation_catatan_kehamilan_navbar"
         android:name="com.proyekakhir.mibu.user.ui.kehamilan.CatatanKehamilanFragment"
         android:label="@string/title_catatan_kehamilan"
         tools:layout="@layout/fragment_catatan_kehamilan" >
@@ -81,6 +84,14 @@
         android:id="@+id/chatBidanFragment"
         android:name="com.proyekakhir.mibu.user.ui.home.ChatBidanFragment"
         android:label="ChatBidanFragment" />
+    <fragment
+        android:id="@+id/artikelFragment"
+        android:name="com.proyekakhir.mibu.user.ui.artikel.ArtikelFragment"
+        android:label="ArtikelFragment" >
+        <action
+            android:id="@+id/action_artikelFragment_to_detailArtikelFragment2"
+            app:destination="@id/detailArtikelFragment2" />
+    </fragment>
 
 
 </navigation>

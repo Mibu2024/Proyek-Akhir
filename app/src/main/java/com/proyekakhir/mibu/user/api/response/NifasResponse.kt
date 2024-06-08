@@ -3,6 +3,7 @@ package com.proyekakhir.mibu.user.api.response
 import kotlinx.parcelize.Parcelize
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 @Parcelize
 data class NifasResponse(
@@ -17,7 +18,6 @@ data class NifasResponse(
 	val message: String? = null
 ) : Parcelable
 
-@Parcelize
 data class DataNifasItem(
 
 	@field:SerializedName("id_ibu")
@@ -58,4 +58,4 @@ data class DataNifasItem(
 
 	@field:SerializedName("masalah")
 	val masalah: String? = null
-) : Parcelable
+) : Serializable

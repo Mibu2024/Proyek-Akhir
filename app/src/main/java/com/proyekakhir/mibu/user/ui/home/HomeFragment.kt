@@ -1,26 +1,35 @@
 package com.proyekakhir.mibu.user.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavOptions
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.bidan.ui.network.NetworkConnection
 import com.proyekakhir.mibu.databinding.FragmentHomeBinding
+import com.proyekakhir.mibu.user.api.UserPreference
+import com.proyekakhir.mibu.user.api.dataStore
+import com.proyekakhir.mibu.user.api.response.DataArtikelItem
+import com.proyekakhir.mibu.user.api.response.IbuResponse
+import com.proyekakhir.mibu.user.auth.viewmodel.LoginViewModel
 import com.proyekakhir.mibu.user.factory.ViewModelFactory
-import com.proyekakhir.mibu.user.firebase.FirebaseRepository
-import com.proyekakhir.mibu.user.ui.home.model.ArtikelModel
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
-import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
@@ -28,9 +37,14 @@ class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-//    private lateinit var homeViewModel: HomeViewModel
     private lateinit var adapter: ListArtikelHomeAdapter
+    private val viewModel by viewModels<HomeViewModel> {
+        ViewModelFactory.getInstance(requireContext())
+    }
 
+    private val loginViewModel: LoginViewModel by activityViewModels {
+        ViewModelFactory.getInstance(requireContext())
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,50 +54,57 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        getHplDate()
+        lifecycleScope.launch {
+            val dataStore: DataStore<Preferences> = requireContext().dataStore
+            val userPreference = UserPreference.getInstance(dataStore)
+            val name = userPreference.getSession().firstOrNull()?.name ?: 0
+            binding.tvUsername.text = name.toString()
+        }
 
-//        val repository = FirebaseRepository()
-//        val factory = ViewModelFactory(repository)
-//        homeViewModel = ViewModelProvider(requireActivity(), factory).get(HomeViewModel::class.java)
+        binding.catatanKehamilan.setOnClickListener {
+            findNavController().navigate(R.id.navigation_catatan_kehamilan_navbar)
+            activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.visibility = View.GONE
+        }
 
-        val username = FirebaseAuth.getInstance().currentUser?.displayName
-        binding.tvUsername.text = username
+        binding.catatanAnak.setOnClickListener {
+            findNavController().navigate(R.id.navigation_catatan_anak)
+            activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.visibility = View.GONE
+        }
 
-//        homeViewModel.fetchUserData()
-//        homeViewModel.userData.observe(viewLifecycleOwner, Observer { data ->
-//            if (!data?.profileImage.isNullOrEmpty()) {
-//                Glide.with(requireActivity())
-//                    .load(data?.profileImage)
-//                    .into(binding.ivAvatar)
-//            } else {
-//                binding.ivAvatar.setImageResource(R.drawable.avatar)
-//            }
-//        })
+        binding.artikel.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_home_to_artikelFragment)
+            activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.visibility = View.GONE
+        }
 
-        val listArtikel = arrayListOf<ArtikelModel>()
-        adapter = ListArtikelHomeAdapter(listArtikel)
+        adapter = ListArtikelHomeAdapter(listOf())
         val rvArtikel = binding.rvArtikelHome
         rvArtikel.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         rvArtikel.setHasFixedSize(true)
         rvArtikel.adapter = adapter
 
-//        homeViewModel.getArtikelByUser(
-//            onDataChange = { list ->
-//                // Update your adapter with the new list
-//                adapter.setData(list)
-//                if (list.isEmpty()){
-//                    binding.noDataHome.visibility = View.VISIBLE
-//                } else {
-//                    binding.noDataHome.visibility = View.GONE
-//                }
-//            },
-//            onCancelled = { error ->
-//                // Handle the error
-//            }
-//        )
+        viewModel.artikel.observe(viewLifecycleOwner, Observer { response ->
+            val list = response.dataArtikel
+            if (list != null) {
+                adapter.listArtikel = list
+                binding.noDataHome.visibility = View.GONE
+            } else {
+                binding.noDataHome.visibility = View.VISIBLE
+            }
+
+            Log.d("artikelapi", response.dataArtikel.toString())
+        })
+
+        loginViewModel.loginResult.observe(viewLifecycleOwner, Observer { loginResponse ->
+            // When login result is updated, trigger data fetch
+            viewModel.getHpl()
+        })
+
+        viewModel.hpl.observe(viewLifecycleOwner, Observer { response ->
+            getHplDate(response)
+        })
 
         adapter.listener = object : ListArtikelHomeAdapter.OnItemClickListenerHome {
-            override fun onItemClick(item: ArtikelModel) {
+            override fun onItemClick(item: DataArtikelItem) {
                 val bundle = Bundle()
                 bundle.putSerializable("itemData", item)
                 findNavController().navigate(
@@ -94,13 +115,13 @@ class HomeFragment : Fragment() {
         }
 
         val progressBar = binding.pbArtikelHome
-//        homeViewModel.isLoading.observe(requireActivity(), Observer { isLoading ->
-//            if (isLoading) {
-//                progressBar.visibility = View.VISIBLE
-//            } else {
-//                progressBar.visibility = View.GONE
-//            }
-//        })
+        viewModel.isLoading.observe(requireActivity(), Observer { isLoading ->
+            if (isLoading) {
+                progressBar.visibility = View.VISIBLE
+            } else {
+                progressBar.visibility = View.GONE
+            }
+        })
 
         binding.fabHubungiBidan.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_chatBidanFragment)
@@ -135,37 +156,37 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun getHplDate() {
-        // Initialize Firebase Auth and Firestore
-        val auth = FirebaseAuth.getInstance()
-        val firestore = FirebaseFirestore.getInstance()
+    private fun getHplDate(response: IbuResponse) {
+        lifecycleScope.launch {
+            val dataStore: DataStore<Preferences> = requireContext().dataStore
+            val userPreference = UserPreference.getInstance(dataStore)
+            val userId = userPreference.getSession().firstOrNull()?.id ?: 0
+            Log.d("useridget", userId.toString())
 
-        // Retrieve LMP date from Firestore
-        val uid = auth.currentUser?.uid
-        if (uid != null) {
-            firestore.collection("users").document(uid).get()
-                .addOnSuccessListener { document ->
-                    if (document != null && document.exists()) {
-                        val lmpDateString = document.getString("hpl_date")
-                        if (!lmpDateString.isNullOrEmpty()) {
-                            calculateAndDisplayCountdown(lmpDateString)
-                        } else {
-                            binding.tvHpl.text = "No LMP date set."
-                        }
-                    } else {
-                        binding.tvHpl.text = "User data not found."
-                    }
+            // Filter the list based on the user ID
+            val filteredList = response.dataIbuHamils?.filter { it?.id == userId } ?: emptyList()
+            Log.d("kesehatanapi", filteredList.toString())
+
+            // Check if the filtered list has any items
+            if (filteredList.isNotEmpty()) {
+                // Assuming there's only one item in the filtered list
+                val ibuHamil = filteredList[0]
+                val tanggalHpl = ibuHamil?.tanggalHpl
+                Log.e("getHplDate", tanggalHpl.toString())
+                if (!tanggalHpl.isNullOrEmpty()) {
+                    calculateAndDisplayCountdown(tanggalHpl)
+                } else {
+                    Log.e("getHplDate", "Tanggal HPL is null or empty")
                 }
-                .addOnFailureListener { exception ->
-                    binding.tvHpl.text = "Failed to load LMP date: ${exception.message}"
-                }
-        } else {
-            binding.tvHpl.text = "User not logged in."
+            } else {
+                Log.e("getHplDate", "No matching data found for user ID: $userId")
+            }
         }
     }
 
+
     private fun calculateAndDisplayCountdown(edbDateString: String) {
-        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()) // Ensure this matches your date format
+        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()) // Ensure this matches your date format
         try {
             val edbDate = sdf.parse(edbDateString)
             if (edbDate != null) {
@@ -175,15 +196,19 @@ class HomeFragment : Fragment() {
 
                 // Ensure the daysDiff is not negative
                 if (daysDiff >= 0) {
-                    binding.tvHpl.text = "Perkiraan Kelahiran dalam: $daysDiff Hari"
+                    binding.tvHpl.text = "$daysDiff Days"
+                    binding.tvDescHpl.text = "Until your estimated day of birth on $edbDateString"
                 } else {
                     binding.tvHpl.text = "The due date has passed."
+                    binding.tvDescHpl.visibility = View.GONE
                 }
             } else {
                 binding.tvHpl.text = "Invalid EDB date format."
+                binding.tvDescHpl.visibility = View.GONE
             }
         } catch (e: Exception) {
             binding.tvHpl.text = "Error parsing EDB date."
+            binding.tvDescHpl.visibility = View.GONE
         }
     }
 

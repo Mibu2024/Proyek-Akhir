@@ -45,6 +45,9 @@ data class DataIbuHamilsItem(
 	@field:SerializedName("kehamilan_ke")
 	val kehamilanKe: Int? = null,
 
+	@field:SerializedName("tanggal_hpl")
+	val tanggalHpl: String? = null,
+
 	@field:SerializedName("alamat")
 	val alamat: String? = null,
 

@@ -3,68 +3,82 @@ package com.proyekakhir.mibu.user.ui.home
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.firebase.database.DatabaseError
+import com.proyekakhir.mibu.user.api.UserRepository
+import com.proyekakhir.mibu.user.api.response.ArtikelResponse
+import com.proyekakhir.mibu.user.api.response.BidanResponse
+import com.proyekakhir.mibu.user.api.response.IbuResponse
+import com.proyekakhir.mibu.user.api.response.KesehatanResponse
+import com.proyekakhir.mibu.user.api.response.NifasResponse
 import com.proyekakhir.mibu.user.firebase.FirebaseRepository
 import com.proyekakhir.mibu.user.ui.home.model.ArtikelModel
 import com.proyekakhir.mibu.user.ui.home.model.BidanData
 import com.proyekakhir.mibu.user.ui.home.model.UserModel
+import kotlinx.coroutines.launch
 
-class HomeViewModel(val repository: FirebaseRepository) : ViewModel() {
+class HomeViewModel(val repository: UserRepository) : ViewModel() {
 
-    private val _userData = MutableLiveData<UserModel?>()
-    val userData: LiveData<UserModel?> = _userData
+    private val _artikel = MutableLiveData<ArtikelResponse>()
+    val artikel: MutableLiveData<ArtikelResponse> get() = _artikel
+
+    private val _hpl = MutableLiveData<IbuResponse>()
+    val hpl: MutableLiveData<IbuResponse> get() = _hpl
+
+    private val _bidan = MutableLiveData<BidanResponse>()
+    val bidan: MutableLiveData<BidanResponse> get() = _bidan
+
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String> get() = _error
 
     private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> = _isLoading
-
-    private val _dataList = MutableLiveData<List<BidanData>>()
-    val dataList: LiveData<List<BidanData>> get() = this._dataList
-
-    val error = MutableLiveData<DatabaseError>()
+    val isLoading: LiveData<Boolean> get() = _isLoading
 
     init {
-        fetchAllBidan("bidan")
+        getArtikel()
+        getHpl()
+        getBidan()
     }
 
-    fun fetchUserData() {
-        repository.getUserData(
-            onDataChange = { data ->
-                _userData.value = data
-            },
-            onCancelled = { exception ->
-                // Handle the error
+    fun getArtikel() {
+        viewModelScope.launch {
+            _isLoading.value = true
+            try {
+                val response = repository.getArtikel()
+                _artikel.postValue(response)
+            } catch (e: Exception) {
+                _error.postValue(e.message)
+            } finally {
+                _isLoading.value = false
             }
-        )
+        }
     }
 
-    fun getArtikelByUser(
-        onDataChange: (List<ArtikelModel>) -> Unit,
-        onCancelled: (DatabaseError) -> Unit
-    ) {
-        _isLoading.value = true
-        repository.getArtikel(
-            onDataChange = { list ->
+    fun getHpl() {
+        viewModelScope.launch {
+            _isLoading.value = true
+            try {
+                val response = repository.getIbuHamil()
+                _hpl.postValue(response)
+            } catch (e: Exception) {
+                _error.postValue(e.message)
+            } finally {
                 _isLoading.value = false
-                onDataChange(list)
-            },
-            onCancelled = { error ->
-                _isLoading.value = false
-                onCancelled(error)
             }
-        )
+        }
     }
 
-    fun fetchAllBidan(role: String) {
-        _isLoading.value = true
-        repository.getAllBidan(role,
-            onDataChange = { data ->
-                _dataList.value = data
-                _isLoading.value = false
-            },
-            onCancelled = { databaseError ->
-                error.value = databaseError
+    fun getBidan() {
+        viewModelScope.launch {
+            _isLoading.value = true
+            try {
+                val response = repository.getBidan()
+                _bidan.postValue(response)
+            } catch (e: Exception) {
+                _error.postValue(e.message)
+            } finally {
                 _isLoading.value = false
             }
-        )
+        }
     }
 }

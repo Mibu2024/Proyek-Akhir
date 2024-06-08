@@ -1,6 +1,14 @@
 package com.proyekakhir.mibu.user.api
 
+import com.proyekakhir.mibu.user.api.response.AnakResponse
+import com.proyekakhir.mibu.user.api.response.ArtikelResponse
+import com.proyekakhir.mibu.user.api.response.BidanResponse
+import com.proyekakhir.mibu.user.api.response.DataKesehatanItem
+import com.proyekakhir.mibu.user.api.response.IbuResponse
+import com.proyekakhir.mibu.user.api.response.ImunisasiResponse
+import com.proyekakhir.mibu.user.api.response.KesehatanResponse
 import com.proyekakhir.mibu.user.api.response.LoginResponse
+import com.proyekakhir.mibu.user.api.response.NifasResponse
 import com.proyekakhir.mibu.user.api.response.RegisterResponse
 import okhttp3.RequestBody
 
@@ -13,6 +21,34 @@ class UserRepository private constructor(
 
     suspend fun login(raw: RequestBody): LoginResponse {
         return apiService.login(raw)
+    }
+
+    suspend fun getNifas(): NifasResponse {
+        return apiService.getNifas()
+    }
+
+    suspend fun getIbuHamil(): IbuResponse {
+        return apiService.getIbuHamil()
+    }
+
+    suspend fun getAnak(): AnakResponse {
+        return apiService.getAnak()
+    }
+
+    suspend fun getImunisasi(): ImunisasiResponse {
+        return apiService.getImunisasi()
+    }
+
+    suspend fun getKesehatan(): KesehatanResponse{
+        return apiService.getKesehatan()
+    }
+
+    suspend fun getArtikel(): ArtikelResponse {
+        return apiService.getArtikel()
+    }
+
+    suspend fun getBidan(): BidanResponse {
+        return apiService.getBidan()
     }
 
     companion object {

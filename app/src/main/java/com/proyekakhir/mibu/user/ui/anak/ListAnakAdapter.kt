@@ -6,15 +6,17 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.proyekakhir.mibu.R
+import com.proyekakhir.mibu.user.api.response.AnakResponse
+import com.proyekakhir.mibu.user.api.response.DataAnaksItem
 import com.proyekakhir.mibu.user.ui.anak.model.AnakModel
 import com.proyekakhir.mibu.user.ui.kehamilan.kesehatan.ListKesehatanAdapter
 import com.proyekakhir.mibu.user.ui.kehamilan.model.KesehatanModel
 
-class ListAnakAdapter(private var list: ArrayList<AnakModel>) : RecyclerView.Adapter<ListAnakAdapter.ViewHolder>() {
+class ListAnakAdapter(var list: List<DataAnaksItem?>) : RecyclerView.Adapter<ListAnakAdapter.ViewHolder>() {
     var listener: OnItemClickListenerHome? = null
 
     interface OnItemClickListenerHome {
-        fun onItemClick(item: AnakModel)
+        fun onItemClick(item: DataAnaksItem)
     }
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nama: TextView = itemView.findViewById(R.id.tv_nama_anak)
@@ -29,16 +31,12 @@ class ListAnakAdapter(private var list: ArrayList<AnakModel>) : RecyclerView.Ada
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = list[position]
-        holder.nama.text = currentItem.namaAnak
+        holder.nama.text = currentItem?.namaAnak
 
         holder.itemView.setOnClickListener {
-            listener?.onItemClick(currentItem)
+            if (currentItem != null) {
+                listener?.onItemClick(currentItem)
+            }
         }
-    }
-
-    fun setData(newData: List<AnakModel>) {
-        list.clear()
-        list.addAll(newData)
-        notifyDataSetChanged()
     }
 }

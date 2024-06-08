@@ -1,4 +1,4 @@
-package com.proyekakhir.mibu.user.ui.home
+package com.proyekakhir.mibu.user.ui.artikel
 
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.user.api.response.DataArtikelItem
-import com.proyekakhir.mibu.user.ui.home.model.ArtikelModel
+import com.proyekakhir.mibu.user.ui.home.ListArtikelHomeAdapter
 
-class ListArtikelHomeAdapter (var listArtikel : List<DataArtikelItem?>)
-    : RecyclerView.Adapter<ListArtikelHomeAdapter.MyViewHolder>() {
+class ListArtikelAdapter (var listArtikel : List<DataArtikelItem?>)
+    : RecyclerView.Adapter<ListArtikelAdapter.MyViewHolder>() {
 
     var listener: OnItemClickListenerHome? = null
 
@@ -30,14 +30,14 @@ class ListArtikelHomeAdapter (var listArtikel : List<DataArtikelItem?>)
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ListArtikelHomeAdapter.MyViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_artikel_user_home, parent, false)
+    ): ListArtikelAdapter.MyViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_list_artikel, parent, false)
         return MyViewHolder(view)
     }
 
     override fun getItemCount() = listArtikel.size
 
-    override fun onBindViewHolder(holder: ListArtikelHomeAdapter.MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ListArtikelAdapter.MyViewHolder, position: Int) {
         val currentItem = listArtikel[position]
 
         holder.title.text = currentItem?.judul
