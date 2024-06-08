@@ -34,8 +34,8 @@ class DetailKesehatanFragment : Fragment() {
         binding.tvHasilLabValue.text = "${itemData?.tindakan}"
         binding.tvKeluhanValue.text = "${itemData?.keluhan}"
         binding.tvNamaPemeriksaValue.text = "${itemData?.namaPemeriksa}"
-        binding.tvTempatPeriksaValue.text = "${itemData?.tempatPeriksa}"
-        binding.tvTglPeriksaSelanjutnya.text = "${itemData?.periksaSelanjutnya}"
+//        binding.tvTempatPeriksaValue.text = "${itemData?.tempatPeriksa}"
+//        binding.tvTglPeriksaSelanjutnya.text = "${itemData?.periksaSelanjutnya}"
         binding.tvSaran.text = "${itemData?.nasihat}"
         binding.tvTanggal.text = itemData?.tanggalPeriksa
         binding.ivBack.setOnClickListener {
