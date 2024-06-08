@@ -41,12 +41,6 @@ class SettingsFragment : Fragment() {
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val username = FirebaseAuth.getInstance().currentUser?.displayName
-        val email = FirebaseAuth.getInstance().currentUser?.email
-
-        binding.username.text = username
-        binding.email.text = email
-
         binding.itemLogout.setOnClickListener {
             alertLogout(getString(R.string.warning), getString(R.string.want_to_logout))
         }

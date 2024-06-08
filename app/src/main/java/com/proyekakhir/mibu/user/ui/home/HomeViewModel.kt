@@ -25,6 +25,9 @@ class HomeViewModel(val repository: UserRepository) : ViewModel() {
     private val _hpl = MutableLiveData<IbuResponse>()
     val hpl: MutableLiveData<IbuResponse> get() = _hpl
 
+    private val _ibu = MutableLiveData<IbuResponse>()
+    val ibu: MutableLiveData<IbuResponse> get() = _ibu
+
     private val _bidan = MutableLiveData<BidanResponse>()
     val bidan: MutableLiveData<BidanResponse> get() = _bidan
 
@@ -38,6 +41,7 @@ class HomeViewModel(val repository: UserRepository) : ViewModel() {
         getArtikel()
         getHpl()
         getBidan()
+        getIbu()
     }
 
     fun getArtikel() {
@@ -60,6 +64,20 @@ class HomeViewModel(val repository: UserRepository) : ViewModel() {
             try {
                 val response = repository.getIbuHamil()
                 _hpl.postValue(response)
+            } catch (e: Exception) {
+                _error.postValue(e.message)
+            } finally {
+                _isLoading.value = false
+            }
+        }
+    }
+
+    fun getIbu() {
+        viewModelScope.launch {
+            _isLoading.value = true
+            try {
+                val response = repository.getIbuHamil()
+                _ibu.postValue(response)
             } catch (e: Exception) {
                 _error.postValue(e.message)
             } finally {
