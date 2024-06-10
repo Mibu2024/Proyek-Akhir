@@ -12,7 +12,9 @@ class AddCatatanViewModel(val repository: FirebaseRepository) : ViewModel() {
     val isLoading = MutableLiveData<Boolean>()
     val isEmpty = MutableLiveData<String>()
     val successMessage = MutableLiveData<String>()
+    val hplSuccessMessage = MutableLiveData<String>()
     val errorMessage = MutableLiveData<String>()
+    val hplErrorMessage = MutableLiveData<String>()
     val catatanKesehatanList = MutableLiveData<ArrayList<AddKesehatanKehamilanData>>()
     val catatanNifasList = MutableLiveData<ArrayList<AddNifasData>>()
     val catatanAnakList = MutableLiveData<ArrayList<AddDataAnak>>()
@@ -68,6 +70,24 @@ class AddCatatanViewModel(val repository: FirebaseRepository) : ViewModel() {
                 // Handle failure case
                 isLoading.value = false
                 errorMessage.value = "Failed to upload form"
+            }
+        }, { exception ->
+            // Handle exception
+            errorMessage.value = exception.message ?: "An error occurred"
+        })
+    }
+
+    fun addHpl(uid: String, hplDate: String) {
+        isLoading.value = true
+        repository.uploadHpl(uid, hplDate, { success ->
+            if (success) {
+                // Handle success case
+                hplSuccessMessage.value = "HPL uploaded successfully"
+                isLoading.value = false
+            } else {
+                // Handle failure case
+                isLoading.value = false
+                hplErrorMessage.value = "Failed to upload HPL"
             }
         }, { exception ->
             // Handle exception

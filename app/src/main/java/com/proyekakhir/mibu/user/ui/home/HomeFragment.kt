@@ -12,12 +12,17 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.bidan.ui.network.NetworkConnection
 import com.proyekakhir.mibu.databinding.FragmentHomeBinding
 import com.proyekakhir.mibu.user.factory.ViewModelFactory
 import com.proyekakhir.mibu.user.firebase.FirebaseRepository
 import com.proyekakhir.mibu.user.ui.home.model.ArtikelModel
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class HomeFragment : Fragment() {
 
@@ -34,6 +39,8 @@ class HomeFragment : Fragment() {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        getHplDate()
 
         val repository = FirebaseRepository()
         val factory = ViewModelFactory(repository)
@@ -125,6 +132,58 @@ class HomeFragment : Fragment() {
 
                 }
             }
+        }
+    }
+
+    private fun getHplDate() {
+        // Initialize Firebase Auth and Firestore
+        val auth = FirebaseAuth.getInstance()
+        val firestore = FirebaseFirestore.getInstance()
+
+        // Retrieve LMP date from Firestore
+        val uid = auth.currentUser?.uid
+        if (uid != null) {
+            firestore.collection("users").document(uid).get()
+                .addOnSuccessListener { document ->
+                    if (document != null && document.exists()) {
+                        val lmpDateString = document.getString("hpl_date")
+                        if (!lmpDateString.isNullOrEmpty()) {
+                            calculateAndDisplayCountdown(lmpDateString)
+                        } else {
+                            binding.tvHpl.text = "No LMP date set."
+                        }
+                    } else {
+                        binding.tvHpl.text = "User data not found."
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    binding.tvHpl.text = "Failed to load LMP date: ${exception.message}"
+                }
+        } else {
+            binding.tvHpl.text = "User not logged in."
+        }
+    }
+
+    private fun calculateAndDisplayCountdown(edbDateString: String) {
+        val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()) // Ensure this matches your date format
+        try {
+            val edbDate = sdf.parse(edbDateString)
+            if (edbDate != null) {
+                val currentDate = Date()
+                val diff = edbDate.time - currentDate.time
+                val daysDiff = (diff / (1000 * 60 * 60 * 24)).toInt()
+
+                // Ensure the daysDiff is not negative
+                if (daysDiff >= 0) {
+                    binding.tvHpl.text = "Perkiraan Kelahiran dalam: $daysDiff Hari"
+                } else {
+                    binding.tvHpl.text = "The due date has passed."
+                }
+            } else {
+                binding.tvHpl.text = "Invalid EDB date format."
+            }
+        } catch (e: Exception) {
+            binding.tvHpl.text = "Error parsing EDB date."
         }
     }
 

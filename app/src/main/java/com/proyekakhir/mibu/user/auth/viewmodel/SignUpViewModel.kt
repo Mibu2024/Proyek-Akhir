@@ -15,9 +15,9 @@ class SignUpViewModel(private val repository: FirebaseRepository) : ViewModel() 
     private val _emailVerificationMessage = MutableLiveData<String>()
     val emailVerificationMessage: LiveData<String> = _emailVerificationMessage
 
-    fun signup(fullname: String, alamat: String, email: String, noTelepon: String, umur: String, kehamilanKe: String, namaSuami: String, umurSuami: String, nik: String, password: String) {
+    fun signup(fullname: String, alamat: String, email: String, noTelepon: String, umur: String, kehamilanKe: String, namaSuami: String, umurSuami: String, nik: String, password: String, faskesTk1: String, faskesRujukan: String, golDarah: String, pekerjaan: String) {
         _isLoading.value = true
-        repository.signup(fullname, alamat, email, noTelepon, umur, kehamilanKe, namaSuami, umurSuami, nik, password) { isSuccessful, message ->
+        repository.signup(fullname, alamat, email, noTelepon, umur, kehamilanKe, namaSuami, umurSuami, nik, password, faskesTk1, faskesRujukan, golDarah, pekerjaan) { isSuccessful, message ->
             _isLoading.value = false
             _isSignupSuccessful.value = isSuccessful
             if (isSuccessful) {

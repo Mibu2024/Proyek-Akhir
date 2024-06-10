@@ -57,6 +57,10 @@ class FirebaseRepository : FirebaseService {
         umurSuami: String,
         nik: String,
         password: String,
+        faskesTk1: String,
+        faskesRujukan: String,
+        golDarah: String,
+        pekerjaan: String,
         onComplete: (Boolean, String?) -> Unit
     ) {
         auth.createUserWithEmailAndPassword(email, password)
@@ -87,6 +91,10 @@ class FirebaseRepository : FirebaseService {
                                                 "namaSuami" to namaSuami,
                                                 "umurSuami" to umurSuami,
                                                 "nik" to nik,
+                                                "faskesTk1" to faskesTk1,
+                                                "faskesRujukan" to faskesRujukan,
+                                                "golDarah" to golDarah,
+                                                "pekerjaan" to pekerjaan,
                                                 "uid" to user?.uid,
                                                 "role" to "user"
                                             )

@@ -1,6 +1,7 @@
 package com.proyekakhir.mibu.user.auth
 
 import android.app.AlertDialog
+import android.app.ProgressDialog
 import android.content.ContentValues
 import android.content.Intent
 import android.graphics.Color
@@ -33,10 +34,17 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
     private lateinit var viewModel: LoginViewModel
     val firebaseAuth = FirebaseAuth.getInstance()
+    private lateinit var progressDialog: ProgressDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Initialize ProgressDialog
+        progressDialog = ProgressDialog(this).apply {
+            setMessage("Registering...")
+            setCancelable(false)
+        }
 
         val repository = FirebaseRepository()
         val factory = ViewModelFactory(repository)
@@ -61,6 +69,7 @@ class LoginActivity : AppCompatActivity() {
             } else if (passError){
                 Toast.makeText(this, R.string.alert_pass_error, Toast.LENGTH_SHORT).show()
             } else {
+                progressDialog.show()
                 viewModel.login(email, pass)
             }
         }
@@ -70,9 +79,10 @@ class LoginActivity : AppCompatActivity() {
         })
 
         viewModel.isLoginSuccessful.observe(this, { isSuccessful ->
+            progressDialog.dismiss()
             if (isSuccessful) {
                 val email = binding.userLoginEmail.text.toString()
-                alertLoginSuccess(getString(R.string.welcome), email, "user")
+                alertLoginSuccess(getString(R.string.success_login), email, "user")
             } else {
                 Toast.makeText(baseContext, R.string.sign_up_failed, Toast.LENGTH_SHORT).show()
             }

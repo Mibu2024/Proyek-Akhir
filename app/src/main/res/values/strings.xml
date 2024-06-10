@@ -129,7 +129,7 @@
     <string name="title_notifications">Notification</string>
     <string name="artikel">Artikel</string>
     <string name="settings">Settings</string>
-    <string name="title_menu_1">Catat Kesehatan Bunda</string>
+    <string name="title_menu_1">Welcome to Mibu!</string>
     <string name="desc_menu_1">Selamat datang di aplikasi kami! Inilah awal perjalanan Anda untuk Cek Kehamilan dengan mudah dan tertata, di monitoring langsung oleh Bidan anda</string>
     <string name="lanjut_ibu">Lanjut Sebagai Ibu</string>
     <string name="lanjut_bidan">Lanjut Sebagai Bidan</string>
@@ -197,4 +197,19 @@
     <string name="chart">Chart</string>
     <string name="piechart_title">Pie Chart Jumlah Catatan</string>
     <string name="success_login">Welcome to Mibu family!</string>
+    <string name="faskesTk1">No. JKN Faskes TK 1</string>
+    <string name="faskesRujukan">No. JKN Faskes Rujukan</string>
+    <string name="golDarah">Golongan Darah</string>
+    <string name="pekerjaan">Pekerjaan</string>
+    <string name="trimester">Trimester ke:</string>
+    <string name="trimester1">Trimester 1</string>
+    <string name="trimester2">Trimester 2</string>
+    <string name="trimester3">Trimester 3</string>
+    <string name="tinggi_badan">Tinggi Badan</string>
+    <string name="lingkar_lengan">Ukur Lingkar Lengan Atas</string>
+    <string name="status_imunisasi_tetanus">Status Imunisasi Tetanus</string>
+    <string name="detail_ibu">Data Ibu</string>
+    <string name="add_hpl">Tambah Hari Perkiraan Lahir</string>
+    <string name="tanggal_hpl">Pilih Tanggal HPL</string>
+    <string name="submit">Submit</string>
 </resources>

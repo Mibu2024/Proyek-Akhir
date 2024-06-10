@@ -1,6 +1,7 @@
 package com.proyekakhir.mibu.user.auth
 
 import android.app.AlertDialog
+import android.app.ProgressDialog
 import android.content.ContentValues
 import android.content.Intent
 import android.graphics.Color
@@ -29,10 +30,17 @@ import com.proyekakhir.mibu.user.ui.activity.MainActivity
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private lateinit var viewModel: SignUpViewModel
+    private lateinit var progressDialog: ProgressDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // Initialize ProgressDialog
+        progressDialog = ProgressDialog(this).apply {
+            setMessage("Registering...")
+            setCancelable(false)
+        }
 
         val repository = FirebaseRepository()
         val factory = ViewModelFactory(repository)
@@ -55,6 +63,10 @@ class RegisterActivity : AppCompatActivity() {
             val pass = binding.userRegisterPassword.text.toString()
             val emailError = binding.userRegisterEmail.isError
             val passError = binding.userRegisterPassword.isError
+            val faskesTk1 = binding.userFaskesTk1.text.toString()
+            val faskesRujukan = binding.userFaskesRujukan.text.toString()
+            val golDarah = binding.userGolDarah.text.toString()
+            val pekerjaan = binding.userPekerjaan.text.toString()
 
             if (passError) {
                 Toast.makeText(this, "Password minimum 8 characters", Toast.LENGTH_SHORT).show()
@@ -80,8 +92,17 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(this, "Tolong isi Umur Suami", Toast.LENGTH_SHORT).show()
             } else if (nik.isNullOrEmpty()){
                 Toast.makeText(this, "Tolong isi NIK", Toast.LENGTH_SHORT).show()
+            } else if (faskesTk1.isNullOrEmpty()){
+                Toast.makeText(this, "Tolong isi No JKN Faskes TK 1", Toast.LENGTH_SHORT).show()
+            } else if (faskesRujukan.isNullOrEmpty()){
+                Toast.makeText(this, "Tolong isi No JKN Faskes Rujukan", Toast.LENGTH_SHORT).show()
+            } else if (golDarah.isNullOrEmpty()){
+                Toast.makeText(this, "Tolong isi Golongan Darah", Toast.LENGTH_SHORT).show()
+            } else if (pekerjaan.isNullOrEmpty()){
+                Toast.makeText(this, "Tolong isi Pekerjaan", Toast.LENGTH_SHORT).show()
             } else {
-                viewModel.signup(fullname, alamat, email, noTelepon, umur, kehamilanKe, namaSuami, umurSuami, nik, pass)
+                progressDialog.show()
+                viewModel.signup(fullname, alamat, email, noTelepon, umur, kehamilanKe, namaSuami, umurSuami, nik, pass, faskesTk1, faskesRujukan, golDarah, pekerjaan)
             }
         }
 
@@ -90,6 +111,7 @@ class RegisterActivity : AppCompatActivity() {
         })
 
         viewModel.isSignupSuccessful.observe(this, { isSuccessful ->
+            progressDialog.dismiss()
             if (isSuccessful) {
                 val email = binding.userRegisterEmail.text.toString()
                 alertRegisterSuccess(getString(R.string.welcome), email, "user")

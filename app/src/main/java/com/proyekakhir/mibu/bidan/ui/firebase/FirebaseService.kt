@@ -31,4 +31,5 @@ interface FirebaseService {
     fun allCatatanKesehatan(onDataChanged: (ArrayList<AddKesehatanKehamilanData>) -> Unit, onIsEmpty: (String) -> Unit, onIsLoading: (Boolean) -> Unit, onCancelled: (DatabaseError) -> Unit)
     fun allCatatanNifas(onDataChanged: (ArrayList<AddNifasData>) -> Unit, onIsEmpty: (String) -> Unit, onIsLoading: (Boolean) -> Unit, onCancelled: (DatabaseError) -> Unit)
     fun allCatatanAnak(onDataChanged: (ArrayList<AddDataAnak>) -> Unit, onIsEmpty: (String) -> Unit, onIsLoading: (Boolean) -> Unit, onCancelled: (DatabaseError) -> Unit)
+    fun uploadHpl(uid: String, hplDate: String, onComplete: (Boolean) -> Unit, onFailure: (Exception) -> Unit)
 }

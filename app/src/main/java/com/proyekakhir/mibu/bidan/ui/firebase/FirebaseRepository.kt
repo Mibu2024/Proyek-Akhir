@@ -10,6 +10,7 @@ import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.storage.FirebaseStorage
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.model.ArtikelData
 import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddDataAnak
@@ -643,6 +644,32 @@ class FirebaseRepository : FirebaseService {
                 onCancelled(error)
             }
         })
+    }
+
+    override fun uploadHpl(
+        uid: String,
+        hplDate: String,
+        onComplete: (Boolean) -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        // Insert data to Firestore
+        if (uid != null) {
+            val userRef = firestore.collection("users").document(uid)
+
+            // Create a map to hold the new field
+            val data = hashMapOf("hpl_date" to hplDate)
+
+            // Set the document with merge option to avoid overwriting
+            userRef.set(data, SetOptions.merge())
+                .addOnSuccessListener {
+                    onComplete(true)
+                }
+                .addOnFailureListener { e ->
+                    onFailure(e)
+                }
+        } else {
+            onComplete(false)
+        }
     }
 
 
