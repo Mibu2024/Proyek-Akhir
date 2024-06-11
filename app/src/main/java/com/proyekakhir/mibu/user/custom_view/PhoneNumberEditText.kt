@@ -1,4 +1,4 @@
-package com.proyekakhir.mibu.bidan.ui.customViewBidan
+package com.proyekakhir.mibu.user.custom_view
 
 import android.content.Context
 import android.graphics.Canvas
@@ -6,11 +6,12 @@ import android.graphics.drawable.Drawable
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
+import android.util.Patterns
 import androidx.core.content.ContextCompat
 import com.google.android.material.textfield.TextInputEditText
 import com.proyekakhir.mibu.R
 
-class PasswordEditText : TextInputEditText {
+class PhoneNumberEditText : TextInputEditText {
 
     private var backgroundDefault: Drawable? = null
     private var backgroundError: Drawable? = null
@@ -49,11 +50,12 @@ class PasswordEditText : TextInputEditText {
                 before: Int,
                 count: Int
             ) {
-                isError = if (s.toString().length < 8){
-                    setError(context.getString(R.string.error_password), null)
-                    true
+                val phoneNumber = s.toString().replace("\\s".toRegex(), "") // Remove whitespace characters
+                if (!Patterns.PHONE.matcher(phoneNumber).matches() || phoneNumber.startsWith("0")) {
+                    error = context.getString(R.string.alert_invalid_phone_number)
+                    isError = true
                 } else {
-                    false
+                    isError = false
                 }
             }
 
@@ -63,3 +65,4 @@ class PasswordEditText : TextInputEditText {
         })
     }
 }
+

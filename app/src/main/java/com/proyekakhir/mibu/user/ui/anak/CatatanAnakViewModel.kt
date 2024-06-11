@@ -7,10 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.proyekakhir.mibu.user.api.UserRepository
 import com.proyekakhir.mibu.user.api.response.AnakResponse
 import com.proyekakhir.mibu.user.api.response.ImunisasiResponse
-import com.proyekakhir.mibu.user.api.response.KesehatanResponse
-import com.proyekakhir.mibu.user.api.response.NifasResponse
-import com.proyekakhir.mibu.user.firebase.FirebaseRepository
-import com.proyekakhir.mibu.user.ui.anak.model.AnakModel
 import kotlinx.coroutines.launch
 
 class CatatanAnakViewModel(val repository: UserRepository) : ViewModel() {

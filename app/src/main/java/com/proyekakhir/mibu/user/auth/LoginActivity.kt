@@ -15,17 +15,15 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import com.google.firebase.auth.FirebaseAuth
 import com.proyekakhir.mibu.R
-import com.proyekakhir.mibu.bidan.ui.customViewBidan.EmailEditText
 import com.proyekakhir.mibu.databinding.ActivityLoginBinding
 import com.proyekakhir.mibu.user.api.UserPreference
 import com.proyekakhir.mibu.user.api.dataStore
 import com.proyekakhir.mibu.user.auth.viewmodel.LoginViewModel
+import com.proyekakhir.mibu.user.custom_view.EmailEditText
 import com.proyekakhir.mibu.user.factory.ViewModelFactory
 import com.proyekakhir.mibu.user.ui.activity.MainActivity
-import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding

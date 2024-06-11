@@ -4,18 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.proyekakhir.mibu.R
-import com.proyekakhir.mibu.bidan.ui.network.NetworkConnection
+import com.proyekakhir.mibu.user.ui.NetworkConnection
 import com.proyekakhir.mibu.databinding.FragmentCatatanKehamilanBinding
 
 class CatatanKehamilanFragment : Fragment() {

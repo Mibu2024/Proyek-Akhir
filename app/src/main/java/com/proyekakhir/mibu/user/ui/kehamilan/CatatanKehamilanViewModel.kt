@@ -5,14 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.proyekakhir.mibu.user.api.UserRepository
-import com.proyekakhir.mibu.user.api.response.DataKesehatanItem
-import com.proyekakhir.mibu.user.api.response.IbuResponse
 import com.proyekakhir.mibu.user.api.response.KesehatanResponse
 import com.proyekakhir.mibu.user.api.response.NifasResponse
-import com.proyekakhir.mibu.user.firebase.FirebaseRepository
-import com.proyekakhir.mibu.user.ui.anak.model.AnakModel
-import com.proyekakhir.mibu.user.ui.kehamilan.model.KesehatanModel
-import com.proyekakhir.mibu.user.ui.kehamilan.model.NifasModel
 import kotlinx.coroutines.launch
 
 class CatatanKehamilanViewModel(val repository: UserRepository) : ViewModel() {

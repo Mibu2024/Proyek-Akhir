@@ -1,15 +1,12 @@
 package com.proyekakhir.mibu.user.ui.kehamilan.nifas
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.proyekakhir.mibu.R
-import com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.model.AddNifasData
+import androidx.fragment.app.Fragment
 import com.proyekakhir.mibu.databinding.FragmentDetailNifasBinding
 import com.proyekakhir.mibu.user.api.response.DataNifasItem
-import com.proyekakhir.mibu.user.ui.kehamilan.model.NifasModel
 
 class DetailNifasFragment : Fragment() {
     private var _binding: FragmentDetailNifasBinding? = null

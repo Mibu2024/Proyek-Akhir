@@ -9,12 +9,14 @@ import com.proyekakhir.mibu.user.api.dataStore
 import com.proyekakhir.mibu.user.auth.viewmodel.LoginViewModel
 import com.proyekakhir.mibu.user.auth.viewmodel.SignUpViewModel
 import com.proyekakhir.mibu.user.di.Injection
-import com.proyekakhir.mibu.user.firebase.FirebaseRepository
 import com.proyekakhir.mibu.user.ui.anak.CatatanAnakViewModel
 import com.proyekakhir.mibu.user.ui.home.HomeViewModel
 import com.proyekakhir.mibu.user.ui.kehamilan.CatatanKehamilanViewModel
 
-class ViewModelFactory(private val repository: UserRepository, private val userPreference: UserPreference) : ViewModelProvider.NewInstanceFactory() {
+class ViewModelFactory(
+    private val repository: UserRepository,
+    private val userPreference: UserPreference
+) : ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return when {
@@ -37,6 +39,7 @@ class ViewModelFactory(private val repository: UserRepository, private val userP
             modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
                 HomeViewModel(repository) as T
             }
+
             else -> throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
         }
     }
@@ -44,12 +47,14 @@ class ViewModelFactory(private val repository: UserRepository, private val userP
     companion object {
         @Volatile
         private var INSTANCE: ViewModelFactory? = null
+
         @JvmStatic
         fun getInstance(context: Context): ViewModelFactory {
             if (INSTANCE == null) {
                 synchronized(ViewModelFactory::class.java) {
                     val userPreference = UserPreference.getInstance(context.dataStore)
-                    INSTANCE = ViewModelFactory(Injection.provideRepository(context), userPreference)
+                    INSTANCE =
+                        ViewModelFactory(Injection.provideRepository(context), userPreference)
                 }
             }
             return INSTANCE as ViewModelFactory

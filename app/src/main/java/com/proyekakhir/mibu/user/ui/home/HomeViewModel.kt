@@ -4,17 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.database.DatabaseError
 import com.proyekakhir.mibu.user.api.UserRepository
 import com.proyekakhir.mibu.user.api.response.ArtikelResponse
 import com.proyekakhir.mibu.user.api.response.BidanResponse
 import com.proyekakhir.mibu.user.api.response.IbuResponse
-import com.proyekakhir.mibu.user.api.response.KesehatanResponse
-import com.proyekakhir.mibu.user.api.response.NifasResponse
-import com.proyekakhir.mibu.user.firebase.FirebaseRepository
-import com.proyekakhir.mibu.user.ui.home.model.ArtikelModel
-import com.proyekakhir.mibu.user.ui.home.model.BidanData
-import com.proyekakhir.mibu.user.ui.home.model.UserModel
 import kotlinx.coroutines.launch
 
 class HomeViewModel(val repository: UserRepository) : ViewModel() {

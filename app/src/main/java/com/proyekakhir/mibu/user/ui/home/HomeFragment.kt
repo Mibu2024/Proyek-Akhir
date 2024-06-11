@@ -13,13 +13,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavOptions
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.proyekakhir.mibu.R
-import com.proyekakhir.mibu.bidan.ui.network.NetworkConnection
+import com.proyekakhir.mibu.user.ui.NetworkConnection
 import com.proyekakhir.mibu.databinding.FragmentHomeBinding
 import com.proyekakhir.mibu.user.api.UserPreference
 import com.proyekakhir.mibu.user.api.dataStore
@@ -54,6 +52,11 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        val swipeRefreshLayout = binding.swipeRefreshLayout
+        swipeRefreshLayout.setOnRefreshListener {
+            refreshData()
+        }
+
         lifecycleScope.launch {
             val dataStore: DataStore<Preferences> = requireContext().dataStore
             val userPreference = UserPreference.getInstance(dataStore)
@@ -86,6 +89,7 @@ class HomeFragment : Fragment() {
             val list = response.dataArtikel
             if (list != null) {
                 adapter.listArtikel = list
+                adapter.notifyDataSetChanged()
                 binding.noDataHome.visibility = View.GONE
             } else {
                 binding.noDataHome.visibility = View.VISIBLE
@@ -210,6 +214,31 @@ class HomeFragment : Fragment() {
             binding.tvHpl.text = "Error parsing EDB date."
             binding.tvDescHpl.visibility = View.GONE
         }
+    }
+
+    private fun refreshData() {
+        // Logic to refresh data
+        viewModel.getHpl()
+        viewModel.artikel.observe(viewLifecycleOwner, Observer { response ->
+            val list = response.dataArtikel
+            if (list != null) {
+                adapter.listArtikel = list
+                adapter.notifyDataSetChanged()
+                binding.noDataHome.visibility = View.GONE
+            } else {
+                binding.noDataHome.visibility = View.VISIBLE
+            }
+            // Stop the refreshing animation once data is loaded
+            binding.swipeRefreshLayout.isRefreshing = false
+        })
+
+        loginViewModel.loginResult.observe(viewLifecycleOwner, Observer { loginResponse ->
+            viewModel.getHpl()
+        })
+
+        viewModel.hpl.observe(viewLifecycleOwner, Observer { response ->
+            getHplDate(response)
+        })
     }
 
     override fun onDestroyView() {

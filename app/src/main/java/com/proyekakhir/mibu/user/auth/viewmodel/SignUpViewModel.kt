@@ -1,12 +1,10 @@
 package com.proyekakhir.mibu.user.auth.viewmodel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.proyekakhir.mibu.user.api.UserRepository
 import com.proyekakhir.mibu.user.api.response.RegisterResponse
-import com.proyekakhir.mibu.user.firebase.FirebaseRepository
 import kotlinx.coroutines.launch
 import okhttp3.RequestBody
 

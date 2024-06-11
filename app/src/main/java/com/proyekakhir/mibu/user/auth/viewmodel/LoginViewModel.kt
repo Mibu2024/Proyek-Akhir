@@ -4,16 +4,17 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.firebase.auth.FirebaseAuth
 import com.proyekakhir.mibu.user.api.UserPreference
 import com.proyekakhir.mibu.user.api.UserRepository
 import com.proyekakhir.mibu.user.api.response.LoginResponse
-import com.proyekakhir.mibu.user.firebase.FirebaseRepository
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 
-class LoginViewModel(private val userRepository: UserRepository, private val userPreference: UserPreference) : ViewModel() {
+class LoginViewModel(
+    private val userRepository: UserRepository,
+    private val userPreference: UserPreference
+) : ViewModel() {
     private val _loginResult = MutableLiveData<LoginResponse>()
     val loginResult: LiveData<LoginResponse> = _loginResult
 

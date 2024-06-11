@@ -90,7 +90,7 @@
     <string name="nama_pemeriksa">Nama Pemeriksa</string>
     <string name="periksa_selanjutnya">Periksa Selanjutnya</string>
     <string name="artikel_saya">Artikel Saya</string>
-    <string name="welcome">Registration successful. Please check your email to verify your account.</string>
+    <string name="welcome">Registration successful.</string>
     <string name="cari_ibu_hamil">Cari nama</string>
     <string name="daftar_ibu_hamil">Daftar Pasien</string>
     <string name="title_settings">Settings</string>

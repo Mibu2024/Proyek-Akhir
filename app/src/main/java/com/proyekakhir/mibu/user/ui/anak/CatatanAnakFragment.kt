@@ -1,34 +1,26 @@
 package com.proyekakhir.mibu.user.ui.anak
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.auth.FirebaseAuth
 import com.proyekakhir.mibu.R
-import com.proyekakhir.mibu.bidan.ui.network.NetworkConnection
+import com.proyekakhir.mibu.user.ui.NetworkConnection
 import com.proyekakhir.mibu.databinding.FragmentCatatanAnakBinding
-import com.proyekakhir.mibu.databinding.FragmentTabNifasBinding
 import com.proyekakhir.mibu.user.api.UserPreference
 import com.proyekakhir.mibu.user.api.dataStore
 import com.proyekakhir.mibu.user.api.response.DataAnaksItem
 import com.proyekakhir.mibu.user.factory.ViewModelFactory
-import com.proyekakhir.mibu.user.firebase.FirebaseRepository
-import com.proyekakhir.mibu.user.ui.anak.model.AnakModel
-import com.proyekakhir.mibu.user.ui.kehamilan.CatatanKehamilanViewModel
-import com.proyekakhir.mibu.user.ui.kehamilan.model.NifasModel
-import com.proyekakhir.mibu.user.ui.kehamilan.nifas.ListNifasAdapter
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 
