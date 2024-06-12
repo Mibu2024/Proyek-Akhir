@@ -130,9 +130,11 @@ class RegisterActivity : AppCompatActivity() {
         viewModel.isRegistrationSuccessful.observe(this, { isSuccessful ->
             progressDialog.dismiss()
             if (isSuccessful) {
+                progressDialog.dismiss()
                 val email = binding.userRegisterEmail.text.toString()
                 alertRegisterSuccess(getString(R.string.welcome), email)
             } else {
+                progressDialog.dismiss()
                 Toast.makeText(baseContext, R.string.sign_up_failed, Toast.LENGTH_SHORT).show()
             }
         })

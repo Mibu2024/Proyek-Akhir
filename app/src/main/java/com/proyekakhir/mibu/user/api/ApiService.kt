@@ -6,6 +6,7 @@ import com.proyekakhir.mibu.user.api.response.BidanResponse
 import com.proyekakhir.mibu.user.api.response.DataKesehatanItem
 import com.proyekakhir.mibu.user.api.response.IbuResponse
 import com.proyekakhir.mibu.user.api.response.ImunisasiResponse
+import com.proyekakhir.mibu.user.api.response.KbResponse
 import com.proyekakhir.mibu.user.api.response.KesehatanResponse
 import com.proyekakhir.mibu.user.api.response.LoginResponse
 import com.proyekakhir.mibu.user.api.response.NifasResponse
@@ -46,4 +47,7 @@ interface ApiService {
 
     @GET("bidan")
     suspend fun getBidan(): BidanResponse
+
+    @GET("layanan-kb")
+    suspend fun getKb(): KbResponse
 }

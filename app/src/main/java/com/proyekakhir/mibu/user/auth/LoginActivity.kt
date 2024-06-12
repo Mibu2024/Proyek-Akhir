@@ -72,15 +72,20 @@ class LoginActivity : AppCompatActivity() {
 
         viewModel.isLoading.observe(this, { isLoading ->
             binding.pbLogin.visibility = if (isLoading) View.VISIBLE else View.GONE
+            if (!isLoading) {
+                progressDialog.dismiss()
+            }
         })
 
         viewModel.loginResult.observe(this, { data ->
             progressDialog.dismiss()
             if (data.data?.token != null) {
+                progressDialog.dismiss()
                 val email = binding.userLoginEmail.text.toString()
                 alertLoginSuccess(getString(R.string.success_login), email)
                 Log.d("loginapi", data.data?.token.toString())
             } else {
+                progressDialog.dismiss()
                 Toast.makeText(baseContext, R.string.sign_up_failed, Toast.LENGTH_SHORT).show()
             }
         })

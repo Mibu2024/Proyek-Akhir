@@ -27,6 +27,7 @@ import com.proyekakhir.mibu.user.auth.viewmodel.LoginViewModel
 import com.proyekakhir.mibu.user.factory.ViewModelFactory
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
+import okhttp3.internal.notify
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -101,6 +102,7 @@ class HomeFragment : Fragment() {
         loginViewModel.loginResult.observe(viewLifecycleOwner, Observer { loginResponse ->
             // When login result is updated, trigger data fetch
             viewModel.getHpl()
+            viewModel.getArtikel()
         })
 
         viewModel.hpl.observe(viewLifecycleOwner, Observer { response ->
@@ -122,6 +124,7 @@ class HomeFragment : Fragment() {
         viewModel.isLoading.observe(requireActivity(), Observer { isLoading ->
             if (isLoading) {
                 progressBar.visibility = View.VISIBLE
+                binding.noDataHome.visibility = View.GONE
             } else {
                 progressBar.visibility = View.GONE
             }

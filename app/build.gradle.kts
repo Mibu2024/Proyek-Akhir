@@ -106,6 +106,8 @@ dependencies {
     testImplementation ("org.mockito:mockito-core:3.12.4")
     testImplementation ("org.mockito:mockito-inline:3.12.4")
     implementation ("com.google.android.gms:play-services-tasks:17.2.1")
+    testImplementation ("androidx.arch.core:core-testing:2.1.0")
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0")
 
     //mp chart
     implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")

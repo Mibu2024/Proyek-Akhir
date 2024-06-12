@@ -217,4 +217,10 @@
     <string name="catatan_kehamilan">Catatan\nKehamilan</string>
     <string name="artikel_kehamilan">Artikel\nKehamilan</string>
     <string name="riwayat_pemeriksaan_imunisasi">Riwayat Pemeriksaan Imunisasi</string>
+    <string name="hasil_pelayanan_kb">Hasil Pelayanan KB</string>
+    <string name="tanggal_pelayanan">Tanggal Pelayanan</string>
+    <string name="jenis_kb">Jenis Kontrasepsi</string>
+    <string name="tanggal_kembali">Tanggal Kembali</string>
+    <string name="detail_hasil_pelayanan">Detail Hasil Pelayanan</string>
+    <string name="tab_kb">KB</string>
 </resources>

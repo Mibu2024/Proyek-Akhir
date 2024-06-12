@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_navigation_catatan_kehamilan_to_detailKesehatanFragment"
             app:destination="@id/detailKesehatanFragment" />
+        <action
+            android:id="@+id/action_navigation_catatan_kehamilan_navbar_to_detailKbFragment"
+            app:destination="@id/detailKbFragment" />
 
     </fragment>
     <fragment
@@ -92,6 +95,10 @@
             android:id="@+id/action_artikelFragment_to_detailArtikelFragment2"
             app:destination="@id/detailArtikelFragment2" />
     </fragment>
+    <fragment
+        android:id="@+id/detailKbFragment"
+        android:name="com.proyekakhir.mibu.user.ui.kehamilan.kb.DetailKbFragment"
+        android:label="DetailKbFragment" />
 
 
 </navigation>

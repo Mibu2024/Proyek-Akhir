@@ -6,6 +6,7 @@ import com.proyekakhir.mibu.user.api.response.BidanResponse
 import com.proyekakhir.mibu.user.api.response.DataKesehatanItem
 import com.proyekakhir.mibu.user.api.response.IbuResponse
 import com.proyekakhir.mibu.user.api.response.ImunisasiResponse
+import com.proyekakhir.mibu.user.api.response.KbResponse
 import com.proyekakhir.mibu.user.api.response.KesehatanResponse
 import com.proyekakhir.mibu.user.api.response.LoginResponse
 import com.proyekakhir.mibu.user.api.response.NifasResponse
@@ -49,6 +50,10 @@ class UserRepository private constructor(
 
     suspend fun getBidan(): BidanResponse {
         return apiService.getBidan()
+    }
+
+    suspend fun getKb(): KbResponse {
+        return apiService.getKb()
     }
 
     companion object {
