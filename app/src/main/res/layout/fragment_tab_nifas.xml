@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:fillViewport="true"
-    tools:context=".ui.kehamilan.nifas.TabNifasFragment">
+    android:fillViewport="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/linear_layout"
@@ -37,6 +36,17 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             tools:visibility="visible"/>
+
+        <TextView
+            android:id="@+id/tv_no_data_nifas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_data"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/rv_tab_nifas"
+            app:layout_constraintEnd_toEndOf="@+id/rv_tab_nifas"
+            app:layout_constraintStart_toStartOf="@+id/rv_tab_nifas"
+            app:layout_constraintTop_toTopOf="@+id/rv_tab_nifas" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

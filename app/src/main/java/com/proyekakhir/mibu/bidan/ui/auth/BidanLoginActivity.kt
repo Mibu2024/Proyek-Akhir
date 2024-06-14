@@ -1,29 +1,35 @@
 package com.proyekakhir.mibu.bidan.ui.auth
 
 import android.app.AlertDialog
+import android.content.ContentValues
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.proyekakhir.mibu.R
-import com.proyekakhir.mibu.bidan.ui.auth.viewmodel.LoginViewModel
+import com.proyekakhir.mibu.bidan.ui.auth.preferences.PreferenceManager
+import com.proyekakhir.mibu.bidan.ui.auth.viewmodel.BidanLoginViewModel
 import com.proyekakhir.mibu.bidan.ui.customViewBidan.EmailEditText
 import com.proyekakhir.mibu.bidan.ui.factory.ViewModelFactory
 import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
 import com.proyekakhir.mibu.bidan.ui.mainPages.BidanMainActivity
 import com.proyekakhir.mibu.databinding.ActivityBidanLoginBinding
+import com.proyekakhir.mibu.user.ui.activity.MainActivity
 
 class BidanLoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBidanLoginBinding
-    private lateinit var viewModel: LoginViewModel
+    private lateinit var viewModel: BidanLoginViewModel
     val firebaseAuth = FirebaseAuth.getInstance()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +38,7 @@ class BidanLoginActivity : AppCompatActivity() {
 
         val repository = FirebaseRepository()
         val factory = ViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, factory).get(LoginViewModel::class.java)
+        viewModel = ViewModelProvider(this, factory).get(BidanLoginViewModel::class.java)
 
 
         binding.btnLoginBidan.setOnClickListener {
@@ -62,12 +68,17 @@ class BidanLoginActivity : AppCompatActivity() {
 
         viewModel.isLoginSuccessful.observe(this, { isSuccessful ->
             if (isSuccessful) {
-                startActivity(Intent(this@BidanLoginActivity, BidanMainActivity::class.java))
-                finish()
+                val email = binding.bidanLoginEmail.text.toString()
+                alertLoginSuccess(getString(R.string.success_login), email, "bidan")
             } else {
-                Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(baseContext, R.string.sign_up_failed, Toast.LENGTH_SHORT).show()
             }
         })
+
+        viewModel.loginErrorMessage.observe(this, { message ->
+            Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+        })
+
 
         binding.tvToSignup.setOnClickListener {
             startActivity(Intent(this@BidanLoginActivity, BidanRegisterActivity::class.java))
@@ -77,6 +88,41 @@ class BidanLoginActivity : AppCompatActivity() {
             forgotPasswordDialog()
         }
 
+    }
+
+    private fun alertLoginSuccess(titleFill: String, descFill: String, role: String) {
+        val builder = AlertDialog.Builder(this)
+
+        val customView = LayoutInflater.from(this)
+            .inflate(R.layout.custom_layout_dialog_1_option, null)
+        builder.setView(customView)
+
+        val title = customView.findViewById<TextView>(R.id.tv_title)
+        val desc = customView.findViewById<TextView>(R.id.tv_desc)
+        val btnOk = customView.findViewById<Button>(R.id.ok_btn_id)
+
+        title.text = titleFill
+        desc.text = descFill
+
+        val dialog = builder.create()
+
+        btnOk.setOnClickListener {
+            if (role == "bidan") {
+                val preferenceManager = PreferenceManager(this)
+                preferenceManager.setUserRole("bidan")
+                startActivity(Intent(this@BidanLoginActivity, BidanMainActivity::class.java))
+                finish()
+            } else {
+                val preferenceManager = PreferenceManager(this)
+                preferenceManager.setUserRole("user")
+                startActivity(Intent(this@BidanLoginActivity, MainActivity::class.java))
+                finish()
+            }
+            dialog.dismiss()
+        }
+
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
     }
 
     private fun forgotPasswordDialog() {

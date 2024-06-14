@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation_bidan"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.BidanHomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_bidan_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_detailIbuFragment"
+            app:destination="@id/detailIbuFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_laporanCatatanFragment"
+            app:destination="@id/laporanCatatanFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_listCatatanFragment"
+            app:destination="@id/listCatatanFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_artikel"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.BidanArtikelFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_bidan_artikel" >
+        <action
+            android:id="@+id/action_navigation_artikel_to_addArtikelFragment"
+            app:destination="@id/addArtikelFragment" />
+        <action
+            android:id="@+id/action_navigation_artikel_to_detailArtikelFragment"
+            app:destination="@id/detailArtikelFragment" />
+        <action
+            android:id="@+id/action_navigation_artikel_to_editArtikelFragmant"
+            app:destination="@id/editArtikelFragmant" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.settings.BidanSettingsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_bidan_settings" >
+        <action
+            android:id="@+id/action_navigation_settings_to_aboutAppFragment"
+            app:destination="@id/aboutAppFragment" />
+        <action
+            android:id="@+id/action_navigation_settings_to_dataPribadiFragment"
+            app:destination="@id/dataPribadiFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addArtikelFragment"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.AddArtikelFragment"
+        android:label="fragment_add_artikel"
+        tools:layout="@layout/fragment_add_artikel" />
+    <fragment
+        android:id="@+id/aboutAppFragment"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.settings.AboutAppFragment"
+        android:label="fragment_about_app"
+        tools:layout="@layout/fragment_about_app" />
+    <fragment
+        android:id="@+id/dataPribadiFragment"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.settings.DataPribadiFragment"
+        android:label="fragment_data_pribadi_bidan"
+        tools:layout="@layout/fragment_data_pribadi_bidan" />
+    <fragment
+        android:id="@+id/detailIbuFragment"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.DetailIbuFragment"
+        android:label="fragment_detail_ibu"
+        tools:layout="@layout/fragment_detail_ibu" >
+        <action
+            android:id="@+id/action_detailIbuFragment_to_addCatatanKesehatanFragment"
+            app:destination="@id/addCatatanKesehatanFragment" />
+        <action
+            android:id="@+id/action_detailIbuFragment_to_addCatatanNifasFragment"
+            app:destination="@id/addCatatanNifasFragment" />
+        <action
+            android:id="@+id/action_detailIbuFragment_to_addDataAnakFragment"
+            app:destination="@id/addDataAnakFragment" />
+        <action
+            android:id="@+id/action_detailIbuFragment_to_detailKesehatanFragment2"
+            app:destination="@id/detailKesehatanFragment2" />
+        <action
+            android:id="@+id/action_detailIbuFragment_to_detailNifasFragment"
+            app:destination="@id/detailNifasFragment" />
+        <action
+            android:id="@+id/action_detailIbuFragment_to_detailAnakFragment"
+            app:destination="@id/detailAnakFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addCatatanKesehatanFragment"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.addCatatan.AddCatatanKesehatanFragment"
+        android:label="fragment_add_catatan_kesehatan"
+        tools:layout="@layout/fragment_add_catatan_kesehatan" />
+    <fragment
+        android:id="@+id/addCatatanNifasFragment"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.addCatatan.AddCatatanNifasFragment"
+        android:label="fragment_add_catatan_nifas"
+        tools:layout="@layout/fragment_add_catatan_nifas" />
+    <fragment
+        android:id="@+id/addDataAnakFragment"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.addCatatan.AddDataAnakFragment"
+        android:label="fragment_add_data_anak"
+        tools:layout="@layout/fragment_add_data_anak" />
+    <fragment
+        android:id="@+id/detailKesehatanFragment2"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.DetailKesehatanFragment"
+        android:label="DetailKesehatanFragment" />
+    <fragment
+        android:id="@+id/detailNifasFragment"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.DetailNifasFragment"
+        android:label="DetailNifasFragment" />
+    <fragment
+        android:id="@+id/detailAnakFragment"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.catatan.DetailAnakFragment"
+        android:label="fragment_detail_anak"
+        tools:layout="@layout/fragment_detail_anak" />
+    <fragment
+        android:id="@+id/detailArtikelFragment"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.DetailArtikelFragment"
+        android:label="DetailArtikelFragment" />
+    <dialog
+        android:id="@+id/editArtikelFragmant"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.EditArtikelFragmant"
+        android:label="EditArtikelFragmant" />
+    <fragment
+        android:id="@+id/laporanCatatanFragment"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.laporan.LaporanCatatanFragment"
+        android:label="fragment_laporan_catatan"
+        tools:layout="@layout/fragment_laporan_catatan" >
+    </fragment>
+    <fragment
+        android:id="@+id/listCatatanFragment"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.laporan.ListCatatanFragment"
+        android:label="ListCatatanFragment" >
+        <action
+            android:id="@+id/action_listCatatanFragment_to_detailListAnakFragment"
+            app:destination="@id/detailListAnakFragment" />
+        <action
+            android:id="@+id/action_listCatatanFragment_to_detailListKesehatanFragment"
+            app:destination="@id/detailListKesehatanFragment" />
+        <action
+            android:id="@+id/action_listCatatanFragment_to_detailListNifasFragment"
+            app:destination="@id/detailListNifasFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailListAnakFragment"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.laporan.anak.DetailListAnakFragment"
+        android:label="DetailListAnakFragment" >
+    </fragment>
+    <fragment
+        android:id="@+id/detailListKesehatanFragment"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.laporan.kesehatan.DetailListKesehatanFragment"
+        android:label="DetailListKesehatanFragment" />
+    <fragment
+        android:id="@+id/detailListNifasFragment"
+        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.home.laporan.nifas.DetailListNifasFragment"
+        android:label="DetailListNifasFragment" />
+
+</navigation>

@@ -3,14 +3,14 @@ package com.proyekakhir.mibu.bidan.ui.mainPages
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.bidan.ui.auth.BidanLoginActivity
@@ -29,7 +29,7 @@ class BidanMainActivity : AppCompatActivity() {
         setupBottomNav()
     }
 
-    private fun setupBottomNav(){
+    private fun setupBottomNav() {
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
         val colorStateList = ColorStateList(
             arrayOf(
@@ -52,10 +52,24 @@ class BidanMainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.navigation_home -> showBottomNav()
-                R.id.navigation_artikel -> showBottomNav()
-                R.id.navigation_settings -> showBottomNav()
-                else -> hideBottomNav()
+                R.id.navigation_home, R.id.navigation_artikel, R.id.navigation_settings -> {
+                    // Post the operation to the main thread's message queue
+                    Handler(Looper.getMainLooper()).post {
+                        // Clear the back stack
+                        val backStackCount = supportFragmentManager.backStackEntryCount
+                        for (i in 0 until backStackCount) {
+                            supportFragmentManager.popBackStackImmediate()
+                        }
+                    }
+
+                    // Show the bottom navigation
+                    showBottomNav()
+                }
+
+                else -> {
+                    // Hide the bottom navigation
+                    hideBottomNav()
+                }
             }
         }
     }

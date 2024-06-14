@@ -56,18 +56,28 @@
             app:layout_constraintStart_toStartOf="@+id/textView"
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
+        <TextView
+            android:id="@+id/textView38"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/nama_lengkap"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/fullnameEditTextLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
             android:elevation="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView">
+            app:layout_constraintTop_toBottomOf="@+id/textView38">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/bidan_register_fullname"
@@ -75,9 +85,19 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_et_default"
                 android:ems="10"
-                android:hint="@string/nama_lengkap"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/textView39"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/alamat"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fullnameEditTextLayout" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/alamatEditTextLayout"
@@ -85,12 +105,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
             android:elevation="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fullnameEditTextLayout">
+            app:layout_constraintTop_toBottomOf="@+id/textView39">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/bidan_register_alamat"
@@ -98,9 +117,19 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_et_default"
                 android:ems="10"
-                android:hint="@string/alamat"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/textView40"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/email"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/alamatEditTextLayout" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailEditTextLayout"
@@ -108,22 +137,32 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
             android:elevation="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/alamatEditTextLayout">
+            app:layout_constraintTop_toBottomOf="@+id/textView40">
 
             <com.proyekakhir.mibu.bidan.ui.customViewBidan.EmailEditText
                 android:id="@+id/bidan_register_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_et_default"
+                android:drawableLeft="@drawable/email_24"
                 android:ems="10"
-                android:hint="@string/hint_email"
                 android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/textView41"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/no_telepon"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailEditTextLayout" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/noTeleponEditTextLayout"
@@ -131,22 +170,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
             android:elevation="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/emailEditTextLayout">
+            app:layout_constraintTop_toBottomOf="@+id/textView41">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <com.proyekakhir.mibu.bidan.ui.customViewBidan.PhoneNumberEditText
                 android:id="@+id/bidan_register_no_telepon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_et_default"
                 android:ems="10"
-                android:hint="@string/no_telepon"
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/textView42"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/no_str"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/noTeleponEditTextLayout" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/noStrEditTextLayout"
@@ -154,12 +202,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
             android:elevation="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/noTeleponEditTextLayout">
+            app:layout_constraintTop_toBottomOf="@+id/textView42">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/bidan_register_no_str"
@@ -167,9 +214,19 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_et_default"
                 android:ems="10"
-                android:hint="@string/no_str"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/textView43"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/hint_password"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/noStrEditTextLayout" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passwordEditTextLayout"
@@ -177,13 +234,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
             android:elevation="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/noStrEditTextLayout">
+            app:layout_constraintTop_toBottomOf="@+id/textView43">
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -195,8 +251,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_et_default"
+                android:drawableLeft="@drawable/lock_24"
                 android:ems="10"
-                android:hint="@string/hint_password"
                 android:inputType="textPassword" />
 
                 <com.proyekakhir.mibu.bidan.ui.customViewBidan.EyeIconView

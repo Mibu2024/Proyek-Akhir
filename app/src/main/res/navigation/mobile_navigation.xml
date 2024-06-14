@@ -7,29 +7,80 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.proyekakhir.mibu.ui.home.HomeFragment"
+        android:name="com.proyekakhir.mibu.user.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
-    <fragment
-        android:id="@+id/navigation_artikel"
-        android:name="com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel.BidanArtikelFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_bidan_artikel" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_detailArtikelFragment2"
+            app:destination="@id/detailArtikelFragment2" />
+        <action
+            android:id="@+id/action_navigation_home_to_chatBidanFragment"
+            app:destination="@id/chatBidanFragment" />
+    </fragment>
+
     <fragment
         android:id="@+id/navigation_catatan_kehamilan"
-        android:name="com.proyekakhir.mibu.ui.kehamilan.CatatanKehamilanFragment"
+        android:name="com.proyekakhir.mibu.user.ui.kehamilan.CatatanKehamilanFragment"
         android:label="@string/title_catatan_kehamilan"
-        tools:layout="@layout/fragment_catatan_kehamilan" />
+        tools:layout="@layout/fragment_catatan_kehamilan" >
+        <action
+            android:id="@+id/action_navigation_catatan_kehamilan_to_detailNifasFragment2"
+            app:destination="@id/detailNifasFragment2" />
+        <action
+            android:id="@+id/action_navigation_catatan_kehamilan_to_detailKesehatanFragment"
+            app:destination="@id/detailKesehatanFragment" />
+
+    </fragment>
     <fragment
         android:id="@+id/navigation_catatan_anak"
-        android:name="com.proyekakhir.mibu.ui.anak.CatatanAnakFragment"
+        android:name="com.proyekakhir.mibu.user.ui.anak.CatatanAnakFragment"
         android:label="@string/title_catatan_anak"
-        tools:layout="@layout/fragment_catatan_anak" />
+        tools:layout="@layout/fragment_catatan_anak" >
+        <action
+            android:id="@+id/action_navigation_catatan_anak_to_detailAnakUserFragment"
+            app:destination="@id/detailAnakUserFragment" />
+    </fragment>
     <fragment
         android:id="@+id/navigation_settings"
-        android:name="com.proyekakhir.mibu.ui.settings.SettingsFragment"
+        android:name="com.proyekakhir.mibu.user.ui.settings.SettingsFragment"
         android:label="@string/title_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_navigation_settings_to_dataPribadiFragment2"
+            app:destination="@id/dataPribadiFragment2" />
+        <action
+            android:id="@+id/action_navigation_settings_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailArtikelFragment2"
+        android:name="com.proyekakhir.mibu.user.ui.artikel.DetailArtikelFragment"
+        android:label="DetailArtikelFragment" />
+
+    <fragment
+        android:id="@+id/detailNifasFragment2"
+        android:name="com.proyekakhir.mibu.user.ui.kehamilan.nifas.DetailNifasFragment"
+        android:label="DetailNifasFragment" />
+    <fragment
+        android:id="@+id/detailKesehatanFragment"
+        android:name="com.proyekakhir.mibu.user.ui.kehamilan.kesehatan.DetailKesehatanFragment"
+        android:label="DetailKesehatanFragment" />
+    <fragment
+        android:id="@+id/detailAnakUserFragment"
+        android:name="com.proyekakhir.mibu.user.ui.anak.DetailAnakUserFragment"
+        android:label="DetailAnakUserFragment" />
+    <fragment
+        android:id="@+id/dataPribadiFragment2"
+        android:name="com.proyekakhir.mibu.user.ui.settings.DataPribadiFragment"
+        android:label="DataPribadiFragment" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.proyekakhir.mibu.user.ui.settings.AboutFragment"
+        android:label="AboutFragment" />
+    <dialog
+        android:id="@+id/chatBidanFragment"
+        android:name="com.proyekakhir.mibu.user.ui.home.ChatBidanFragment"
+        android:label="ChatBidanFragment" />
 
 
 </navigation>

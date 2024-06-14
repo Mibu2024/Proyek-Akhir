@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "com.proyekakhir.mibu"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -58,7 +58,10 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
+    implementation("androidx.test:core-ktx:1.5.0")
+    implementation("androidx.test.ext:junit-ktx:1.1.5")
     testImplementation("junit:junit:4.13.2")
+    testImplementation("junit:junit:4.12")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
@@ -87,11 +90,39 @@ dependencies {
     implementation("androidx.camera:camera-view:$cameraxVersion")
 
     implementation ("hu.autsoft:krate:2.0.0")
+
     //glide library
     implementation ("com.github.bumptech.glide:glide:4.16.0")
     annotationProcessor ("com.github.bumptech.glide:compiler:4.13.0")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
 
     implementation ("com.jakewharton.timber:timber:5.0.1")
+
+    //imagepicker
+    implementation ("com.github.dhaval2404:imagepicker:2.1")
+
+    //mockito
+    testImplementation ("org.mockito:mockito-core:3.12.4")
+    testImplementation ("org.mockito:mockito-inline:3.12.4")
+    implementation ("com.google.android.gms:play-services-tasks:17.2.1")
+    testImplementation ("androidx.arch.core:core-testing:2.1.0")
+    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.2")
+
+    //mp chart
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
+    //POI
+    implementation ("org.apache.poi:poi:4.1.2")
+    implementation ("org.apache.poi:poi-ooxml:4.1.2")
+    implementation("javax.xml.stream:stax-api:1.0")
+    implementation("org.apache.xmlbeans:xmlbeans:3.1.0")
+    implementation("com.fasterxml:aalto-xml:1.2.2")
+
+    androidTestImplementation ("androidx.test.ext:junit:1.1.3")
+    androidTestImplementation ("androidx.test.espresso:espresso-core:3.4.0")
+    androidTestImplementation ("androidx.fragment:fragment-testing:1.3.6")
+    androidTestImplementation ("androidx.test:runner:1.4.0")
+    androidTestImplementation ("androidx.test:rules:1.4.0")
+
 
 }

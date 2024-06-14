@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:background="@color/blue_background"
-    tools:context=".auth.LoginActivity">
+    tools:context=".user.auth.LoginActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -29,7 +29,7 @@
             android:id="@+id/iv_logo"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:src="@drawable/logowithbg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -89,8 +89,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView3">
 
-            <com.proyekakhir.mibu.custom_view.EmailEditText
-                android:id="@+id/bidan_login_email"
+            <com.proyekakhir.mibu.user.custom_view.EmailEditText
+                android:id="@+id/user_login_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_et_default"
@@ -123,13 +123,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView6">
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end">
-
-            <com.proyekakhir.mibu.custom_view.PasswordEditText
-                android:id="@+id/bidan_login_password"
+            <com.proyekakhir.mibu.user.custom_view.PasswordEditText
+                android:id="@+id/user_login_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_et_default"
@@ -137,31 +132,18 @@
                 android:drawablePadding="12dp"
                 android:ems="10"
                 android:inputType="textPassword" />
-
-                <com.proyekakhir.mibu.custom_view.EyeIconView
-                    android:id="@+id/eyeIcon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end|center_vertical"
-                    android:clickable="true"
-                    android:paddingEnd="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </FrameLayout>
-
         </com.google.android.material.textfield.TextInputLayout>
 
 
         <TextView
-            android:id="@+id/bidan_forgot_password"
+            android:id="@+id/user_forgot_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:text="@string/forgot_password"
             android:textStyle="italic"
-            app:layout_constraintBottom_toTopOf="@+id/btn_login_bidan"
+            app:layout_constraintBottom_toTopOf="@+id/btn_login_user"
             app:layout_constraintEnd_toEndOf="@+id/passwordEditTextLayout"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="@+id/passwordEditTextLayout"
@@ -169,7 +151,7 @@
             app:layout_constraintVertical_bias="0.032" />
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_login_bidan"
+            android:id="@+id/btn_login_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"

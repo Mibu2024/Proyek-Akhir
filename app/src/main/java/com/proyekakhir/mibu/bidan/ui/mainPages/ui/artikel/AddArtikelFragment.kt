@@ -1,60 +1,124 @@
 package com.proyekakhir.mibu.bidan.ui.mainPages.ui.artikel
 
+import android.app.Activity
+import android.app.AlertDialog
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.github.dhaval2404.imagepicker.ImagePicker
 import com.proyekakhir.mibu.R
+import com.proyekakhir.mibu.bidan.ui.factory.ViewModelFactory
+import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
+import com.proyekakhir.mibu.databinding.FragmentAddArtikelBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [AddArtikelFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class AddArtikelFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    private var _binding: FragmentAddArtikelBinding? = null
+    private val binding get() = _binding!!
+    private var selectedImageUri: Uri? = null
+    private lateinit var viewModel: BidanArtikelViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_artikel, container, false)
+        _binding = FragmentAddArtikelBinding.inflate(inflater, container, false)
+        val root: View = binding.root
+
+        val repository = FirebaseRepository()
+        val factory = ViewModelFactory(repository)
+        viewModel =
+            ViewModelProvider(requireActivity(), factory).get(BidanArtikelViewModel::class.java)
+
+        binding.layoutAddGambar.setOnClickListener {
+            ImagePicker.with(this)
+                .crop() // Crop image(Optional), Check Customization for more option
+                .compress(1024) // Final image size will be less than 1 MB(Optional)
+                .maxResultSize(
+                    720,
+                    720
+                ) // Final image resolution will be less than 1080 x 1080(Optional)
+                .start()
+        }
+
+        binding.arrowBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
+        binding.btnSimpan.setOnClickListener {
+            val judul = binding.edJudul.text.toString()
+            val isi = binding.edIsi.text.toString()
+
+            if (judul.isNullOrEmpty()) {
+                Toast.makeText(context, "Isi Judul Artikel!", Toast.LENGTH_SHORT).show()
+            } else if (isi.isNullOrEmpty()) {
+                Toast.makeText(context, "Isi Artikel!", Toast.LENGTH_SHORT).show()
+            } else {
+                viewModel.uploadArtikel(judul, isi, selectedImageUri,
+                    onSuccess = {
+                        alertUpload(getString(R.string.success), getString(R.string.upload_success))
+                    },
+                    onFailure = { e ->
+                        alertUpload(getString(R.string.failed), getString(R.string.upload_failed))
+                    })
+            }
+        }
+
+        val progressBar = binding.pbAddArtikel
+        viewModel.isLoading.observe(requireActivity(), Observer { isLoading ->
+            if (isLoading) {
+                progressBar.visibility = View.VISIBLE
+            } else {
+                progressBar.visibility = View.GONE
+            }
+        })
+
+        return root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment AddArtikelFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            AddArtikelFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun alertUpload(titleFill: String, descFill: String) {
+        val builder = AlertDialog.Builder(requireContext())
+
+        val customView = LayoutInflater.from(requireContext())
+            .inflate(R.layout.custom_layout_dialog_1_option, null)
+        builder.setView(customView)
+
+        val title = customView.findViewById<TextView>(R.id.tv_title)
+        val desc = customView.findViewById<TextView>(R.id.tv_desc)
+        val btnOk = customView.findViewById<Button>(R.id.ok_btn_id)
+
+        title.text = titleFill
+        desc.text = descFill
+
+        val dialog = builder.create()
+
+        btnOk.setOnClickListener {
+            findNavController().popBackStack()
+            dialog.dismiss()
+        }
+
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            // Image Uri will not be null for RESULT_OK
+            selectedImageUri = data?.data!!
+            // Use Uri object instead of File to avoid storage permissions
+            binding.ivPreviewPoster.setImageURI(selectedImageUri)
+        }
+    }
+
 }

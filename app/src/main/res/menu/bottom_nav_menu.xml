@@ -7,13 +7,18 @@
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_artikel"
+        android:id="@+id/navigation_catatan_kehamilan"
+        android:icon="@drawable/baseline_assignment_24"
+        android:title="@string/title_catatan_kehamilan" />
+
+    <item
+        android:id="@+id/navigation_catatan_anak"
         android:icon="@drawable/baseline_article_24"
-        android:title="@string/artikel" />
+        android:title="@string/title_catatan_anak" />
 
     <item
         android:id="@+id/navigation_settings"
         android:icon="@drawable/baseline_settings_24"
-        android:title="@string/settings" />
+        android:title="@string/title_settings" />
 
 </menu>
