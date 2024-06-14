@@ -26,16 +26,6 @@
             android:name=".user.ui.activity.OnBoardActivity"
             android:exported="false" />
         <activity
-            android:name=".bidan.ui.auth.BidanRegisterActivity"
-            android:exported="false" />
-        <activity
-            android:name=".bidan.ui.auth.BidanLoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".bidan.ui.mainPages.BidanMainActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustPan" />
-        <activity
             android:name=".user.ui.activity.SplashActivity"
             android:exported="true">
             <intent-filter>

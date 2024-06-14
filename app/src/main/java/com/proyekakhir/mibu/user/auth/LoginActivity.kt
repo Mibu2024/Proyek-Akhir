@@ -2,11 +2,9 @@ package com.proyekakhir.mibu.user.auth
 
 import android.app.AlertDialog
 import android.app.ProgressDialog
-import android.content.ContentValues
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,40 +13,38 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.lifecycle.ViewModelProvider
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.FirebaseFirestore
 import com.proyekakhir.mibu.R
-import com.proyekakhir.mibu.bidan.ui.auth.preferences.PreferenceManager
-import com.proyekakhir.mibu.bidan.ui.customViewBidan.EmailEditText
-import com.proyekakhir.mibu.bidan.ui.mainPages.BidanMainActivity
-import com.proyekakhir.mibu.user.factory.ViewModelFactory
-import com.proyekakhir.mibu.user.firebase.FirebaseRepository
 import com.proyekakhir.mibu.databinding.ActivityLoginBinding
+import com.proyekakhir.mibu.user.api.UserPreference
+import com.proyekakhir.mibu.user.api.dataStore
 import com.proyekakhir.mibu.user.auth.viewmodel.LoginViewModel
+import com.proyekakhir.mibu.user.custom_view.EmailEditText
+import com.proyekakhir.mibu.user.factory.ViewModelFactory
 import com.proyekakhir.mibu.user.ui.activity.MainActivity
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var viewModel: LoginViewModel
     val firebaseAuth = FirebaseAuth.getInstance()
     private lateinit var progressDialog: ProgressDialog
+    private val viewModel by viewModels<LoginViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
+    private lateinit var userPreference: UserPreference
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        userPreference = UserPreference.getInstance(dataStore)
+
         // Initialize ProgressDialog
         progressDialog = ProgressDialog(this).apply {
-            setMessage("Registering...")
+            setMessage("Logging In...")
             setCancelable(false)
         }
-
-        val repository = FirebaseRepository()
-        val factory = ViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, factory).get(LoginViewModel::class.java)
 
         binding.tvToSignup.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
@@ -60,13 +56,13 @@ class LoginActivity : AppCompatActivity() {
             val emailError = binding.userLoginEmail.isError
             val passError = binding.userLoginPassword.isError
 
-            if (email.isNullOrEmpty()){
+            if (email.isNullOrEmpty()) {
                 Toast.makeText(this, R.string.alert_email_empty, Toast.LENGTH_SHORT).show()
-            } else if (pass.isNullOrEmpty()){
+            } else if (pass.isNullOrEmpty()) {
                 Toast.makeText(this, R.string.alert_pass_empty, Toast.LENGTH_SHORT).show()
-            } else if (emailError){
+            } else if (emailError) {
                 Toast.makeText(this, R.string.alert_email_error, Toast.LENGTH_SHORT).show()
-            } else if (passError){
+            } else if (passError) {
                 Toast.makeText(this, R.string.alert_pass_error, Toast.LENGTH_SHORT).show()
             } else {
                 progressDialog.show()
@@ -76,20 +72,22 @@ class LoginActivity : AppCompatActivity() {
 
         viewModel.isLoading.observe(this, { isLoading ->
             binding.pbLogin.visibility = if (isLoading) View.VISIBLE else View.GONE
-        })
-
-        viewModel.isLoginSuccessful.observe(this, { isSuccessful ->
-            progressDialog.dismiss()
-            if (isSuccessful) {
-                val email = binding.userLoginEmail.text.toString()
-                alertLoginSuccess(getString(R.string.success_login), email, "user")
-            } else {
-                Toast.makeText(baseContext, R.string.sign_up_failed, Toast.LENGTH_SHORT).show()
+            if (!isLoading) {
+                progressDialog.dismiss()
             }
         })
 
-        viewModel.loginErrorMessage.observe(this, { message ->
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+        viewModel.loginResult.observe(this, { data ->
+            progressDialog.dismiss()
+            if (data.data?.token != null) {
+                progressDialog.dismiss()
+                val email = binding.userLoginEmail.text.toString()
+                alertLoginSuccess(getString(R.string.success_login), email)
+                Log.d("loginapi", data.data?.token.toString())
+            } else {
+                progressDialog.dismiss()
+                Toast.makeText(baseContext, R.string.sign_up_failed, Toast.LENGTH_SHORT).show()
+            }
         })
 
         binding.userForgotPassword.setOnClickListener {
@@ -103,7 +101,8 @@ class LoginActivity : AppCompatActivity() {
 
     private fun forgotPasswordDialog() {
         val builder = AlertDialog.Builder(this)
-        val customView = LayoutInflater.from(this).inflate(R.layout.alert_dialog_forgot_password, null)
+        val customView =
+            LayoutInflater.from(this).inflate(R.layout.alert_dialog_forgot_password, null)
         builder.setView(customView)
         val dialog = builder.create()
 
@@ -113,14 +112,16 @@ class LoginActivity : AppCompatActivity() {
         val emailError = edEmail.isError
 
         btnSend.setOnClickListener {
-            if (emailError){
+            if (emailError) {
                 Toast.makeText(this, "Please check your email format!", Toast.LENGTH_SHORT).show()
             } else {
-                firebaseAuth.sendPasswordResetEmail(edEmail.text.toString()).addOnCompleteListener { task ->
-                    if (task.isSuccessful){
-                        Toast.makeText(this, "Check your email inbox!", Toast.LENGTH_SHORT).show()
+                firebaseAuth.sendPasswordResetEmail(edEmail.text.toString())
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Toast.makeText(this, "Check your email inbox!", Toast.LENGTH_SHORT)
+                                .show()
+                        }
                     }
-                }
                 dialog.dismiss()
             }
         }
@@ -133,7 +134,7 @@ class LoginActivity : AppCompatActivity() {
         dialog.show()
     }
 
-    private fun alertLoginSuccess(titleFill: String, descFill: String, role: String) {
+    private fun alertLoginSuccess(titleFill: String, descFill: String) {
         val builder = AlertDialog.Builder(this)
 
         val customView = LayoutInflater.from(this)
@@ -150,30 +151,12 @@ class LoginActivity : AppCompatActivity() {
         val dialog = builder.create()
 
         btnOk.setOnClickListener {
-            if (role == "bidan") {
-                val preferenceManager = PreferenceManager(this)
-                preferenceManager.setUserRole("bidan")
-                startActivity(Intent(this@LoginActivity, BidanMainActivity::class.java))
-                finish()
-            } else {
-                val preferenceManager = PreferenceManager(this)
-                preferenceManager.setUserRole("user")
-                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-                finish()
-            }
+            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+            finish()
             dialog.dismiss()
         }
 
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        val currentUser = FirebaseAuth.getInstance().currentUser
-        if (currentUser != null) {
-            startActivity(Intent(this@LoginActivity, MainActivity::class.java))
-            finish()
-        }
     }
 }

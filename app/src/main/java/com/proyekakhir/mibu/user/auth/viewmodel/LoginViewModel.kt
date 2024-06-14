@@ -3,40 +3,58 @@ package com.proyekakhir.mibu.user.auth.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.google.firebase.auth.FirebaseAuth
-import com.proyekakhir.mibu.user.firebase.FirebaseRepository
+import androidx.lifecycle.viewModelScope
+import com.proyekakhir.mibu.user.api.UserPreference
+import com.proyekakhir.mibu.user.api.UserRepository
+import com.proyekakhir.mibu.user.api.response.LoginResponse
+import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
 
-class LoginViewModel(private val repository: FirebaseRepository) : ViewModel() {
+class LoginViewModel(
+    private val userRepository: UserRepository,
+    private val userPreference: UserPreference
+) : ViewModel() {
+    private val _loginResult = MutableLiveData<LoginResponse>()
+    val loginResult: LiveData<LoginResponse> = _loginResult
+
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> = _isLoading
 
-    private val _isLoginSuccessful = MutableLiveData<Boolean>()
-    val isLoginSuccessful: LiveData<Boolean> = _isLoginSuccessful
-
-    private val _loginErrorMessage = MutableLiveData<String>()
-    val loginErrorMessage: LiveData<String> = _loginErrorMessage
-
     fun login(email: String, password: String) {
-        _isLoading.value = true
-        repository.login(email, password) { isSuccessful, message ->
-            _isLoading.value = false
-            _isLoginSuccessful.value = isSuccessful
+        val json = """
+            {
+                "email": "$email",
+                "password": "$password"
+            }
+        """.trimIndent()
 
-            if (isSuccessful) {
-                val user = FirebaseAuth.getInstance().currentUser
-                if (user != null && user.isEmailVerified) {
-                    _isLoading.value = false
-                    _isLoginSuccessful.value = true
-                } else {
-                    FirebaseAuth.getInstance().signOut()
-                    _isLoading.value = false
-                    _isLoginSuccessful.value = false
-                    _loginErrorMessage.value = "Email not verified. Please check your email for verification instructions."
+        val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
+
+        viewModelScope.launch {
+            try {
+                _isLoading.value = true
+                val response = userRepository.login(requestBody)
+                // If the login was successful, update _loginResult to notify the activity
+                _loginResult.value = response
+
+                var currentToken = ""
+                var id = 0
+                var nama = ""
+                response.data?.token?.let { token ->
+                    currentToken = token
                 }
-            } else {
+                response.data?.id?.let { userId ->
+                    id = userId
+                }
+                response.data?.namaIbu?.let { name ->
+                    nama = name
+                }
+                userPreference.saveSession(currentToken, id, true, nama)
+            } catch (e: Exception) {
+                // Handle any exceptions that occurred during the login operation.
+            } finally {
                 _isLoading.value = false
-                _isLoginSuccessful.value = false
-                _loginErrorMessage.value = message ?: "Login failed. Please check your email and password."
             }
         }
     }

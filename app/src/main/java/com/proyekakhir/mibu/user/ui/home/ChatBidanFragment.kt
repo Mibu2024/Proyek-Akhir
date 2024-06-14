@@ -3,48 +3,51 @@ package com.proyekakhir.mibu.user.ui.home
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.proyekakhir.mibu.bidan.ui.factory.ViewModelFactory
-import com.proyekakhir.mibu.bidan.ui.firebase.FirebaseRepository
 import com.proyekakhir.mibu.databinding.FragmentChatBidanBinding
 import com.proyekakhir.mibu.user.ui.home.model.BidanData
 
 class ChatBidanFragment : DialogFragment() {
     private var _binding: FragmentChatBidanBinding? = null
     private val binding get() = _binding!!
+    private val viewModel by viewModels<HomeViewModel> {
+        com.proyekakhir.mibu.user.factory.ViewModelFactory.getInstance(requireContext())
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        val repository = FirebaseRepository()
-        val factory = ViewModelFactory(repository)
-        val viewModel = ViewModelProvider(requireActivity(), factory).get(HomeViewModel::class.java)
-
         _binding = FragmentChatBidanBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val bidanArrayList = arrayListOf<BidanData>()
-        val adapter = ListBidanAdapter(bidanArrayList)
+        val adapter = ListBidanAdapter(listOf())
         val rvBidan = binding.rvBidan
         rvBidan.layoutManager = LinearLayoutManager(requireContext())
         rvBidan.setHasFixedSize(true)
         rvBidan.adapter = adapter
 
-        viewModel.dataList.observe(viewLifecycleOwner) { data ->
-            adapter.setData(data)
-            if (data.isEmpty()){
-                binding.noDataBidan.visibility = View.VISIBLE
-            } else {
+        viewModel.bidan.observe(viewLifecycleOwner, Observer { response ->
+            val list = response.dataBidan
+            if (list != null) {
+                adapter.list = list
+                adapter.notifyDataSetChanged()
                 binding.noDataBidan.visibility = View.GONE
+            } else {
+                binding.noDataBidan.visibility = View.VISIBLE
             }
-        }
+
+            Log.d("bidanapi", response.dataBidan.toString())
+        })
 
         return root
     }

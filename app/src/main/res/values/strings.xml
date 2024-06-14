@@ -90,7 +90,7 @@
     <string name="nama_pemeriksa">Nama Pemeriksa</string>
     <string name="periksa_selanjutnya">Periksa Selanjutnya</string>
     <string name="artikel_saya">Artikel Saya</string>
-    <string name="welcome">Registration successful. Tolong Login.</string>
+    <string name="welcome">Registration successful.</string>
     <string name="cari_ibu_hamil">Cari nama</string>
     <string name="daftar_ibu_hamil">Daftar Pasien</string>
     <string name="title_settings">Settings</string>
@@ -150,7 +150,7 @@
     <string name="title_catatan_kehamilan">Kehamilan</string>
     <string name="history_catatan_kesehatan">History Catatan Kesehatan</string>
     <string name="history_catatan_nifas">History Catatan Nifas</string>
-    <string name="catatan_anak">Catatan Anak</string>
+    <string name="catatan_anak">Catatan\nAnak</string>
     <string name="no_data">No Data Found</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -212,4 +212,15 @@
     <string name="add_hpl">Tambah Hari Perkiraan Lahir</string>
     <string name="tanggal_hpl">Pilih Tanggal HPL</string>
     <string name="submit">Submit</string>
+    <string name="swipe_left">Swipe Left</string>
+    <string name="buat_akun">Buat Akun</string>
+    <string name="catatan_kehamilan">Catatan\nKehamilan</string>
+    <string name="artikel_kehamilan">Artikel\nKehamilan</string>
+    <string name="riwayat_pemeriksaan_imunisasi">Riwayat Pemeriksaan Imunisasi</string>
+    <string name="hasil_pelayanan_kb">Hasil Pelayanan KB</string>
+    <string name="tanggal_pelayanan">Tanggal Pelayanan</string>
+    <string name="jenis_kb">Jenis Kontrasepsi</string>
+    <string name="tanggal_kembali">Tanggal Kembali</string>
+    <string name="detail_hasil_pelayanan">Detail Hasil Pelayanan</string>
+    <string name="tab_kb">KB</string>
 </resources>

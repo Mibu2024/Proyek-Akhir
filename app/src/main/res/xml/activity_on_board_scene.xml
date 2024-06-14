@@ -214,6 +214,16 @@
                 motion:attributeName="crossfade"
                 motion:customFloatValue="0" />
         </Constraint>
+        <Constraint
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            motion:layout_constraintTop_toBottomOf="@+id/descMenu1"
+            android:id="@+id/tvSwipe"
+            motion:layout_constraintBottom_toTopOf="@+id/menu1"
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="32dp"
+            android:layout_marginLeft="32dp"
+            motion:layout_constraintVertical_bias="0.902" />
     </ConstraintSet>
     <ConstraintSet
         android:id="@+id/menu2"
@@ -468,21 +478,25 @@
         <Constraint
             android:id="@+id/button"
             motion:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
             motion:layout_constraintBottom_toTopOf="@+id/menu2"
             android:alpha="100"
-            motion:layout_constraintStart_toStartOf="parent" />
+            motion:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp" />
         <Constraint
             android:id="@+id/button2"
             motion:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:alpha="100"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintBottom_toTopOf="@+id/button"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp" />
     </ConstraintSet>
     <Transition
         motion:constraintSetStart="@+id/menu3"

@@ -9,15 +9,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.proyekakhir.mibu.R
+import com.proyekakhir.mibu.user.api.response.DataArtikelItem
 import com.proyekakhir.mibu.user.ui.home.model.ArtikelModel
 
-class ListArtikelHomeAdapter (private var listArtikel : ArrayList<ArtikelModel>)
+class ListArtikelHomeAdapter (var listArtikel : List<DataArtikelItem?>)
     : RecyclerView.Adapter<ListArtikelHomeAdapter.MyViewHolder>() {
 
     var listener: OnItemClickListenerHome? = null
 
     interface OnItemClickListenerHome {
-        fun onItemClick(item: ArtikelModel)
+        fun onItemClick(item: DataArtikelItem)
     }
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val poster: ImageView = itemView.findViewById(R.id.iv_item_photo)
@@ -39,29 +40,27 @@ class ListArtikelHomeAdapter (private var listArtikel : ArrayList<ArtikelModel>)
     override fun onBindViewHolder(holder: ListArtikelHomeAdapter.MyViewHolder, position: Int) {
         val currentItem = listArtikel[position]
 
-        holder.title.text = currentItem.judul
-        holder.desc.text = currentItem.isiArtikel
+        holder.title.text = currentItem?.judul
+        holder.desc.text = currentItem?.isi
 
-        if (!currentItem.imageUrl.isNullOrEmpty()) {
+        if (!currentItem?.foto.isNullOrEmpty()) {
             Glide.with(holder.itemView.context)
-                .load(currentItem.imageUrl)
+                .load(currentItem?.foto)
                 .into(holder.poster)
         } else {
             holder.poster.setImageResource(R.drawable.cam_placeholder_logo)
         }
 
         holder.itemView.setOnClickListener {
-            listener?.onItemClick(currentItem)
+            if (currentItem != null) {
+                listener?.onItemClick(currentItem)
+            }
         }
 
         holder.view.setOnClickListener {
-            listener?.onItemClick(currentItem)
+            if (currentItem != null) {
+                listener?.onItemClick(currentItem)
+            }
         }
-    }
-
-    fun setData(newData: List<ArtikelModel>) {
-        listArtikel.clear()
-        listArtikel.addAll(newData)
-        notifyDataSetChanged()
     }
 }

@@ -1,51 +1,77 @@
 package com.proyekakhir.mibu.user.ui.kehamilan
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.proyekakhir.mibu.user.firebase.FirebaseRepository
-import com.proyekakhir.mibu.user.ui.anak.model.AnakModel
-import com.proyekakhir.mibu.user.ui.kehamilan.model.KesehatanModel
-import com.proyekakhir.mibu.user.ui.kehamilan.model.NifasModel
+import androidx.lifecycle.viewModelScope
+import com.proyekakhir.mibu.user.api.UserRepository
+import com.proyekakhir.mibu.user.api.response.KbResponse
+import com.proyekakhir.mibu.user.api.response.KesehatanResponse
+import com.proyekakhir.mibu.user.api.response.NifasResponse
+import kotlinx.coroutines.launch
 
-class CatatanKehamilanViewModel(val repository: FirebaseRepository) : ViewModel() {
+class CatatanKehamilanViewModel(val repository: UserRepository) : ViewModel() {
 
-    val isLoading = MutableLiveData<Boolean>()
-    val isEmpty = MutableLiveData<String>()
-    val catatanKesehatanList = MutableLiveData<ArrayList<KesehatanModel>>()
-    val catatanNifasList = MutableLiveData<ArrayList<NifasModel>>()
-    fun getCatatanKesehatanList(uid: String) {
-        repository.getCatatanKesehatan(
-            uid,
-            { data ->
-                catatanKesehatanList.value = data
-            },
-            { isEmptyMessage ->
-                isEmpty.value = isEmptyMessage
-            },
-            { loading ->
-                isLoading.value = loading
-            },
-            { error ->
-                // Handle error here
-            }
-        )
+    private val _kesehatan = MutableLiveData<KesehatanResponse>()
+    val kesehatan: MutableLiveData<KesehatanResponse> get() = _kesehatan
+
+    private val _nifas = MutableLiveData<NifasResponse>()
+    val nifas: LiveData<NifasResponse> get() = _nifas
+
+    private val _kb = MutableLiveData<KbResponse>()
+    val kb: LiveData<KbResponse> get() = _kb
+
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String> get() = _error
+
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> get() = _isLoading
+
+    init {
+        getCatatanKehamilan()
+        getCatatanNifas()
+        getCatatanKb()
     }
 
-    fun getCatatanNifasList(uid: String) {
-        repository.getCatatanNifas(
-            uid,
-            { data ->
-                catatanNifasList.value = data
-            },
-            { isEmptyMessage ->
-                isEmpty.value = isEmptyMessage
-            },
-            { loading ->
-                isLoading.value = loading
-            },
-            { error ->
-                // Handle error here
+    fun getCatatanKehamilan() {
+        viewModelScope.launch {
+            _isLoading.value = true
+            try {
+                val response = repository.getKesehatan()
+                _kesehatan.postValue(response)
+            } catch (e: Exception) {
+                _error.postValue(e.message)
+            } finally {
+                _isLoading.value = false
             }
-        )
+        }
+    }
+
+    fun getCatatanNifas() {
+        viewModelScope.launch {
+            _isLoading.value = true
+            try {
+                val response = repository.getNifas()
+                _nifas.postValue(response)
+            } catch (e: Exception) {
+                _error.postValue(e.message)
+            } finally {
+                _isLoading.value = false
+            }
+        }
+    }
+
+    fun getCatatanKb() {
+        viewModelScope.launch {
+            _isLoading.value = true
+            try {
+                val response = repository.getKb()
+                _kb.postValue(response)
+            } catch (e: Exception) {
+                _error.postValue(e.message)
+            } finally {
+                _isLoading.value = false
+            }
+        }
     }
 }

@@ -7,7 +7,7 @@
         android:title="@string/title_home" />
 
     <item
-        android:id="@+id/navigation_catatan_kehamilan"
+        android:id="@+id/navigation_catatan_kehamilan_navbar"
         android:icon="@drawable/baseline_assignment_24"
         android:title="@string/title_catatan_kehamilan" />
 

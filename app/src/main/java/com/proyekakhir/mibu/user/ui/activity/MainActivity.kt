@@ -51,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
                 R.id.navigation_home -> showBottomNav()
-                R.id.navigation_catatan_kehamilan -> showBottomNav()
+                R.id.navigation_catatan_kehamilan_navbar -> showBottomNav()
                 R.id.navigation_catatan_anak -> showBottomNav()
                 R.id.navigation_settings -> showBottomNav()
                 else -> hideBottomNav()
@@ -67,12 +67,4 @@ class MainActivity : AppCompatActivity() {
         binding.navView.visibility = View.VISIBLE
     }
 
-//    override fun onStart() {
-//        super.onStart()
-//        val currentUser = FirebaseAuth.getInstance().currentUser
-//        if (currentUser == null) {
-//            startActivity(Intent(this@MainActivity, LoginActivity::class.java))
-//            finish()
-//        }
-//    }
 }

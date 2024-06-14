@@ -96,4 +96,7 @@
     <color name="SupportErrorDark">#FFED3241</color>
     <color name="SupportErrorMid">#FFFF616D</color>
     <color name="SupportErrorLight">#FFFFE2E5</color>
+
+    <color name="hpl">#7291A5</color>
+    <color name="hplblack">#1E1B1B</color>
 </resources>

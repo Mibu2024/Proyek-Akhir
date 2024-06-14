@@ -1,32 +1,35 @@
 package com.proyekakhir.mibu.user.ui.anak
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.firebase.auth.FirebaseAuth
 import com.proyekakhir.mibu.R
-import com.proyekakhir.mibu.bidan.ui.network.NetworkConnection
+import com.proyekakhir.mibu.user.ui.NetworkConnection
 import com.proyekakhir.mibu.databinding.FragmentCatatanAnakBinding
-import com.proyekakhir.mibu.databinding.FragmentTabNifasBinding
+import com.proyekakhir.mibu.user.api.UserPreference
+import com.proyekakhir.mibu.user.api.dataStore
+import com.proyekakhir.mibu.user.api.response.DataAnaksItem
 import com.proyekakhir.mibu.user.factory.ViewModelFactory
-import com.proyekakhir.mibu.user.firebase.FirebaseRepository
-import com.proyekakhir.mibu.user.ui.anak.model.AnakModel
-import com.proyekakhir.mibu.user.ui.kehamilan.CatatanKehamilanViewModel
-import com.proyekakhir.mibu.user.ui.kehamilan.model.NifasModel
-import com.proyekakhir.mibu.user.ui.kehamilan.nifas.ListNifasAdapter
+import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.launch
 
 class CatatanAnakFragment : Fragment() {
     private var _binding: FragmentCatatanAnakBinding? = null
     private val binding get() = _binding!!
-
-    private lateinit var viewModel: CatatanAnakViewModel
+    private val viewModel by viewModels<CatatanAnakViewModel> {
+        ViewModelFactory.getInstance(requireContext())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,30 +38,28 @@ class CatatanAnakFragment : Fragment() {
         _binding = FragmentCatatanAnakBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val repository = FirebaseRepository()
-        val factory = ViewModelFactory(repository)
-        viewModel = ViewModelProvider(requireActivity(), factory).get(CatatanAnakViewModel::class.java)
-
-        val list = arrayListOf<AnakModel>()
-        val adapter = ListAnakAdapter(list)
+        val adapter = ListAnakAdapter(listOf())
         val rvAnak = binding.rvDataAnak
         rvAnak.layoutManager = LinearLayoutManager(requireContext())
         rvAnak.setHasFixedSize(true)
         rvAnak.adapter = adapter
 
-        val uid = FirebaseAuth.getInstance().currentUser?.uid
-        if (uid != null) {
-            viewModel.getCatatanAnakList(uid)
-            viewModel.catatanAnakList.observe(viewLifecycleOwner, Observer { list ->
-                adapter.setData(list)
-                adapter.notifyDataSetChanged()
-                if (list.isEmpty()) {
+        viewModel.anak.observe(viewLifecycleOwner, Observer { response ->
+            lifecycleScope.launch {
+                val dataStore: DataStore<Preferences> = requireContext().dataStore
+                val userPreference = UserPreference.getInstance(dataStore)
+                val userId = userPreference.getSession().firstOrNull()?.id ?: 0
+                Log.d("useridget", userId.toString())
+                val filteredList = response.dataAnaks?.filter { it?.idIbu == userId } ?: emptyList()
+                adapter.list = filteredList
+                if (filteredList.isEmpty()) {
                     binding.tvNoDataAnak.visibility = View.VISIBLE
                 } else {
                     binding.tvNoDataAnak.visibility = View.GONE
                 }
-            })
-        }
+                adapter.notifyDataSetChanged()
+            }
+        })
 
         val progressBar = binding.progressBar
         viewModel.isLoading.observe(requireActivity(), Observer { isLoading ->
@@ -70,7 +71,7 @@ class CatatanAnakFragment : Fragment() {
         })
 
         adapter.listener = object : ListAnakAdapter.OnItemClickListenerHome {
-            override fun onItemClick(item: AnakModel) {
+            override fun onItemClick(item: DataAnaksItem) {
                 val bundle = Bundle()
                 bundle.putSerializable("itemData", item)
                 findNavController().navigate(

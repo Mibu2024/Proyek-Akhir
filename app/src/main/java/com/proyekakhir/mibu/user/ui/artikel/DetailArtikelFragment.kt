@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.proyekakhir.mibu.databinding.FragmentDetailArtikelBinding
+import com.proyekakhir.mibu.user.api.response.DataArtikelItem
 import com.proyekakhir.mibu.user.ui.home.model.ArtikelModel
 
 class DetailArtikelFragment : Fragment() {
@@ -21,14 +22,14 @@ class DetailArtikelFragment : Fragment() {
         _binding = FragmentDetailArtikelBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val itemData = arguments?.getSerializable("itemData") as ArtikelModel
+        val itemData = arguments?.getSerializable("itemData") as DataArtikelItem
 
         binding.titleArtikel.text = itemData.judul
-        binding.isiArtikel.text = itemData.isiArtikel
+        binding.isiArtikel.text = itemData.isi
 
-        if (!itemData.imageUrl.isNullOrEmpty()) {
+        if (!itemData.foto.isNullOrEmpty()) {
             Glide.with(this)
-                .load(itemData.imageUrl)
+                .load(itemData.foto)
                 .into(binding.ivPosterArtikel)
         } else {
             binding.cardView3.visibility = View.GONE

@@ -12,10 +12,11 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.proyekakhir.mibu.R
+import com.proyekakhir.mibu.user.api.response.DataBidanItem
 import com.proyekakhir.mibu.user.ui.home.model.BidanData
 import de.hdodenhof.circleimageview.CircleImageView
 
-class ListBidanAdapter(private var list: ArrayList<BidanData>) :
+class ListBidanAdapter(var list: List<DataBidanItem?>) :
     RecyclerView.Adapter<ListBidanAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -34,17 +35,10 @@ class ListBidanAdapter(private var list: ArrayList<BidanData>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = list[position]
-        if (!currentItem.profileImage.isNullOrEmpty()) {
-            Glide.with(holder.itemView.context)
-                .load(currentItem.profileImage)
-                .into(holder.photo)
-        } else {
-            holder.photo.setImageResource(R.drawable.cam_placeholder_logo)
-        }
 
-        holder.nama.text = currentItem.fullname
+        holder.nama.text = currentItem?.name
         holder.whatsapp.setOnClickListener {
-            val phoneNumber = currentItem.noTelepon
+            val phoneNumber = currentItem?.noTelepon
             if (phoneNumber != null) {
                 sendWhatsAppMessage(holder.itemView.context, phoneNumber)
             }
@@ -61,11 +55,5 @@ class ListBidanAdapter(private var list: ArrayList<BidanData>) :
         } catch (ex: Exception) {
             Toast.makeText(context, "WhatsApp not installed.", Toast.LENGTH_SHORT).show()
         }
-    }
-
-    fun setData(newData: List<BidanData>) {
-        list.clear()
-        list.addAll(newData)
-        notifyDataSetChanged()
     }
 }

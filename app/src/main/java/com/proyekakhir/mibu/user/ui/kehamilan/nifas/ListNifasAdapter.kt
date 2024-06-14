@@ -6,16 +6,18 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.proyekakhir.mibu.R
+import com.proyekakhir.mibu.user.api.response.DataNifasItem
+import com.proyekakhir.mibu.user.api.response.NifasResponse
 import com.proyekakhir.mibu.user.ui.kehamilan.kesehatan.ListKesehatanAdapter
 import com.proyekakhir.mibu.user.ui.kehamilan.model.KesehatanModel
 import com.proyekakhir.mibu.user.ui.kehamilan.model.NifasModel
 
-class ListNifasAdapter(private var list: ArrayList<NifasModel>) :  RecyclerView.Adapter<ListNifasAdapter.ViewHolder>(){
+class ListNifasAdapter(var list: List<DataNifasItem?>) :  RecyclerView.Adapter<ListNifasAdapter.ViewHolder>(){
 
     var listener: OnItemClickListenerHome? = null
 
     interface OnItemClickListenerHome {
-        fun onItemClick(item: NifasModel)
+        fun onItemClick(item: DataNifasItem)
     }
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val masalah: TextView = itemView.findViewById(R.id.tv_masalah)
@@ -31,18 +33,13 @@ class ListNifasAdapter(private var list: ArrayList<NifasModel>) :  RecyclerView.
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = list[position]
-        holder.masalah.text = currentItem.masalah
-        holder.tanggal.text = currentItem.tanggalPeriksa
+        holder.masalah.text = currentItem?.masalah ?: "No masalah available"
+        holder.tanggal.text = currentItem?.tanggal ?: "No date available"
 
         holder.itemView.setOnClickListener {
-            listener?.onItemClick(currentItem)
+            if (currentItem != null) {
+                listener?.onItemClick(currentItem)
+            }
         }
     }
-
-    fun setData(newData: List<NifasModel>) {
-        list.clear()
-        list.addAll(newData)
-        notifyDataSetChanged()
-    }
-
 }

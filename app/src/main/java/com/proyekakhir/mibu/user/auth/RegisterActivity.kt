@@ -2,11 +2,9 @@ package com.proyekakhir.mibu.user.auth
 
 import android.app.AlertDialog
 import android.app.ProgressDialog
-import android.content.ContentValues
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,23 +12,22 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FirebaseFirestore
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.proyekakhir.mibu.R
-import com.proyekakhir.mibu.bidan.ui.auth.BidanLoginActivity
-import com.proyekakhir.mibu.bidan.ui.auth.preferences.PreferenceManager
-import com.proyekakhir.mibu.bidan.ui.mainPages.BidanMainActivity
 import com.proyekakhir.mibu.databinding.ActivityRegisterBinding
 import com.proyekakhir.mibu.user.auth.viewmodel.SignUpViewModel
 import com.proyekakhir.mibu.user.factory.ViewModelFactory
-import com.proyekakhir.mibu.user.firebase.FirebaseRepository
-import com.proyekakhir.mibu.user.ui.activity.MainActivity
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody.Companion.toRequestBody
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
-    private lateinit var viewModel: SignUpViewModel
     private lateinit var progressDialog: ProgressDialog
+    private val viewModel by viewModels<SignUpViewModel> {
+        ViewModelFactory.getInstance(this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
@@ -41,10 +38,6 @@ class RegisterActivity : AppCompatActivity() {
             setMessage("Registering...")
             setCancelable(false)
         }
-
-        val repository = FirebaseRepository()
-        val factory = ViewModelFactory(repository)
-        viewModel = ViewModelProvider(this, factory).get(SignUpViewModel::class.java)
 
         binding.tvToLogin.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
@@ -72,60 +65,82 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(this, "Password minimum 8 characters", Toast.LENGTH_SHORT).show()
             } else if (emailError) {
                 Toast.makeText(this, "Please check your email format!", Toast.LENGTH_SHORT).show()
-            } else if (email.isNullOrEmpty()){
+            } else if (email.isNullOrEmpty()) {
                 Toast.makeText(this, "Tolong isi email", Toast.LENGTH_SHORT).show()
-            } else if (alamat.isNullOrEmpty()){
+            } else if (alamat.isNullOrEmpty()) {
                 Toast.makeText(this, "Tolong isi alamat", Toast.LENGTH_SHORT).show()
-            } else if (fullname.isNullOrEmpty()){
+            } else if (fullname.isNullOrEmpty()) {
                 Toast.makeText(this, "Tolong isi nama lengkap", Toast.LENGTH_SHORT).show()
-            } else if (umur.isNullOrEmpty()){
+            } else if (umur.isNullOrEmpty()) {
                 Toast.makeText(this, "Tolong isi umur", Toast.LENGTH_SHORT).show()
             } else if (pass.isNullOrEmpty()) {
                 Toast.makeText(this, "Tolong isi password", Toast.LENGTH_SHORT).show()
-            } else if (noTelepon.isNullOrEmpty()){
+            } else if (noTelepon.isNullOrEmpty()) {
                 Toast.makeText(this, "Tolong isi Nomor Telepon", Toast.LENGTH_SHORT).show()
-            } else if (kehamilanKe.isNullOrEmpty()){
+            } else if (kehamilanKe.isNullOrEmpty()) {
                 Toast.makeText(this, "Tolong isi kehamilan keberapa", Toast.LENGTH_SHORT).show()
-            } else if (namaSuami.isNullOrEmpty()){
+            } else if (namaSuami.isNullOrEmpty()) {
                 Toast.makeText(this, "Tolong isi Nama Suami", Toast.LENGTH_SHORT).show()
-            } else if (umurSuami.isNullOrEmpty()){
+            } else if (umurSuami.isNullOrEmpty()) {
                 Toast.makeText(this, "Tolong isi Umur Suami", Toast.LENGTH_SHORT).show()
-            } else if (nik.isNullOrEmpty()){
+            } else if (nik.isNullOrEmpty()) {
                 Toast.makeText(this, "Tolong isi NIK", Toast.LENGTH_SHORT).show()
-            } else if (faskesTk1.isNullOrEmpty()){
+            } else if (faskesTk1.isNullOrEmpty()) {
                 Toast.makeText(this, "Tolong isi No JKN Faskes TK 1", Toast.LENGTH_SHORT).show()
-            } else if (faskesRujukan.isNullOrEmpty()){
+            } else if (faskesRujukan.isNullOrEmpty()) {
                 Toast.makeText(this, "Tolong isi No JKN Faskes Rujukan", Toast.LENGTH_SHORT).show()
-            } else if (golDarah.isNullOrEmpty()){
+            } else if (golDarah.isNullOrEmpty()) {
                 Toast.makeText(this, "Tolong isi Golongan Darah", Toast.LENGTH_SHORT).show()
-            } else if (pekerjaan.isNullOrEmpty()){
+            } else if (pekerjaan.isNullOrEmpty()) {
                 Toast.makeText(this, "Tolong isi Pekerjaan", Toast.LENGTH_SHORT).show()
             } else {
                 progressDialog.show()
-                viewModel.signup(fullname, alamat, email, noTelepon, umur, kehamilanKe, namaSuami, umurSuami, nik, pass, faskesTk1, faskesRujukan, golDarah, pekerjaan)
+                val json = """
+                            {
+                                "nama_ibu": "$fullname",
+                                "alamat": "$alamat",
+                                "email": "$email",
+                                "no_telepon": "$noTelepon",
+                                "password": "$pass",
+                                "umur_ibu": "$umur",
+                                "kehamilan_ke": "$kehamilanKe",
+                                "nama_suami": "$namaSuami",
+                                "umur_suami": "$umurSuami",
+                                "nik": "$nik",
+                                "no_jkn_faskes_tk_1": "$faskesTk1",
+                                "no_jkn_rujukan": "$faskesRujukan",
+                                "gol_darah": "$golDarah",
+                                "pekerjaan": "$pekerjaan"
+                            }
+                        """.trimIndent()
+
+                val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
+                viewModel.signup(requestBody)
             }
         }
+
+        viewModel.registerResponse.observe(this, { data ->
+            Log.d("registerapi", data.message.toString())
+        })
 
         viewModel.isLoading.observe(this, { isLoading ->
             binding.pbRegister.visibility = if (isLoading) View.VISIBLE else View.GONE
         })
 
-        viewModel.isSignupSuccessful.observe(this, { isSuccessful ->
+        viewModel.isRegistrationSuccessful.observe(this, { isSuccessful ->
             progressDialog.dismiss()
             if (isSuccessful) {
+                progressDialog.dismiss()
                 val email = binding.userRegisterEmail.text.toString()
-                alertRegisterSuccess(getString(R.string.welcome), email, "user")
+                alertRegisterSuccess(getString(R.string.welcome), email)
             } else {
+                progressDialog.dismiss()
                 Toast.makeText(baseContext, R.string.sign_up_failed, Toast.LENGTH_SHORT).show()
             }
         })
-
-        viewModel.emailVerificationMessage.observe(this, { message ->
-            Toast.makeText(this, message, Toast.LENGTH_LONG).show()
-        })
     }
 
-    private fun alertRegisterSuccess(titleFill: String, descFill: String, role: String) {
+    private fun alertRegisterSuccess(titleFill: String, descFill: String) {
         val builder = AlertDialog.Builder(this)
 
         val customView = LayoutInflater.from(this)
@@ -142,17 +157,8 @@ class RegisterActivity : AppCompatActivity() {
         val dialog = builder.create()
 
         btnOk.setOnClickListener {
-            if (role == "bidan") {
-                val preferenceManager = PreferenceManager(this)
-                preferenceManager.setUserRole("bidan")
-                startActivity(Intent(this@RegisterActivity, BidanLoginActivity::class.java))
-                finish()
-            } else {
-                val preferenceManager = PreferenceManager(this)
-                preferenceManager.setUserRole("user")
-                startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
-                finish()
-            }
+            startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+            finish()
             dialog.dismiss()
         }
 
