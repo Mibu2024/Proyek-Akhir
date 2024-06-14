@@ -48,5 +48,4 @@ class CatatanKehamilanViewModel(val repository: FirebaseRepository) : ViewModel(
             }
         )
     }
-
 }
