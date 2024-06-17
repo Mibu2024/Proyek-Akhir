@@ -9,7 +9,7 @@ import com.proyekakhir.mibu.user.api.response.AnakResponse
 import com.proyekakhir.mibu.user.api.response.ImunisasiResponse
 import kotlinx.coroutines.launch
 
-class CatatanAnakViewModel(val repository: UserRepository) : ViewModel() {
+class CatatanAnakViewModel(private val repository: UserRepository) : ViewModel() {
     private val _anak = MutableLiveData<AnakResponse>()
     val anak: MutableLiveData<AnakResponse> get() = _anak
 

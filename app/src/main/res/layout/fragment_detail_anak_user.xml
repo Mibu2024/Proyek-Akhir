@@ -9,7 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_detail_anak"
@@ -26,7 +26,8 @@
                 android:id="@+id/arrow_back"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/baseline_arrow_back_ios_24"/>
+                android:src="@drawable/baseline_arrow_back_ios_24"
+                android:contentDescription="TODO" />
 
             <TextView
                 android:id="@+id/toolbar_title"
@@ -78,7 +79,8 @@
                     android:layout_marginTop="16dp"
                     android:src="@drawable/idcard"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/textView9"
@@ -99,7 +101,8 @@
                     android:layout_marginTop="16dp"
                     android:src="@drawable/calendar"
                     app:layout_constraintStart_toStartOf="@+id/imageView3"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageView3"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/textView10"
@@ -120,7 +123,8 @@
                     android:layout_marginTop="16dp"
                     android:src="@drawable/calendar"
                     app:layout_constraintStart_toStartOf="@+id/imageView4"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageView4"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/textView11"
@@ -141,7 +145,8 @@
                     android:layout_marginTop="16dp"
                     android:src="@drawable/weight"
                     app:layout_constraintStart_toStartOf="@+id/imageView4"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageView5"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/textView12"
@@ -164,7 +169,8 @@
                     android:src="@drawable/person_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/imageView6"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageView6"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/textView13"
@@ -277,7 +283,8 @@
                     android:layout_marginTop="32dp"
                     android:src="@drawable/vaccine"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/textView91"
@@ -298,7 +305,8 @@
                     android:layout_marginTop="50dp"
                     android:src="@drawable/vaccine"
                     app:layout_constraintStart_toStartOf="@+id/imageView31"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView31" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageView31"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/textView101"
@@ -319,7 +327,8 @@
                     android:layout_marginTop="50dp"
                     android:src="@drawable/vaccine"
                     app:layout_constraintStart_toStartOf="@+id/imageView41"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView41" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageView41"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/textView111"
@@ -340,7 +349,8 @@
                     android:layout_marginTop="50dp"
                     android:src="@drawable/vaccine"
                     app:layout_constraintStart_toStartOf="@+id/imageView51"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView51" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageView51"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/textView121"
@@ -361,7 +371,8 @@
                     android:layout_marginTop="50dp"
                     android:src="@drawable/vaccine"
                     app:layout_constraintStart_toStartOf="@+id/imageView61"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView61" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageView61"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/textView131"
@@ -382,7 +393,8 @@
                     android:layout_marginTop="50dp"
                     android:src="@drawable/vaccine"
                     app:layout_constraintStart_toStartOf="@+id/imageView71"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView71" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageView71"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/textView132"
@@ -403,7 +415,8 @@
                     android:layout_marginTop="50dp"
                     android:src="@drawable/vaccine"
                     app:layout_constraintStart_toStartOf="@+id/imageView72"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView72" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageView72"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/textView133"
@@ -426,7 +439,8 @@
                     android:src="@drawable/vaccine"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/imageView73"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView73" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageView73"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/textView134"
@@ -576,7 +590,8 @@
                     android:src="@drawable/person_24"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/textView95"

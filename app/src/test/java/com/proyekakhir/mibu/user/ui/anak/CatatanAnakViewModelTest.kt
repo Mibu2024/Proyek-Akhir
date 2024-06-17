@@ -5,8 +5,6 @@ import androidx.lifecycle.Observer
 import com.proyekakhir.mibu.user.api.UserRepository
 import com.proyekakhir.mibu.user.api.response.AnakResponse
 import com.proyekakhir.mibu.user.api.response.ImunisasiResponse
-import com.proyekakhir.mibu.user.api.response.KesehatanResponse
-import com.proyekakhir.mibu.user.ui.kehamilan.CatatanKehamilanViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestCoroutineDispatcher
@@ -16,7 +14,6 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.mockito.ArgumentMatchers.any
-import org.mockito.ArgumentMatchers.nullable
 import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.junit.MockitoJUnit
@@ -42,9 +39,6 @@ class CatatanAnakViewModelTest {
 
     @Mock
     private lateinit var imunisasiObserver: Observer<ImunisasiResponse>
-
-    @Mock
-    private lateinit var anakResponse: AnakResponse
 
     @Mock
     private lateinit var imunisasiResponse: ImunisasiResponse

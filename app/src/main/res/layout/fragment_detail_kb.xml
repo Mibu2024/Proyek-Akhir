@@ -9,7 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/iv_back"
@@ -19,7 +19,8 @@
             android:layout_marginTop="16dp"
             android:src="@drawable/baseline_arrow_back_ios_24"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="TODO" />
 
         <TextView
             android:id="@+id/textView13"
@@ -87,7 +88,8 @@
                     android:layout_marginTop="16dp"
                     android:src="@drawable/doctorvisit"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/textView9"
@@ -109,7 +111,8 @@
                     android:layout_marginTop="16dp"
                     android:src="@drawable/calendar"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_nama_value" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_nama_value"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/textView10"
@@ -131,7 +134,8 @@
                     android:layout_marginTop="16dp"
                     android:src="@drawable/blood"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_tanggal_pelayanan_value" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_tanggal_pelayanan_value"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/textView11"
@@ -153,7 +157,8 @@
                     android:layout_marginTop="16dp"
                     android:src="@drawable/weightmachine"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_tekanan_darah_value" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_tekanan_darah_value"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/tv_jalan_lahir_nifas"
@@ -175,7 +180,8 @@
                     android:layout_marginTop="16dp"
                     android:src="@drawable/vitamina"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_berat_badan_value" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_berat_badan_value"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/tv_vita"
@@ -197,7 +203,8 @@
                     android:layout_marginTop="16dp"
                     android:src="@drawable/problem"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_kb_value" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_kb_value"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/tv_masalah"
@@ -219,7 +226,8 @@
                     android:layout_marginTop="16dp"
                     android:src="@drawable/tindakan"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_keluhan_value" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_keluhan_value"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/tv_tindakan"

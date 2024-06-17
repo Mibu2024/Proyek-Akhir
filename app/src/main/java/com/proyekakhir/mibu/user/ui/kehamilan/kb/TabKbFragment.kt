@@ -1,32 +1,26 @@
 package com.proyekakhir.mibu.user.ui.kehamilan.kb
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.databinding.FragmentTabKbBinding
-import com.proyekakhir.mibu.databinding.FragmentTabKesehatanBinding
 import com.proyekakhir.mibu.user.api.UserPreference
 import com.proyekakhir.mibu.user.api.dataStore
-import com.proyekakhir.mibu.user.api.response.DataKesehatanItem
 import com.proyekakhir.mibu.user.api.response.DataLayananKbsItem
 import com.proyekakhir.mibu.user.api.response.KbResponse
-import com.proyekakhir.mibu.user.api.response.KesehatanResponse
 import com.proyekakhir.mibu.user.auth.viewmodel.LoginViewModel
 import com.proyekakhir.mibu.user.factory.ViewModelFactory
 import com.proyekakhir.mibu.user.ui.kehamilan.CatatanKehamilanViewModel
-import com.proyekakhir.mibu.user.ui.kehamilan.kesehatan.ListKesehatanAdapter
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 
@@ -43,7 +37,7 @@ class TabKbFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentTabKbBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -53,17 +47,17 @@ class TabKbFragment : Fragment() {
         rvKesehatan.setHasFixedSize(true)
         rvKesehatan.adapter = adapter
 
-        viewModel.kb.observe(viewLifecycleOwner, Observer { response ->
+        viewModel.kb.observe(viewLifecycleOwner, { response ->
             updateRecyclerView(response)
         })
 
-        loginViewModel.loginResult.observe(viewLifecycleOwner, Observer { loginResponse ->
+        loginViewModel.loginResult.observe(viewLifecycleOwner, { loginResponse ->
             // When login result is updated, trigger data fetch
             viewModel.getCatatanKb()
         })
 
         val progressBar = binding.progressBar
-        viewModel.isLoading.observe(requireActivity(), Observer { isLoading ->
+        viewModel.isLoading.observe(requireActivity(), { isLoading ->
             if (isLoading) {
                 progressBar.visibility = View.VISIBLE
             } else {
@@ -90,9 +84,7 @@ class TabKbFragment : Fragment() {
             val dataStore: DataStore<Preferences> = requireContext().dataStore
             val userPreference = UserPreference.getInstance(dataStore)
             val userId = userPreference.getSession().firstOrNull()?.id ?: 0
-            Log.d("useridget", userId.toString())
             val filteredList = response.dataLayananKbs?.filter { it?.idIbu == userId } ?: emptyList()
-            Log.d("kesehatanapi", filteredList.toString())
             (binding.rvTabKb.adapter as ListKbAdapter).apply {
                 listKb = filteredList
                 notifyDataSetChanged()

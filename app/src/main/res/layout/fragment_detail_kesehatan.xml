@@ -9,7 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/iv_back"
@@ -19,7 +19,8 @@
             android:layout_marginTop="16dp"
             android:src="@drawable/baseline_arrow_back_ios_24"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="TODO" />
 
         <TextView
             android:id="@+id/textView13"
@@ -87,7 +88,8 @@
                     android:layout_marginTop="16dp"
                     android:src="@drawable/blood"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/textView9"
@@ -109,7 +111,8 @@
                     android:layout_marginTop="16dp"
                     android:src="@drawable/weightmachine"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_tekanan_darah" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_tekanan_darah"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/textView10"
@@ -131,7 +134,8 @@
                     android:layout_marginTop="16dp"
                     android:src="@drawable/prenatalcare"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_berat_badan" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_berat_badan"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/textView11"
@@ -153,7 +157,8 @@
                     android:layout_marginTop="16dp"
                     android:src="@drawable/fundus"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_umur_kehamilan" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_umur_kehamilan"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/tv_fundus"
@@ -175,7 +180,8 @@
                     android:layout_marginTop="16dp"
                     android:src="@drawable/janin"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_tinggi_fundus" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_tinggi_fundus"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/tv_janin"
@@ -197,7 +203,8 @@
                     android:layout_marginTop="16dp"
                     android:src="@drawable/detakjantung"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_letak_janin" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_letak_janin"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/tv_detak"
@@ -219,7 +226,8 @@
                     android:layout_marginTop="16dp"
                     android:src="@drawable/foot"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_denyut_janin" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_denyut_janin"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/tv_kaki_bengkak"
@@ -241,7 +249,8 @@
                     android:layout_marginTop="16dp"
                     android:src="@drawable/hasillab"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_kaki_bengkak_value" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_kaki_bengkak_value"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/tv_hasil_lab"
@@ -263,7 +272,8 @@
                     android:layout_marginTop="16dp"
                     android:src="@drawable/tindakan"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_hasil_lab_value" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_hasil_lab_value"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/tv_tindakan"
@@ -516,7 +526,8 @@
                     android:layout_marginTop="16dp"
                     android:src="@drawable/idcard"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/tv_nama_pemeriksa"
@@ -631,7 +642,8 @@
                     android:layout_marginTop="24dp"
                     android:src="@drawable/advice"
                     app:layout_constraintStart_toStartOf="@+id/tv_nama_pemeriksa_value"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_nama_pemeriksa_value" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_nama_pemeriksa_value"
+                    android:contentDescription="TODO" />
 
                 <TextView
                     android:id="@+id/tv_title_advice"
@@ -692,7 +704,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView44"/>
+            app:layout_constraintTop_toBottomOf="@+id/textView44"
+            android:contentDescription="TODO" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

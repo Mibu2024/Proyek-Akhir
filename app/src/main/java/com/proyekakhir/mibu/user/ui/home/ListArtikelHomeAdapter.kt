@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.user.api.response.DataArtikelItem
-import com.proyekakhir.mibu.user.ui.home.model.ArtikelModel
 
 class ListArtikelHomeAdapter (var listArtikel : List<DataArtikelItem?>)
     : RecyclerView.Adapter<ListArtikelHomeAdapter.MyViewHolder>() {
@@ -30,14 +29,14 @@ class ListArtikelHomeAdapter (var listArtikel : List<DataArtikelItem?>)
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ListArtikelHomeAdapter.MyViewHolder {
+    ): MyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_artikel_user_home, parent, false)
         return MyViewHolder(view)
     }
 
     override fun getItemCount() = listArtikel.size
 
-    override fun onBindViewHolder(holder: ListArtikelHomeAdapter.MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentItem = listArtikel[position]
 
         holder.title.text = currentItem?.judul

@@ -1,7 +1,6 @@
 package com.proyekakhir.mibu.user.ui.kehamilan.nifas
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,6 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -47,12 +45,11 @@ class TabNifasFragment : Fragment() {
         rvNifas.setHasFixedSize(true)
         rvNifas.adapter = adapter
 
-        viewModel.nifas.observe(viewLifecycleOwner, Observer { response ->
+        viewModel.nifas.observe(viewLifecycleOwner, { response ->
             lifecycleScope.launch {
                 val dataStore: DataStore<Preferences> = requireContext().dataStore
                 val userPreference = UserPreference.getInstance(dataStore)
                 val userId = userPreference.getSession().firstOrNull()?.id ?: 0
-                Log.d("useridget", userId.toString())
                 val filteredList = response.dataNifas?.filter { it?.idIbu == userId } ?: emptyList()
                 adapter.list = filteredList
                 if (filteredList.isEmpty()) {
@@ -65,7 +62,7 @@ class TabNifasFragment : Fragment() {
         })
 
         val progressBar = binding.progressBar
-        viewModel.isLoading.observe(requireActivity(), Observer { isLoading ->
+        viewModel.isLoading.observe(requireActivity(), { isLoading ->
             if (isLoading) {
                 progressBar.visibility = View.VISIBLE
             } else {

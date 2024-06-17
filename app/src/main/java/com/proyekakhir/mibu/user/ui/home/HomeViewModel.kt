@@ -10,7 +10,7 @@ import com.proyekakhir.mibu.user.api.response.BidanResponse
 import com.proyekakhir.mibu.user.api.response.IbuResponse
 import kotlinx.coroutines.launch
 
-class HomeViewModel(val repository: UserRepository) : ViewModel() {
+class HomeViewModel(private val repository: UserRepository) : ViewModel() {
 
     private val _artikel = MutableLiveData<ArtikelResponse>()
     val artikel: MutableLiveData<ArtikelResponse> get() = _artikel
@@ -65,7 +65,7 @@ class HomeViewModel(val repository: UserRepository) : ViewModel() {
         }
     }
 
-    fun getIbu() {
+    private fun getIbu() {
         viewModelScope.launch {
             _isLoading.value = true
             try {
@@ -79,7 +79,7 @@ class HomeViewModel(val repository: UserRepository) : ViewModel() {
         }
     }
 
-    fun getBidan() {
+    private fun getBidan() {
         viewModelScope.launch {
             _isLoading.value = true
             try {

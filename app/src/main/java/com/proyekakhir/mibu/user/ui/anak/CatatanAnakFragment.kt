@@ -1,7 +1,6 @@
 package com.proyekakhir.mibu.user.ui.anak
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,17 +9,16 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.proyekakhir.mibu.R
-import com.proyekakhir.mibu.user.ui.NetworkConnection
 import com.proyekakhir.mibu.databinding.FragmentCatatanAnakBinding
 import com.proyekakhir.mibu.user.api.UserPreference
 import com.proyekakhir.mibu.user.api.dataStore
 import com.proyekakhir.mibu.user.api.response.DataAnaksItem
 import com.proyekakhir.mibu.user.factory.ViewModelFactory
+import com.proyekakhir.mibu.user.ui.NetworkConnection
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 
@@ -34,7 +32,7 @@ class CatatanAnakFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentCatatanAnakBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -44,12 +42,11 @@ class CatatanAnakFragment : Fragment() {
         rvAnak.setHasFixedSize(true)
         rvAnak.adapter = adapter
 
-        viewModel.anak.observe(viewLifecycleOwner, Observer { response ->
+        viewModel.anak.observe(viewLifecycleOwner, { response ->
             lifecycleScope.launch {
                 val dataStore: DataStore<Preferences> = requireContext().dataStore
                 val userPreference = UserPreference.getInstance(dataStore)
                 val userId = userPreference.getSession().firstOrNull()?.id ?: 0
-                Log.d("useridget", userId.toString())
                 val filteredList = response.dataAnaks?.filter { it?.idIbu == userId } ?: emptyList()
                 adapter.list = filteredList
                 if (filteredList.isEmpty()) {
@@ -62,7 +59,7 @@ class CatatanAnakFragment : Fragment() {
         })
 
         val progressBar = binding.progressBar
-        viewModel.isLoading.observe(requireActivity(), Observer { isLoading ->
+        viewModel.isLoading.observe(requireActivity(), { isLoading ->
             if (isLoading) {
                 progressBar.visibility = View.VISIBLE
             } else {

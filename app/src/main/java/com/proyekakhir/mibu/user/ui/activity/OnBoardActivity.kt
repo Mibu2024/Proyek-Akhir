@@ -2,8 +2,6 @@ package com.proyekakhir.mibu.user.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
-import android.preference.PreferenceManager
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.proyekakhir.mibu.databinding.ActivityOnBoardBinding
@@ -37,10 +35,7 @@ class OnBoardActivity : AppCompatActivity() {
         lifecycleScope.launch {
             userPreference.getSession().collect { session ->
                 if (session.token.isNotEmpty()) {
-                    Log.d("UserPreference", "Token exists: ${session.token}")
                     finish()
-                } else {
-                    Log.d("UserPreference", "No token found")
                 }
             }
         }

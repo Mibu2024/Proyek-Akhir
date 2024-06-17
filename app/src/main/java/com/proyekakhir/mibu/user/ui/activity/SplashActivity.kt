@@ -1,12 +1,11 @@
 package com.proyekakhir.mibu.user.ui.activity
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.user.api.UserPreference
@@ -35,11 +34,11 @@ class SplashActivity : AppCompatActivity() {
         lifecycleScope.launch {
             userPreference.getSession().collect { session ->
                 if (session.token.isNotEmpty()) {
-                    Log.d("UserPreference", "Token exists: ${session.token}")
                     startActivity(Intent(this@SplashActivity, MainActivity::class.java))
                     finish()
                 } else {
-                    Log.d("UserPreference", "No token found")
+                    startActivity(Intent(this@SplashActivity, OnBoardActivity::class.java))
+                    finish()
                 }
             }
         }

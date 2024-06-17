@@ -7,10 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.user.api.response.DataKesehatanItem
-import com.proyekakhir.mibu.user.api.response.IbuResponse
-import com.proyekakhir.mibu.user.api.response.KesehatanResponse
-import com.proyekakhir.mibu.user.ui.home.model.ArtikelModel
-import com.proyekakhir.mibu.user.ui.kehamilan.model.KesehatanModel
 
 class ListKesehatanAdapter(var list: List<DataKesehatanItem?>) : RecyclerView.Adapter<ListKesehatanAdapter.ViewHolder>() {
 

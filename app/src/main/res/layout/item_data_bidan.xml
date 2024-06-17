@@ -61,7 +61,8 @@
                 android:src="@drawable/whatsapp"
                 app:layout_constraintBottom_toBottomOf="@+id/tv_nama_bidan"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tv_nama_bidan" />
+                app:layout_constraintTop_toTopOf="@+id/tv_nama_bidan"
+                android:contentDescription="TODO" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,25 +1,23 @@
 package com.proyekakhir.mibu.user.ui.kehamilan.kb
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.bumptech.glide.Glide
-import com.proyekakhir.mibu.R
+import androidx.fragment.app.Fragment
 import com.proyekakhir.mibu.databinding.FragmentDetailKbBinding
-import com.proyekakhir.mibu.databinding.FragmentDetailKesehatanBinding
-import com.proyekakhir.mibu.user.api.response.DataKesehatanItem
 import com.proyekakhir.mibu.user.api.response.DataLayananKbsItem
 
 class DetailKbFragment : Fragment() {
     private var _binding: FragmentDetailKbBinding? = null
     private val binding get() = _binding!!
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentDetailKbBinding.inflate(inflater, container, false)
         val root: View = binding.root
 

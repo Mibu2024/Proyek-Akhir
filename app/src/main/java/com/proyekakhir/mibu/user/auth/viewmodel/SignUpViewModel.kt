@@ -10,7 +10,7 @@ import okhttp3.RequestBody
 
 class SignUpViewModel(private val repository: UserRepository) : ViewModel() {
     val isLoading = MutableLiveData<Boolean>()
-    val registerResponse = MutableLiveData<RegisterResponse>()
+    private val registerResponse = MutableLiveData<RegisterResponse>()
     val isRegistrationSuccessful = MutableLiveData<Boolean>()
 
     fun signup(raw: RequestBody) {

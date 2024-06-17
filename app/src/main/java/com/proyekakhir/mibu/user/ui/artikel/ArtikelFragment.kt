@@ -1,22 +1,18 @@
 package com.proyekakhir.mibu.user.ui.artikel
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.databinding.FragmentArtikelBinding
-import com.proyekakhir.mibu.databinding.FragmentHomeBinding
 import com.proyekakhir.mibu.user.api.response.DataArtikelItem
 import com.proyekakhir.mibu.user.factory.ViewModelFactory
 import com.proyekakhir.mibu.user.ui.home.HomeViewModel
-import com.proyekakhir.mibu.user.ui.home.ListArtikelHomeAdapter
 
 class ArtikelFragment : Fragment() {
     private var _binding: FragmentArtikelBinding? = null
@@ -29,7 +25,7 @@ class ArtikelFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentArtikelBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -39,7 +35,7 @@ class ArtikelFragment : Fragment() {
         rvArtikel.setHasFixedSize(true)
         rvArtikel.adapter = adapter
 
-        viewModel.artikel.observe(viewLifecycleOwner, Observer { response ->
+        viewModel.artikel.observe(viewLifecycleOwner, { response ->
             val list = response.dataArtikel
             if (list != null) {
                 adapter.listArtikel = list
@@ -48,8 +44,6 @@ class ArtikelFragment : Fragment() {
             } else {
                 binding.noDataHome.visibility = View.VISIBLE
             }
-
-            Log.d("artikelapi", response.dataArtikel.toString())
         })
 
         adapter.listener = object : ListArtikelAdapter.OnItemClickListenerHome {

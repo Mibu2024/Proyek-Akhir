@@ -10,7 +10,7 @@ import com.proyekakhir.mibu.user.api.response.KesehatanResponse
 import com.proyekakhir.mibu.user.api.response.NifasResponse
 import kotlinx.coroutines.launch
 
-class CatatanKehamilanViewModel(val repository: UserRepository) : ViewModel() {
+class CatatanKehamilanViewModel(private val repository: UserRepository) : ViewModel() {
 
     private val _kesehatan = MutableLiveData<KesehatanResponse>()
     val kesehatan: MutableLiveData<KesehatanResponse> get() = _kesehatan

@@ -1,7 +1,7 @@
 package com.proyekakhir.mibu.user.ui.home
 
+import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +17,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.proyekakhir.mibu.R
-import com.proyekakhir.mibu.user.ui.NetworkConnection
 import com.proyekakhir.mibu.databinding.FragmentHomeBinding
 import com.proyekakhir.mibu.user.api.UserPreference
 import com.proyekakhir.mibu.user.api.dataStore
@@ -25,9 +24,9 @@ import com.proyekakhir.mibu.user.api.response.DataArtikelItem
 import com.proyekakhir.mibu.user.api.response.IbuResponse
 import com.proyekakhir.mibu.user.auth.viewmodel.LoginViewModel
 import com.proyekakhir.mibu.user.factory.ViewModelFactory
+import com.proyekakhir.mibu.user.ui.NetworkConnection
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
-import okhttp3.internal.notify
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -44,6 +43,8 @@ class HomeFragment : Fragment() {
     private val loginViewModel: LoginViewModel by activityViewModels {
         ViewModelFactory.getInstance(requireContext())
     }
+
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -82,11 +83,12 @@ class HomeFragment : Fragment() {
 
         adapter = ListArtikelHomeAdapter(listOf())
         val rvArtikel = binding.rvArtikelHome
-        rvArtikel.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        rvArtikel.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         rvArtikel.setHasFixedSize(true)
         rvArtikel.adapter = adapter
 
-        viewModel.artikel.observe(viewLifecycleOwner, Observer { response ->
+        viewModel.artikel.observe(viewLifecycleOwner, { response ->
             val list = response.dataArtikel
             if (list != null) {
                 adapter.listArtikel = list
@@ -96,16 +98,15 @@ class HomeFragment : Fragment() {
                 binding.noDataHome.visibility = View.VISIBLE
             }
 
-            Log.d("artikelapi", response.dataArtikel.toString())
         })
 
-        loginViewModel.loginResult.observe(viewLifecycleOwner, Observer { loginResponse ->
+        loginViewModel.loginResult.observe(viewLifecycleOwner, { loginResponse ->
             // When login result is updated, trigger data fetch
             viewModel.getHpl()
             viewModel.getArtikel()
         })
 
-        viewModel.hpl.observe(viewLifecycleOwner, Observer { response ->
+        viewModel.hpl.observe(viewLifecycleOwner, { response ->
             getHplDate(response)
         })
 
@@ -121,7 +122,7 @@ class HomeFragment : Fragment() {
         }
 
         val progressBar = binding.pbArtikelHome
-        viewModel.isLoading.observe(requireActivity(), Observer { isLoading ->
+        viewModel.isLoading.observe(requireActivity(), { isLoading ->
             if (isLoading) {
                 progressBar.visibility = View.VISIBLE
                 binding.noDataHome.visibility = View.GONE
@@ -168,32 +169,32 @@ class HomeFragment : Fragment() {
             val dataStore: DataStore<Preferences> = requireContext().dataStore
             val userPreference = UserPreference.getInstance(dataStore)
             val userId = userPreference.getSession().firstOrNull()?.id ?: 0
-            Log.d("useridget", userId.toString())
+
 
             // Filter the list based on the user ID
             val filteredList = response.dataIbuHamils?.filter { it?.id == userId } ?: emptyList()
-            Log.d("kesehatanapi", filteredList.toString())
+
 
             // Check if the filtered list has any items
             if (filteredList.isNotEmpty()) {
                 // Assuming there's only one item in the filtered list
                 val ibuHamil = filteredList[0]
                 val tanggalHpl = ibuHamil?.tanggalHpl
-                Log.e("getHplDate", tanggalHpl.toString())
+
                 if (!tanggalHpl.isNullOrEmpty()) {
                     calculateAndDisplayCountdown(tanggalHpl)
-                } else {
-                    Log.e("getHplDate", "Tanggal HPL is null or empty")
                 }
-            } else {
-                Log.e("getHplDate", "No matching data found for user ID: $userId")
             }
         }
     }
 
 
+    @SuppressLint("SetTextI18n")
     private fun calculateAndDisplayCountdown(edbDateString: String) {
-        val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()) // Ensure this matches your date format
+        val sdf = SimpleDateFormat(
+            "yyyy-MM-dd",
+            Locale.getDefault()
+        ) // Ensure this matches your date format
         try {
             val edbDate = sdf.parse(edbDateString)
             if (edbDate != null) {
@@ -219,10 +220,11 @@ class HomeFragment : Fragment() {
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun refreshData() {
         // Logic to refresh data
         viewModel.getHpl()
-        viewModel.artikel.observe(viewLifecycleOwner, Observer { response ->
+        viewModel.artikel.observe(viewLifecycleOwner, { response ->
             val list = response.dataArtikel
             if (list != null) {
                 adapter.listArtikel = list
@@ -235,11 +237,11 @@ class HomeFragment : Fragment() {
             binding.swipeRefreshLayout.isRefreshing = false
         })
 
-        loginViewModel.loginResult.observe(viewLifecycleOwner, Observer { loginResponse ->
+        loginViewModel.loginResult.observe(viewLifecycleOwner, { loginResponse ->
             viewModel.getHpl()
         })
 
-        viewModel.hpl.observe(viewLifecycleOwner, Observer { response ->
+        viewModel.hpl.observe(viewLifecycleOwner, { response ->
             getHplDate(response)
         })
     }

@@ -6,7 +6,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
@@ -65,33 +64,33 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(this, "Password minimum 8 characters", Toast.LENGTH_SHORT).show()
             } else if (emailError) {
                 Toast.makeText(this, "Please check your email format!", Toast.LENGTH_SHORT).show()
-            } else if (email.isNullOrEmpty()) {
+            } else if (email.isEmpty()) {
                 Toast.makeText(this, "Tolong isi email", Toast.LENGTH_SHORT).show()
-            } else if (alamat.isNullOrEmpty()) {
+            } else if (alamat.isEmpty()) {
                 Toast.makeText(this, "Tolong isi alamat", Toast.LENGTH_SHORT).show()
-            } else if (fullname.isNullOrEmpty()) {
+            } else if (fullname.isEmpty()) {
                 Toast.makeText(this, "Tolong isi nama lengkap", Toast.LENGTH_SHORT).show()
-            } else if (umur.isNullOrEmpty()) {
+            } else if (umur.isEmpty()) {
                 Toast.makeText(this, "Tolong isi umur", Toast.LENGTH_SHORT).show()
-            } else if (pass.isNullOrEmpty()) {
+            } else if (pass.isEmpty()) {
                 Toast.makeText(this, "Tolong isi password", Toast.LENGTH_SHORT).show()
-            } else if (noTelepon.isNullOrEmpty()) {
+            } else if (noTelepon.isEmpty()) {
                 Toast.makeText(this, "Tolong isi Nomor Telepon", Toast.LENGTH_SHORT).show()
-            } else if (kehamilanKe.isNullOrEmpty()) {
+            } else if (kehamilanKe.isEmpty()) {
                 Toast.makeText(this, "Tolong isi kehamilan keberapa", Toast.LENGTH_SHORT).show()
-            } else if (namaSuami.isNullOrEmpty()) {
+            } else if (namaSuami.isEmpty()) {
                 Toast.makeText(this, "Tolong isi Nama Suami", Toast.LENGTH_SHORT).show()
-            } else if (umurSuami.isNullOrEmpty()) {
+            } else if (umurSuami.isEmpty()) {
                 Toast.makeText(this, "Tolong isi Umur Suami", Toast.LENGTH_SHORT).show()
-            } else if (nik.isNullOrEmpty()) {
+            } else if (nik.isEmpty()) {
                 Toast.makeText(this, "Tolong isi NIK", Toast.LENGTH_SHORT).show()
-            } else if (faskesTk1.isNullOrEmpty()) {
+            } else if (faskesTk1.isEmpty()) {
                 Toast.makeText(this, "Tolong isi No JKN Faskes TK 1", Toast.LENGTH_SHORT).show()
-            } else if (faskesRujukan.isNullOrEmpty()) {
+            } else if (faskesRujukan.isEmpty()) {
                 Toast.makeText(this, "Tolong isi No JKN Faskes Rujukan", Toast.LENGTH_SHORT).show()
-            } else if (golDarah.isNullOrEmpty()) {
+            } else if (golDarah.isEmpty()) {
                 Toast.makeText(this, "Tolong isi Golongan Darah", Toast.LENGTH_SHORT).show()
-            } else if (pekerjaan.isNullOrEmpty()) {
+            } else if (pekerjaan.isEmpty()) {
                 Toast.makeText(this, "Tolong isi Pekerjaan", Toast.LENGTH_SHORT).show()
             } else {
                 progressDialog.show()
@@ -119,15 +118,11 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.registerResponse.observe(this, { data ->
-            Log.d("registerapi", data.message.toString())
-        })
-
-        viewModel.isLoading.observe(this, { isLoading ->
+        viewModel.isLoading.observe(this) { isLoading ->
             binding.pbRegister.visibility = if (isLoading) View.VISIBLE else View.GONE
-        })
+        }
 
-        viewModel.isRegistrationSuccessful.observe(this, { isSuccessful ->
+        viewModel.isRegistrationSuccessful.observe(this) { isSuccessful ->
             progressDialog.dismiss()
             if (isSuccessful) {
                 progressDialog.dismiss()
@@ -137,7 +132,7 @@ class RegisterActivity : AppCompatActivity() {
                 progressDialog.dismiss()
                 Toast.makeText(baseContext, R.string.sign_up_failed, Toast.LENGTH_SHORT).show()
             }
-        })
+        }
     }
 
     private fun alertRegisterSuccess(titleFill: String, descFill: String) {

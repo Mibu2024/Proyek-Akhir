@@ -3,7 +3,6 @@ package com.proyekakhir.mibu.user.api
 import com.proyekakhir.mibu.user.api.response.AnakResponse
 import com.proyekakhir.mibu.user.api.response.ArtikelResponse
 import com.proyekakhir.mibu.user.api.response.BidanResponse
-import com.proyekakhir.mibu.user.api.response.DataKesehatanItem
 import com.proyekakhir.mibu.user.api.response.IbuResponse
 import com.proyekakhir.mibu.user.api.response.ImunisasiResponse
 import com.proyekakhir.mibu.user.api.response.KbResponse

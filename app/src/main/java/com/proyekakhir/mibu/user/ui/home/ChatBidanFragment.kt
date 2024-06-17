@@ -3,17 +3,14 @@ package com.proyekakhir.mibu.user.ui.home
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.proyekakhir.mibu.databinding.FragmentChatBidanBinding
-import com.proyekakhir.mibu.user.ui.home.model.BidanData
 
 class ChatBidanFragment : DialogFragment() {
     private var _binding: FragmentChatBidanBinding? = null
@@ -25,7 +22,7 @@ class ChatBidanFragment : DialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentChatBidanBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -36,7 +33,7 @@ class ChatBidanFragment : DialogFragment() {
         rvBidan.setHasFixedSize(true)
         rvBidan.adapter = adapter
 
-        viewModel.bidan.observe(viewLifecycleOwner, Observer { response ->
+        viewModel.bidan.observe(viewLifecycleOwner, { response ->
             val list = response.dataBidan
             if (list != null) {
                 adapter.list = list
@@ -45,8 +42,6 @@ class ChatBidanFragment : DialogFragment() {
             } else {
                 binding.noDataBidan.visibility = View.VISIBLE
             }
-
-            Log.d("bidanapi", response.dataBidan.toString())
         })
 
         return root

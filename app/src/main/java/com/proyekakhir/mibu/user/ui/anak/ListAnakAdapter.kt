@@ -6,11 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.proyekakhir.mibu.R
-import com.proyekakhir.mibu.user.api.response.AnakResponse
 import com.proyekakhir.mibu.user.api.response.DataAnaksItem
-import com.proyekakhir.mibu.user.ui.anak.model.AnakModel
-import com.proyekakhir.mibu.user.ui.kehamilan.kesehatan.ListKesehatanAdapter
-import com.proyekakhir.mibu.user.ui.kehamilan.model.KesehatanModel
 
 class ListAnakAdapter(var list: List<DataAnaksItem?>) : RecyclerView.Adapter<ListAnakAdapter.ViewHolder>() {
     var listener: OnItemClickListenerHome? = null

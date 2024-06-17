@@ -10,17 +10,14 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.user.api.response.DataBidanItem
-import com.proyekakhir.mibu.user.ui.home.model.BidanData
 import de.hdodenhof.circleimageview.CircleImageView
 
 class ListBidanAdapter(var list: List<DataBidanItem?>) :
     RecyclerView.Adapter<ListBidanAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val photo: CircleImageView = itemView.findViewById(R.id.iv_bidan)
         val nama: TextView = itemView.findViewById(R.id.tv_nama_bidan)
         val whatsapp: ImageView = itemView.findViewById(R.id.iv_wa)
     }

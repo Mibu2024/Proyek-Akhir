@@ -37,7 +37,7 @@
         <activity
             android:name=".user.ui.activity.MainActivity"
             android:exported="false"
-            android:label="@string/title_activity_main"></activity>
+            android:label="@string/title_activity_main" />
         <activity
             android:name=".user.auth.RegisterActivity"
             android:exported="false" />

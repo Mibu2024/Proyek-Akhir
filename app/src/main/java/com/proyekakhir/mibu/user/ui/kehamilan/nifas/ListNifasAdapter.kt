@@ -7,10 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.user.api.response.DataNifasItem
-import com.proyekakhir.mibu.user.api.response.NifasResponse
-import com.proyekakhir.mibu.user.ui.kehamilan.kesehatan.ListKesehatanAdapter
-import com.proyekakhir.mibu.user.ui.kehamilan.model.KesehatanModel
-import com.proyekakhir.mibu.user.ui.kehamilan.model.NifasModel
 
 class ListNifasAdapter(var list: List<DataNifasItem?>) :  RecyclerView.Adapter<ListNifasAdapter.ViewHolder>(){
 

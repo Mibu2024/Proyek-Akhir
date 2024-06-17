@@ -1,5 +1,6 @@
 package com.proyekakhir.mibu.user.ui.kehamilan.kesehatan
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,10 +14,11 @@ class DetailKesehatanFragment : Fragment() {
     private var _binding: FragmentDetailKesehatanBinding? = null
     private val binding get() = _binding!!
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentDetailKesehatanBinding.inflate(inflater, container, false)
         val root: View = binding.root
 

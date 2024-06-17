@@ -1,7 +1,6 @@
 package com.proyekakhir.mibu.user.ui.kehamilan.kesehatan
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -41,7 +39,7 @@ class TabKesehatanFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentTabKesehatanBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -51,17 +49,17 @@ class TabKesehatanFragment : Fragment() {
         rvKesehatan.setHasFixedSize(true)
         rvKesehatan.adapter = adapter
 
-        viewModel.kesehatan.observe(viewLifecycleOwner, Observer { response ->
+        viewModel.kesehatan.observe(viewLifecycleOwner, { response ->
             updateRecyclerView(response)
         })
 
-        loginViewModel.loginResult.observe(viewLifecycleOwner, Observer { loginResponse ->
+        loginViewModel.loginResult.observe(viewLifecycleOwner, { loginResponse ->
             // When login result is updated, trigger data fetch
             viewModel.getCatatanKehamilan()
         })
 
         val progressBar = binding.progressBar
-        viewModel.isLoading.observe(requireActivity(), Observer { isLoading ->
+        viewModel.isLoading.observe(requireActivity(), { isLoading ->
             if (isLoading) {
                 progressBar.visibility = View.VISIBLE
             } else {
@@ -88,9 +86,7 @@ class TabKesehatanFragment : Fragment() {
             val dataStore: DataStore<Preferences> = requireContext().dataStore
             val userPreference = UserPreference.getInstance(dataStore)
             val userId = userPreference.getSession().firstOrNull()?.id ?: 0
-            Log.d("useridget", userId.toString())
             val filteredList = response.dataKesehatan?.filter { it?.idIbu == userId } ?: emptyList()
-            Log.d("kesehatanapi", filteredList.toString())
             (binding.rvTabKesehatan.adapter as ListKesehatanAdapter).apply {
                 list = filteredList
                 notifyDataSetChanged()

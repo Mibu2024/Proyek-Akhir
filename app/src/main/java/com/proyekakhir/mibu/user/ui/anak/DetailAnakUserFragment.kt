@@ -1,27 +1,19 @@
 package com.proyekakhir.mibu.user.ui.anak
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.proyekakhir.mibu.R
 import com.proyekakhir.mibu.databinding.FragmentDetailAnakUserBinding
-import com.proyekakhir.mibu.user.api.UserPreference
-import com.proyekakhir.mibu.user.api.dataStore
 import com.proyekakhir.mibu.user.api.response.DataAnaksItem
-import com.proyekakhir.mibu.user.api.response.DataImunisasisItem
 import com.proyekakhir.mibu.user.factory.ViewModelFactory
-import com.proyekakhir.mibu.user.ui.anak.model.AnakModel
-import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 
 class DetailAnakUserFragment : Fragment() {
@@ -30,12 +22,12 @@ class DetailAnakUserFragment : Fragment() {
     private val viewModel by viewModels<CatatanAnakViewModel> {
         ViewModelFactory.getInstance(requireContext())
     }
-    private lateinit var dataAnak: List<DataImunisasisItem?>
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentDetailAnakUserBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -51,7 +43,7 @@ class DetailAnakUserFragment : Fragment() {
         binding.tvBeratBayi.text = ": ${itemData.beratBadan}"
         binding.tvNamaIbu.text = ": ${itemData.namaIbu}"
 
-        viewModel.imunisasi.observe(viewLifecycleOwner, Observer { response ->
+        viewModel.imunisasi.observe(viewLifecycleOwner, { response ->
             lifecycleScope.launch {
                 val filteredList = response.dataImunisasis?.filter { it?.idAnak == itemData.id } ?: emptyList()
                 val sortedList = filteredList.sortedByDescending { it?.tanggal }
@@ -67,15 +59,15 @@ class DetailAnakUserFragment : Fragment() {
                 val tetanus = sortedList.find { it?.imunisasiTetanusDiphteriaTd != null }?.imunisasiTetanusDiphteriaTd
                 val namaPemeriksa = sortedList.find { it?.namaPemeriksa != null }?.namaPemeriksa
 
-                binding.tvNamaPemeriksa.setText(namaPemeriksa)
-                binding.tvPolio2.setText(polio2)
-                binding.tvPolio3.setText(polio3)
-                binding.tvPolio4.setText(polio4)
-                binding.tvCampak.setText(campak)
-                binding.tvHib1.setText(hib1Dosis)
-                binding.tvRubella1.setText(rubella1Dosis)
-                binding.tvRubellaDt.setText(rubellaDt)
-                binding.tvTetanus.setText(tetanus)
+                binding.tvNamaPemeriksa.text = namaPemeriksa
+                binding.tvPolio2.text = polio2
+                binding.tvPolio3.text = polio3
+                binding.tvPolio4.text = polio4
+                binding.tvCampak.text = campak
+                binding.tvHib1.text = hib1Dosis
+                binding.tvRubella1.text = rubella1Dosis
+                binding.tvRubellaDt.text = rubellaDt
+                binding.tvTetanus.text = tetanus
 
                 when (polio2) {
                     "Sudah" -> {
