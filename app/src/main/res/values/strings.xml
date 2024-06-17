@@ -127,4 +127,6 @@
     <string name="tanggal_kembali">Tanggal Kembali</string>
     <string name="detail_hasil_pelayanan">Detail Hasil Pelayanan</string>
     <string name="tab_kb">KB</string>
+    <string name="layanan_kb">Layanan\nKB</string>
+    <string name="layanan_kb_title">Layanan KB</string>
 </resources>

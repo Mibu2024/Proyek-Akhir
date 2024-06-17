@@ -22,7 +22,6 @@ class CatatanKehamilanFragment : Fragment() {
         private val TAB_TITLES = intArrayOf(
             R.string.tab_kesehatan,
             R.string.tab_nifas,
-            R.string.tab_kb
         )
     }
 

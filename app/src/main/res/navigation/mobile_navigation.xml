@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_navigation_home_to_artikelFragment"
             app:destination="@id/artikelFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_tabKbFragment"
+            app:destination="@id/tabKbFragment" />
     </fragment>
 
     <fragment
@@ -98,6 +101,10 @@
         android:id="@+id/detailKbFragment"
         android:name="com.proyekakhir.mibu.user.ui.kehamilan.kb.DetailKbFragment"
         android:label="DetailKbFragment" />
+    <fragment
+        android:id="@+id/tabKbFragment"
+        android:name="com.proyekakhir.mibu.user.ui.kehamilan.kb.TabKbFragment"
+        android:label="TabKbFragment" />
 
 
 </navigation>

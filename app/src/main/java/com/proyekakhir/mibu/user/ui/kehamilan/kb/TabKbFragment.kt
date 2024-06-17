@@ -41,6 +41,10 @@ class TabKbFragment : Fragment() {
         _binding = FragmentTabKbBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        binding.arrowBack.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         val adapter = ListKbAdapter(listOf())
         val rvKesehatan = binding.rvTabKb
         rvKesehatan.layoutManager = LinearLayoutManager(requireContext())

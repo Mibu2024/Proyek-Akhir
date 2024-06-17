@@ -143,91 +143,118 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fab_hubungi_bidan">
 
-                <GridLayout
-                    android:id="@+id/gridLayout"
+                <HorizontalScrollView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:alignmentMode="alignMargins"
-                    android:columnCount="3"
-                    android:columnOrderPreserved="false"
-                    android:rowCount="3"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/searchView">
+                    android:fillViewport="true">
 
-                    <!-- First Image and Text -->
-                    <LinearLayout
-                        android:id="@+id/catatanKehamilan"
+                    <GridLayout
+                        android:id="@+id/gridLayout"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_columnWeight="1"
-                        android:layout_margin="8dp"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
+                        android:alignmentMode="alignMargins"
+                        android:columnCount="4"
+                        android:columnOrderPreserved="false"
+                        android:rowCount="2"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/searchView">
 
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/iv_kehamilan"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:src="@drawable/parents" />
-
-                        <TextView
+                        <!-- First Image and Text -->
+                        <LinearLayout
+                            android:id="@+id/catatanKehamilan"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingTop="5dp"
-                            android:text="@string/catatan_kehamilan"
-                            android:textAlignment="center" />
-                    </LinearLayout>
+                            android:layout_margin="8dp"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
 
-                    <!-- Second Image and Text -->
-                    <LinearLayout
-                        android:id="@+id/catatanAnak"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="1"
-                        android:layout_margin="8dp"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/iv_kehamilan"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:src="@drawable/parents" />
 
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/iv_anak"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:src="@drawable/babyicon" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="5dp"
+                                android:text="@string/catatan_kehamilan"
+                                android:textAlignment="center" />
+                        </LinearLayout>
 
-                        <TextView
+                        <!-- Second Image and Text -->
+                        <LinearLayout
+                            android:id="@+id/catatanAnak"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingTop="5dp"
-                            android:text="@string/catatan_anak"
-                            android:textAlignment="center" />
-                    </LinearLayout>
+                            android:layout_margin="8dp"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
 
-                    <!-- Third Image and Text -->
-                    <LinearLayout
-                        android:id="@+id/artikel"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_columnWeight="1"
-                        android:layout_margin="8dp"
-                        android:gravity="center_horizontal"
-                        android:orientation="vertical">
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/iv_anak"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:src="@drawable/babyicon" />
 
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/iv_artikel"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:src="@drawable/artikelmenu" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="5dp"
+                                android:text="@string/catatan_anak"
+                                android:textAlignment="center" />
+                        </LinearLayout>
 
-                        <TextView
+                        <!-- Third Image and Text -->
+                        <LinearLayout
+                            android:id="@+id/artikel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:paddingTop="5dp"
-                            android:text="@string/artikel_kehamilan"
-                            android:textAlignment="center" />
-                    </LinearLayout>
+                            android:layout_margin="8dp"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
 
-                </GridLayout>
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/iv_artikel"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:src="@drawable/artikelmenu" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="5dp"
+                                android:text="@string/artikel_kehamilan"
+                                android:textAlignment="center" />
+                        </LinearLayout>
+
+                        <!-- Fourth Image and Text -->
+                        <LinearLayout
+                            android:id="@+id/kb"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/iv_kb"
+                                android:layout_width="80dp"
+                                android:layout_height="80dp"
+                                android:src="@drawable/kb" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="5dp"
+                                android:text="@string/layanan_kb"
+                                android:textAlignment="center" />
+                        </LinearLayout>
+
+                    </GridLayout>
+
+                </HorizontalScrollView>
 
             </androidx.cardview.widget.CardView>
 

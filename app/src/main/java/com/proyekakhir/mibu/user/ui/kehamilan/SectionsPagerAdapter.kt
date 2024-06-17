@@ -9,7 +9,7 @@ import com.proyekakhir.mibu.user.ui.kehamilan.nifas.TabNifasFragment
 
 class SectionsPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
     override fun getItemCount(): Int {
-        return 3
+        return 2
     }
 
     override fun createFragment(position: Int): Fragment {
@@ -17,7 +17,6 @@ class SectionsPagerAdapter(fragmentActivity: FragmentActivity) : FragmentStateAd
         when (position) {
             0 -> fragment = TabKesehatanFragment()
             1 -> fragment = TabNifasFragment()
-            2 -> fragment = TabKbFragment()
         }
         return fragment as Fragment
     }

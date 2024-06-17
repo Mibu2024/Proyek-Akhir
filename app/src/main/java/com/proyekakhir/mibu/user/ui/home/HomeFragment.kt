@@ -81,6 +81,11 @@ class HomeFragment : Fragment() {
             activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.visibility = View.GONE
         }
 
+        binding.kb.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_home_to_tabKbFragment)
+            activity?.findViewById<BottomNavigationView>(R.id.nav_view)?.visibility = View.GONE
+        }
+
         adapter = ListArtikelHomeAdapter(listOf())
         val rvArtikel = binding.rvArtikelHome
         rvArtikel.layoutManager =
