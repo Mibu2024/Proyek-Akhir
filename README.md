@@ -9,6 +9,13 @@ Aplikasi monitoring ibu hamil berbasis Android dan website yang membantu mendata
 
 #
 
+# Poster MIBU
+<p align="center">
+    <img src="https://github.com/Mibu2024/Proyek-Akhir/blob/master/MIBU%20Poster.png" alt="Logo" width="300" height="300">
+</p>
+
+#
+
 # UI/UX Design
 ![image](https://github.com/Mibu2024/Proyek-Akhir/blob/master/UIUXPAMibuFigma.png)
 
@@ -46,6 +53,11 @@ Aplikasi monitoring ibu hamil berbasis Android dan website yang membantu mendata
 
 # Video Demo Aplikasi
 [![Mibu Demo](https://img.youtube.com/vi/sKTDeYIA6Ik/0.jpg)](https://youtu.be/sKTDeYIA6Ik?autoplay=1)
+
+#
+
+# Buku Panduan MIBU
+[Unduh Buku Panduan MIBU](https://github.com/Mibu2024/Proyek-Akhir/blob/master/Buku%20Panduan%20MIBU.pdf)
 
 #
 
