@@ -1,9 +1,9 @@
 # MIBU
 ## Monitoring Ibu Hamil dan Balita
 
-<div style="text-align: center;">
-    <img src="https://github.com/Mibu2024/Proyek-Akhir/blob/master/logo.png" alt="Logo" width="300" height="300">
-</div>
+<p align="center">
+<img src="https://github.com/Mibu2024/Proyek-Akhir/blob/master/logo.png" alt="Logo" style="border-radius: 50%; width: 300; height: 300;">
+</p>
 
 Aplikasi monitoring ibu hamil berbasis Android dan website yang membantu mendata kesehatan ibu hamil dan imunisasi balita. Aplikasi ini berfokus pada kebutuhan kesehatan ibu hamil dan imunisasi balita, aplikasi ini memberikan akses yang mudah dan pencatatan yang akurat, aplikasi ini dibuat dengan tujuan untuk membantu para Bidan agar mempermudah pada saat proses tindak lanjut sehingga memungkinkan ibu hamil dan orang tua muda anak-anak untuk mencatat kemajuan vaksinasi dan imunisasi balita yang disajikan dalam laporan. 
 
