@@ -35,7 +35,7 @@ Aplikasi monitoring ibu hamil berbasis Android dan website yang membantu mendata
 #
 
 # Video Promosi
-[![Mibu Promosi](https://youtu.be/k43GHvVUV4c)
+[![Mibu Promosi](https://img.youtube.com/vi/k43GHvVUV4c/0.jpg)](https://youtu.be/k43GHvVUV4c?autoplay=1)
 
 #
 
@@ -45,7 +45,7 @@ Aplikasi monitoring ibu hamil berbasis Android dan website yang membantu mendata
 #
 
 # Video Demo Aplikasi
-[![Mibu Demo](https://youtu.be/sKTDeYIA6Ik)
+[![Mibu Demo](https://img.youtube.com/vi/sKTDeYIA6Ik/0.jpg)](https://youtu.be/sKTDeYIA6Ik?autoplay=1)
 
 #
 
