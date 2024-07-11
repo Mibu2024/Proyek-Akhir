@@ -5,13 +5,13 @@
     <img src="https://github.com/Mibu2024/Proyek-Akhir/blob/master/logo.png" alt="Logo" width="300" height="300">
 </p>
 
-Aplikasi monitoring ibu hamil berbasis Android dan website yang membantu mendata kesehatan ibu hamil dan imunisasi balita. Aplikasi ini berfokus pada kebutuhan kesehatan ibu hamil dan imunisasi balita, aplikasi ini memberikan akses yang mudah dan pencatatan yang akurat, aplikasi ini dibuat dengan tujuan untuk membantu para Bidan agar mempermudah pada saat proses tindak lanjut sehingga memungkinkan ibu hamil dan orang tua muda anak-anak untuk mencatat kemajuan vaksinasi dan imunisasi balita yang disajikan dalam laporan. 
+Aplikasi monitoring ibu hamil berbasis Android dan website yang membantu mendata kesehatan ibu hamil dan imunisasi balita. Aplikasi ini berfokus pada kebutuhan kesehatan ibu hamil dan imunisasi balita, aplikasi ini memberikan akses yang mudah dan pencatatan yang akurat, aplikasi ini dibuat dengan tujuan untuk membantu para Bidan agar mempermudah pada saat proses tindak lanjut sehingga memungkinkan ibu hamil dan orang tua muda anak anak untuk mencatat kemajuan vaksinasi dan imunisasi balita yang disajikan dalam laporan. 
 
 #
 
 # Poster MIBU
 <p align="center">
-    <img src="https://github.com/Mibu2024/Proyek-Akhir/blob/master/MIBU%20Poster.png" alt="Logo" width="300" height="400">
+    <img src="https://github.com/Mibu2024/Proyek-Akhir/blob/master/MIBU%20Poster.png" alt="Logo" width="400" height="500">
 </p>
 
 #
