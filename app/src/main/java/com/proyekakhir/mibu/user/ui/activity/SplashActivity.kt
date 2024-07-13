@@ -36,9 +36,6 @@ class SplashActivity : AppCompatActivity() {
                 if (session.token.isNotEmpty()) {
                     startActivity(Intent(this@SplashActivity, MainActivity::class.java))
                     finish()
-                } else {
-                    startActivity(Intent(this@SplashActivity, OnBoardActivity::class.java))
-                    finish()
                 }
             }
         }

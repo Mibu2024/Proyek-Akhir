@@ -18,7 +18,6 @@ data class KesehatanResponse(
 	val message: String? = null
 ) : Parcelable
 
-
 data class DataKesehatanItem(
 
 	@field:SerializedName("umur_kehamilan")
@@ -66,11 +65,17 @@ data class DataKesehatanItem(
 	@field:SerializedName("keluhan")
 	val keluhan: String? = null,
 
+	@field:SerializedName("lingkar_lengan_atas")
+	val lingkarLenganAtas: String? = null,
+
 	@field:SerializedName("updated_at")
 	val updatedAt: String? = null,
 
 	@field:SerializedName("tindakan")
 	val tindakan: String? = null,
+
+	@field:SerializedName("tinggi_badan")
+	val tinggiBadan: String? = null,
 
 	@field:SerializedName("id")
 	val id: Int? = null,
@@ -82,5 +87,8 @@ data class DataKesehatanItem(
 	val kakiBengkak: String? = null,
 
 	@field:SerializedName("hasil_lab")
-	val hasilLab: String? = null
+	val hasilLab: String? = null,
+
+	@field:SerializedName("lingkar_perut")
+	val lingkarPerut: String? = null
 ) : Serializable

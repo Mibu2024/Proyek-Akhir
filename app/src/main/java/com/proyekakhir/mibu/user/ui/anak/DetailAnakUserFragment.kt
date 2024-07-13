@@ -43,147 +43,59 @@ class DetailAnakUserFragment : Fragment() {
         binding.tvBeratBayi.text = ": ${itemData.beratBadan}"
         binding.tvNamaIbu.text = ": ${itemData.namaIbu}"
 
-        viewModel.imunisasi.observe(viewLifecycleOwner, { response ->
+        viewModel.imunisasi.observe(viewLifecycleOwner) { response ->
             lifecycleScope.launch {
-                val filteredList = response.dataImunisasis?.filter { it?.idAnak == itemData.id } ?: emptyList()
+                val filteredList =
+                    response.dataImunisasis?.filter { it?.idAnak == itemData.id } ?: emptyList()
                 val sortedList = filteredList.sortedByDescending { it?.tanggal }
 
-                //value imunisasi
-                val polio2 = sortedList.find { it?.imunisasiDptHbHib1Polio2 != null }?.imunisasiDptHbHib1Polio2
-                val polio3 = sortedList.find { it?.imunisasiDptHbHib2Polio3 != null }?.imunisasiDptHbHib2Polio3
-                val polio4 = sortedList.find { it?.imunisasiDptHbHib3Polio4 != null }?.imunisasiDptHbHib3Polio4
-                val campak = sortedList.find { it?.imunisasiCampak != null }?.imunisasiCampak
-                val hib1Dosis = sortedList.find { it?.imunisasiDptHbHib1Dosis != null }?.imunisasiDptHbHib1Dosis
-                val rubella1Dosis = sortedList.find { it?.imunisasiCampakRubella1Dosis != null }?.imunisasiCampakRubella1Dosis
-                val rubellaDt = sortedList.find { it?.imunisasiCampakRubellaDanDt != null }?.imunisasiCampakRubellaDanDt
-                val tetanus = sortedList.find { it?.imunisasiTetanusDiphteriaTd != null }?.imunisasiTetanusDiphteriaTd
+                // Immunization values
+                val immunizationMap = mapOf(
+                    binding.tvHepatitisB to sortedList.find { it?.hepatitisB != null }?.hepatitisB,
+                    binding.tvBcg to sortedList.find { it?.bcg != null }?.bcg,
+                    binding.tvPolioTetes1 to sortedList.find { it?.polioTetes1 != null }?.polioTetes1,
+                    binding.tvDptHbHib1 to sortedList.find { it?.dptHbHib1 != null }?.dptHbHib1,
+                    binding.tvPolioTetes2 to sortedList.find { it?.polioTetes2 != null }?.polioTetes2,
+                    binding.tvRotavirus1 to sortedList.find { it?.rotaVirus1 != null }?.rotaVirus1,
+                    binding.tvPcv1 to sortedList.find { it?.pcv1 != null }?.pcv1,
+                    binding.tvDptHbHib2 to sortedList.find { it?.dptHbHib2 != null }?.dptHbHib2,
+                    binding.tvPolioTetes3 to sortedList.find { it?.polioTetes3 != null }?.polioTetes3,
+                    binding.tvRotavirus2 to sortedList.find { it?.rotaVirus2 != null }?.rotaVirus2,
+                    binding.tvPcv2 to sortedList.find { it?.pcv2 != null }?.pcv2,
+                    binding.tvDptHbHib3 to sortedList.find { it?.dptHbHib3 != null }?.dptHbHib3,
+                    binding.tvPolioTetes4 to sortedList.find { it?.polioTetes4 != null }?.polioTetes4,
+                    binding.tvPolioSuntik1 to sortedList.find { it?.polioSuntik1 != null }?.polioSuntik1,
+                    binding.tvRotavirus3 to sortedList.find { it?.rotaVirus3 != null }?.rotaVirus3,
+                    binding.tvCampakRubella to sortedList.find { it?.campakRubella != null }?.campakRubella,
+                    binding.tvPolioSuntik2 to sortedList.find { it?.polioSuntik2 != null }?.polioSuntik2,
+                    binding.tvJapaneseEncephalitis to sortedList.find { it?.japaneseEncephalitis != null }?.japaneseEncephalitis,
+                    binding.tvPcv3 to sortedList.find { it?.pcv3 != null }?.pcv3,
+                    binding.tvDptHbHibLanjutan to sortedList.find { it?.dptHbHibLanjutan != null }?.dptHbHibLanjutan,
+                    binding.tvCampakRubellaLanjutan to sortedList.find { it?.campakRubellaLanjutan != null }?.campakRubellaLanjutan
+                )
+
+                immunizationMap.forEach { (textView, status) ->
+                    when (status) {
+                        "Sudah" -> {
+                            textView.setBackgroundResource(R.drawable.bg_filled_green)
+                            textView.setTextColor(Color.WHITE)
+                            textView.text = "Sudah"
+                            textView.setPadding(32, 32, 32, 32)
+                        }
+
+                        "Belum" -> {
+                            textView.setBackgroundResource(R.drawable.bg_filled_red)
+                            textView.setTextColor(Color.WHITE)
+                            textView.text = "Belum"
+                            textView.setPadding(32, 32, 32, 32)
+                        }
+                    }
+                }
+
                 val namaPemeriksa = sortedList.find { it?.namaPemeriksa != null }?.namaPemeriksa
-
                 binding.tvNamaPemeriksa.text = namaPemeriksa
-                binding.tvPolio2.text = polio2
-                binding.tvPolio3.text = polio3
-                binding.tvPolio4.text = polio4
-                binding.tvCampak.text = campak
-                binding.tvHib1.text = hib1Dosis
-                binding.tvRubella1.text = rubella1Dosis
-                binding.tvRubellaDt.text = rubellaDt
-                binding.tvTetanus.text = tetanus
-
-                when (polio2) {
-                    "Sudah" -> {
-                        binding.tvPolio2.setBackgroundResource(R.drawable.bg_filled_green)
-                        binding.tvPolio2.setTextColor(Color.WHITE)
-                        binding.tvPolio2.setPadding(32, 32, 32, 32)
-                    }
-
-                    "Belum" -> {
-                        binding.tvPolio2.setBackgroundResource(R.drawable.bg_filled_red)
-                        binding.tvPolio2.setTextColor(Color.WHITE)
-                        binding.tvPolio2.setPadding(32, 32, 32, 32)
-                    }
-                }
-
-                when (polio3) {
-                    "Sudah" -> {
-                        binding.tvPolio3.setBackgroundResource(R.drawable.bg_filled_green)
-                        binding.tvPolio3.setTextColor(Color.WHITE)
-                        binding.tvPolio3.setPadding(32, 32, 32, 32)
-                    }
-
-                    "Belum" -> {
-                        binding.tvPolio3.setBackgroundResource(R.drawable.bg_filled_red)
-                        binding.tvPolio3.setTextColor(Color.WHITE)
-                        binding.tvPolio3.setPadding(32, 32, 32, 32)
-                    }
-                }
-
-                when (polio4) {
-                    "Sudah" -> {
-                        binding.tvPolio4.setBackgroundResource(R.drawable.bg_filled_green)
-                        binding.tvPolio4.setTextColor(Color.WHITE)
-                        binding.tvPolio4.setPadding(32, 32, 32, 32)
-                    }
-
-                    "Belum" -> {
-                        binding.tvPolio4.setBackgroundResource(R.drawable.bg_filled_red)
-                        binding.tvPolio4.setTextColor(Color.WHITE)
-                        binding.tvPolio4.setPadding(32, 32, 32, 32)
-                    }
-                }
-
-                when (campak) {
-                    "Sudah" -> {
-                        binding.tvCampak.setBackgroundResource(R.drawable.bg_filled_green)
-                        binding.tvCampak.setTextColor(Color.WHITE)
-                        binding.tvCampak.setPadding(32, 32, 32, 32)
-                    }
-
-                    "Belum" -> {
-                        binding.tvCampak.setBackgroundResource(R.drawable.bg_filled_red)
-                        binding.tvCampak.setTextColor(Color.WHITE)
-                        binding.tvCampak.setPadding(32, 32, 32, 32)
-                    }
-                }
-
-                when (hib1Dosis) {
-                    "Sudah" -> {
-                        binding.tvHib1.setBackgroundResource(R.drawable.bg_filled_green)
-                        binding.tvHib1.setTextColor(Color.WHITE)
-                        binding.tvHib1.setPadding(32, 32, 32, 32)
-                    }
-
-                    "Belum" -> {
-                        binding.tvHib1.setBackgroundResource(R.drawable.bg_filled_red)
-                        binding.tvHib1.setTextColor(Color.WHITE)
-                        binding.tvHib1.setPadding(32, 32, 32, 32)
-                    }
-                }
-
-                when (rubella1Dosis) {
-                    "Sudah" -> {
-                        binding.tvRubella1.setBackgroundResource(R.drawable.bg_filled_green)
-                        binding.tvRubella1.setTextColor(Color.WHITE)
-                        binding.tvRubella1.setPadding(32, 32, 32, 32)
-                    }
-
-                    "Belum" -> {
-                        binding.tvRubella1.setBackgroundResource(R.drawable.bg_filled_red)
-                        binding.tvRubella1.setTextColor(Color.WHITE)
-                        binding.tvRubella1.setPadding(32, 32, 32, 32)
-                    }
-                }
-
-                when (rubellaDt) {
-                    "Sudah" -> {
-                        binding.tvRubellaDt.setBackgroundResource(R.drawable.bg_filled_green)
-                        binding.tvRubellaDt.setTextColor(Color.WHITE)
-                        binding.tvRubellaDt.setPadding(32, 32, 32, 32)
-                    }
-
-                    "Belum" -> {
-                        binding.tvRubellaDt.setBackgroundResource(R.drawable.bg_filled_red)
-                        binding.tvRubellaDt.setTextColor(Color.WHITE)
-                        binding.tvRubellaDt.setPadding(32, 32, 32, 32)
-                    }
-                }
-
-                when (tetanus) {
-                    "Sudah" -> {
-                        binding.tvTetanus.setBackgroundResource(R.drawable.bg_filled_green)
-                        binding.tvTetanus.setTextColor(Color.WHITE)
-                        binding.tvTetanus.setPadding(32, 32, 32, 32)
-                    }
-
-                    "Belum" -> {
-                        binding.tvTetanus.setBackgroundResource(R.drawable.bg_filled_red)
-                        binding.tvTetanus.setTextColor(Color.WHITE)
-                        binding.tvTetanus.setPadding(32, 32, 32, 32)
-                    }
-                }
-
-
             }
-        })
+        }
 
         return root
     }

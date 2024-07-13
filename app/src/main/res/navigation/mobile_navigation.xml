@@ -104,7 +104,11 @@
     <fragment
         android:id="@+id/tabKbFragment"
         android:name="com.proyekakhir.mibu.user.ui.kehamilan.kb.TabKbFragment"
-        android:label="TabKbFragment" />
+        android:label="TabKbFragment" >
+        <action
+            android:id="@+id/action_tabKbFragment_to_detailKbFragment"
+            app:destination="@id/detailKbFragment" />
+    </fragment>
 
 
 </navigation>

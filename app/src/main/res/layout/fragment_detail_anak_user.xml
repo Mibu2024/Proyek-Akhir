@@ -291,7 +291,7 @@
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="@string/polio2"
+                    android:text="@string/hepatitis_b"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView31"
@@ -313,7 +313,7 @@
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="@string/polio3"
+                    android:text="@string/bcg"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView41"
@@ -335,7 +335,7 @@
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="@string/polio4"
+                    android:text="@string/polio_tetes_1"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView51"
@@ -357,7 +357,7 @@
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="@string/campak"
+                    android:text="@string/dpt_hb_hib_1"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView61"
@@ -379,7 +379,7 @@
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="@string/hib1"
+                    android:text="@string/polio_tetes_2"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView71"
@@ -401,7 +401,7 @@
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="@string/rubella1"
+                    android:text="@string/rotovirus_1"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView72"
@@ -423,7 +423,7 @@
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="@string/rubelladt"
+                    android:text="@string/pcv_1"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView73"
@@ -435,19 +435,61 @@
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_marginTop="50dp"
-                    android:layout_marginBottom="32dp"
+                    android:contentDescription="TODO"
                     android:src="@drawable/vaccine"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/imageView73"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView73"
-                    android:contentDescription="TODO" />
+                    app:layout_constraintTop_toBottomOf="@+id/imageView75" />
 
                 <TextView
                     android:id="@+id/textView134"
                     android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:text="@string/tetanus"
+                    android:text="@string/dpt_hb_hib_2"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView75"
+                    app:layout_constraintStart_toEndOf="@+id/imageView74"
+                    app:layout_constraintTop_toTopOf="@+id/imageView75" />
+
+                <ImageView
+                    android:id="@+id/imageView75"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="50dp"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/vaccine"
+                    app:layout_constraintStart_toStartOf="@+id/imageView73"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView73" />
+
+                <TextView
+                    android:id="@+id/textView136"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/rotavirus_2"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView76"
+                    app:layout_constraintStart_toEndOf="@+id/imageView76"
+                    app:layout_constraintTop_toTopOf="@+id/imageView76" />
+
+                <ImageView
+                    android:id="@+id/imageView76"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="50dp"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/vaccine"
+                    app:layout_constraintStart_toStartOf="@+id/imageView74"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView74" />
+
+                <TextView
+                    android:id="@+id/textView135"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/polio_tetes_3"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/imageView74"
@@ -455,7 +497,251 @@
                     app:layout_constraintTop_toTopOf="@+id/imageView74" />
 
                 <TextView
-                    android:id="@+id/tv_polio2"
+                    android:id="@+id/textView137"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/pcv_2"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView77"
+                    app:layout_constraintStart_toEndOf="@+id/imageView77"
+                    app:layout_constraintTop_toTopOf="@+id/imageView77" />
+
+                <ImageView
+                    android:id="@+id/imageView77"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="50dp"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/vaccine"
+                    app:layout_constraintStart_toStartOf="@+id/imageView76"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView76" />
+
+                <TextView
+                    android:id="@+id/textView138"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/dpt_hb_hib_3"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView78"
+                    app:layout_constraintStart_toEndOf="@+id/imageView78"
+                    app:layout_constraintTop_toTopOf="@+id/imageView78" />
+
+                <ImageView
+                    android:id="@+id/imageView79"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="50dp"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/vaccine"
+                    app:layout_constraintStart_toStartOf="@+id/imageView78"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView78" />
+
+                <TextView
+                    android:id="@+id/textView139"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/polio_tetes_4"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView79"
+                    app:layout_constraintStart_toEndOf="@+id/imageView79"
+                    app:layout_constraintTop_toTopOf="@+id/imageView79" />
+
+                <ImageView
+                    android:id="@+id/imageView78"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="50dp"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/vaccine"
+                    app:layout_constraintStart_toStartOf="@+id/imageView77"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView77" />
+
+                <ImageView
+                    android:id="@+id/imageView80"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="50dp"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/vaccine"
+                    app:layout_constraintStart_toStartOf="@+id/imageView79"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView79" />
+
+                <TextView
+                    android:id="@+id/textView140"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/polio_suntik_1"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView80"
+                    app:layout_constraintStart_toEndOf="@+id/imageView80"
+                    app:layout_constraintTop_toTopOf="@+id/imageView80" />
+
+                <ImageView
+                    android:id="@+id/imageView81"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="50dp"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/vaccine"
+                    app:layout_constraintStart_toStartOf="@+id/imageView80"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView80" />
+
+                <TextView
+                    android:id="@+id/textView141"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/rotavirus_3"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView81"
+                    app:layout_constraintStart_toEndOf="@+id/imageView81"
+                    app:layout_constraintTop_toTopOf="@+id/imageView81" />
+
+                <ImageView
+                    android:id="@+id/imageView82"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="50dp"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/vaccine"
+                    app:layout_constraintStart_toStartOf="@+id/imageView81"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView81" />
+
+                <TextView
+                    android:id="@+id/textView142"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/campak_rubella"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView82"
+                    app:layout_constraintStart_toEndOf="@+id/imageView82"
+                    app:layout_constraintTop_toTopOf="@+id/imageView82" />
+
+                <ImageView
+                    android:id="@+id/imageView83"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="50dp"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/vaccine"
+                    app:layout_constraintStart_toStartOf="@+id/imageView82"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView82" />
+
+                <TextView
+                    android:id="@+id/textView143"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/polio_suntik_2"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView83"
+                    app:layout_constraintStart_toEndOf="@+id/imageView83"
+                    app:layout_constraintTop_toTopOf="@+id/imageView83" />
+
+                <ImageView
+                    android:id="@+id/imageView84"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="50dp"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/vaccine"
+                    app:layout_constraintStart_toStartOf="@+id/imageView83"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView83" />
+
+                <TextView
+                    android:id="@+id/textView144"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/japanese_encephalitis"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView84"
+                    app:layout_constraintStart_toEndOf="@+id/imageView84"
+                    app:layout_constraintTop_toTopOf="@+id/imageView84" />
+
+                <ImageView
+                    android:id="@+id/imageView85"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="50dp"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/vaccine"
+                    app:layout_constraintStart_toStartOf="@+id/imageView84"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView84" />
+
+                <TextView
+                    android:id="@+id/textView145"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/pcv_3"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView85"
+                    app:layout_constraintStart_toEndOf="@+id/imageView85"
+                    app:layout_constraintTop_toTopOf="@+id/imageView85" />
+
+                <ImageView
+                    android:id="@+id/imageView86"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="50dp"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/vaccine"
+                    app:layout_constraintStart_toStartOf="@+id/imageView85"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView85" />
+
+                <TextView
+                    android:id="@+id/textView146"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/dpt_hb_hib_lanjutan"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView86"
+                    app:layout_constraintStart_toEndOf="@+id/imageView86"
+                    app:layout_constraintTop_toTopOf="@+id/imageView86" />
+
+                <ImageView
+                    android:id="@+id/imageView87"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginBottom="24dp"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/vaccine"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/imageView86"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView86" />
+
+                <TextView
+                    android:id="@+id/textView147"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/campak_rubella_lanjutan"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView87"
+                    app:layout_constraintStart_toEndOf="@+id/imageView87"
+                    app:layout_constraintTop_toTopOf="@+id/imageView87" />
+
+                <TextView
+                    android:id="@+id/tv_hepatitis_b"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
@@ -469,81 +755,226 @@
                     tools:text=": Siti Badillah" />
 
                 <TextView
-                    android:id="@+id/tv_polio3"
+                    android:id="@+id/tv_bcg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/textView101"
-                    app:layout_constraintStart_toStartOf="@+id/tv_polio2"
+                    app:layout_constraintStart_toStartOf="@+id/tv_hepatitis_b"
                     app:layout_constraintTop_toTopOf="@+id/textView101"
                     tools:text=": 25 Februari 2023" />
 
                 <TextView
-                    android:id="@+id/tv_polio4"
+                    android:id="@+id/tv_polio_tetes_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/textView111"
-                    app:layout_constraintStart_toStartOf="@+id/tv_polio3"
+                    app:layout_constraintStart_toStartOf="@+id/tv_bcg"
                     app:layout_constraintTop_toTopOf="@+id/textView111"
                     tools:text=": 2 Bulan" />
 
                 <TextView
-                    android:id="@+id/tv_campak"
+                    android:id="@+id/tv_dpt_hb_hib_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/textView121"
-                    app:layout_constraintStart_toStartOf="@+id/tv_polio4"
+                    app:layout_constraintStart_toStartOf="@+id/tv_polio_tetes_1"
                     app:layout_constraintTop_toTopOf="@+id/textView121"
                     tools:text=": 2 Kg" />
 
                 <TextView
-                    android:id="@+id/tv_hib1"
+                    android:id="@+id/tv_polio_tetes_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/textView131"
-                    app:layout_constraintStart_toStartOf="@+id/tv_campak"
+                    app:layout_constraintStart_toStartOf="@+id/tv_dpt_hb_hib_1"
                     app:layout_constraintTop_toTopOf="@+id/textView131"
                     tools:text=": John Doe" />
 
                 <TextView
-                    android:id="@+id/tv_rubella1"
+                    android:id="@+id/tv_rotavirus_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/textView132"
-                    app:layout_constraintStart_toStartOf="@+id/tv_hib1"
+                    app:layout_constraintStart_toStartOf="@+id/tv_polio_tetes_2"
                     app:layout_constraintTop_toTopOf="@+id/textView132"
                     tools:text=": John Doe" />
 
                 <TextView
-                    android:id="@+id/tv_rubellaDt"
+                    android:id="@+id/tv_pcv_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/textView133"
-                    app:layout_constraintStart_toStartOf="@+id/tv_rubella1"
+                    app:layout_constraintStart_toStartOf="@+id/tv_rotavirus_1"
                     app:layout_constraintTop_toTopOf="@+id/textView133"
                     tools:text=": John Doe" />
 
                 <TextView
-                    android:id="@+id/tv_tetanus"
+                    android:id="@+id/tv_polio_tetes_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView135"
+                    app:layout_constraintStart_toStartOf="@+id/tv_pcv_1"
+                    app:layout_constraintTop_toTopOf="@+id/textView135"
+                    tools:text=": John Doe" />
+
+                <TextView
+                    android:id="@+id/tv_dpt_hb_hib_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@+id/textView134"
-                    app:layout_constraintStart_toStartOf="@+id/tv_rubellaDt"
+                    app:layout_constraintStart_toStartOf="@+id/tv_polio_tetes_3"
                     app:layout_constraintTop_toTopOf="@+id/textView134"
                     tools:text=": John Doe" />
+
+                <TextView
+                    android:id="@+id/tv_rotavirus_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView136"
+                    app:layout_constraintStart_toStartOf="@+id/tv_polio_tetes_3"
+                    app:layout_constraintTop_toTopOf="@+id/textView136"
+                    tools:text=": John Doe" />
+
+                <TextView
+                    android:id="@+id/tv_pcv_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView137"
+                    app:layout_constraintStart_toStartOf="@+id/tv_rotavirus_2"
+                    app:layout_constraintTop_toTopOf="@+id/textView137"
+                    tools:text=": John Doe" />
+
+                <TextView
+                    android:id="@+id/tv_dpt_hb_hib_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView138"
+                    app:layout_constraintStart_toStartOf="@+id/tv_pcv_2"
+                    app:layout_constraintTop_toTopOf="@+id/textView138"
+                    tools:text=": John Doe" />
+
+                <TextView
+                    android:id="@+id/tv_polio_tetes_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView139"
+                    app:layout_constraintStart_toStartOf="@+id/tv_dpt_hb_hib_3"
+                    app:layout_constraintTop_toTopOf="@+id/textView139"
+                    tools:text=": John Doe" />
+
+                <TextView
+                    android:id="@+id/tv_polio_suntik_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView140"
+                    app:layout_constraintStart_toStartOf="@+id/tv_polio_tetes_4"
+                    app:layout_constraintTop_toTopOf="@+id/textView140"
+                    tools:text=": John Doe" />
+
+                <TextView
+                    android:id="@+id/tv_rotavirus_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView141"
+                    app:layout_constraintStart_toStartOf="@+id/tv_polio_suntik_1"
+                    app:layout_constraintTop_toTopOf="@+id/textView141"
+                    tools:text=": John Doe" />
+
+                <TextView
+                    android:id="@+id/tv_campak_rubella"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView142"
+                    app:layout_constraintStart_toStartOf="@+id/tv_rotavirus_3"
+                    app:layout_constraintTop_toTopOf="@+id/textView142"
+                    tools:text=": John Doe" />
+
+                <TextView
+                    android:id="@+id/tv_polio_suntik_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView143"
+                    app:layout_constraintStart_toStartOf="@+id/tv_campak_rubella"
+                    app:layout_constraintTop_toTopOf="@+id/textView143"
+                    tools:text=": John Doe" />
+
+                <TextView
+                    android:id="@+id/tv_japanese_encephalitis"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView144"
+                    app:layout_constraintStart_toStartOf="@+id/tv_polio_suntik_2"
+                    app:layout_constraintTop_toTopOf="@+id/textView144"
+                    tools:text=": John Doe" />
+
+                <TextView
+                    android:id="@+id/tv_pcv_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView145"
+                    app:layout_constraintStart_toStartOf="@+id/tv_japanese_encephalitis"
+                    app:layout_constraintTop_toTopOf="@+id/textView145"
+                    tools:text=": John Doe" />
+
+                <TextView
+                    android:id="@+id/tv_dpt_hb_hib_lanjutan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView146"
+                    app:layout_constraintStart_toStartOf="@+id/tv_pcv_3"
+                    app:layout_constraintTop_toTopOf="@+id/textView146"
+                    tools:text=": John Doe" />
+
+                <TextView
+                    android:id="@+id/tv_campak_rubella_lanjutan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView147"
+                    app:layout_constraintStart_toStartOf="@+id/tv_dpt_hb_hib_lanjutan"
+                    app:layout_constraintTop_toTopOf="@+id/textView147"
+                    tools:text=": John Doe" />
+
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

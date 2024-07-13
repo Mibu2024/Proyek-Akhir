@@ -38,14 +38,20 @@ class TabNifasFragment : Fragment() {
         _binding = FragmentTabNifasBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val list = arrayListOf<NifasModel>()
+        val swipeRefreshLayout = binding.swipeRefreshLayout
+        swipeRefreshLayout.setOnRefreshListener {
+            viewModel.getCatatanKehamilan()
+            refreshData()
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
+
         val adapter = ListNifasAdapter(listOf())
         val rvNifas = binding.rvTabNifas
         rvNifas.layoutManager = LinearLayoutManager(requireContext())
         rvNifas.setHasFixedSize(true)
         rvNifas.adapter = adapter
 
-        viewModel.nifas.observe(viewLifecycleOwner, { response ->
+        viewModel.nifas.observe(viewLifecycleOwner) { response ->
             lifecycleScope.launch {
                 val dataStore: DataStore<Preferences> = requireContext().dataStore
                 val userPreference = UserPreference.getInstance(dataStore)
@@ -59,16 +65,16 @@ class TabNifasFragment : Fragment() {
                 }
                 adapter.notifyDataSetChanged()
             }
-        })
+        }
 
         val progressBar = binding.progressBar
-        viewModel.isLoading.observe(requireActivity(), { isLoading ->
+        viewModel.isLoading.observe(requireActivity()) { isLoading ->
             if (isLoading) {
                 progressBar.visibility = View.VISIBLE
             } else {
                 progressBar.visibility = View.GONE
             }
-        })
+        }
 
         adapter.listener = object : ListNifasAdapter.OnItemClickListenerHome {
             override fun onItemClick(item: DataNifasItem) {
@@ -82,6 +88,10 @@ class TabNifasFragment : Fragment() {
         }
 
         return root
+    }
+
+    private fun refreshData() {
+        viewModel.getCatatanNifas()
     }
 
     override fun onDestroyView() {

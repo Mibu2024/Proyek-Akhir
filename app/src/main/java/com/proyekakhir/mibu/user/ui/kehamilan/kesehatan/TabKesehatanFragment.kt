@@ -43,29 +43,36 @@ class TabKesehatanFragment : Fragment() {
         _binding = FragmentTabKesehatanBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        val swipeRefreshLayout = binding.swipeRefreshLayout
+        swipeRefreshLayout.setOnRefreshListener {
+            viewModel.getCatatanKehamilan()
+            refreshData()
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
+
         val adapter = ListKesehatanAdapter(listOf())
         val rvKesehatan = binding.rvTabKesehatan
         rvKesehatan.layoutManager = LinearLayoutManager(requireContext())
         rvKesehatan.setHasFixedSize(true)
         rvKesehatan.adapter = adapter
 
-        viewModel.kesehatan.observe(viewLifecycleOwner, { response ->
+        viewModel.kesehatan.observe(viewLifecycleOwner) { response ->
             updateRecyclerView(response)
-        })
+        }
 
-        loginViewModel.loginResult.observe(viewLifecycleOwner, { loginResponse ->
+        loginViewModel.loginResult.observe(viewLifecycleOwner) { loginResponse ->
             // When login result is updated, trigger data fetch
             viewModel.getCatatanKehamilan()
-        })
+        }
 
         val progressBar = binding.progressBar
-        viewModel.isLoading.observe(requireActivity(), { isLoading ->
+        viewModel.isLoading.observe(requireActivity()) { isLoading ->
             if (isLoading) {
                 progressBar.visibility = View.VISIBLE
             } else {
                 progressBar.visibility = View.GONE
             }
-        })
+        }
 
         adapter.listener = object : ListKesehatanAdapter.OnItemClickListenerHome {
             override fun onItemClick(item: DataKesehatanItem) {
@@ -79,6 +86,12 @@ class TabKesehatanFragment : Fragment() {
         }
 
         return root
+    }
+
+    private fun refreshData() {
+        viewModel.kesehatan.observe(viewLifecycleOwner) { response ->
+            updateRecyclerView(response)
+        }
     }
 
     private fun updateRecyclerView(response: KesehatanResponse) {

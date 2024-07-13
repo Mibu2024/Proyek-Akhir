@@ -41,6 +41,12 @@ class TabKbFragment : Fragment() {
         _binding = FragmentTabKbBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        val swipeRefreshLayout = binding.swipeRefreshLayout
+        swipeRefreshLayout.setOnRefreshListener {
+            refreshData()
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
+
         binding.arrowBack.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -74,13 +80,24 @@ class TabKbFragment : Fragment() {
                 val bundle = Bundle()
                 bundle.putSerializable("itemData", item)
                 findNavController().navigate(
-                    R.id.action_navigation_catatan_kehamilan_navbar_to_detailKbFragment,
+                    R.id.action_tabKbFragment_to_detailKbFragment,
                     bundle
                 )
             }
         }
 
         return root
+    }
+
+    private fun refreshData() {
+        viewModel.kb.observe(viewLifecycleOwner) { response ->
+            updateRecyclerView(response)
+        }
+
+        loginViewModel.loginResult.observe(viewLifecycleOwner) { loginResponse ->
+            // When login result is updated, trigger data fetch
+            viewModel.getCatatanKb()
+        }
     }
 
     private fun updateRecyclerView(response: KbResponse) {

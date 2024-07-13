@@ -93,7 +93,7 @@ class HomeFragment : Fragment() {
         rvArtikel.setHasFixedSize(true)
         rvArtikel.adapter = adapter
 
-        viewModel.artikel.observe(viewLifecycleOwner, { response ->
+        viewModel.artikel.observe(viewLifecycleOwner) { response ->
             val list = response.dataArtikel
             if (list != null) {
                 adapter.listArtikel = list
@@ -103,17 +103,17 @@ class HomeFragment : Fragment() {
                 binding.noDataHome.visibility = View.VISIBLE
             }
 
-        })
+        }
 
-        loginViewModel.loginResult.observe(viewLifecycleOwner, { loginResponse ->
+        loginViewModel.loginResult.observe(viewLifecycleOwner) { loginResponse ->
             // When login result is updated, trigger data fetch
             viewModel.getHpl()
             viewModel.getArtikel()
-        })
+        }
 
-        viewModel.hpl.observe(viewLifecycleOwner, { response ->
+        viewModel.hpl.observe(viewLifecycleOwner) { response ->
             getHplDate(response)
-        })
+        }
 
         adapter.listener = object : ListArtikelHomeAdapter.OnItemClickListenerHome {
             override fun onItemClick(item: DataArtikelItem) {
@@ -127,14 +127,14 @@ class HomeFragment : Fragment() {
         }
 
         val progressBar = binding.pbArtikelHome
-        viewModel.isLoading.observe(requireActivity(), { isLoading ->
+        viewModel.isLoading.observe(requireActivity()) { isLoading ->
             if (isLoading) {
                 progressBar.visibility = View.VISIBLE
                 binding.noDataHome.visibility = View.GONE
             } else {
                 progressBar.visibility = View.GONE
             }
-        })
+        }
 
         binding.fabHubungiBidan.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_home_to_chatBidanFragment)
@@ -188,6 +188,13 @@ class HomeFragment : Fragment() {
 
                 if (!tanggalHpl.isNullOrEmpty()) {
                     calculateAndDisplayCountdown(tanggalHpl)
+                    binding.banner.setBackgroundResource(R.color.hpl)
+                    binding.tvHpl.visibility = View.VISIBLE
+                    binding.tvDescHpl.visibility = View.VISIBLE
+                } else {
+                    binding.banner.setBackgroundResource(R.drawable.artbannerhome)
+                    binding.tvHpl.visibility = View.GONE
+                    binding.tvDescHpl.visibility = View.GONE
                 }
             }
         }
@@ -212,16 +219,19 @@ class HomeFragment : Fragment() {
                     binding.tvHpl.text = "$daysDiff Days"
                     binding.tvDescHpl.text = "Until your estimated day of birth on $edbDateString"
                 } else {
-                    binding.tvHpl.text = "The due date has passed."
+                    binding.tvHpl.visibility = View.GONE
                     binding.tvDescHpl.visibility = View.GONE
+                    binding.banner.setBackgroundResource(R.drawable.artbannerhome)
                 }
             } else {
-                binding.tvHpl.text = "Invalid EDB date format."
+                binding.tvHpl.visibility = View.GONE
                 binding.tvDescHpl.visibility = View.GONE
+                binding.banner.setBackgroundResource(R.drawable.artbannerhome)
             }
         } catch (e: Exception) {
-            binding.tvHpl.text = "Error parsing EDB date."
+            binding.tvHpl.visibility = View.GONE
             binding.tvDescHpl.visibility = View.GONE
+            binding.banner.setBackgroundResource(R.drawable.artbannerhome)
         }
     }
 
@@ -229,7 +239,7 @@ class HomeFragment : Fragment() {
     private fun refreshData() {
         // Logic to refresh data
         viewModel.getHpl()
-        viewModel.artikel.observe(viewLifecycleOwner, { response ->
+        viewModel.artikel.observe(viewLifecycleOwner) { response ->
             val list = response.dataArtikel
             if (list != null) {
                 adapter.listArtikel = list
@@ -240,7 +250,7 @@ class HomeFragment : Fragment() {
             }
             // Stop the refreshing animation once data is loaded
             binding.swipeRefreshLayout.isRefreshing = false
-        })
+        }
 
         loginViewModel.loginResult.observe(viewLifecycleOwner, { loginResponse ->
             viewModel.getHpl()

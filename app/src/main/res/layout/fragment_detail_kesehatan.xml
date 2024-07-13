@@ -287,6 +287,75 @@
                     app:layout_constraintStart_toEndOf="@+id/iv_tindakan"
                     app:layout_constraintTop_toTopOf="@+id/iv_tindakan" />
 
+                <ImageView
+                    android:id="@+id/iv_tinggi_badan"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/height"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_tindakan_value" />
+
+                <TextView
+                    android:id="@+id/tv_tinggi_badan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/tinggi_badan"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_tinggi_badan"
+                    app:layout_constraintStart_toEndOf="@+id/iv_tinggi_badan"
+                    app:layout_constraintTop_toTopOf="@+id/iv_tinggi_badan" />
+
+                <ImageView
+                    android:id="@+id/iv_lingkar_perut"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/lingkarPerut"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_tinggi_badan_value" />
+
+                <TextView
+                    android:id="@+id/tv_lingkar_perut"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/lingkar_perut"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_lingkar_perut"
+                    app:layout_constraintStart_toEndOf="@+id/iv_lingkar_perut"
+                    app:layout_constraintTop_toTopOf="@+id/iv_lingkar_perut" />
+
+                <ImageView
+                    android:id="@+id/iv_lingkar_lengan"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/lingkarLengan"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_lingkar_perut_value" />
+
+                <TextView
+                    android:id="@+id/tv_lingkar_lengan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/lingkar_lengan"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/iv_lingkar_lengan"
+                    app:layout_constraintStart_toEndOf="@+id/iv_lingkar_lengan"
+                    app:layout_constraintTop_toTopOf="@+id/iv_lingkar_lengan" />
+
                 <TextView
                     android:id="@+id/tv_tekanan_darah"
                     android:layout_width="match_parent"
@@ -422,7 +491,55 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="24dp"
+                    android:background="@drawable/bg_filled_light_green"
+                    android:padding="12dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_tindakan"
+                    tools:text=": Tidak Ada" />
+
+                <TextView
+                    android:id="@+id/tv_tinggi_badan_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/bg_filled_light_green"
+                    android:padding="12dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_tinggi_badan"
+                    tools:text=": 170 Cm" />
+
+                <TextView
+                    android:id="@+id/tv_lingkar_perut_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:background="@drawable/bg_filled_light_green"
+                    android:padding="12dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_lingkar_perut"
+                    tools:text=": 170 Cm" />
+
+                <TextView
+                    android:id="@+id/tv_lingkar_lengan_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
                     android:background="@drawable/bg_filled_light_green"
                     android:padding="12dp"
                     android:textSize="16sp"
@@ -430,8 +547,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_tindakan"
-                    tools:text=": Tidak Ada" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_lingkar_lengan"
+                    tools:text=": 170 Cm" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

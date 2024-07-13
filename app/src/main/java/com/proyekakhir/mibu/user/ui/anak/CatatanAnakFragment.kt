@@ -1,5 +1,6 @@
 package com.proyekakhir.mibu.user.ui.anak
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -29,6 +30,7 @@ class CatatanAnakFragment : Fragment() {
         ViewModelFactory.getInstance(requireContext())
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,13 +38,19 @@ class CatatanAnakFragment : Fragment() {
         _binding = FragmentCatatanAnakBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        val swipeRefreshLayout = binding.swipeRefreshLayout
+        swipeRefreshLayout.setOnRefreshListener {
+            viewModel.getCatatanAnak()
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
+
         val adapter = ListAnakAdapter(listOf())
         val rvAnak = binding.rvDataAnak
         rvAnak.layoutManager = LinearLayoutManager(requireContext())
         rvAnak.setHasFixedSize(true)
         rvAnak.adapter = adapter
 
-        viewModel.anak.observe(viewLifecycleOwner, { response ->
+        viewModel.anak.observe(viewLifecycleOwner) { response ->
             lifecycleScope.launch {
                 val dataStore: DataStore<Preferences> = requireContext().dataStore
                 val userPreference = UserPreference.getInstance(dataStore)
@@ -56,16 +64,16 @@ class CatatanAnakFragment : Fragment() {
                 }
                 adapter.notifyDataSetChanged()
             }
-        })
+        }
 
         val progressBar = binding.progressBar
-        viewModel.isLoading.observe(requireActivity(), { isLoading ->
+        viewModel.isLoading.observe(requireActivity()) { isLoading ->
             if (isLoading) {
                 progressBar.visibility = View.VISIBLE
             } else {
                 progressBar.visibility = View.GONE
             }
-        })
+        }
 
         adapter.listener = object : ListAnakAdapter.OnItemClickListenerHome {
             override fun onItemClick(item: DataAnaksItem) {
