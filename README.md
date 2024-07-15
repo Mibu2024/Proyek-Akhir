@@ -11,7 +11,7 @@ Aplikasi monitoring ibu hamil berbasis Android dan website yang membantu mendata
 
 # Poster MIBU
 <p align="center">
-    <img src="https://github.com/Mibu2024/Proyek-Akhir/blob/master/MIBU_Poster.png" alt="Logo" width="400" height="500">
+    <img src="https://github.com/Mibu2024/Proyek-Akhir/blob/master/MIBU_Poster.png" alt="Logo" width="400" height="550">
 </p>
 
 #
