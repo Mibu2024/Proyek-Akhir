@@ -57,8 +57,8 @@
                     <!--begin::Brand-->
                     <div class="brand flex-column-auto" id="kt_brand">
                         <!--begin::Logo-->
-                        <a href="index.html" class="brand-logo">
-                            <img alt="Logo" class="w-65px" src="assets/media/logos/Logo_Mibu.png" />
+                        <a href="{{ route('home') }}" class="brand-logo">
+                            <img alt="Logo" class="w-65px" src="assets/media/logos/logowithbg.png" />
                         </a>
                         <!--end::Logo-->
                     </div>
@@ -85,6 +85,12 @@
                                     </a>
                                 </li>
                                 <li class="menu-item menu-item" aria-haspopup="true">
+                                    <a href="{{ route('data-layanan-kb.index') }}" class="menu-link" style="display: flex; align-items: center; justify-content: center; text-align: center;">
+                                        <i class="menu-icon fas fa-notes-medical"></i>
+                                        <span class="menu-text">Data Layanan KB</span>
+                                    </a>
+                                </li>
+                                <li class="menu-item menu-item" aria-haspopup="true">
                                     <a href="{{ route('data-nifas.index') }}" class="menu-link">
                                         <i class="menu-icon 
                                         fas fa-hospital-user"></i>
@@ -101,6 +107,12 @@
                                     <a href="{{ route('data-imunisasi.index') }}" class="menu-link">
                                         <i class="menu-icon flaticon2-hospital"></i>
                                         <span class="menu-text">Data Imunisasi</span>
+                                    </a>
+                                </li>
+                                <li class="menu-item menu-item" aria-haspopup="true">
+                                    <a href="{{ route('data-artikel.index') }}" class="menu-link">
+                                        <i class="menu-icon fas fa-newspaper"></i>
+                                        <span class="menu-text">Artikel</span>
                                     </a>
                                 </li>
                             </ul>
@@ -226,9 +238,10 @@
                                                     <select name="nama_anak" id="nama_anak" class="form-control @error('nama_anak') is-invalid @enderror">
                                                         <option value="">Pilih Nama Anak</option>
                                                         @foreach($data_anaks as $anak)
-                                                            <option value="{{ $anak->nama_anak }}">{{ $anak->nama_anak }}</option>
+                                                            <option value="{{ $anak->id }}" data-id="{{ $anak->id }}">{{ $anak->nama_anak }}</option>
                                                         @endforeach
                                                     </select>
+                                                    <input type="hidden" name="id_anak" id="id_anak">
                                                     @error('nama_anak')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -237,13 +250,13 @@
                                                 </div>
 
                                                 <div class="form-group mt-5">
-                                                    <label for="" class="form-label">Apakah Sudah Imunisasi DPT-HB-Hib 1 Polio 2?</label>
-                                                    <select class="form-control @error('imunisasi_dpt_hb_hib_1_polio_2') is-invalid @enderror" id="imunisasi_dpt_hb_hib_1_polio_2" name="imunisasi_dpt_hb_hib_1_polio_2" title="Pilih Jawaban">
+                                                    <label for="" class="form-label">Apakah Sudah Imunisasi Hepatitis B?</label>
+                                                    <select class="form-control @error('hepatitis_b') is-invalid @enderror" id="hepatitis_b" name="hepatitis_b" title="Pilih Jawaban">
                                                         <option value="" disabled selected hidden>Pilih Jawaban</option>
                                                         <option value="Sudah">Sudah</option>
                                                         <option value="Belum">Belum</option>
                                                     </select>
-                                                    @error('imunisasi_dpt_hb_hib_1_polio_2')
+                                                    @error('hepatitis_b')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span> 
@@ -251,13 +264,13 @@
                                                 </div>
 
                                                 <div class="form-group mt-5">
-                                                    <label for="" class="form-label">Apakah Sudah Imunisasi DPT-HB-Hib 2 Polio 3?</label>
-                                                    <select class="form-control @error('imunisasi_dpt_hb_hib_2_polio_3') is-invalid @enderror" id="imunisasi_dpt_hb_hib_2_polio_3" name="imunisasi_dpt_hb_hib_2_polio_3" title="Pilih Jawaban">
+                                                    <label for="" class="form-label">Apakah Sudah Imunisasi BCG?</label>
+                                                    <select class="form-control @error('bcg') is-invalid @enderror" id="bcg" name="bcg" title="Pilih Jawaban">
                                                         <option value="" disabled selected hidden>Pilih Jawaban</option>
                                                         <option value="Sudah">Sudah</option>
                                                         <option value="Belum">Belum</option>
                                                     </select>
-                                                    @error('imunisasi_dpt_hb_hib_2_polio_3')
+                                                    @error('bcg')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>     
@@ -265,13 +278,13 @@
                                                 </div>
 
                                                 <div class="form-group mt-5">
-                                                    <label for="" class="form-label">Apakah Sudah Imunisasi DPT-HB-Hib 3 Polio 4?</label>
-                                                    <select class="form-control @error('imunisasi_dpt_hb_hib_3_polio_4') is-invalid @enderror" id="imunisasi_dpt_hb_hib_3_polio_4" name="imunisasi_dpt_hb_hib_3_polio_4" title="Pilih Jawaban">
+                                                    <label for="" class="form-label">Apakah Sudah Imunisasi Polio Tetes 1?</label>
+                                                    <select class="form-control @error('polio_tetes_1') is-invalid @enderror" id="polio_tetes_1" name="polio_tetes_1" title="Pilih Jawaban">
                                                         <option value="" disabled selected hidden>Pilih Jawaban</option>
                                                         <option value="Sudah">Sudah</option>
                                                         <option value="Belum">Belum</option>
                                                     </select>
-                                                    @error('imunisasi_dpt_hb_hib_3_polio_4')
+                                                    @error('polio_tetes_1')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span> 
@@ -279,13 +292,13 @@
                                                 </div>
 
                                                 <div class="form-group mt-5">
-                                                    <label for="" class="form-label">Apakah Sudah Imunisasi Campak?</label>
-                                                    <select class="form-control @error('imunisasi_campak') is-invalid @enderror" id="imunisasi_campak" name="imunisasi_campak" title="Pilih Jawaban">
+                                                    <label for="" class="form-label">Apakah Sudah Imunisasi DPT-HB-Hib 1?</label>
+                                                    <select class="form-control @error('dpt_hb_hib_1') is-invalid @enderror" id="dpt_hb_hib_1" name="dpt_hb_hib_1" title="Pilih Jawaban">
                                                         <option value="" disabled selected hidden>Pilih Jawaban</option>
                                                         <option value="Sudah">Sudah</option>
                                                         <option value="Belum">Belum</option>
                                                     </select>
-                                                    @error('imunisasi_campak')
+                                                    @error('dpt_hb_hib_1')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -293,13 +306,13 @@
                                                 </div>
 
                                                 <div class="form-group mt-5">
-                                                    <label for="" class="form-label">Apakah Sudah Imunisasi DPT-HB-Hib 1 Dosis?</label>
-                                                    <select class="form-control @error('imunisasi_dpt_hb_hib_1_dosis') is-invalid @enderror" id="imunisasi_dpt_hb_hib_1_dosis" name="imunisasi_dpt_hb_hib_1_dosis" title="Pilih Jawaban">
+                                                    <label for="" class="form-label">Apakah Sudah Imunisasi Polio Tetes 2?</label>
+                                                    <select class="form-control @error('polio_tetes_2') is-invalid @enderror" id="polio_tetes_2" name="polio_tetes_2" title="Pilih Jawaban">
                                                         <option value="" disabled selected hidden>Pilih Jawaban</option>
                                                         <option value="Sudah">Sudah</option>
                                                         <option value="Belum">Belum</option>
                                                     </select>
-                                                    @error('imunisasi_dpt_hb_hib_1_dosis')
+                                                    @error('polio_tetes_2')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -307,13 +320,13 @@
                                                 </div>
 
                                                 <div class="form-group mt-5">
-                                                    <label for="" class="form-label">Apakah Sudah Imunisasi Campak Rubella 1 Dosis?</label>
-                                                    <select class="form-control @error('imunisasi_campak_rubella_1_dosis') is-invalid @enderror" id="imunisasi_campak_rubella_1_dosis" name="imunisasi_campak_rubella_1_dosis" title="Pilih Jawaban">
+                                                    <label for="" class="form-label">Apakah Sudah Imunisasi Rota virus 1?</label>
+                                                    <select class="form-control @error('rota_virus_1') is-invalid @enderror" id="rota_virus_1" name="rota_virus_1" title="Pilih Jawaban">
                                                         <option value="" disabled selected hidden>Pilih Jawaban</option>
                                                         <option value="Sudah">Sudah</option>
                                                         <option value="Belum">Belum</option>
                                                     </select>
-                                                    @error('imunisasi_campak_rubella_1_dosis')
+                                                    @error('rota_virus_1')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -321,13 +334,13 @@
                                                 </div>
 
                                                 <div class="form-group mt-5">
-                                                    <label for="" class="form-label">Apakah Sudah Imunisasi Campak Rubella dan DT?</label>
-                                                    <select class="form-control @error('imunisasi_campak_rubella_dan_dt') is-invalid @enderror" id="imunisasi_campak_rubella_dan_dt" name="imunisasi_campak_rubella_dan_dt" title="Pilih Jawaban">
+                                                    <label for="" class="form-label">Apakah Sudah Imunisasi PCV 1?</label>
+                                                    <select class="form-control @error('pcv_1') is-invalid @enderror" id="pcv_1" name="pcv_1" title="Pilih Jawaban">
                                                         <option value="" disabled selected hidden>Pilih Jawaban</option>
                                                         <option value="Sudah">Sudah</option>
                                                         <option value="Belum">Belum</option>
                                                     </select>
-                                                    @error('imunisasi_campak_rubella_dan_dt')
+                                                    @error('pcv_1')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -335,13 +348,195 @@
                                                 </div>
 
                                                 <div class="form-group mt-5">
-                                                    <label for="" class="form-label">Apakah Sudah Imunisasi Tetanus Diphteria TD?</label>
-                                                    <select class="form-control @error('imunisasi_tetanus_diphteria_td') is-invalid @enderror" id="imunisasi_tetanus_diphteria_td" name="imunisasi_tetanus_diphteria_td" title="Pilih Jawaban">
+                                                    <label for="" class="form-label">Apakah Sudah Imunisasi DPT-HB-Hib 2?</label>
+                                                    <select class="form-control @error('dpt_hb_hib_2') is-invalid @enderror" id="dpt_hb_hib_2" name="dpt_hb_hib_2" title="Pilih Jawaban">
                                                         <option value="" disabled selected hidden>Pilih Jawaban</option>
                                                         <option value="Sudah">Sudah</option>
                                                         <option value="Belum">Belum</option>
                                                     </select>
-                                                    @error('imunisasi_tetanus_diphteria_td')
+                                                    @error('dpt_hb_hib_2')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group mt-5">
+                                                    <label for="" class="form-label">Apakah Sudah Imunisasi Polio Tetes 3?</label>
+                                                    <select class="form-control @error('polio_tetes_3') is-invalid @enderror" id="polio_tetes_3" name="polio_tetes_3" title="Pilih Jawaban">
+                                                        <option value="" disabled selected hidden>Pilih Jawaban</option>
+                                                        <option value="Sudah">Sudah</option>
+                                                        <option value="Belum">Belum</option>
+                                                    </select>
+                                                    @error('polio_tetes_3')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group mt-5">
+                                                    <label for="" class="form-label">Apakah Sudah Imunisasi Rotavirus 2?</label>
+                                                    <select class="form-control @error('rota_virus_2') is-invalid @enderror" id="rota_virus_2" name="rota_virus_2" title="Pilih Jawaban">
+                                                        <option value="" disabled selected hidden>Pilih Jawaban</option>
+                                                        <option value="Sudah">Sudah</option>
+                                                        <option value="Belum">Belum</option>
+                                                    </select>
+                                                    @error('rota_virus_2')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group mt-5">
+                                                    <label for="" class="form-label">Apakah Sudah Imunisasi PCV 2?</label>
+                                                    <select class="form-control @error('pcv_2') is-invalid @enderror" id="pcv_2" name="pcv_2" title="Pilih Jawaban">
+                                                        <option value="" disabled selected hidden>Pilih Jawaban</option>
+                                                        <option value="Sudah">Sudah</option>
+                                                        <option value="Belum">Belum</option>
+                                                    </select>
+                                                    @error('pcv_2')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group mt-5">
+                                                    <label for="" class="form-label">Apakah Sudah Imunisasi DPT-HB-Hib 3?</label>
+                                                    <select class="form-control @error('dpt_hb_hib_3') is-invalid @enderror" id="dpt_hb_hib_3" name="dpt_hb_hib_3" title="Pilih Jawaban">
+                                                        <option value="" disabled selected hidden>Pilih Jawaban</option>
+                                                        <option value="Sudah">Sudah</option>
+                                                        <option value="Belum">Belum</option>
+                                                    </select>
+                                                    @error('dpt_hb_hib_3')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group mt-5">
+                                                    <label for="" class="form-label">Apakah Sudah Imunisasi Polio Tetes 4?</label>
+                                                    <select class="form-control @error('polio_tetes_4') is-invalid @enderror" id="polio_tetes_4" name="polio_tetes_4" title="Pilih Jawaban">
+                                                        <option value="" disabled selected hidden>Pilih Jawaban</option>
+                                                        <option value="Sudah">Sudah</option>
+                                                        <option value="Belum">Belum</option>
+                                                    </select>
+                                                    @error('polio_tetes_4')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group mt-5">
+                                                    <label for="" class="form-label">Apakah Sudah Imunisasi Polio Suntik 1?</label>
+                                                    <select class="form-control @error('polio_suntik_1') is-invalid @enderror" id="polio_suntik_1" name="polio_suntik_1" title="Pilih Jawaban">
+                                                        <option value="" disabled selected hidden>Pilih Jawaban</option>
+                                                        <option value="Sudah">Sudah</option>
+                                                        <option value="Belum">Belum</option>
+                                                    </select>
+                                                    @error('polio_suntik_1')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group mt-5">
+                                                    <label for="" class="form-label">Apakah Sudah Imunisasi Rotavirus 3?</label>
+                                                    <select class="form-control @error('rota_virus_3') is-invalid @enderror" id="rota_virus_3" name="rota_virus_3" title="Pilih Jawaban">
+                                                        <option value="" disabled selected hidden>Pilih Jawaban</option>
+                                                        <option value="Sudah">Sudah</option>
+                                                        <option value="Belum">Belum</option>
+                                                    </select>
+                                                    @error('rota_virus_3')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group mt-5">
+                                                    <label for="" class="form-label">Apakah Sudah Imunisasi Campak Rubella?</label>
+                                                    <select class="form-control @error('campak_rubella') is-invalid @enderror" id="campak_rubella" name="campak_rubella" title="Pilih Jawaban">
+                                                        <option value="" disabled selected hidden>Pilih Jawaban</option>
+                                                        <option value="Sudah">Sudah</option>
+                                                        <option value="Belum">Belum</option>
+                                                    </select>
+                                                    @error('campak_rubella')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group mt-5">
+                                                    <label for="" class="form-label">Apakah Sudah Imunisasi Polio Suntik 2?</label>
+                                                    <select class="form-control @error('polio_suntik_2') is-invalid @enderror" id="polio_suntik_2" name="polio_suntik_2" title="Pilih Jawaban">
+                                                        <option value="" disabled selected hidden>Pilih Jawaban</option>
+                                                        <option value="Sudah">Sudah</option>
+                                                        <option value="Belum">Belum</option>
+                                                    </select>
+                                                    @error('polio_suntik_2')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group mt-5">
+                                                    <label for="" class="form-label">Apakah Sudah Imunisasi Japanese Encephalitis?</label>
+                                                    <select class="form-control @error('japanese_encephalitis') is-invalid @enderror" id="japanese_encephalitis" name="japanese_encephalitis" title="Pilih Jawaban">
+                                                        <option value="" disabled selected hidden>Pilih Jawaban</option>
+                                                        <option value="Sudah">Sudah</option>
+                                                        <option value="Belum">Belum</option>
+                                                    </select>
+                                                    @error('japanese_encephalitis')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group mt-5">
+                                                    <label for="" class="form-label">Apakah Sudah Imunisasi PCV 3?</label>
+                                                    <select class="form-control @error('pcv_3') is-invalid @enderror" id="pcv_3" name="pcv_3" title="Pilih Jawaban">
+                                                        <option value="" disabled selected hidden>Pilih Jawaban</option>
+                                                        <option value="Sudah">Sudah</option>
+                                                        <option value="Belum">Belum</option>
+                                                    </select>
+                                                    @error('pcv_3')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group mt-5">
+                                                    <label for="" class="form-label">Apakah Sudah Imunisasi DPT-HB-Hib Lanjutan?</label>
+                                                    <select class="form-control @error('dpt_hb_hib_lanjutan') is-invalid @enderror" id="dpt_hb_hib_lanjutan" name="dpt_hb_hib_lanjutan" title="Pilih Jawaban">
+                                                        <option value="" disabled selected hidden>Pilih Jawaban</option>
+                                                        <option value="Sudah">Sudah</option>
+                                                        <option value="Belum">Belum</option>
+                                                    </select>
+                                                    @error('dpt_hb_hib_lanjutan')
+                                                        <span class="invalid-feedback" role="alert">
+                                                            <strong>{{ $message }}</strong>
+                                                        </span>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="form-group mt-5">
+                                                    <label for="" class="form-label">Apakah Sudah Imunisasi Campak Rubella Lanjutan?</label>
+                                                    <select class="form-control @error('campak_rubella_lanjutan') is-invalid @enderror" id="campak_rubella_lanjutan" name="campak_rubella_lanjutan" title="Pilih Jawaban">
+                                                        <option value="" disabled selected hidden>Pilih Jawaban</option>
+                                                        <option value="Sudah">Sudah</option>
+                                                        <option value="Belum">Belum</option>
+                                                    </select>
+                                                    @error('campak_rubella_lanjutan')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
@@ -443,6 +638,13 @@
             <!--end::Content-->
         </div>
         <!-- end::User Panel-->
+        <script>
+            document.getElementById('nama_anak').addEventListener('change', function() {
+                var selectedOption = this.options[this.selectedIndex];
+                var idAnak = selectedOption.getAttribute('data-id');
+                document.getElementById('id_anak').value = idAnak;
+            });
+        </script>
     </body>
     <!--end::Body-->
 @endsection

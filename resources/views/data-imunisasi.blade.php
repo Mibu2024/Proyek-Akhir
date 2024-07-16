@@ -57,8 +57,8 @@
                     <!--begin::Brand-->
                     <div class="brand flex-column-auto" id="kt_brand">
                         <!--begin::Logo-->
-                        <a href="index.html" class="brand-logo">
-                            <img alt="Logo" class="w-65px" src="assets/media/logos/Logo_Mibu.png" />
+                        <a href="{{ route('home') }}" class="brand-logo">
+                            <img alt="Logo" class="w-65px" src="assets/media/logos/logowithbg.png" />
                         </a>
                         <!--end::Logo-->
                     </div>
@@ -85,6 +85,12 @@
                                     </a>
                                 </li>
                                 <li class="menu-item menu-item" aria-haspopup="true">
+                                    <a href="{{ route('data-layanan-kb.index') }}" class="menu-link" style="display: flex; align-items: center; justify-content: center; text-align: center;">
+                                        <i class="menu-icon fas fa-notes-medical"></i>
+                                        <span class="menu-text">Data Layanan KB</span>
+                                    </a>
+                                </li>
+                                <li class="menu-item menu-item" aria-haspopup="true">
                                     <a href="{{ route('data-nifas.index') }}" class="menu-link">
                                         <i class="menu-icon 
                                         fas fa-hospital-user"></i>
@@ -101,6 +107,12 @@
                                     <a href="{{ route('data-imunisasi.index') }}" class="menu-link">
                                         <i class="menu-icon flaticon2-hospital"></i>
                                         <span class="menu-text">Data Imunisasi</span>
+                                    </a>
+                                </li>
+                                <li class="menu-item menu-item" aria-haspopup="true">
+                                    <a href="{{ route('data-artikel.index') }}" class="menu-link">
+                                        <i class="menu-icon fas fa-newspaper"></i>
+                                        <span class="menu-text">Artikel</span>
                                     </a>
                                 </li>
                             </ul>
@@ -230,14 +242,27 @@
                                                         <th>No</th>
                                                         <th>Tanggal Periksa</th>
                                                         <th>Nama Anak</th>
-                                                        <th>Imunisasi DPT-HB-Hib 1 Polio 2</th>
-                                                        <th>Imunisasi DPT-HB-Hib 2 Polio 3</th>
-                                                        <th>Imunisasi DPT-HB-Hib 3 Polio 4</th>
-                                                        <th>Imunisasi Campak</th>
-                                                        <th>Imunisasi DPT-HB-Hib 1 Dosis</th>
-                                                        <th>Imunisasi Campak Rubella 1 Dosis</th>
-                                                        <th>Imunisasi Campak Rubella dan DT</th>
-                                                        <th>Imunisasi Tetanus Diphteria TD</th>
+                                                        <th>Hepatitis B</th>
+                                                        <th>BCG</th>
+                                                        <th>Polio Tetes 1</th>
+                                                        <th>DPT-HB-Hib 1</th>
+                                                        <th>Polio Tetes 2</th>
+                                                        <th>Rota Virus 1</th>
+                                                        <th>PCV 1</th>
+                                                        <th>DPT-HB-Hib 2</th>
+                                                        <th>Polio Tetes 3</th>
+                                                        <th>Rota Virus 2</th>
+                                                        <th>PCV 2</th>
+                                                        <th>DPT-HB-Hib 3</th>
+                                                        <th>Polio Tetes 4</th>
+                                                        <th>Polio Suntik 1</th>
+                                                        <th>Rota Virus 3</th>
+                                                        <th>Campak Rubella</th>
+                                                        <th>Polio Suntik 2</th>
+                                                        <th>Japanese Encephalitis</th>
+                                                        <th>PCV 3</th>
+                                                        <th>DPT-HB-Hib Lanjutan</th>
+                                                        <th>Campak Rubella Lanjutan</th>
                                                         <th>Nama Pemeriksa</th>
                                                         <th>Aksi</th>
                                                     </tr>
@@ -251,14 +276,27 @@
                                                             <td>{{ $num++ }}</td>
                                                             <td>{{ $di->tanggal }}</td>
                                                             <td>{{ $di->nama_anak }}</td>
-                                                            <td>{{ $di->imunisasi_dpt_hb_hib_1_polio_2 }}</td>
-                                                            <td>{{ $di->imunisasi_dpt_hb_hib_2_polio_3 }}</td>
-                                                            <td>{{ $di->imunisasi_dpt_hb_hib_3_polio_4 }}</td>
-                                                            <td>{{ $di->imunisasi_campak }}</td>
-                                                            <td>{{ $di->imunisasi_dpt_hb_hib_1_dosis }}</td>
-                                                            <td>{{ $di->imunisasi_campak_rubella_1_dosis }}</td>
-                                                            <td>{{ $di->imunisasi_campak_rubella_dan_dt }}</td>
-                                                            <td>{{ $di->imunisasi_tetanus_diphteria_td }}</td>
+                                                            <td>{{ $di->hepatitis_b }}</td>
+                                                            <td>{{ $di->bcg }}</td>
+                                                            <td>{{ $di->polio_tetes_1 }}</td>
+                                                            <td>{{ $di->dpt_hb_hib_1 }}</td>
+                                                            <td>{{ $di->polio_tetes_2 }}</td>
+                                                            <td>{{ $di->rota_virus_1 }}</td>
+                                                            <td>{{ $di->pcv_1 }}</td>
+                                                            <td>{{ $di->dpt_hb_hib_2 }}</td>
+                                                            <td>{{ $di->polio_tetes_3 }}</td>
+                                                            <td>{{ $di->rota_virus_2 }}</td>
+                                                            <td>{{ $di->pcv_2 }}</td>
+                                                            <td>{{ $di->dpt_hb_hib_3 }}</td>
+                                                            <td>{{ $di->polio_tetes_4 }}</td>
+                                                            <td>{{ $di->polio_suntik_1 }}</td>
+                                                            <td>{{ $di->rota_virus_3 }}</td>
+                                                            <td>{{ $di->campak_rubella }}</td>
+                                                            <td>{{ $di->polio_suntik_2 }}</td>
+                                                            <td>{{ $di->japanese_encephalitis }}</td>
+                                                            <td>{{ $di->pcv_3 }}</td>
+                                                            <td>{{ $di->dpt_hb_hib_lanjutan }}</td>
+                                                            <td>{{ $di->campak_rubella_lanjutan }}</td>
                                                             <td>{{ $di->nama_pemeriksa }}</td>
                                                             <td>
                                                                 <!-- Action buttons -->
@@ -294,7 +332,7 @@
                                                         </tr>
                                                     @empty
                                                     <tr>
-                                                        <td colspan="15" style="text-align: center;">Tidak Ada Data Ditemukan</td>
+                                                        <td colspan="20" style="text-align: center;">Tidak Ada Data Ditemukan</td>
                                                     </tr>
                                                     @endforelse
                                                 </tbody>
