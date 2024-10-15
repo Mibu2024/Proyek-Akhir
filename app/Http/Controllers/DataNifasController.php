@@ -11,12 +11,24 @@ class DataNifasController extends Controller
 {
     public function index(Request $request)
     {
-        $search      = $request->input('search');
-        $perPage     = $request->input('per_page', 5);
-        $data_nifas  = DataNifas::where('nama_ibu', 'like', "%$search%")->paginate($perPage);
+        $search = $request->input('search');
+        $perPage = $request->input('per_page', 5);
+        
+        // Mendapatkan id user saat ini
+        $userId = auth()->user()->id;
+
+        // Mendapatkan data ibu hamil yang terkait dengan user
+        $ibuHamilIds = DataIbuHamil::where('user_id', $userId)->pluck('id');
+
+        // Mengambil data nifas hanya untuk ibu hamil yang terhubung dengan user
+        $data_nifas = DataNifas::whereIn('id_ibu', $ibuHamilIds)
+            ->where('nama_ibu', 'like', "%$search%")
+            ->paginate($perPage);
+
         $currentPage = $data_nifas->currentPage();
         return view('data-nifas', compact('data_nifas', 'currentPage'));
     }
+
 
     public function create()
     {

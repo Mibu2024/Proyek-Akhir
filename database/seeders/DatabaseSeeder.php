@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             DataIbuHamilSeeder::class,
             DataKesehatanSeeder::class,
             DataLayananKbSeeder::class,
+            DataNifasSeeder::class,
             // Tambahkan seeder lain jika ada
         ]);
     }
