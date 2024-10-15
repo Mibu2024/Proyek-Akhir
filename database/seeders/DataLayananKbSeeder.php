@@ -18,13 +18,13 @@ class DataLayananKbSeeder extends Seeder
         DB::table('data_layanan_kbs')->insert([
             [
                 'tanggal_praktik' => '2024-01-01',
-                'nama_ibu' => 'Ibu tes',
-                'tekanan_darah' => '120',
-                'berat_badan' => 60,
-                'jenis_kb' => 'KB Suntik',
+                'nama_ibu'        => 'Ibu tes',
+                'tekanan_darah'   => '120',
+                'berat_badan'     => 60,
+                'jenis_kb'        => 'KB Suntik',
                 'tanggal_kembali' => '2024-02-01',
-                'id_ibu' => 1,
-                'keluhan' => 'Tidak ada keluhan',
+                'id_ibu'          => 1,
+                'keluhan'         => 'Tidak ada keluhan',
             ],
         ]);
     }

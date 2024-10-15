@@ -19,6 +19,8 @@ return new class extends Migration
             $table->date('tanggal_lahir');
             $table->string('umur');
             $table->integer('berat_badan');
+            $table->string('tinggi_badan');
+            $table->string('lingkar_kepala');
             $table->bigInteger('id_ibu');
             $table->timestamps();
         });

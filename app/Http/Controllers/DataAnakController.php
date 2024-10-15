@@ -11,9 +11,23 @@ class DataAnakController extends Controller
 {
     public function index(Request $request)
     {
-        $search      = $request->input('search');
-        $perPage     = $request->input('per_page', 5);
-        $data_anaks  = DataAnak::where('nama_ibu', 'like', "%$search%")->orWhere('nama_anak', 'like', "%$search%")->paginate($perPage);
+        $search = $request->input('search');
+        $perPage = $request->input('per_page', 5);
+
+        // Mendapatkan id user saat ini
+        $userId = auth()->user()->id;
+
+        // Mendapatkan data ibu hamil yang terkait dengan user
+        $ibuHamilIds = DataIbuHamil::where('user_id', $userId)->pluck('id');
+
+        // Mengambil data anak hanya untuk ibu hamil yang terhubung dengan user
+        $data_anaks = DataAnak::whereIn('id_ibu', $ibuHamilIds)
+            ->where(function ($query) use ($search) {
+                $query->where('nama_ibu', 'like', "%$search%")
+                    ->orWhere('nama_anak', 'like', "%$search%");
+            })
+            ->paginate($perPage);
+
         $currentPage = $data_anaks->currentPage();
         return view('data-anak', compact('data_anaks', 'currentPage'));
     }
