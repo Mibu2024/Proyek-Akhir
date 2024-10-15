@@ -25,13 +25,24 @@ class DataLayananKbController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(Request $request)
-    {
-        $search          = $request->input('search');
-        $perPage         = $request->input('per_page', 5);
-        $data_layanan_kbs = DataLayananKb::where('nama_ibu', 'like', "%$search%")->paginate($perPage);
+    {                   
+        $search = $request->input('search');
+        $perPage = $request->input('per_page', 5);
+        
+        // Mendapatkan id user saat ini
+        $userId = auth()->user()->id;
+
+        // Mendapatkan data ibu hamil yang terkait dengan user
+        $ibuHamilIds = DataIbuHamil::where('user_id', $userId)->pluck('id');
+
+        // Mengambil data layanan KB hanya untuk ibu hamil yang terhubung dengan user
+        $data_layanan_kbs = DataLayananKb::whereIn('id_ibu', $ibuHamilIds)
+            ->where('nama_ibu', 'like', "%$search%")
+            ->paginate($perPage);
+
         $currentPage = $data_layanan_kbs->currentPage();
         return view('data-layanan-kb', compact('data_layanan_kbs', 'currentPage'));
-    }
+    }       
 
     public function create()
     {

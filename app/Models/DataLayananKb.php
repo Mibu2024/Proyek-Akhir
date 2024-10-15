@@ -25,6 +25,6 @@ class DataLayananKb extends Model
 
     public function ibuHamil()
     {
-        return $this->belongsTo(DataIbuHamil::class, 'nama_ibu');
+        return $this->belongsTo(DataIbuHamil::class, 'id_ibu');
     }
 }

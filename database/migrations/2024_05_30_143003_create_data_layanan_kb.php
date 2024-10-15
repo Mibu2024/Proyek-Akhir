@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('tekanan_darah');
             $table->integer('berat_badan');
             $table->string('jenis_kb');
+            $table->string('keluhan');
             $table->date('tanggal_kembali');
             $table->bigInteger('id_ibu');
             $table->timestamps();
