@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataAnak;
+use App\Models\DataIbuHamil;
 use Illuminate\Http\Request;
 use App\Models\DataImunisasi;
 use Illuminate\Support\Facades\Response;
@@ -13,7 +14,21 @@ class DataImunisasiController extends Controller
     {
         $search = $request->input('search');
         $perPage = $request->input('per_page', 5);
-        $data_imunisasis = DataImunisasi::where('nama_anak', 'like', "%$search%")->paginate($perPage);
+
+        // Mendapatkan id user saat ini
+        $userId = auth()->user()->id;
+
+        // Mendapatkan data ibu hamil yang terkait dengan user
+        $ibuHamilIds = DataIbuHamil::where('user_id', $userId)->pluck('id');
+
+        // Mendapatkan data anak yang terkait dengan ibu hamil
+        $anakIds = DataAnak::whereIn('id_ibu', $ibuHamilIds)->pluck('id');
+
+        // Mengambil data imunisasi hanya untuk anak yang terhubung dengan ibu hamil terkait user
+        $data_imunisasis = DataImunisasi::whereIn('id_anak', $anakIds)
+            ->where('nama_anak', 'like', "%$search%")
+            ->paginate($perPage);
+
         $currentPage = $data_imunisasis->currentPage();
         return view('data-imunisasi', compact('data_imunisasis', 'currentPage'));
     }

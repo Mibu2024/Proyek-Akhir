@@ -63,6 +63,6 @@ class DataImunisasi extends Model
 
     public function anak()
     {
-        return $this->belongsTo(DataAnak::class, 'nama_anak');
+        return $this->belongsTo(DataAnak::class, 'id_anak');
     }
 }
