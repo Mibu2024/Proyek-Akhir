@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\DataIbuHamil;
 use Illuminate\Http\Request;
 use App\Models\DataKesehatan;
-use App\Models\User;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\File;
 
@@ -28,9 +27,20 @@ class DataKesehatanController extends Controller
      */
     public function index(Request $request)
     {
-        $search          = $request->input('search');
-        $perPage         = $request->input('per_page', 5);
-        $data_kesehatans = DataKesehatan::where('nama_ibu', 'like', "%$search%")->paginate($perPage);
+        $search = $request->input('search');
+        $perPage = $request->input('per_page', 5);
+        
+        // Mendapatkan id user saat ini
+        $userId = auth()->user()->id;
+
+        // Mendapatkan data ibu hamil yang terkait dengan user
+        $ibuHamilIds = DataIbuHamil::where('user_id', $userId)->pluck('id');
+
+        // Mengambil data kesehatan hanya untuk ibu hamil yang terhubung dengan user
+        $data_kesehatans = DataKesehatan::whereIn('id_ibu', $ibuHamilIds)
+            ->where('nama_ibu', 'like', "%$search%")
+            ->paginate($perPage);
+
         $currentPage = $data_kesehatans->currentPage();
         return view('data-kesehatan', compact('data_kesehatans', 'currentPage'));
     }
@@ -38,9 +48,8 @@ class DataKesehatanController extends Controller
     public function create()
     {
         $data_ibu_hamils = DataIbuHamil::all();
-        $data_pemeriksas = User::all();
 
-        return view('create-data-kesehatan', compact('data_ibu_hamils', 'data_pemeriksas'));
+        return view('create-data-kesehatan', compact('data_ibu_hamils'));
     }
 
     public function store(Request $request)
@@ -49,7 +58,6 @@ class DataKesehatanController extends Controller
             'tanggal'              => 'required',
             'nama_ibu'             => 'required',
             'id_ibu'               => 'required|exists:data_ibu_hamils,id',
-            'id_pemeriksa'         => 'required|exists:users,id',
             'keluhan'              => 'required',
             'tekanan_darah'        => 'required|integer',
             'berat_badan'          => 'required|integer',
@@ -91,7 +99,6 @@ class DataKesehatanController extends Controller
 
         $data = $request->all();
         $data['nama_ibu'] = DataIbuHamil::find($request->id_ibu)->nama_ibu;
-        $data['nama_pemeriksa'] = User::find($request->id_pemeriksa)->name;
 
         if ($request->hasFile('image')) {
             $imageName = time().'.'.$request->file('image')->extension();  
@@ -109,8 +116,7 @@ class DataKesehatanController extends Controller
     {
         $data_ibu_hamils = DataIbuHamil::all();
         $data_kesehatans = DataKesehatan::find($id);
-        $data_pemeriksas = User::all();
-        return view('edit-data-kesehatan', compact('data_kesehatans', 'data_ibu_hamils', 'data_pemeriksas'));
+        return view('edit-data-kesehatan', compact('data_kesehatans', 'data_ibu_hamils'));
     }
 
     public function update(Request $request, $id)
@@ -119,7 +125,6 @@ class DataKesehatanController extends Controller
             'tanggal'              => 'required',
             'nama_ibu'             => 'required',
             'id_ibu'               => 'required|exists:data_ibu_hamils,id',
-            'id_pemeriksa'         => 'required|exists:users,id',
             'keluhan'              => 'required',
             'tekanan_darah'        => 'required|integer',
             'berat_badan'          => 'required|integer',

@@ -29,7 +29,6 @@ class DataKesehatan extends Model
         'nasihat',
         'foto_usg',
         'nama_pemeriksa',
-        'id_pemeriksa',
         'tanggal_hpl',
         'tinggi_badan',
         'lingkar_perut',
@@ -38,6 +37,6 @@ class DataKesehatan extends Model
 
     public function ibuHamil()
     {
-        return $this->belongsTo(DataIbuHamil::class, 'nama_ibu');
+        return $this->belongsTo(DataIbuHamil::class, 'id_ibu');
     }
 }

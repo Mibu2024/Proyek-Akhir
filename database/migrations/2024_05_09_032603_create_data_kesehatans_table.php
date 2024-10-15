@@ -16,6 +16,9 @@ return new class extends Migration
             $table->date('tanggal');
             $table->string('nama_ibu');
             $table->string('keluhan');
+            $table->string('tinggi_badan');
+            $table->string('lingkar_perut');
+            $table->string('lingkar_lengan_atas');
             $table->integer('tekanan_darah');
             $table->integer('berat_badan');
             $table->string('umur_kehamilan');
@@ -26,6 +29,9 @@ return new class extends Migration
             $table->string('tindakan');
             $table->string('kaki_bengkak');
             $table->string('nasihat');
+            $table->string('nama_pemeriksa');
+            $table->string('foto_usg');
+            $table->string('tanggal_hpl');
             $table->bigInteger('id_ibu');
             $table->timestamps();
         });

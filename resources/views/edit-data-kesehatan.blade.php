@@ -414,14 +414,9 @@
                                                 </div>
 
                                                 <div class="form-group mt-5">
-                                                    <label for="nama_pemeriksa"><strong>Nama Pemeriksa</strong></label>
-                                                    <select name="nama_pemeriksa" id="nama_pemeriksa" class="form-control @error('nama_pemeriksa') is-invalid @enderror">
-                                                        <option value="">Pilih Nama Pemeriksa</option>
-                                                        @foreach($data_pemeriksas as $bidan)
-                                                            <option value="{{ $bidan->name }}" data-id="{{ $bidan->id }}" {{ $bidan->id == $data_kesehatans->id_pemeriksa ? 'selected' : '' }}>{{ $bidan->name }}</option>
-                                                        @endforeach
-                                                    </select>
-                                                    <input type="hidden" name="id_pemeriksa" id="id_pemeriksa" value="{{ $data_kesehatans->id_pemeriksa }}">
+                                                    <label for=""><strong>Nama Pemeriksa</strong></label>
+                                                    <input type="text" name="nama_pemeriksa" id="nama_pemeriksa" class="form-control @error('nama_pemeriksa') is-invalid @enderror" value="{{ $data_kesehatans->nama_pemeriksa }}"
+                                                        placeholder="Masukkan Nama Bidan Pemeriksa">
                                                     @error('nama_pemeriksa')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
@@ -536,19 +531,6 @@
                 $('#nama_ibu').on('change', function() {
                     var selectedId = $(this).find(':selected').data('id');
                     $('#id_ibu').val(selectedId);
-                });
-            });
-
-            $(document).ready(function() {
-                $('#nama_pemeriksa').select2({
-                    placeholder: "Pilih Nama Pemeriksa",
-                    width: '100%' // Ensure the Select2 element takes the full width
-                });
-
-                // Update hidden input when a new selection is made
-                $('#nama_pemeriksa').on('change', function() {
-                    var selectedId = $(this).find(':selected').data('id');
-                    $('#id_pemeriksa').val(selectedId);
                 });
             });
         </script>
