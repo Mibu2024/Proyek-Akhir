@@ -133,24 +133,12 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label for="no_str"
-                                            class="font-size-h6 font-weight-bolder text-dark">{{ __('No STR') }}</label>
-                                        <input id="no_str" type="text"
-                                            class="form-control form-control-solid h-auto py-7 px-6 rounded-lg @error('no_str') is-invalid @enderror"
-                                            name="no_str" value="{{ old('no_str') }}" autocomplete="no_str" autofocus />
-                                        @error('no_str')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="nik"
-                                            class="font-size-h6 font-weight-bolder text-dark">{{ __('NIK') }}</label>
-                                        <input id="nik" type="text"
-                                            class="form-control form-control-solid h-auto py-7 px-6 rounded-lg @error('nik') is-invalid @enderror"
-                                            name="nik" value="{{ old('nik') }}" autocomplete="nik" autofocus />
-                                        @error('nik')
+                                        <label for="kode_puskesmas"
+                                            class="font-size-h6 font-weight-bolder text-dark">{{ __('Kode Puskesmas') }}</label>
+                                        <input id="kode_puskesmas" type="text"
+                                            class="form-control form-control-solid h-auto py-7 px-6 rounded-lg @error('kode_puskesmas') is-invalid @enderror"
+                                            name="kode_puskesmas" value="{{ old('kode_puskesmas') }}" autocomplete="kode_puskesmas" autofocus />
+                                        @error('kode_puskesmas')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>

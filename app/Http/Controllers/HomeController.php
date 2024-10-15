@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\DataIbuHamil;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -26,35 +27,47 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $search          = $request->input('search');
-        $perPage         = $request->input('per_page', 5);
-        $data_ibu_hamils = DataIbuHamil::where('nama_ibu', 'like', "%$search%")->paginate($perPage);
+        $search = $request->input('search');
+        $perPage = $request->input('per_page', 5);
+
+        // Ambil data hanya untuk user yang sedang login
+        $data_ibu_hamils = DataIbuHamil::where('user_id', auth()->id())
+            ->where('nama_ibu', 'like', "%$search%")
+            ->paginate($perPage);
+
         $currentPage = $data_ibu_hamils->currentPage();
         return view('home', compact('data_ibu_hamils', 'currentPage'));
     }
 
+
     public function create()
     {
-        return view('create-data-ibu-hamil');
+        // Mengambil semua pengguna
+        $users = User::all();
+
+        // Mengirim data users ke view
+        return view('create-data-ibu-hamil', compact('users'));
     }
 
     public function store(Request $request)
     {
+        // Validasi data yang dikirim dari form
         $request->validate([
-            'nama_ibu'       => 'required',
-            'umur_ibu'       => 'required|integer',
-            'alamat'         => 'required',
-            'email'          => 'required|email',
-            'nik'            => 'required|numeric',
-            'no_telepon'     => 'required|numeric',
-            'kehamilan_ke'   => 'required|integer',
-            'nama_suami'     => 'required',
-            'umur_suami'     => 'required|integer',
-            'password'       => 'required|min:8',
+            'nama_ibu'         => 'required',
+            'umur_ibu'         => 'required|integer',
+            'alamat'           => 'required',
+            'email'            => 'required|email',
+            'nik'              => 'required|numeric',
+            'no_telepon'       => 'required|numeric',
+            'kehamilan_ke'     => 'required|integer',
+            'nama_suami'       => 'required',
+            'umur_suami'       => 'required|integer',
+            'password'         => 'required|min:8',
             'no_jkn_faskes_tk_1' => 'required',
-            'no_jkn_rujukan' => 'required',
-            'gol_darah' => 'required',
-            'pekerjaan' => 'required',
+            'no_jkn_rujukan'   => 'required',
+            'gol_darah'        => 'required',
+            'pekerjaan'        => 'required',
+            'user_id'          => 'required|exists:users,id', // Validasi user_id
         ], [
             'nama_ibu.required'     => 'Nama Ibu wajib diisi.',
             'umur_ibu.required'     => 'Umur Ibu wajib diisi.',
@@ -71,27 +84,41 @@ class HomeController extends Controller
             'nama_suami.required'   => 'Nama Suami wajib diisi.',
             'umur_suami.required'   => 'Umur Suami wajib diisi.',
             'umur_suami.integer'    => 'Umur Suami harus berupa angka.',
-            'password.required'     => 'Password harus diisi',
+            'password.required'     => 'Password harus diisi.',
             'password.min'          => 'Password harus terdiri dari minimal 8 karakter.',
-            'no_jkn_faskes_tk_1.required' => 'required',
-            'no_jkn_rujukan.required' => 'required',
-            'gol_darah.required' => 'required',
-            'pekerjaan.required' => 'required',
+            'no_jkn_faskes_tk_1.required' => 'Nomor JKN Faskes TK 1 wajib diisi.',
+            'no_jkn_rujukan.required'     => 'Nomor JKN Rujukan wajib diisi.',
+            'gol_darah.required'    => 'Golongan darah wajib diisi.',
+            'pekerjaan.required'    => 'Pekerjaan wajib diisi.',
+            'user_id.required'      => 'User yang dapat mengakses data wajib dipilih.',
+            'user_id.exists'        => 'User yang dipilih tidak valid.',
         ]);
-        
+
+        // Menyimpan data ibu hamil baru
         DataIbuHamil::create($request->all());
+
+        // Pesan berhasil ditambahkan
         toast('Data Berhasil Ditambahkan','success');
         return redirect()->route('home');
     }
 
+
     public function edit($id)
     {
-        $data_ibu_hamils = DataIbuHamil::find($id);
-        return view('edit-data-ibu-hamil', compact('data_ibu_hamils'));
+        // Mengambil data ibu hamil berdasarkan ID
+        $data_ibu_hamils = DataIbuHamil::findOrFail($id);
+
+        // Mengambil semua data dari tabel users (puskesmas)
+        $users = User::all();
+
+        // Mengirimkan data ibu hamil dan daftar user (puskesmas) ke view
+        return view('edit-data-ibu-hamil', compact('data_ibu_hamils', 'users'));
     }
+
 
     public function update(Request $request, $id)
     {
+        // Validasi input
         $request->validate([
             'nama_ibu'       => 'required',
             'umur_ibu'       => 'required|integer',
@@ -106,6 +133,7 @@ class HomeController extends Controller
             'no_jkn_rujukan' => 'required',
             'gol_darah' => 'required',
             'pekerjaan' => 'required',
+            'user_id' => 'required|exists:users,id', // Validasi tambahan untuk user_id
         ], [
             'nama_ibu.required'     => 'Nama Ibu wajib diisi.',
             'umur_ibu.required'     => 'Umur Ibu wajib diisi.',
@@ -126,9 +154,12 @@ class HomeController extends Controller
             'no_jkn_rujukan.required' => 'required',
             'gol_darah.required' => 'required',
             'pekerjaan.required' => 'required',
+            'user_id.required' => 'Puskesmas wajib dipilih.',
+            'user_id.exists' => 'Puskesmas yang dipilih tidak valid.',
         ]);
-        
-        $data_ibu_hamils               = DataIbuHamil::find($id);
+
+        // Update data ibu hamil berdasarkan input dari form
+        $data_ibu_hamils = DataIbuHamil::findOrFail($id);
         $data_ibu_hamils->nama_ibu     = $request->nama_ibu;
         $data_ibu_hamils->umur_ibu     = $request->umur_ibu;
         $data_ibu_hamils->alamat       = $request->alamat;
@@ -138,13 +169,15 @@ class HomeController extends Controller
         $data_ibu_hamils->kehamilan_ke = $request->kehamilan_ke;
         $data_ibu_hamils->nama_suami   = $request->nama_suami;
         $data_ibu_hamils->umur_suami   = $request->umur_suami;
-        $data_ibu_hamils->no_jkn_faskes_tk_1   = $request->no_jkn_faskes_tk_1;
-        $data_ibu_hamils->no_jkn_rujukan   = $request->no_jkn_rujukan;
+        $data_ibu_hamils->no_jkn_faskes_tk_1 = $request->no_jkn_faskes_tk_1;
+        $data_ibu_hamils->no_jkn_rujukan = $request->no_jkn_rujukan;
         $data_ibu_hamils->gol_darah   = $request->gol_darah;
         $data_ibu_hamils->pekerjaan   = $request->pekerjaan;
-        $data_ibu_hamils->tanggal_hpl   = $request->tanggal_hpl;
+        $data_ibu_hamils->tanggal_hpl = $request->tanggal_hpl;
+        $data_ibu_hamils->user_id     = $request->user_id; // Update user_id
         $data_ibu_hamils->save();
 
+        // Menampilkan notifikasi sukses dan redirect ke halaman utama
         toast('Data Berhasil Diubah','success');
         return redirect()->route('home');
     }

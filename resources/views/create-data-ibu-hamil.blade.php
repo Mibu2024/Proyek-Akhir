@@ -369,12 +369,27 @@
                                                     <label for=""><strong>Password </strong></label>
                                                     <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror"
                                                         placeholder="Password" value="{{ old('password') }}">
-                                                    @error('umur_suami')
+                                                    @error('password')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
                                                 </div>
+
+                                                <div class="form-group">
+                                                    <label for="user_id"><strong>Pilih Puskesmas</strong></label>
+                                                    <select name="user_id" id="user_id" class="form-control @error('user_id') is-invalid @enderror">
+                                                        <option value="">Pilih Puskesmas</option>
+                                                        @foreach($users as $user)
+                                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('user_id')
+                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                
+                                                
 
                                                 <div class="text-right">
                                                     <a href="{{ route('home') }}" class="btn btn-outline-danger mr-2"

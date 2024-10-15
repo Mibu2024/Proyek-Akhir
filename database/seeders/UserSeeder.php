@@ -23,8 +23,17 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('password'),
                 'alamat' => 'Bandung',
                 'no_telepon' => '911',
-                'no_str' => 'str911',
-                'nik' => 'nik911',
+                'kode_puskesmas' => '911',
+            ],
+
+            [
+                'id' => 2,
+                'name' => 'Puskesmas',
+                'email' => 'puskesmas@mail.com',
+                'password' => Hash::make('password'),
+                'alamat' => 'Bandung',
+                'no_telepon' => '911',
+                'kode_puskesmas' => '911',
             ],
             // Tambahkan data lain jika diperlukan
         ]);
