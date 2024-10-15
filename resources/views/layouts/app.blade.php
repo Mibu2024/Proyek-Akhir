@@ -25,6 +25,17 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
     </head>
 
+    <body>
+        @if (Auth::check())
+            <div class="sidebar">
+                @include('layouts._sidebar') <!-- Include the sidebar here -->
+            </div>
+        @endif
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+
     @yield('content')
 
     <!-- REQUIRED SCRIPTS -->
