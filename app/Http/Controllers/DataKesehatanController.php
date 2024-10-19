@@ -32,7 +32,7 @@ class DataKesehatanController extends Controller
         $perPage         = $request->input('per_page', 5);
         $data_kesehatans = DataKesehatan::where('nama_ibu', 'like', "%$search%")->paginate($perPage);
         $currentPage = $data_kesehatans->currentPage();
-        return view('data-kesehatan', compact('data_kesehatans', 'currentPage'));
+        return view('data-catatan-kesehatan/data-kesehatan', compact('data_kesehatans', 'currentPage'));
     }
 
     public function create()

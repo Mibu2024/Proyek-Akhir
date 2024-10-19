@@ -25,10 +25,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.11.0/sweetalert2.all.min.js"></script>
     </head>
 
-    <body>
+    <body style= "background-color: #F4F4F4">
         @if (Auth::check())
             <div class="sidebar">
-                @include('layouts._sidebar') <!-- Include the sidebar here -->
+                @include('layouts._sidebar')
             </div>
         @endif
 

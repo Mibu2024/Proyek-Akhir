@@ -30,7 +30,7 @@ class HomeController extends Controller
         $perPage         = $request->input('per_page', 5);
         $data_ibu_hamils = DataIbuHamil::where('nama_ibu', 'like', "%$search%")->paginate($perPage);
         $currentPage = $data_ibu_hamils->currentPage();
-        return view('home', compact('data_ibu_hamils', 'currentPage'));
+        return view('data-ibu-hamil/home', compact('data_ibu_hamils', 'currentPage'));
     }
 
     public function create()

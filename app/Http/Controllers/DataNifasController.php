@@ -15,7 +15,7 @@ class DataNifasController extends Controller
         $perPage     = $request->input('per_page', 5);
         $data_nifas  = DataNifas::where('nama_ibu', 'like', "%$search%")->paginate($perPage);
         $currentPage = $data_nifas->currentPage();
-        return view('data-nifas', compact('data_nifas', 'currentPage'));
+        return view('data-catatan-nifas/data-nifas', compact('data_nifas', 'currentPage'));
     }
 
     public function create()

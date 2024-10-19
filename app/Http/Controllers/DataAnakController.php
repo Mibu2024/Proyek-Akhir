@@ -15,7 +15,7 @@ class DataAnakController extends Controller
         $perPage     = $request->input('per_page', 5);
         $data_anaks  = DataAnak::where('nama_ibu', 'like', "%$search%")->orWhere('nama_anak', 'like', "%$search%")->paginate($perPage);
         $currentPage = $data_anaks->currentPage();
-        return view('data-anak', compact('data_anaks', 'currentPage'));
+        return view('data-catatan-anak/data-anak', compact('data_anaks', 'currentPage'));
     }
 
     public function create()
