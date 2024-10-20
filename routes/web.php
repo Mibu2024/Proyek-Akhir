@@ -41,6 +41,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::delete('/data-ibu-hamil/{id}', [App\Http\Controllers\HomeController::class, 'delete'])->name('data-ibu-hamil.delete');
     Route::get('data-ibu-hamil/download', [App\Http\Controllers\HomeController::class, 'download'])->name('data-ibu-hamil.download');
     Route::post('/data-ibu-hamil/upload-hpl', [App\Http\Controllers\HomeController::class, 'uploadHpl'])->name('data-ibu-hamil.upload-hpl');
+    Route::get('/data-ibu-hamil/detail-ibu/{id}', [App\Http\Controllers\HomeController::class, 'detail'])->name('data-ibu-hamil.detail');
 
     // route buat halaman data kesehatan
     Route::get('/data-kesehatan', [App\Http\Controllers\DataKesehatanController::class, 'index'])->name('data-kesehatan.index');

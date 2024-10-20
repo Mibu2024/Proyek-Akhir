@@ -21,7 +21,7 @@ class DataNifasController extends Controller
     public function create()
     {
         $data_ibu_hamils = DataIbuHamil::all();
-        return view('create-data-nifas', compact('data_ibu_hamils'));
+        return view('data-catatan-nifas/create-data-nifas', compact('data_ibu_hamils'));
     }
 
     public function store(Request $request)
@@ -62,7 +62,7 @@ class DataNifasController extends Controller
     {
         $data_ibu_hamils = DataIbuHamil::all();
         $data_nifas = DataNifas::find($id);
-        return view('edit-data-nifas', compact('data_nifas', 'data_ibu_hamils'));
+        return view('data-catatan-nifas/edit-data-nifas', compact('data_nifas', 'data_ibu_hamils'));
     }
 
     public function update(Request $request, $id)

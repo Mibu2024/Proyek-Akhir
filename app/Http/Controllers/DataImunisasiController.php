@@ -15,14 +15,14 @@ class DataImunisasiController extends Controller
         $perPage = $request->input('per_page', 5);
         $data_imunisasis = DataImunisasi::where('nama_anak', 'like', "%$search%")->paginate($perPage);
         $currentPage = $data_imunisasis->currentPage();
-        return view('data-imunisasi', compact('data_imunisasis', 'currentPage'));
+        return view('data-catatan-imunisasi/data-imunisasi', compact('data_imunisasis', 'currentPage'));
     }
 
     public function create()
     {
         $data_anaks = DataAnak::all();
 
-        return view('create-data-imunisasi', compact('data_anaks'));
+        return view('data-catatan-imunisasi/create-data-imunisasi', compact('data_anaks'));
     }
 
     public function store(Request $request)
@@ -55,7 +55,7 @@ class DataImunisasiController extends Controller
         $data_anaks = DataAnak::all();
 
         $data_imunisasis = DataImunisasi::find($id);
-        return view('edit-data-imunisasi', compact('data_imunisasis', 'data_anaks'));
+        return view('data-catatan-imunisasi/edit-data-imunisasi', compact('data_imunisasis', 'data_anaks'));
     }
 
     public function update(Request $request, $id)

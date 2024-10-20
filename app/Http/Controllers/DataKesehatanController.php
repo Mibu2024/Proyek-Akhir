@@ -40,7 +40,7 @@ class DataKesehatanController extends Controller
         $data_ibu_hamils = DataIbuHamil::all();
         $data_pemeriksas = User::all();
 
-        return view('create-data-kesehatan', compact('data_ibu_hamils', 'data_pemeriksas'));
+        return view('data-catatan-kesehatan/create-data-kesehatan', compact('data_ibu_hamils', 'data_pemeriksas'));
     }
 
     public function store(Request $request)
@@ -110,7 +110,7 @@ class DataKesehatanController extends Controller
         $data_ibu_hamils = DataIbuHamil::all();
         $data_kesehatans = DataKesehatan::find($id);
         $data_pemeriksas = User::all();
-        return view('edit-data-kesehatan', compact('data_kesehatans', 'data_ibu_hamils', 'data_pemeriksas'));
+        return view('data-catatan-kesehatan/edit-data-kesehatan', compact('data_kesehatans', 'data_ibu_hamils', 'data_pemeriksas'));
     }
 
     public function update(Request $request, $id)

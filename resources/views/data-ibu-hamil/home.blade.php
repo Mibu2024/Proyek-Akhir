@@ -28,7 +28,11 @@
                                     <td>{{ $dih->umur_ibu }} Tahun</td>
                                     <td>{{ $dih->no_telepon }}</td>
                                     <td>{{ $dih->nama_suami }}</td>
-                                    <td><button class="btn btn-m btn-primary view-detail-btn" style="background-color: #E7FFEA; color: #45A350; outline: none; box-shadow: none; border: 1px solid transparent;" data-id="{{ $dih->id }}" data-toggle="modal"><b>Lihat Detail</b></button>
+                                    <td>
+                                        <a href="{{ route('data-ibu-hamil.detail', $dih->id) }}" class="btn btn-m btn-primary" style="background-color: #E7FFEA; color: #45A350; outline: none; box-shadow: none; border: 1px solid transparent">
+                                            <b>Lihat Detail</b>
+                                        </a>
+                                    </td>
                                     </td>
                                     <td>
                                         @include('data-ibu-hamil.components.action_buttons', ['dih' => $dih])

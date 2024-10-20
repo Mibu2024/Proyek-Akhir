@@ -21,7 +21,7 @@ class DataAnakController extends Controller
     public function create()
     {
         $data_ibu_hamils = DataIbuHamil::all();
-        return view('create-data-anak', compact('data_ibu_hamils'));
+        return view('data-catatan-anak/create-data-anak', compact('data_ibu_hamils'));
     }
 
     public function store(Request $request)
@@ -61,7 +61,7 @@ class DataAnakController extends Controller
     {
         $data_ibu_hamils = DataIbuHamil::all();
         $data_anaks = DataAnak::find($id);
-        return view('edit-data-anak', compact('data_anaks', 'data_ibu_hamils'));
+        return view('data-catatan-anak/edit-data-anak', compact('data_anaks', 'data_ibu_hamils'));
     }
 
     public function update(Request $request, $id)

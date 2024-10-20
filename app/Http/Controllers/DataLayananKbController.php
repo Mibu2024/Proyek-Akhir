@@ -30,14 +30,14 @@ class DataLayananKbController extends Controller
         $perPage         = $request->input('per_page', 5);
         $data_layanan_kbs = DataLayananKb::where('nama_ibu', 'like', "%$search%")->paginate($perPage);
         $currentPage = $data_layanan_kbs->currentPage();
-        return view('data-layanan-kb', compact('data_layanan_kbs', 'currentPage'));
+        return view('data-layanan-kb/data-layanan-kb', compact('data_layanan_kbs', 'currentPage'));
     }
 
     public function create()
     {
         $data_ibu_hamils = DataIbuHamil::all();
 
-        return view('create-data-layanan-kb', compact('data_ibu_hamils'));
+        return view('data-layanan-kb/create-data-layanan-kb', compact('data_ibu_hamils'));
     }
 
     public function store(Request $request)
@@ -76,7 +76,7 @@ class DataLayananKbController extends Controller
     {
         $data_ibu_hamils = DataIbuHamil::all();
         $data_layanan_kbs = DataLayananKb::find($id);
-        return view('edit-data-layanan-kb', compact('data_layanan_kbs', 'data_ibu_hamils'));
+        return view('data-layanan-kb/edit-data-layanan-kb', compact('data_layanan_kbs', 'data_ibu_hamils'));
     }
 
     public function update(Request $request, $id)
