@@ -21,10 +21,16 @@ return new class extends Migration
             $table->integer('kehamilan_ke');
             $table->string('nama_suami');
             $table->integer('umur_suami');
+            $table->string('no_jkn_faskes_tk_1');
+            $table->string('no_jkn_rujukan');
+            $table->string('gol_darah');
+            $table->string('pekerjaan');
+            $table->string('tanggal_hpl')->nullable();;
             $table->string('profile_photo')->nullable();
             $table->string('password');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
             });

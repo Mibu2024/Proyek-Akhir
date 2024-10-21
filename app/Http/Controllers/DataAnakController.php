@@ -11,9 +11,23 @@ class DataAnakController extends Controller
 {
     public function index(Request $request)
     {
-        $search      = $request->input('search');
-        $perPage     = $request->input('per_page', 5);
-        $data_anaks  = DataAnak::where('nama_ibu', 'like', "%$search%")->orWhere('nama_anak', 'like', "%$search%")->paginate($perPage);
+        $search = $request->input('search');
+        $perPage = $request->input('per_page', 5);
+
+        // Mendapatkan id user saat ini
+        $userId = auth()->user()->id;
+
+        // Mendapatkan data ibu hamil yang terkait dengan user
+        $ibuHamilIds = DataIbuHamil::where('user_id', $userId)->pluck('id');
+
+        // Mengambil data anak hanya untuk ibu hamil yang terhubung dengan user
+        $data_anaks = DataAnak::whereIn('id_ibu', $ibuHamilIds)
+            ->where(function ($query) use ($search) {
+                $query->where('nama_ibu', 'like', "%$search%")
+                    ->orWhere('nama_anak', 'like', "%$search%");
+            })
+            ->paginate($perPage);
+
         $currentPage = $data_anaks->currentPage();
         return view('data-catatan-anak/data-anak', compact('data_anaks', 'currentPage'));
     }
@@ -67,37 +81,37 @@ class DataAnakController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'tanggal'       => 'required',
-            'nama_ibu'      => 'required',
-            'id_ibu'        => 'required|exists:data_ibu_hamils,id',
-            'nama_anak'     => 'required',
-            'tanggal_lahir' => 'required',
-            'umur'          => 'required',
-            'berat_badan'   => 'required|integer',
-            'tinggi_badan'      => 'required',
-            'lingkar_kepala'    => 'required',
+            'tanggal'        => 'required',
+            'nama_ibu'       => 'required',
+            'id_ibu'         => 'required|exists:data_ibu_hamils,id',
+            'nama_anak'      => 'required',
+            'tanggal_lahir'  => 'required',
+            'umur'           => 'required',
+            'berat_badan'    => 'required|integer',
+            'tinggi_badan'   => 'required',
+            'lingkar_kepala' => 'required',
         ], [
-            'tanggal.required'       => 'Tanggal Periksa wajib diisi.',
-            'nama_ibu.required'      => 'Nama Ibu wajib diisi.',
-            'nama_anak.required'     => 'Nama Anak wajib diisi.',
-            'tanggal_lahir.required' => 'Tanggal Lahir wajib diisi.',
-            'umur.required'          => 'Umur wajib diisi.',
-            'berat_badan.required'   => 'Berat badan wajib diisi.',
-            'berat_badan.integer'    => 'Berat badan harus berupa angka.',
-            'tinggi_badan.required'     => 'Tinggi badan wajib diisi',
-            'lingkar_kepala.required'   => 'Lingkar kepala wajib diisi',
+            'tanggal.required'        => 'Tanggal Periksa wajib diisi.',
+            'nama_ibu.required'       => 'Nama Ibu wajib diisi.',
+            'nama_anak.required'      => 'Nama Anak wajib diisi.',
+            'tanggal_lahir.required'  => 'Tanggal Lahir wajib diisi.',
+            'umur.required'           => 'Umur wajib diisi.',
+            'berat_badan.required'    => 'Berat badan wajib diisi.',
+            'berat_badan.integer'     => 'Berat badan harus berupa angka.',
+            'tinggi_badan.required'   => 'Tinggi badan wajib diisi',
+            'lingkar_kepala.required' => 'Lingkar kepala wajib diisi',
         ]);
         
-        $data_anaks                = DataAnak::find($id);
-        $data_anaks->tanggal       = $request->tanggal;
-        $data_anaks->nama_ibu      = $request->nama_ibu;
-        $data_anaks->id_ibu        = $request->id_ibu;
-        $data_anaks->nama_anak     = $request->nama_anak;
-        $data_anaks->tanggal_lahir = $request->tanggal_lahir;
-        $data_anaks->umur          = $request->umur;
-        $data_anaks->berat_badan   = $request->berat_badan;
+        $data_anaks                 = DataAnak::find($id);
+        $data_anaks->tanggal        = $request->tanggal;
+        $data_anaks->nama_ibu       = $request->nama_ibu;
+        $data_anaks->id_ibu         = $request->id_ibu;
+        $data_anaks->nama_anak      = $request->nama_anak;
+        $data_anaks->tanggal_lahir  = $request->tanggal_lahir;
+        $data_anaks->umur           = $request->umur;
+        $data_anaks->berat_badan    = $request->berat_badan;
         $data_anaks->tinggi_badan   = $request->tinggi_badan;
-        $data_anaks->lingkar_kepala   = $request->lingkar_kepala;
+        $data_anaks->lingkar_kepala = $request->lingkar_kepala;
         $data_anaks->save();
 
     

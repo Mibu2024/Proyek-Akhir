@@ -11,19 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('data_anaks', function (Blueprint $table) {
+        Schema::create('data_kehamilans', function (Blueprint $table) {
             $table->id();
-            $table->date('tanggal');
-            $table->string('nama_ibu');
-            $table->string('nama_anak');
-            $table->date('tanggal_lahir');
-            $table->string('umur');
-            $table->integer('berat_badan');
-            $table->string('tinggi_badan');
-            $table->string('lingkar_kepala');
             $table->bigInteger('id_ibu');
+            $table->date('tanggal_kehamilan');
+            $table->date('tanggal_hpl');
+            $table->rememberToken();
             $table->timestamps();
-        });
+            });
+
     }
 
     /**
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('data_anaks');
+        Schema::dropIfExists('data_kehamilans');
     }
 };

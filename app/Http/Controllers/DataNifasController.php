@@ -11,9 +11,17 @@ class DataNifasController extends Controller
 {
     public function index(Request $request)
     {
-        $search      = $request->input('search');
-        $perPage     = $request->input('per_page', 5);
-        $data_nifas  = DataNifas::where('nama_ibu', 'like', "%$search%")->paginate($perPage);
+        $search = $request->input('search');
+        $perPage = $request->input('per_page', 5);
+        
+        $userId = auth()->user()->id;
+
+        $ibuHamilIds = DataIbuHamil::where('user_id', $userId)->pluck('id');
+
+        $data_nifas = DataNifas::whereIn('id_ibu', $ibuHamilIds)
+            ->where('nama_ibu', 'like', "%$search%")
+            ->paginate($perPage);
+
         $currentPage = $data_nifas->currentPage();
         return view('data-catatan-nifas/data-nifas', compact('data_nifas', 'currentPage'));
     }
@@ -93,7 +101,7 @@ class DataNifasController extends Controller
         $data_nifas                            = DataNifas::find($id);
         $data_nifas->tanggal                   = $request->tanggal;
         $data_nifas->nama_ibu                  = $request->nama_ibu;
-        $data_nifas->id_ibu                  = $request->id_ibu;
+        $data_nifas->id_ibu                    = $request->id_ibu;
         $data_nifas->kunjungan_nifas           = $request->kunjungan_nifas;
         $data_nifas->hasil_periksa_payudara    = $request->hasil_periksa_payudara;
         $data_nifas->hasil_periksa_pendarahan  = $request->hasil_periksa_pendarahan;

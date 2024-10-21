@@ -16,8 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('alamat');
             $table->string('no_telepon');
-            $table->string('no_str');
-            $table->string('nik');
+            $table->string('kode_puskesmas');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

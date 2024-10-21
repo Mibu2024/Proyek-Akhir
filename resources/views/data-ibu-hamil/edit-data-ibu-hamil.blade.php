@@ -368,13 +368,30 @@
                                                 <div class="form-group mt-5">
                                                     <label for="tanggal_hpl"><strong>Tanggal HPL (Optional)</strong></label>
                                                     <input type="date" name="tanggal_hpl" id="tanggal_hpl" class="form-control @error('tanggal_hpl') is-invalid @enderror" value="{{ $data_ibu_hamils->tanggal_hpl }}"
-                                                        placeholder="Pilih HPL (Optional)">
+                                                        placeholder="Pilih HPL (Optional)" value="{{ old('tanggal_hpl') }}">
                                                     @error('tanggal_hpl')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
                                                 </div>
+
+                                                <div class="form-group">
+                                                    <label for="user_id"><strong>Pilih Puskesmas</strong></label>
+                                                    <select name="user_id" id="user_id" class="form-control @error('user_id') is-invalid @enderror">
+                                                        <option value="">Pilih Puskesmas</option>
+                                                        @foreach($users as $user)
+                                                            <option value="{{ $user->id }}" 
+                                                                {{ old('user_id', $data_ibu_hamils->user_id) == $user->id ? 'selected' : '' }}>
+                                                                {{ $user->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('user_id')
+                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
+                                                </div>
+                                                
 
                                                 <div class="text-right">
                                                     <a href="{{ route('home') }}" class="btn btn-outline-danger mr-2"

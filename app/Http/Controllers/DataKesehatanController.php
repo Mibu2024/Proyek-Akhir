@@ -28,9 +28,17 @@ class DataKesehatanController extends Controller
      */
     public function index(Request $request)
     {
-        $search          = $request->input('search');
-        $perPage         = $request->input('per_page', 5);
-        $data_kesehatans = DataKesehatan::where('nama_ibu', 'like', "%$search%")->paginate($perPage);
+        $search = $request->input('search');
+        $perPage = $request->input('per_page', 5);
+        
+        $userId = auth()->user()->id;
+
+        $ibuHamilIds = DataIbuHamil::where('user_id', $userId)->pluck('id');
+
+        $data_kesehatans = DataKesehatan::whereIn('id_ibu', $ibuHamilIds)
+            ->where('nama_ibu', 'like', "%$search%")
+            ->paginate($perPage);
+
         $currentPage = $data_kesehatans->currentPage();
         return view('data-catatan-kesehatan/data-kesehatan', compact('data_kesehatans', 'currentPage'));
     }
@@ -38,9 +46,8 @@ class DataKesehatanController extends Controller
     public function create()
     {
         $data_ibu_hamils = DataIbuHamil::all();
-        $data_pemeriksas = User::all();
 
-        return view('data-catatan-kesehatan/create-data-kesehatan', compact('data_ibu_hamils', 'data_pemeriksas'));
+        return view('create-data-kesehatan', compact('data_ibu_hamils'));
     }
 
     public function store(Request $request)
@@ -49,7 +56,6 @@ class DataKesehatanController extends Controller
             'tanggal'              => 'required',
             'nama_ibu'             => 'required',
             'id_ibu'               => 'required|exists:data_ibu_hamils,id',
-            'id_pemeriksa'         => 'required|exists:users,id',
             'keluhan'              => 'required',
             'tekanan_darah'        => 'required|integer',
             'berat_badan'          => 'required|integer',
@@ -91,7 +97,6 @@ class DataKesehatanController extends Controller
 
         $data = $request->all();
         $data['nama_ibu'] = DataIbuHamil::find($request->id_ibu)->nama_ibu;
-        $data['nama_pemeriksa'] = User::find($request->id_pemeriksa)->name;
 
         if ($request->hasFile('image')) {
             $imageName = time().'.'.$request->file('image')->extension();  
@@ -109,8 +114,7 @@ class DataKesehatanController extends Controller
     {
         $data_ibu_hamils = DataIbuHamil::all();
         $data_kesehatans = DataKesehatan::find($id);
-        $data_pemeriksas = User::all();
-        return view('data-catatan-kesehatan/edit-data-kesehatan', compact('data_kesehatans', 'data_ibu_hamils', 'data_pemeriksas'));
+        return view('data-catatan-kesehatan/edit-data-kesehatan', compact('data_kesehatans', 'data_ibu_hamils'));
     }
 
     public function update(Request $request, $id)
@@ -119,7 +123,6 @@ class DataKesehatanController extends Controller
             'tanggal'              => 'required',
             'nama_ibu'             => 'required',
             'id_ibu'               => 'required|exists:data_ibu_hamils,id',
-            'id_pemeriksa'         => 'required|exists:users,id',
             'keluhan'              => 'required',
             'tekanan_darah'        => 'required|integer',
             'berat_badan'          => 'required|integer',
@@ -178,9 +181,9 @@ class DataKesehatanController extends Controller
         $data_kesehatans->nama_pemeriksa       = $request->nama_pemeriksa;
         $data_kesehatans->id_pemeriksa         = $request->id_pemeriksa;
         $data_kesehatans->tanggal_hpl          = $request->tanggal_hpl;
-        $data_kesehatans->tinggi_badan          = $request->tinggi_badan;
-        $data_kesehatans->lingkar_perut          = $request->lingkar_perut;
-        $data_kesehatans->lingkar_lengan_atas          = $request->lingkar_lengan_atas;
+        $data_kesehatans->tinggi_badan         = $request->tinggi_badan;
+        $data_kesehatans->lingkar_perut        = $request->lingkar_perut;
+        $data_kesehatans->lingkar_lengan_atas  = $request->lingkar_lengan_atas;
         $data_kesehatans->save();
 
         toast('Data Berhasil Diubah','success');

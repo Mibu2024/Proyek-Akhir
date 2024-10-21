@@ -30,14 +30,14 @@ class DataArtikelController extends Controller
         $perPage         = $request->input('per_page', 5);
         $data_artikels   = DataArtikel::where('judul', 'like', "%$search%")->paginate($perPage);
         $currentPage = $data_artikels->currentPage();
-        return view('data-artikel', compact('data_artikels', 'currentPage'));
+        return view('data-artikel/data-artikel', compact('data_artikels', 'currentPage'));
     }
 
     public function create()
     {
         $data_artikels = DataArtikel::all();
 
-        return view('create-data-artikel', compact('data_artikels'));
+        return view('data-artikel/create-data-artikel', compact('data_artikels'));
     }
 
     public function store(Request $request)

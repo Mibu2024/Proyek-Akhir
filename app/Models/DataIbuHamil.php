@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\User;
+use Laravel\Sanctum\HasApiTokens;
+use App\Notifications\VerifyEmail;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
-use App\Notifications\VerifyEmail;
 
 class DataIbuHamil extends Authenticatable implements MustVerifyEmail
 {
@@ -33,6 +34,7 @@ class DataIbuHamil extends Authenticatable implements MustVerifyEmail
         'gol_darah',
         'pekerjaan',
         'tanggal_hpl',
+        'user_id',
     ];
 
     /**
@@ -54,6 +56,11 @@ class DataIbuHamil extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+    
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 
     public function kesehatan()
     {
