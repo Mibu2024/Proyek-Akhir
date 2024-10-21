@@ -32,34 +32,92 @@
    </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="nifasRecordModal" tabindex="-1" aria-labelledby="nifasRecordModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="nifasRecordModalLabel">Nifas Record Details</h5>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <!-- First Column -->
+            <div class="col-md-6">
+              <p><strong>Tanggal:</strong> <span id="modalTanggalKunjungan"></span></p>
+              <p><strong>Nama Ibu:</strong> <span id="modalNamaIbuNifas"></span></p>
+              <p><strong>Kunjungan Nifas:</strong> <span id="modalKunjunganNifas"></span></p>
+              <p><strong>Hasil Periksa Payudara:</strong> <span id="modalPeriksaPayudara"></span></p>
+              <p><strong>Hasil Periksa Jalan Lahir:</strong> <span id="modalPeriksaJalanLahir"></span></p>
+            </div>
+            <!-- Second Column -->
+            <div class="col-md-6">
+              <p><strong>Hasil Periksa Pendarahan:</strong> <span id="modalPeriksaPendarahan"></span></p>
+              <p><strong>Vitamin A:</strong> <span id="modalVitaminA"></span></p>
+              <p><strong>Masalah:</strong> <span id="modalMasalahNifas"></span></p>
+              <p><strong>Tindakan:</strong> <span id="modalTindakanNifas"></span></p>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 @if ($nifasRecords->isEmpty())
     <p style="text-align: center;">No record found</p>
 @else
     @foreach ($nifasRecords as $record)
 <!-- card list riwayat nifas -->
         <div class="card-list-nifas">
-        <div class="container">
-            
-            <div class="row">
-                <!-- Margin for spacing -->
-                <div class="col-sm-5">
-                    <p>{{ \Carbon\Carbon::parse($record->tanggal)->format('l') }}</p>
-                    <h4>{{ \Carbon\Carbon::parse($record->tanggal)->format('d F Y') }}</h4>
-                </div>
-                <div class="col-sm-2">
-                    <span class="status-badge">Masalah: {{ $record->masalah }}</span>
-                </div>
-                <div class="col-sm">
-                    <span class="status-badge">Tindakan: {{ $record->tindakan }}</span>
-                </div>
-                <div class="col-sm-1 text-end">
-                    <button type="button" class="btn btn-outline-info status-badge" style="font-size: 12px; border-radius: 8px;">View</button>
+            <div class="container">
+                
+                <div class="row">
+                    <!-- Margin for spacing -->
+                    <div class="col-sm-5">
+                        <p>{{ \Carbon\Carbon::parse($record->tanggal)->format('l') }}</p>
+                        <h4>{{ \Carbon\Carbon::parse($record->tanggal)->format('d F Y') }}</h4>
+                    </div>
+                    <div class="col-sm-2">
+                        <span class="status-badge">Masalah: {{ $record->masalah }}</span>
+                    </div>
+                    <div class="col-sm">
+                        <span class="status-badge">Tindakan: {{ $record->tindakan }}</span>
+                    </div>
+                    <div class="col-sm-1 text-end">
+                        <button 
+                            data-toggle="modal" 
+                            data-target="#nifasRecordModal" 
+                            type="button" 
+                            class="btn btn-outline-info status-badge"
+                            onclick="setNifasData({{ json_encode($record) }})"
+                            >
+                            View
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-        </div>
     @endforeach
 @endif
+
+<!-- modal script -->
+<script>
+    function setNifasData(record) {
+    document.getElementById('modalTanggalKunjungan').textContent = record.tanggal;
+    document.getElementById('modalNamaIbuNifas').textContent = record.nama_ibu;
+    document.getElementById('modalKunjunganNifas').textContent = record.kunjungan_nifas;
+    document.getElementById('modalPeriksaPayudara').textContent = record.hasil_periksa_payudara;
+    document.getElementById('modalPeriksaJalanLahir').textContent = record.hasil_periksa_jalan_lahir;
+    document.getElementById('modalPeriksaPendarahan').textContent = record.hasil_periksa_pendarahan;
+    document.getElementById('modalVitaminA').textContent = record.vitamin_a;
+    document.getElementById('modalMasalahNifas').textContent = record.masalah;
+    document.getElementById('modalTindakanNifas').textContent = record.tindakan;
+}
+</script>
 
 <head>
     <style>
