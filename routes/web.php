@@ -53,6 +53,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('data-kesehatan/download', [App\Http\Controllers\DataKesehatanController::class, 'download'])->name('data-kesehatan.download');
     Route::get('/data-kesehatan/view-foto-usg/{id}', [App\Http\Controllers\DataKesehatanController::class, 'viewFotoUsg'])->name('data-kesehatan.view-foto-usg');
 
+    // route halaman data kehamilan
+    Route::get('/data-ibu-hamil/detail-kehamilan/{id}', [App\Http\Controllers\DataKehamilanController::class, 'detail'])->name('data-kehamilan.detail');
+
 
     // route buat halaman data nifas
     Route::get('/data-nifas', [App\Http\Controllers\DataNifasController::class, 'index'])->name('data-nifas.index');

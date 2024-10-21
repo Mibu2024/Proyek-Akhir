@@ -24,9 +24,9 @@
                                 <tr>
                                     <td>{{ $index + 1 + ($data_anaks->currentPage() - 1) * $data_anaks->perPage() }}</td>
                                     <td>{{ $da->nama_anak }}</td>
-                                    <td>{{ $da->nama_ibu }} Tahun</td>
+                                    <td>{{ $da->nama_ibu }}</td>
                                     <td>{{ $da->tanggal_lahir }}</td>
-                                    <td><button class="btn btn-m btn-primary view-detail-btn" style="background-color: #E7FFEA; color: #45A350; outline: none; box-shadow: none; border: 1px solid transparent;" data-id="{{ $dk->id }}" data-toggle="modal"><b>Lihat Detail</b></button>
+                                    <td><button class="btn btn-m btn-primary view-detail-btn" style="background-color: #E7FFEA; color: #45A350; outline: none; box-shadow: none; border: 1px solid transparent;" data-id="{{ $da->id }}" data-toggle="modal"><b>Lihat Detail</b></button>
                                     </td>
                                     <td>
                                         @include('data-catatan-anak.components.action_buttons', ['da' => $da])

@@ -1,8 +1,8 @@
-<!-- title riwayat nifas -->
-<div class="container-title-riwayat-nifas">
+<!-- title riwayat kesehatan -->
+<div class="container-title-riwayat-kesehatan">
    <div class="row align-items-center">
       <div class="col-sm-6">
-         <h3>Riwayat Catatan Nifas</h3>
+         <h3>Riwayat Kehamilan</h3>
       </div>
       <div class="col-sm-6 d-flex justify-content-end align-items-center">
          <div class="btn-group me-2">
@@ -24,38 +24,40 @@
                <a class="dropdown-item" href="#">Desember</a>
             </div>
          </div>
-         <a href="{{ route('data-nifas.create') }}" class="btn btn-create-data-nifas ml-2 d-flex align-items-center justify-content-center">
+         <a href="{{ route('data-kesehatan.create') }}" class="btn btn-create-data-kesehatan ml-2 d-flex align-items-center justify-content-center">
          <i class="flaticon2-add-1"></i>
-         <span>Tambah Catatan Nifas</span> 
+         <span>Tambah Kehamilan</span> 
          </a>
       </div>
    </div>
 </div>
 
-@if ($nifasRecords->isEmpty())
-    <p style="text-align: center;">No record found</p>
+
+
+<!-- card list riwayat kehamilan -->
+@if ($kehamilanRecords->isEmpty())
+    <p style="text-align: center;">-- No record found --</p>
 @else
-    @foreach ($nifasRecords as $record)
-<!-- card list riwayat nifas -->
-        <div class="card-list-nifas">
+    @foreach ($kehamilanRecords as $record)
+        <div class="card-list-kesehatan">
         <div class="container">
-            
             <div class="row">
-                <!-- Margin for spacing -->
                 <div class="col-sm-5">
-                    <p>{{ \Carbon\Carbon::parse($record->tanggal)->format('l') }}</p>
+                    <p>Tanggal Kehamilan</p>
                     <h4>{{ \Carbon\Carbon::parse($record->tanggal)->format('d F Y') }}</h4>
                 </div>
                 <div class="col-sm-2">
-                    <span class="status-badge">Masalah: {{ $record->masalah }}</span>
+                    <span class="status-badge">Kehamilan Ke: {{ $record->kehamilan_ke }}</span>
                 </div>
-                <div class="col-sm">
-                    <span class="status-badge">Tindakan: {{ $record->tindakan }}</span>
+                <div class="col-sm col-hpl">
+                    <span class="status-badge">HPL: {{ \Carbon\Carbon::parse($record->tanggal_hpl)->format('d F Y') }}</span>
                 </div>
-                <div class="col-sm-1 text-end">
-                    <button type="button" class="btn btn-outline-info status-badge" style="font-size: 12px; border-radius: 8px;">View</button>
+                <div class="col-sm-1 justify-content-end">
+                    <a href="{{ route('data-kehamilan.detail', $record->id_ibu) }}" class="btn btn-m btn-primary" style="background-color: #E7FFEA; color: #45A350; outline: none; box-shadow: none; border: 1px solid green">
+                        <b>View</b>
+                    </a>    
                 </div>
-            </div>
+            </div>  
         </div>
         </div>
     @endforeach
@@ -63,7 +65,7 @@
 
 <head>
     <style>
-        .card-list-nifas {
+        .card-list-kesehatan {
             position: relative;
             max-width: 100%;
             border-radius: 8px;
@@ -74,16 +76,16 @@
             background-color: #f8f9fa;
         }
 
-        .card-list-nifas .row {
+        .card-list-kesehatan .row {
             align-items: center;
         }
 
-        .card-list-nifas p {
+        .card-list-kesehatan p {
             margin-bottom: 0;
             color: #6c757d;
         }
 
-        .card-list-nifas h4 {
+        .card-list-kesehatan h4 {
             margin-bottom: 0;
             font-weight: bold;
             color: #495057;
@@ -107,7 +109,7 @@
             }
         }
 
-        .btn-create-data-nifas {
+        .btn-create-data-kesehatan {
             align-items: center;
             border-radius: 8px;
             height: 50px;
@@ -116,7 +118,7 @@
             color: #4DBEFF;
         }
 
-        .btn-create-data-nifas:hover {
+        .btn-create-data-kesehatan:hover {
             align-items: center;
             border-radius: 8px;
             height: 50px;
@@ -125,7 +127,7 @@
             color: white;
         }
 
-        .btn-create-data-nifas:hover .flaticon2-add-1 {
+        .btn-create-data-kesehatan:hover .flaticon2-add-1 {
             align-items: center;
             border-radius: 8px;
             height: 50px;
@@ -138,7 +140,7 @@
             color: #4DBEFF;
         }
 
-        .container-title-riwayat-nifas {
+        .container-title-riwayat-kesehatan {
             margin-top: 30px;
         }
 

@@ -2,7 +2,7 @@
 <div class="container-title-riwayat-kesehatan">
    <div class="row align-items-center">
       <div class="col-sm-6">
-         <h3>Riwayat Catatan Kesehatan</h3>
+         <h3>Riwayat Pemeriksaan</h3>
       </div>
       <div class="col-sm-6 d-flex justify-content-end align-items-center">
          <div class="btn-group me-2">
@@ -31,34 +31,35 @@
       </div>
    </div>
 </div>
+
+
+
 <!-- card list riwayat kesehatan -->
-<div class="card-list-kesehatan">
-   <div class="container">
-      @if ($healthRecords->isEmpty())
-      <p>No record found</p>
-      <!-- Message when no records are found -->
-      @else
-      @foreach ($healthRecords as $record)
-      <div class="row mb-3">
-         <!-- Margin for spacing -->
-         <div class="col-sm-5">
-            <p>{{ \Carbon\Carbon::parse($record->tanggal)->format('l') }}</p>
-            <h4>{{ \Carbon\Carbon::parse($record->tanggal)->format('d F Y') }}</h4>
-         </div>
-         <div class="col-sm-3">
-            <span class="status-badge">Hasil Pemeriksaan: {{ $record->hasil_lab }}</span>
-         </div>
-         <div class="col-sm-3">
-            <span class="status-badge">Tindakan: {{ $record->tindakan }}</span>
-         </div>
-         <div class="col-sm-1 text-end">
-            <button type="button" class="btn btn-outline-info status-badge" style="font-size: 12px; border-radius: 8px;">View</button>
-         </div>
-      </div>
-      @endforeach
-      @endif
-   </div>
-</div>
+@if ($healthRecords->isEmpty())
+    <p style="text-align: center;">-- No record found --</p>
+@else
+    @foreach ($healthRecords as $record)
+        <div class="card-list-kesehatan">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-5">
+                    <p>{{ \Carbon\Carbon::parse($record->tanggal)->format('l') }}</p>
+                    <h4>{{ \Carbon\Carbon::parse($record->tanggal)->format('d F Y') }}</h4>
+                </div>
+                <div class="col-sm-2">
+                    <span class="status-badge">Pemeriksa: {{ $record->nama_pemeriksa}}</span>
+                </div>
+                <div class="col-sm col-hpl">
+                    <span class="status-badge">Tindakan: {{ $record->tindakan }}</span>
+                </div>
+                <div class="col-sm-1 justify-content-end">
+                    <button href="{{ route('data-ibu-hamil.detail', $record->id) }}" type="button" class="btn btn-outline-info status-badge">View</button>
+                </div>
+            </div>  
+        </div>
+        </div>
+    @endforeach
+@endif
 
 <head>
     <style>
@@ -68,7 +69,7 @@
             border-radius: 8px;
             overflow: hidden;
             margin-top: 20px;
-            padding: 15px;
+            padding: 20px;
             box-shadow: 0 0px 8px rgba(0, 0, 0, 0.2);
             background-color: #f8f9fa;
         }

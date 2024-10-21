@@ -28,10 +28,10 @@
                                     <td>{{ $dn->nama_ibu }}</td>
                                     <td>{{ $dn->masalah }}</td>
                                     <td>{{ $dn->tindakan }}</td>
-                                    <td><button class="btn btn-m btn-primary view-detail-btn" style="background-color: #E7FFEA; color: #45A350; outline: none; box-shadow: none; border: 1px solid transparent;" data-id="{{ $dk->id }}" data-toggle="modal"><b>Lihat Detail</b></button>
+                                    <td><button class="btn btn-m btn-primary view-detail-btn" style="background-color: #E7FFEA; color: #45A350; outline: none; box-shadow: none; border: 1px solid transparent;" data-id="{{ $dn->id }}" data-toggle="modal"><b>Lihat Detail</b></button>
                                     </td>
                                     <td>
-                                        @include('data-catatan-nifas.components.action_buttons', ['dk' => $dk])
+                                        @include('data-catatan-nifas.components.action_buttons', ['dn' => $dn])
                                     </td>
                                 </tr>
                             @empty

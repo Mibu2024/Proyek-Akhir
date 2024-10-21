@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DataIbuHamil;
-use App\Models\DataKesehatan;
+use App\Models\DataKehamilan;
 use App\Models\DataNifas;
 use App\Models\DataAnak;
 use App\Models\DataLayananKb;
@@ -48,7 +48,7 @@ class HomeController extends Controller
         }
 
         // Fetch health records that match the id_ibu from ibuHamil
-        $healthRecords = DataKesehatan::where('id_ibu', $ibuHamil->id)->get();
+        $kehamilanRecords = DataKehamilan::where('id_ibu', $ibuHamil->id)->get();
 
         // Fetch nifas records that match the id_ibu from ibuHamil
         $nifasRecords = DataNifas::where('id_ibu', $ibuHamil->id)->get();
@@ -60,7 +60,7 @@ class HomeController extends Controller
         $kbRecords = DataLayananKb::where('id_ibu', $ibuHamil->id)->get();
 
         // Pass the data to the view
-        return view('data-ibu-hamil/detail-page/detail-ibu', compact('ibuHamil', 'healthRecords', 'nifasRecords', 'anakRecords', 'kbRecords'));
+        return view('data-ibu-hamil/detail-page/detail-ibu', compact('ibuHamil', 'kehamilanRecords', 'nifasRecords', 'anakRecords', 'kbRecords'));
     }
 
 

@@ -30,34 +30,36 @@
       </div>
    </div>
 </div>
+
+@if ($kbRecords->isEmpty())
+    <p style="text-align: center;">No record found</p>
+@else
+    @foreach ($kbRecords as $record)
 <!-- card list layanan kb -->
-<div class="card-list-kb">
-   <div class="container">
-      @if ($kbRecords->isEmpty())
-      <p style="text-align: center;">No record found</p>
-      <!-- Message when no records are found -->
-      @else
-      @foreach ($kbRecords as $record)
-      <div class="row mb-3">
-         <!-- Margin for spacing -->
-         <div class="col-sm-5">
-            <p>{{ \Carbon\Carbon::parse($record->tanggal_praktik)->format('l') }}</p>
-            <h4>{{ \Carbon\Carbon::parse($record->tanggal_praktik)->format('d F Y') }}</h4>
-         </div>
-         <div class="col-sm-3">
-            <span class="status-badge">Tanggal Kembali: {{ $record->tanggal_kembali }}</span>
-         </div>
-         <div class="col-sm-3">
-            <span class="status-badge">Jenis KB: {{ $record->jenis_kb }}</span>
-         </div>
-         <div class="col-sm-1 text-end">
-            <button type="button" class="btn btn-outline-info status-badge" style="font-size: 12px; border-radius: 8px;">View</button>
-         </div>
-      </div>
-      @endforeach
-      @endif
-   </div>
-</div>
+        <div class="card-list-kb">
+        <div class="container">
+            
+            <div class="row">
+                <!-- Margin for spacing -->
+                <div class="col-sm-5">
+                    <p>{{ \Carbon\Carbon::parse($record->tanggal_praktik)->format('l') }}</p>
+                    <h4>{{ \Carbon\Carbon::parse($record->tanggal_praktik)->format('d F Y') }}</h4>
+                </div>
+                <div class="col-sm-2">
+                    <span class="status-badge">Tanggal Kembali: {{ $record->tanggal_kembali }}</span>
+                </div>
+                <div class="col-sm">
+                    <span class="status-badge">Jenis KB: {{ $record->jenis_kb }}</span>
+                </div>
+                <div class="col-sm-1 text-end">
+                    <button type="button" class="btn btn-outline-info status-badge" style="font-size: 12px; border-radius: 8px;">View</button>
+                </div>
+            </div>
+
+        </div>
+        </div>
+    @endforeach
+@endif
 
 <head>
     <style>
@@ -67,7 +69,7 @@
             border-radius: 8px;
             overflow: hidden;
             margin-top: 20px;
-            padding: 15px;
+            padding: 20px;
             box-shadow: 0 0px 8px rgba(0, 0, 0, 0.2);
             background-color: #f8f9fa;
         }

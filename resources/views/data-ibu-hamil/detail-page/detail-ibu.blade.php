@@ -69,12 +69,12 @@
             height: 20px;
         }
 
-        .col-sm {
-        margin: 10px;
+        .col-sm-3 {
+        margin-top: 20px;
         }
 
-        .col-sm h1{
-            font-size: 20px;
+        .col-sm-3 h1{
+            font-size: 18px;
         }
     </style>
 </head>
@@ -106,57 +106,57 @@
                     <div class="detail-ibu-container">
                         <div class="container">
                             <div class="row">
-                                <div class="col-sm">
+                                <div class="col-sm-3">
                                     Nama Ibu
                                     <h1>{{ $ibuHamil->nama_ibu }}</h1>
                                 </div>
-                                <div class="col-sm">
+                                <div class="col-sm-3">
                                     Umur Ibu
                                     <h1>{{ $ibuHamil->umur_ibu }} Tahun</h1>
                                 </div>
-                                <div class="col-sm">
+                                <div class="col-sm-3">
                                     Alamat
                                     <h1>{{ $ibuHamil->alamat }}</h1>
                                 </div>
-                                <div class="col-sm">
+                                <div class="col-sm-3">
                                     Email
                                     <h1>{{ $ibuHamil->email }}</h1>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-sm">
+                                <div class="col-sm-3">
                                     NIK
                                     <h1>{{ $ibuHamil->nik }}</h1>
                                 </div>
-                                <div class="col-sm">
+                                <div class="col-sm-3">
                                     Nomor Telepon
                                     <h1>{{ $ibuHamil->no_telepon }}</h1>
                                 </div>
-                                <div class="col-sm">
+                                <div class="col-sm-3">
                                     Kehamilan Ke
                                     <h1>{{ $ibuHamil->kehamilan_ke }}</h1>
                                 </div>
-                                <div class="col-sm">
+                                <div class="col-sm-3">
                                     Nama Suami
                                     <h1>{{ $ibuHamil->nama_suami }}</h1>
                                 </div>
                             </div>
 
                             <div class="row">
-                                <div class="col-sm">
+                                <div class="col-sm-3">
                                     Umur Suami
                                     <h1>{{ $ibuHamil->umur_suami }} Tahun</h1>
                                 </div>
-                                <div class="col-sm">
+                                <div class="col-sm-3">
                                     No. JKN TK 1
                                     <h1>{{ $ibuHamil->no_jkn_faskes_tk_1 }}</h1>
                                 </div>
-                                <div class="col-sm">
+                                <div class="col-sm-3">
                                     No. JKN Rujukan
                                     <h1>{{ $ibuHamil->no_jkn_rujukan }}</h1>
                                 </div>
-                                <div class="col-sm">
+                                <div class="col-sm-3">
                                     Golongan Darah
                                     <h1>{{ $ibuHamil->gol_darah }}</h1>
                                 </div>
@@ -164,7 +164,7 @@
                         </div>
                     </div>
 
-                    @include('data-ibu-hamil.detail-page.components.health-record-section', ['healthRecords' => $healthRecords])
+                    @include('data-ibu-hamil.detail-page.components.kehamilan-record-section', ['kehamilanRecords' => $kehamilanRecords])
                     @include('data-ibu-hamil.detail-page.components.nifas-record-section', ['nifasRecords' => $nifasRecords])
                     @include('data-ibu-hamil.detail-page.components.anak-list-section', ['anakRecords' => $anakRecords])
                     @include('data-ibu-hamil.detail-page.components.kb-record-section', ['kbRecords' => $kbRecords])
