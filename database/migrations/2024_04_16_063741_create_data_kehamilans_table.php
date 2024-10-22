@@ -16,6 +16,7 @@ return new class extends Migration
             $table->bigInteger('id_ibu');
             $table->date('tanggal_kehamilan');
             $table->date('tanggal_hpl');
+            $table->integer('kehamilan_ke');
             $table->rememberToken();
             $table->timestamps();
             });

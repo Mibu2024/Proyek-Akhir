@@ -165,7 +165,6 @@
                     </div>
 
                     @include('data-ibu-hamil.detail-page.components.kehamilan-record-section', ['kehamilanRecords' => $kehamilanRecords])
-                    @include('data-ibu-hamil.detail-page.components.nifas-record-section', ['nifasRecords' => $nifasRecords])
                     @include('data-ibu-hamil.detail-page.components.anak-list-section', ['anakRecords' => $anakRecords])
                     @include('data-ibu-hamil.detail-page.components.kb-record-section', ['kbRecords' => $kbRecords])
                 </div>

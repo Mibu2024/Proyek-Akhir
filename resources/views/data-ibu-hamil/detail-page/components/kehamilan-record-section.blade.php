@@ -36,7 +36,13 @@
 
 <!-- card list riwayat kehamilan -->
 @if ($kehamilanRecords->isEmpty())
-    <p style="text-align: center;">-- No record found --</p>
+    <p 
+    style="text-align: center; 
+    width: 100%; 
+    padding: 30px; 
+    border-radius: 8px;
+    margin-top: 20px;
+    box-shadow: 0 0px 8px rgba(0, 0, 0, 0.2);">-- No record found --</p>
 @else
     @foreach ($kehamilanRecords as $record)
         <div class="card-list-kesehatan">
