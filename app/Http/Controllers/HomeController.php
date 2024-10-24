@@ -58,7 +58,7 @@ class HomeController extends Controller
         // Fetch nifas records that match the id_ibu from ibuHamil
         $nifasRecords = DataNifas::where('id_ibu', $ibuHamil->id)->get();
 
-        // Fetch nifas records that match the id_ibu from ibuHamil
+        // Fetch anak  records that match the id_ibu from ibuHamil
         $anakRecords = DataAnak::where('id_ibu', $ibuHamil->id)->get();
 
         // Fetch kb records that match the id_ibu from ibuHamil

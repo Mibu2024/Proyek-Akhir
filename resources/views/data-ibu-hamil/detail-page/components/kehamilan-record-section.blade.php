@@ -24,7 +24,7 @@
                <a class="dropdown-item" href="#">Desember</a>
             </div>
          </div>
-         <a href="{{ route('data-kesehatan.create') }}" class="btn btn-create-data-kesehatan ml-2 d-flex align-items-center justify-content-center">
+         <a href="{{ route('data-kehamilan.create', $ibuHamil -> id) }}" class="btn btn-create-data-kesehatan ml-2 d-flex align-items-center justify-content-center">
          <i class="flaticon2-add-1"></i>
          <span>Tambah Kehamilan</span> 
          </a>
@@ -50,7 +50,7 @@
             <div class="row">
                 <div class="col-sm-5">
                     <p>Tanggal Kehamilan</p>
-                    <h4>{{ \Carbon\Carbon::parse($record->tanggal)->format('d F Y') }}</h4>
+                    <h4>{{ \Carbon\Carbon::parse($record->tanggal_kehamilan)->format('d F Y') }}</h4>
                 </div>
                 <div class="col-sm-2">
                     <span class="status-badge">Kehamilan Ke: {{ $record->kehamilan_ke }}</span>
@@ -58,10 +58,16 @@
                 <div class="col-sm col-hpl">
                     <span class="status-badge">HPL: {{ \Carbon\Carbon::parse($record->tanggal_hpl)->format('d F Y') }}</span>
                 </div>
-                <div class="col-sm-1 justify-content-end">
-                    <a href="{{ route('data-kehamilan.detail', $record->id_ibu) }}" class="btn btn-m btn-primary" style="background-color: #E7FFEA; color: #45A350; outline: none; box-shadow: none; border: 1px solid green">
-                        <b>View</b>
-                    </a>    
+                <div class="col-sm-1 justify-content-end">  
+                <button 
+    type="button" 
+    class="btn btn-outline-info status-badge" 
+    onclick="window.location.href='{{ route('data-kehamilan.detail', [$record->id_ibu, $record->id_kehamilan]) }}'" 
+    style="font-size: 12px; border-radius: 8px;">
+        View
+</button>
+
+
                 </div>
             </div>  
         </div>

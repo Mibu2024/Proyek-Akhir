@@ -35,10 +35,11 @@ class DataKehamilanController extends Controller
         return view('', compact('data_kehamilans', 'currentPage'));
     }
 
-    public function detail($id)
+    public function detail($id, $id_kehamilan)
     {
         // Fetch the record based on the ID from the 'DataIbuHamil' model
         $ibuHamil = DataIbuHamil::find($id);
+        
 
         // Check if the record exists
         if (!$ibuHamil) {
@@ -46,22 +47,25 @@ class DataKehamilanController extends Controller
         }
 
         // Fetch health records that match the id_ibu from ibuHamil
-        $healthRecords = DataKesehatan::where('id_ibu', $ibuHamil->id)->get();
+        $healthRecords = DataKesehatan::where('id_ibu', $ibuHamil->id)
+                                            ->where('id_kehamilan', $id_kehamilan)
+                                            ->get();
 
         // Fetch nifas records that match the id_ibu from ibuHamil
-        $nifasRecords = DataNifas::where('id_ibu', $ibuHamil->id)->get();
+        $nifasRecords = DataNifas::where('id_ibu', $ibuHamil->id)
+                                            ->where('id_kehamilan', $id_kehamilan)
+                                            ->get();
 
         // Pass the data to the view
-        return view('data-ibu-hamil/detail-page/detail-kehamilan', compact('ibuHamil', 'healthRecords', 'nifasRecords'));
+        return view('data-ibu-hamil/detail-page/detail-kehamilan', compact( 'ibuHamil', 'healthRecords', 'nifasRecords'));
     }
 
-    public function create()
+    public function create($id)
     {
-        $data_kehamilans = DataKehamilan::all();
-        $data_pemeriksas = User::all();
-
-        return view('', compact('data_kehamilans', 'data_pemeriksas'));
+        $ibuHamil = DataIbuHamil::find($id);  // Fetch the related Ibu Hamil based on the ID
+        return view('data-ibu-hamil.detail-page.form.create-data-kehamilan', compact('ibuHamil'));
     }
+
 
     public function store(Request $request)
     {
@@ -74,13 +78,14 @@ class DataKehamilanController extends Controller
             'tanggal_kehamilan.required'         => 'Tanggal kehamilan wajib diisi.',
             'tanggal_hpl.required'               => 'Tanggal HPL wajib diisi.',
             'kehamilan_ke.required'              => 'Kehamilan ke wajib diisi.',
+            'id_ibu.required'                    => 'id ibu ke wajib diisi.',
         ]);
 
         $data = $request->all();
 
         DataKehamilan::create($data);
         toast('Data Berhasil Ditambahkan', 'success');
-        return redirect()->route('');
+        return redirect()->route('data-ibu-hamil.detail', ['id' => $request->id_ibu]);
     }
 
 

@@ -18,7 +18,7 @@
             box-shadow: 0 0px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .detail-ibu-container {
+        .detail-anak-container {
             position: relative;
             max-width: 100%;
             height: relative;
@@ -89,24 +89,62 @@
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">Data Ibu Hamil</a></li>
                             <li class="breadcrumb-item"><a href="{{ route('data-ibu-hamil.detail', $ibuHamil->id) }}">Detail Ibu Hamil</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Detail Kehamilan</li>
+                            <li class="breadcrumb-item active" aria-current="page">Detail Anak</li>
                         </ol>
                     </nav>
-
                     <hr>
 
                     <!-- Banner Section -->
                     <div class="banner-container">
                         <div class="banner-background">
                             <div class="banner-text">
-                                <h1>Detail Kehamilan</h1>
+                                <h1>Detail Anak</h1>
                             </div>
                         </div>
                     </div>
 
-                    @include('data-ibu-hamil.detail-page.components.health-record-section', ['healthRecords' => $healthRecords])
-                    @include('data-ibu-hamil.detail-page.components.nifas-record-section', ['nifasRecords' => $nifasRecords])
-                </div>
+                    <!-- Data Anak Section -->
+                    <div class="detail-anak-container">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    Nama Anak
+                                    <h1>{{ $anakRecords->nama_anak }}</h1>
+                                </div>
+                                <div class="col-sm-3">
+                                    Nama Ibu
+                                    <h1>{{ $anakRecords->nama_ibu }} Tahun</h1>
+                                </div>
+                                <div class="col-sm-3">
+                                    Tanggal Lahir
+                                    <h1>{{ $anakRecords->tanggal_lahir }}</h1>
+                                </div>
+                                <div class="col-sm-3">
+                                    Umur (Bulan)
+                                    <h1>{{ $anakRecords->umur }}</h1>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    Berat Badan (Kg)
+                                    <h1>{{ $anakRecords->berat_badan }}</h1>
+                                </div>
+                                <div class="col-sm-3">
+                                    Lingkar Kepala (Cm)
+                                    <h1>{{ $anakRecords->lingkar_kepala }}</h1>
+                                </div>
+                                <div class="col-sm-3">
+                                    Tinggi Badan (Cm)
+                                    <h1>{{ $anakRecords->tinggi_badan }}</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @include('data-ibu-hamil.detail-page.components.status-imunisasi-section', ['imunisasiRecords' => $imunisasiRecords])
+
+                   </div>
             </div>
         </div>
     </div>

@@ -54,8 +54,13 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/data-kesehatan/view-foto-usg/{id}', [App\Http\Controllers\DataKesehatanController::class, 'viewFotoUsg'])->name('data-kesehatan.view-foto-usg');
 
     // route halaman data kehamilan
-    Route::get('/data-ibu-hamil/detail-kehamilan/{id}', [App\Http\Controllers\DataKehamilanController::class, 'detail'])->name('data-kehamilan.detail');
-
+    Route::get('/data-ibu-hamil/detail-kehamilan/{id}/{id_kehamilan}', [App\Http\Controllers\DataKehamilanController::class, 'detail'])->name('data-kehamilan.detail');
+    Route::get('/data-kehamilan', [App\Http\Controllers\DataKehamilanController::class, 'index'])->name('data-kehamilan.index');
+    Route::get('/create-data-kehamilan/{id}', [App\Http\Controllers\DataKehamilanController::class, 'create'])->name('data-kehamilan.create');
+    Route::post('/store-data-kehamilan', [App\Http\Controllers\DataKehamilanController::class, 'store'])->name('data-kehamilan.store');
+    Route::get('/data-kehamilan/{id}/edit', [App\Http\Controllers\DataKehamilanController::class, 'edit'])->name('data-kehamilan.edit');
+    Route::put('/data-kehamilan/{id}', [App\Http\Controllers\DataKehamilanController::class, 'update'])->name('data-kehamilan.update');
+    Route::delete('/data-kehamilan/{id}', [App\Http\Controllers\DataKehamilanController::class, 'delete'])->name('data-kehamilan.delete');
 
     // route buat halaman data nifas
     Route::get('/data-nifas', [App\Http\Controllers\DataNifasController::class, 'index'])->name('data-nifas.index');
@@ -74,6 +79,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::put('/data-anak/{id}', [App\Http\Controllers\DataAnakController::class, 'update'])->name('data-anak.update');
     Route::delete('/data-anak/{id}', [App\Http\Controllers\DataAnakController::class, 'delete'])->name('data-anak.delete');
     Route::get('data-anak/download', [App\Http\Controllers\DataAnakController::class, 'download'])->name('data-anak.download');
+    Route::get('/data-ibu-hamil/detail-anak/{id}', [App\Http\Controllers\DataAnakController::class, 'detail'])->name('data-anak.detail');
 
     // route buat halaman data imunisasi
     Route::get('/data-imunisasi', [App\Http\Controllers\DataImunisasiController::class, 'index'])->name('data-imunisasi.index');

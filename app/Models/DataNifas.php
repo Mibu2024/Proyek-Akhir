@@ -16,6 +16,7 @@ class DataNifas extends Model
         'tanggal',
         'nama_ibu',
         'id_ibu',
+        'id_kehamilan',
         'kunjungan_nifas',
         'hasil_periksa_payudara',
         'hasil_periksa_pendarahan',

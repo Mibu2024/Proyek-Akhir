@@ -14,6 +14,7 @@ class DataAnak extends Model
     protected $table = 'data_anaks';
     
     protected $fillable =  [
+        'id',
         'tanggal',
         'nama_ibu',
         'id_ibu',

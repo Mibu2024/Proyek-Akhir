@@ -12,7 +12,7 @@ class DataKehamilan extends Model
     protected $table = 'data_kehamilans';
     
     protected $fillable =  [
-        'id',
+        'id_kehamilan',
         'id_ibu',
         'tanggal_kehamilan',
         'tanggal_hpl',

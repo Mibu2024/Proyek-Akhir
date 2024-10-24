@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DataAnak;
 use App\Models\DataIbuHamil;
+use App\Models\DataImunisasi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
@@ -31,6 +32,26 @@ class DataAnakController extends Controller
         $currentPage = $data_anaks->currentPage();
         return view('data-catatan-anak/data-anak', compact('data_anaks', 'currentPage'));
     }
+
+    public function detail($id)
+    {
+        // Fetch the specific 'DataAnak' record based on the ID
+        $anakRecords = DataAnak::find($id);
+
+        // Check if the record exists
+        if (!$anakRecords) {
+            return redirect()->route('data-ibu-hamil.index')->with('error', 'Data Anak not found.');
+        }
+
+        // Fetch the associated Ibu Hamil record using 'id_ibu'
+        $ibuHamil = DataIbuHamil::find($anakRecords->id_ibu);
+
+        $imunisasiRecords = DataImunisasi::find($anakRecords->id_anak);
+
+        // Pass the data to the view
+        return view('data-ibu-hamil/detail-page/detail-anak', compact('anakRecords', 'ibuHamil', 'imunisasiRecords'));
+    }
+
 
     public function create()
     {

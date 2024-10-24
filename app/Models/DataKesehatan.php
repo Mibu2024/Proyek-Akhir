@@ -16,6 +16,7 @@ class DataKesehatan extends Model
         'tanggal',
         'nama_ibu',
         'id_ibu',
+        'id_kehamilan',
         'keluhan',
         'tekanan_darah',
         'berat_badan',

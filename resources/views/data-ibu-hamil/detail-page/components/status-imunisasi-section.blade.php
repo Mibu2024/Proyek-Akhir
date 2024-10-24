@@ -1,7 +1,8 @@
-<div class="container-title-riwayat-anak">
+<!-- title riwayat kesehatan -->
+<div class="container-title-status-imunisasi">
    <div class="row align-items-center">
       <div class="col-sm-6">
-         <h3>List Anak</h3>
+         <h3>Status Imunisasi</h3>
       </div>
       <div class="col-sm-6 d-flex justify-content-end align-items-center">
          <div class="btn-group me-2">
@@ -23,53 +24,21 @@
                <a class="dropdown-item" href="#">Desember</a>
             </div>
          </div>
-         <a href="{{ route('data-anak.create') }}" class="btn btn-create-data-anak ml-2 d-flex align-items-center justify-content-center">
+         <a href="{{ route('data-imunisasi.create') }}" class="btn btn-create-data-imunisasi ml-2 d-flex align-items-center justify-content-center">
          <i class="flaticon2-add-1"></i>
-         <span>Tambah List Anak</span> 
+         <span>Tambah Imunisasi</span> 
          </a>
       </div>
    </div>
 </div>
 
-@if ($anakRecords->isEmpty())
-    <p style="text-align: center;">No record found</p>
-@else
-    @foreach ($anakRecords as $record)
-<!-- card list riwayat anak -->
-        <div class="card-list-anak">
-        <div class="container">
-            
-            <div class="row">
-                <!-- Margin for spacing -->
-                <div class="col-sm-5">
-                    <p>{{ \Carbon\Carbon::parse($record->tanggal_lahir)->format('l') }}</p>
-                    <h4>{{ \Carbon\Carbon::parse($record->tanggal_lahir)->format('d F Y') }}</h4>
-                </div>
-                <div class="col-sm-2">
-                    <span class="status-badge">Nama: {{ $record->nama_anak }}</span>
-                </div>
-                <div class="col-sm">
-                    <span class="status-badge">Umur: {{ $record->umur }}</span>
-                </div>
-                <div class="col-sm-1 text-end">
-                    <button 
-                    type="button" 
-                    class="btn btn-outline-info status-badge" 
-                    onclick="window.location.href='{{ route('data-anak.detail', $record->id) }}'" 
-                    style="font-size: 12px; border-radius: 8px;">
-                        View
-                    </button>
-                </div>
-            </div>
-            
-        </div>
-        </div>
-    @endforeach
-@endif
+<div class="imunisasi-status-container">
+
+</div>
 
 <head>
     <style>
-        .card-list-anak {
+        .imunisasi-status-container {
             position: relative;
             max-width: 100%;
             border-radius: 8px;
@@ -80,40 +49,14 @@
             background-color: #f8f9fa;
         }
 
-        .card-list-anak .row {
-            align-items: center;
-        }
-
-        .card-list-anak p {
-            margin-bottom: 0;
-            color: #6c757d;
-        }
-
-        .card-list-anak h4 {
-            margin-bottom: 0;
-            font-weight: bold;
-            color: #495057;
-        }
-
-        .status-badge {
-            display: inline-block;
-            padding: 12px;
-            border-radius: 8px;
-            font-size: 13px;
-            opacity: 0.9;
-            font-weight: bold;
-            text-align: center;
-            background-color: #FDECC9;
-            color: black;
-        }
 
         @media (max-width: 768px) {
-            .card-list-kesehatan .col-sm {
+            .imunisasi-status-container {
                 margin-bottom: 10px;
             }
         }
 
-        .btn-create-data-anak {
+        .btn-create-data-imunisasi {
             align-items: center;
             border-radius: 8px;
             height: 50px;
@@ -122,7 +65,7 @@
             color: #4DBEFF;
         }
 
-        .btn-create-data-anak:hover {
+        .btn-create-data-imunisasi:hover {
             align-items: center;
             border-radius: 8px;
             height: 50px;
@@ -131,7 +74,7 @@
             color: white;
         }
 
-        .btn-create-data-anak:hover .flaticon2-add-1 {
+        .btn-create-data-imunisasi:hover .flaticon2-add-1 {
             align-items: center;
             border-radius: 8px;
             height: 50px;
@@ -144,7 +87,7 @@
             color: #4DBEFF;
         }
 
-        .container-title-riwayat-anak {
+        .container-title-status-imunisasi {
             margin-top: 30px;
         }
 
