@@ -44,9 +44,9 @@ class DataLayananKbController extends Controller
         return view('data-layanan-kb/data-layanan-kb', compact('data_layanan_kbs', 'currentPage'));
     } 
 
-    public function create()
+    public function create($id)
     {
-        $data_ibu_hamils = DataIbuHamil::all();
+        $data_ibu_hamils = DataIbuHamil::find($id);
 
         return view('data-layanan-kb/create-data-layanan-kb', compact('data_ibu_hamils'));
     }
@@ -55,7 +55,6 @@ class DataLayananKbController extends Controller
     {
         $request->validate([
             'tanggal_praktik'      => 'required',
-            'nama_ibu'             => 'required',
             'id_ibu'               => 'required|exists:data_ibu_hamils,id',
             'tekanan_darah'        => 'required|integer',
             'berat_badan'          => 'required|integer',
@@ -64,7 +63,6 @@ class DataLayananKbController extends Controller
             'keluhan'              => 'required'
         ], [
             'tanggal_praktik.required'      => 'Tanggal wajib diisi.',
-            'nama_ibu.required'             => 'Nama Ibu wajib diisi.',
             'tekanan_darah.required'        => 'Tekanan darah wajib diisi.',
             'tekanan_darah.integer'         => 'Tekanan darah harus berupa angka.',
             'berat_badan.required'          => 'Berat badan wajib diisi.',
@@ -79,7 +77,7 @@ class DataLayananKbController extends Controller
 
         DataLayananKb::create($data);
         toast('Data Berhasil Ditambahkan', 'success');
-        return redirect()->route('data-layanan-kb.index');
+        return redirect()->route('data-ibu-hamil.detail', ['id' => $request->id_ibu]);
     }
 
     public function edit($id)

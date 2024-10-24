@@ -59,9 +59,6 @@
             <a href="{{ route('data-anak.download') }}" class="btn btn-outline-primary ml-2">
                 <i class="flaticon2-download"></i> Download
             </a>
-            <a href="{{ route('data-anak.create') }}" class="btn btn-primary ml-2">
-                <i class="flaticon2-add-1"></i> Tambah Data
-            </a>
         </div>
     </div>
 </div>

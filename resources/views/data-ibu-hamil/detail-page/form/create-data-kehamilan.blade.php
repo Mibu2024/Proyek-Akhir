@@ -88,6 +88,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">Data Ibu Hamil</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('data-ibu-hamil.detail', $ibuHamil->id) }}">Detail Ibu Hamil</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Create Data Kehamilan</li>
                         </ol>
                     </nav>
@@ -145,7 +146,8 @@
                                 </div>    
 
                                 <div class="text-right">
-                                    
+                                    <a href="{{ route('data-ibu-hamil.detail', $ibuHamil->id) }}" class="btn btn-outline-danger mr-2"
+                                    role="button">Batal</a>
                                     <button type="submit" class="btn btn-success">Simpan</button>
                                 </div>
 

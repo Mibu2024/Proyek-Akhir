@@ -23,7 +23,7 @@
                <a class="dropdown-item" href="#">Desember</a>
             </div>
          </div>
-         <a href="{{ route('data-anak.create') }}" class="btn btn-create-data-anak ml-2 d-flex align-items-center justify-content-center">
+         <a href="{{ route('data-anak.create', $ibuHamil -> id) }}" class="btn btn-create-data-anak ml-2 d-flex align-items-center justify-content-center">
          <i class="flaticon2-add-1"></i>
          <span>Tambah List Anak</span> 
          </a>

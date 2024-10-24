@@ -23,7 +23,7 @@
                <a class="dropdown-item" href="#">Desember</a>
             </div>
          </div>
-         <a href="{{ route('data-layanan-kb.create') }}" class="btn btn-create-data-kb ml-2 d-flex align-items-center justify-content-center">
+         <a href="{{ route('data-layanan-kb.create', $ibuHamil->id) }}" class="btn btn-create-data-kb ml-2 d-flex align-items-center justify-content-center">
          <i class="flaticon2-add-1"></i>
          <span>Tambah Layanan KB</span> 
          </a>

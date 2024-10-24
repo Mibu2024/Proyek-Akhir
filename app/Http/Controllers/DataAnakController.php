@@ -53,9 +53,9 @@ class DataAnakController extends Controller
     }
 
 
-    public function create()
+    public function create($id)
     {
-        $data_ibu_hamils = DataIbuHamil::all();
+        $data_ibu_hamils = DataIbuHamil::find($id);
         return view('data-catatan-anak/create-data-anak', compact('data_ibu_hamils'));
     }
 
@@ -63,7 +63,6 @@ class DataAnakController extends Controller
     {
         $request->validate([
             'tanggal'           => 'required',
-            'nama_ibu'          => 'required',
             'id_ibu'            => 'required|exists:data_ibu_hamils,id',
             'nama_anak'         => 'required',
             'tanggal_lahir'     => 'required',
@@ -73,7 +72,6 @@ class DataAnakController extends Controller
             'lingkar_kepala'    => 'required',
         ], [
             'tanggal.required'          => 'Tanggal Periksa wajib diisi.',
-            'nama_ibu.required'         => 'Nama Ibu wajib diisi.',
             'nama_anak.required'        => 'Nama Anak wajib diisi.',
             'tanggal_lahir.required'    => 'Tanggal Lahir wajib diisi.',
             'umur.required'             => 'Umur wajib diisi.',
@@ -89,7 +87,7 @@ class DataAnakController extends Controller
 
         DataAnak::create($data);
         toast('Data Berhasil Ditambahkan','success');
-        return redirect()->route('data-anak.index');
+        return redirect()->route('data-ibu-hamil.detail', ['id' => $request->id_ibu]);
     }
 
     public function edit($id)

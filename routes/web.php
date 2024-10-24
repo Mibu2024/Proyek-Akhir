@@ -73,7 +73,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     // route buat halaman data anak
     Route::get('/data-anak', [App\Http\Controllers\DataAnakController::class, 'index'])->name('data-anak.index');
-    Route::get('/create-data-anak', [App\Http\Controllers\DataAnakController::class, 'create'])->name('data-anak.create');
+    Route::get('/create-data-anak/{id}', [App\Http\Controllers\DataAnakController::class, 'create'])->name('data-anak.create');
     Route::post('/store-data-anak', [App\Http\Controllers\DataAnakController::class, 'store'])->name('data-anak.store');
     Route::get('/data-anak/{id}/edit', [App\Http\Controllers\DataAnakController::class, 'edit'])->name('data-anak.edit');
     Route::put('/data-anak/{id}', [App\Http\Controllers\DataAnakController::class, 'update'])->name('data-anak.update');
@@ -92,7 +92,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     // route layanan kb
     Route::get('/data-layanan-kb', [App\Http\Controllers\DataLayananKbController::class, 'index'])->name('data-layanan-kb.index');
-    Route::get('/create-data-layanan-kb', [App\Http\Controllers\DataLayananKbController::class, 'create'])->name('data-layanan-kb.create');
+    Route::get('/create-data-layanan-kb/{id}', [App\Http\Controllers\DataLayananKbController::class, 'create'])->name('data-layanan-kb.create');
     Route::post('/store-data-layanan-kb', [App\Http\Controllers\DataLayananKbController::class, 'store'])->name('data-layanan-kb.store');
     Route::get('data-layanan-kb/download', [App\Http\Controllers\DataLayananKbController::class, 'download'])->name('data-layanan-kb.download');
     Route::get('/data-layanan-kb/{id}/edit', [App\Http\Controllers\DataLayananKbController::class, 'edit'])->name('data-layanan-kb.edit');
