@@ -197,7 +197,7 @@ class HomeController extends Controller
         $data_ibu_hamils->save();
 
         toast('Data Berhasil Diubah','success');
-        return redirect()->route('home');
+        return redirect()->route('data-ibu-hamil.detail', ['id' => $data_ibu_hamils->id]);
     }
 
     public function delete($id)
