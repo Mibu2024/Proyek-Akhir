@@ -161,6 +161,18 @@
                                     <h1>{{ $ibuHamil->gol_darah }}</h1>
                                 </div>
                             </div>
+
+                            <div class="row mt-4">
+                                <div class="col text-right">
+                                    <a href="{{ route('data-ibu-hamil.edit', $ibuHamil->id) }}" class="btn btn-info">Edit</a>
+
+                                    <form action="{{ route('data-ibu-hamil.delete', $ibuHamil->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
