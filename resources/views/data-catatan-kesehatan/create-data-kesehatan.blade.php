@@ -295,7 +295,7 @@
 
                     <div class="row mt-4">
                         <div class="col-12 text-right">
-                            <a href="{{ route('data-kesehatan.index') }}" class="btn btn-outline-danger mr-2" role="button">Batal</a>
+                            <a href="{{ route('data-kehamilan.detail', [$data_ibu_hamils->id, $kehamilan->id_kehamilan]) }}" class="btn btn-outline-danger mr-2" role="button">Batal</a>
                             <button type="submit" class="btn btn-success">Simpan</button>
                         </div>
                     </div>

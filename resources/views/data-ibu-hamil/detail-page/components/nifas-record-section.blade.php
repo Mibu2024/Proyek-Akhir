@@ -24,7 +24,7 @@
                <a class="dropdown-item" href="#">Desember</a>
             </div>
          </div>
-         <a href="{{ route('data-nifas.create') }}" class="btn btn-create-data-nifas ml-2 d-flex align-items-center justify-content-center">
+         <a href="{{ route('data-nifas.create', [$ibuHamil->id, $kehamilan->id_kehamilan]) }}" class="btn btn-create-data-nifas ml-2 d-flex align-items-center justify-content-center">
          <i class="flaticon2-add-1"></i>
          <span>Tambah Catatan Nifas</span> 
          </a>

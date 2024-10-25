@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\DataNifas;
 use App\Models\DataIbuHamil;
+use App\Models\DataKehamilan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
@@ -26,17 +27,17 @@ class DataNifasController extends Controller
         return view('data-catatan-nifas/data-nifas', compact('data_nifas', 'currentPage'));
     }
 
-    public function create()
+    public function create($id, $id_kehamilan)
     {
-        $data_ibu_hamils = DataIbuHamil::all();
-        return view('data-catatan-nifas/create-data-nifas', compact('data_ibu_hamils'));
+        $data_ibu_hamils = DataIbuHamil::find($id);
+        $kehamilan = DataKehamilan::findOrFail($id_kehamilan);
+        return view('data-catatan-nifas/create-data-nifas', compact('kehamilan', 'data_ibu_hamils'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'tanggal'                   => 'required',
-            'nama_ibu'                  => 'required',
             'id_ibu'                    => 'required|exists:data_ibu_hamils,id',
             'kunjungan_nifas'           => 'required',
             'hasil_periksa_payudara'    => 'required',
@@ -47,7 +48,6 @@ class DataNifasController extends Controller
             'tindakan'                  => 'required',
         ], [
             'tanggal.required'                   => 'Tanggal wajib diisi.',
-            'nama_ibu.required'                  => 'Nama Ibu wajib diisi.',
             'kunjungan_nifas.required'           => 'Kunjungan Nifas wajib diisi.',
             'hasil_periksa_payudara.required'    => 'Hasil Periksa Payudara wajib diisi.',
             'hasil_periksa_pendarahan.required'  => 'Hasil Periksa Pendarahan wajib diisi.',
@@ -63,7 +63,7 @@ class DataNifasController extends Controller
 
         DataNifas::create($data);
         toast('Data Berhasil Ditambahkan','success');
-        return redirect()->route('data-nifas.index');
+        return redirect()->route('data-kehamilan.detail', ['id' => $request->id_ibu, 'id_kehamilan' => $request->id_kehamilan]);
     }
 
     public function edit($id)
