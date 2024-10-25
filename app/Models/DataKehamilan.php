@@ -10,6 +10,7 @@ class DataKehamilan extends Model
     use HasFactory;
 
     protected $table = 'data_kehamilans';
+    protected $primaryKey = 'id_kehamilan';
     
     protected $fillable =  [
         'id_kehamilan',

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\DataIbuHamil;
 use Illuminate\Http\Request;
 use App\Models\DataKesehatan;
-use App\Models\User;
+use App\Models\DataKehamilan;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\File;
 
@@ -43,19 +43,20 @@ class DataKesehatanController extends Controller
         return view('data-catatan-kesehatan/data-kesehatan', compact('data_kesehatans', 'currentPage'));
     }
 
-    public function create()
+    public function create($id, $id_kehamilan)
     {
-        $data_ibu_hamils = DataIbuHamil::all();
+        $data_ibu_hamils = DataIbuHamil::findOrFail($id);
+        $kehamilan = DataKehamilan::findOrFail($id_kehamilan);
 
-        return view('create-data-kesehatan', compact('data_ibu_hamils'));
+        return view('data-catatan-kesehatan/create-data-kesehatan', compact('data_ibu_hamils', 'kehamilan'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'tanggal'              => 'required',
-            'nama_ibu'             => 'required',
             'id_ibu'               => 'required|exists:data_ibu_hamils,id',
+            'id_kehamilan'         => 'required|exists:data_kehamilans,id_kehamilan',
             'keluhan'              => 'required',
             'tekanan_darah'        => 'required|integer',
             'berat_badan'          => 'required|integer',
@@ -73,7 +74,6 @@ class DataKesehatanController extends Controller
             'lingkar_lengan_atas'  => 'required'
         ], [
             'tanggal.required'              => 'Tanggal wajib diisi.',
-            'nama_ibu.required'             => 'Nama Ibu wajib diisi.',
             'keluhan.required'              => 'Keluhan wajib diisi.',
             'tekanan_darah.required'        => 'Tekanan darah wajib diisi.',
             'tekanan_darah.integer'         => 'Tekanan darah harus berupa angka.',
@@ -106,7 +106,7 @@ class DataKesehatanController extends Controller
 
         DataKesehatan::create($data);
         toast('Data Berhasil Ditambahkan', 'success');
-        return redirect()->route('data-kesehatan.index');
+        return redirect()->route('data-ibu-hamil.detail', ['id' => $request->id_ibu]);
     }
 
 

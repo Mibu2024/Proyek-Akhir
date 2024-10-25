@@ -39,7 +39,7 @@ class DataKehamilanController extends Controller
     {
         // Fetch the record based on the ID from the 'DataIbuHamil' model
         $ibuHamil = DataIbuHamil::find($id);
-        
+        $kehamilan = DataKehamilan::find($id_kehamilan);
 
         // Check if the record exists
         if (!$ibuHamil) {
@@ -57,7 +57,7 @@ class DataKehamilanController extends Controller
                                             ->get();
 
         // Pass the data to the view
-        return view('data-ibu-hamil/detail-page/detail-kehamilan', compact( 'ibuHamil', 'healthRecords', 'nifasRecords'));
+        return view('data-ibu-hamil/detail-page/detail-kehamilan', compact(  'kehamilan', 'ibuHamil', 'healthRecords', 'nifasRecords'));
     }
 
     public function create($id)

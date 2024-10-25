@@ -45,7 +45,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     // route buat halaman data kesehatan
     Route::get('/data-kesehatan', [App\Http\Controllers\DataKesehatanController::class, 'index'])->name('data-kesehatan.index');
-    Route::get('/create-data-kesehatan', [App\Http\Controllers\DataKesehatanController::class, 'create'])->name('data-kesehatan.create');
+    Route::get('/create-data-kesehatan/{id}/{id_kehamilan}', [App\Http\Controllers\DataKesehatanController::class, 'create'])->name('data-kesehatan.create');
     Route::post('/store-data-kesehatan', [App\Http\Controllers\DataKesehatanController::class, 'store'])->name('data-kesehatan.store');
     Route::get('/data-kesehatan/{id}/edit', [App\Http\Controllers\DataKesehatanController::class, 'edit'])->name('data-kesehatan.edit');
     Route::put('/data-kesehatan/{id}', [App\Http\Controllers\DataKesehatanController::class, 'update'])->name('data-kesehatan.update');

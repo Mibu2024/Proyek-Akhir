@@ -64,12 +64,12 @@
                 </div>
                 <div class="col-sm-1 justify-content-end">  
                 <button 
-    type="button" 
-    class="btn btn-outline-info status-badge" 
-    onclick="window.location.href='{{ route('data-kehamilan.detail', [$record->id_ibu, $record->id_kehamilan]) }}'" 
-    style="font-size: 12px; border-radius: 8px;">
-        View
-</button>
+                    type="button" 
+                    class="btn btn-outline-info status-badge" 
+                    onclick="window.location.href='{{ route('data-kehamilan.detail', [$record->id_ibu, $record->id_kehamilan]) }}'" 
+                    style="font-size: 12px; border-radius: 8px;">
+                        View
+                </button>
 
 
                 </div>
