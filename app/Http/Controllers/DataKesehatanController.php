@@ -106,13 +106,13 @@ class DataKesehatanController extends Controller
 
         DataKesehatan::create($data);
         toast('Data Berhasil Ditambahkan', 'success');
-        return redirect()->route('data-ibu-hamil.detail', ['id' => $request->id_ibu]);
+        return redirect()->route('data-kehamilan.detail', ['id' => $request->id_ibu, 'id_kehamilan' => $request->id_kehamilan]);
     }
 
 
-    public function edit($id)
+    public function edit($id, $id_ibu)
     {
-        $data_ibu_hamils = DataIbuHamil::all();
+        $data_ibu_hamils = DataIbuHamil::find($id_ibu);
         $data_kesehatans = DataKesehatan::find($id);
         return view('data-catatan-kesehatan/edit-data-kesehatan', compact('data_kesehatans', 'data_ibu_hamils'));
     }
@@ -121,7 +121,6 @@ class DataKesehatanController extends Controller
     {
         $request->validate([
             'tanggal'              => 'required',
-            'nama_ibu'             => 'required',
             'id_ibu'               => 'required|exists:data_ibu_hamils,id',
             'keluhan'              => 'required',
             'tekanan_darah'        => 'required|integer',
@@ -140,7 +139,6 @@ class DataKesehatanController extends Controller
             'lingkar_lengan_atas'  => 'required'
         ], [
             'tanggal.required'              => 'Tanggal wajib diisi.',
-            'nama_ibu.required'             => 'Nama Ibu wajib diisi.',
             'keluhan.required'              => 'Keluhan wajib diisi.',
             'tekanan_darah.required'        => 'Tekanan darah wajib diisi.',
             'tekanan_darah.integer'         => 'Tekanan darah harus berupa angka.',
@@ -165,7 +163,6 @@ class DataKesehatanController extends Controller
         
         $data_kesehatans                       = DataKesehatan::find($id);
         $data_kesehatans->tanggal              = $request->tanggal;
-        $data_kesehatans->nama_ibu             = $request->nama_ibu;
         $data_kesehatans->id_ibu               = $request->id_ibu;
         $data_kesehatans->keluhan              = $request->keluhan;
         $data_kesehatans->tekanan_darah        = $request->tekanan_darah;
@@ -179,15 +176,13 @@ class DataKesehatanController extends Controller
         $data_kesehatans->kaki_bengkak         = $request->kaki_bengkak;
         $data_kesehatans->nasihat              = $request->nasihat;
         $data_kesehatans->nama_pemeriksa       = $request->nama_pemeriksa;
-        $data_kesehatans->id_pemeriksa         = $request->id_pemeriksa;
-        $data_kesehatans->tanggal_hpl          = $request->tanggal_hpl;
         $data_kesehatans->tinggi_badan         = $request->tinggi_badan;
         $data_kesehatans->lingkar_perut        = $request->lingkar_perut;
         $data_kesehatans->lingkar_lengan_atas  = $request->lingkar_lengan_atas;
         $data_kesehatans->save();
 
         toast('Data Berhasil Diubah','success');
-        return redirect()->route('data-kesehatan.index');
+        return redirect()->route('data-kehamilan.detail', ['id' => $request->id_ibu, 'id_kehamilan' => $data_kesehatans->id_kehamilan]);
     }
 
     public function delete($id)
@@ -195,7 +190,7 @@ class DataKesehatanController extends Controller
         $data_kesehatans = DataKesehatan::find($id);
         $data_kesehatans->delete();
         toast('Data Berhasil Dihapus','success');
-        return redirect(route('data-kesehatan.index'));
+        return redirect(route('data-kehamilan.detail', ['id' => $data_kesehatans->id_ibu, 'id_kehamilan' => $data_kesehatans->id_kehamilan]));
     }
 
     public function download()
