@@ -89,14 +89,15 @@ class DataKehamilanController extends Controller
     }
 
 
-    public function edit($id)
+    public function edit($id_kehamilan, $id)
     {
-        $data_kehamilans = DataKehamilan::find($id);
+        $data_kehamilans = DataKehamilan::find($id_kehamilan);
+        $data_ibu_hamils = DataIbuHamil::find($id);
 
-        return view('', compact('data_kehamilans'));
+        return view('data-ibu-hamil.detail-page.form.edit-data-kehamilan', compact('data_ibu_hamils', 'data_kehamilans'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $id_kehamilan)
     {
         $request->validate([
             'id_ibu'                => 'required|exists:data_ibu_hamils,id',
@@ -109,23 +110,23 @@ class DataKehamilanController extends Controller
             'kehamilan_ke.required'              => 'Kehamilan ke wajib diisi.',
         ]);
         
-        $data_kehamilans                       = DataKehamilan::find($id);
-        $data_kehamilans->tanggal_kehamilan    = $request->tanggal;
-        $data_kehamilans->tanggal_hpl          = $request->nama_ibu;
+        $data_kehamilans                       = DataKehamilan::find($id_kehamilan);
+        $data_kehamilans->tanggal_kehamilan    = $request->tanggal_kehamilan;
+        $data_kehamilans->tanggal_hpl          = $request->tanggal_hpl;
         $data_kehamilans->id_ibu               = $request->id_ibu;
-        $data_kehamilans->kehamilan_ke         = $request->keluhan;
+        $data_kehamilans->kehamilan_ke         = $request->kehamilan_ke;
         $data_kehamilans->save();
 
         toast('Data Berhasil Diubah','success');
-        return redirect()->route('');
+        return redirect()->route('data-ibu-hamil.detail', ['id' => $request->id_ibu]);
     }
 
-    public function delete($id)
+    public function delete($id_kehamilan)
     {
-        $data_kehamilans = DataKehamilan::find($id);
+        $data_kehamilans = DataKehamilan::find($id_kehamilan);
         $data_kehamilans->delete();
         toast('Data Berhasil Dihapus','success');
-        return redirect(route(''));
+        return redirect(route('data-ibu-hamil.detail', ['id' => $data_kehamilans->id_ibu]));
     }
 
 }

@@ -58,9 +58,9 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/data-kehamilan', [App\Http\Controllers\DataKehamilanController::class, 'index'])->name('data-kehamilan.index');
     Route::get('/create-data-kehamilan/{id}', [App\Http\Controllers\DataKehamilanController::class, 'create'])->name('data-kehamilan.create');
     Route::post('/store-data-kehamilan', [App\Http\Controllers\DataKehamilanController::class, 'store'])->name('data-kehamilan.store');
-    Route::get('/data-kehamilan/{id}/edit', [App\Http\Controllers\DataKehamilanController::class, 'edit'])->name('data-kehamilan.edit');
-    Route::put('/data-kehamilan/{id}', [App\Http\Controllers\DataKehamilanController::class, 'update'])->name('data-kehamilan.update');
-    Route::delete('/data-kehamilan/{id}', [App\Http\Controllers\DataKehamilanController::class, 'delete'])->name('data-kehamilan.delete');
+    Route::get('/data-kehamilan/edit/{id_kehamilan}/{id}', [App\Http\Controllers\DataKehamilanController::class, 'edit'])->name('data-kehamilan.edit');
+    Route::put('/data-kehamilan/{id_kehamilan}', [App\Http\Controllers\DataKehamilanController::class, 'update'])->name('data-kehamilan.update');
+    Route::delete('/data-kehamilan/{id_kehamilan}', [App\Http\Controllers\DataKehamilanController::class, 'delete'])->name('data-kehamilan.delete');
 
     // route buat halaman data nifas
     Route::get('/data-nifas', [App\Http\Controllers\DataNifasController::class, 'index'])->name('data-nifas.index');

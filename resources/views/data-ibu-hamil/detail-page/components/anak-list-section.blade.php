@@ -60,6 +60,17 @@
                         View
                     </button>
                 </div>
+
+                <div class="dropdown ml-2">
+                    <button class="btn btn-light" type="button" id="dropdownMenuButton{{ $record->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton{{ $record->id }}">
+                        <a class="dropdown-item" href="#">Edit</a>
+                        <a class="dropdown-item" href="#">Delete</a>
+                        <a class="dropdown-item" href="#">More Info</a>
+                    </div>
+                </div>
             </div>
             
         </div>
@@ -163,6 +174,10 @@
 
         .btn-sort::after {
             margin-left: 10px;
+        }
+
+        .card-list-anak, .container, .row {
+            overflow: visible !important;
         }
 
     </style>

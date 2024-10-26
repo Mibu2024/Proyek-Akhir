@@ -1,5 +1,5 @@
 <!-- title riwayat kesehatan -->
-<div class="container-title-riwayat-kesehatan">
+<div class="container-title-riwayat-kehamilan">
    <div class="row align-items-center">
       <div class="col-sm-6">
          <h3>Riwayat Kehamilan</h3>
@@ -28,7 +28,7 @@
             </div>
         </div>
 
-         <a href="{{ route('data-kehamilan.create', $ibuHamil -> id) }}" class="btn btn-create-data-kesehatan ml-2 d-flex align-items-center justify-content-center">
+         <a href="{{ route('data-kehamilan.create', $ibuHamil -> id) }}" class="btn btn-create-data-kehamilan ml-2 d-flex align-items-center justify-content-center">
          <i class="flaticon2-add-1"></i>
          <span>Tambah Kehamilan</span> 
          </a>
@@ -49,7 +49,7 @@
     box-shadow: 0 0px 8px rgba(0, 0, 0, 0.2);">-- No record found --</p>
 @else
     @foreach ($kehamilanRecords as $record)
-        <div class="card-list-kesehatan">
+        <div class="card-list-kehamilan">
         <div class="container">
             <div class="row">
                 <div class="col-sm-5">
@@ -71,8 +71,40 @@
                         View
                 </button>
 
-
                 </div>
+                <div class="dropdown ml-2">
+                    <button class="btn btn-light" type="button" id="dropdownMenuButton{{ $record->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-v"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton{{ $record->id }}">
+                        <a class="dropdown-item" href="{{ route('data-kehamilan.edit', [$record -> id_kehamilan, $record->id_ibu]) }}">Edit</a>
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteModal-{{ $record->id_kehamilan }}">Delete</a>
+                    </div>
+                </div>
+                <div class="modal fade" id="deleteModal-{{ $record->id_kehamilan }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to delete this record?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <form id="deleteForm-{{ $record->id_kehamilan }}" action="{{ route('data-kehamilan.delete', $record->id_kehamilan) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>  
         </div>
         </div>
@@ -81,7 +113,7 @@
 
 <head>
     <style>
-        .card-list-kesehatan {
+        .card-list-kehamilan {
             position: relative;
             max-width: 100%;
             border-radius: 8px;
@@ -92,16 +124,16 @@
             background-color: #f8f9fa;
         }
 
-        .card-list-kesehatan .row {
+        .card-list-kehamilan .row {
             align-items: center;
         }
 
-        .card-list-kesehatan p {
+        .card-list-kehamilan p {
             margin-bottom: 0;
             color: #6c757d;
         }
 
-        .card-list-kesehatan h4 {
+        .card-list-kehamilan h4 {
             margin-bottom: 0;
             font-weight: bold;
             color: #495057;
@@ -125,7 +157,7 @@
             }
         }
 
-        .btn-create-data-kesehatan {
+        .btn-create-data-kehamilan {
             align-items: center;
             border-radius: 8px;
             height: 50px;
@@ -134,7 +166,7 @@
             color: #4DBEFF;
         }
 
-        .btn-create-data-kesehatan:hover {
+        .btn-create-data-kehamilan:hover {
             align-items: center;
             border-radius: 8px;
             height: 50px;
@@ -143,7 +175,7 @@
             color: white;
         }
 
-        .btn-create-data-kesehatan:hover .flaticon2-add-1 {
+        .btn-create-data-kehamilan:hover .flaticon2-add-1 {
             align-items: center;
             border-radius: 8px;
             height: 50px;
@@ -156,7 +188,7 @@
             color: #4DBEFF;
         }
 
-        .container-title-riwayat-kesehatan {
+        .container-title-riwayat-kehamilan {
             margin-top: 30px;
         }
 
@@ -175,6 +207,10 @@
 
         .btn-sort::after {
             margin-left: 10px;
+        }
+
+        .card-list-kehamilan, .container, .row {
+            overflow: visible !important;
         }
 
     </style>
