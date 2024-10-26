@@ -1,4 +1,4 @@
-<a href="{{ route('data-kesehatan.edit', $dk->id) }}" class="btn btn-sm btn-icon btn-light btn-hover-primary mr-2" title="Edit">
+<a href="{{ route('data-kesehatan.edit', [$dk->id, $dk->id_kehamilan]) }}" class="btn btn-sm btn-icon btn-light btn-hover-primary mr-2" title="Edit">
     <i class="flaticon2-edit"></i>
 </a>
 <a href="#" class="btn btn-sm btn-icon btn-light btn-hover-danger" title="Delete" data-toggle="modal" data-target="#deleteModal-{{ $dk->id }}">

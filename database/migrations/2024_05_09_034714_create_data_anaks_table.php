@@ -22,6 +22,71 @@ return new class extends Migration
             $table->string('tinggi_badan');
             $table->string('lingkar_kepala');
             $table->bigInteger('id_ibu');
+
+             // Imunisasi dan tanggal terkait
+             $table->string('hepatitis_b')->nullable();
+             $table->date('tanggal_imunisasi_hepatitis_b')->nullable();
+ 
+             $table->string('bcg')->nullable();
+             $table->date('tanggal_imunisasi_bcg')->nullable();
+ 
+             $table->string('polio_tetes_1')->nullable();
+             $table->date('tanggal_imunisasi_polio_tetes_1')->nullable();
+ 
+             $table->string('dpt_hb_hib_1')->nullable();
+             $table->date('tanggal_imunisasi_dpt_hb_hib_1')->nullable();
+ 
+             $table->string('polio_tetes_2')->nullable();
+             $table->date('tanggal_imunisasi_polio_tetes_2')->nullable();
+ 
+             $table->string('rota_virus_1')->nullable();
+             $table->date('tanggal_imunisasi_rota_virus_1')->nullable();
+ 
+             $table->string('pcv_1')->nullable();
+             $table->date('tanggal_imunisasi_pcv_1')->nullable();
+ 
+             $table->string('dpt_hb_hib_2')->nullable();
+             $table->date('tanggal_imunisasi_dpt_hb_hib_2')->nullable();
+ 
+             $table->string('polio_tetes_3')->nullable();
+             $table->date('tanggal_imunisasi_polio_tetes_3')->nullable();
+ 
+             $table->string('rota_virus_2')->nullable();
+             $table->date('tanggal_imunisasi_rota_virus_2')->nullable();
+ 
+             $table->string('pcv_2')->nullable();
+             $table->date('tanggal_imunisasi_pcv_2')->nullable();
+ 
+             $table->string('dpt_hb_hib_3')->nullable();
+             $table->date('tanggal_imunisasi_dpt_hb_hib_3')->nullable();
+ 
+             $table->string('polio_tetes_4')->nullable();
+             $table->date('tanggal_imunisasi_polio_tetes_4')->nullable();
+ 
+             $table->string('polio_suntik_1')->nullable();
+             $table->date('tanggal_imunisasi_polio_suntik_1')->nullable();
+ 
+             $table->string('rota_virus_3')->nullable();
+             $table->date('tanggal_imunisasi_rota_virus_3')->nullable();
+ 
+             $table->string('campak_rubella')->nullable();
+             $table->date('tanggal_imunisasi_campak_rubella')->nullable();
+ 
+             $table->string('polio_suntik_2')->nullable();
+             $table->date('tanggal_imunisasi_polio_suntik_2')->nullable();
+ 
+             $table->string('japanese_encephalitis')->nullable();
+             $table->date('tanggal_imunisasi_japanese_encephalitis')->nullable();
+ 
+             $table->string('pcv_3')->nullable();
+             $table->date('tanggal_imunisasi_pcv_3')->nullable();
+ 
+             $table->string('dpt_hb_hib_lanjutan')->nullable();
+             $table->date('tanggal_imunisasi_dpt_hb_hib_lanjutan')->nullable();
+ 
+             $table->string('campak_rubella_lanjutan')->nullable();
+             $table->date('tanggal_imunisasi_campak_rubella_lanjutan')->nullable();
+             
             $table->timestamps();
         });
     }

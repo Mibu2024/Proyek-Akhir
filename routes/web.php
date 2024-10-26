@@ -80,6 +80,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::delete('/data-anak/{id}', [App\Http\Controllers\DataAnakController::class, 'delete'])->name('data-anak.delete');
     Route::get('data-anak/download', [App\Http\Controllers\DataAnakController::class, 'download'])->name('data-anak.download');
     Route::get('/data-ibu-hamil/detail-anak/{id}', [App\Http\Controllers\DataAnakController::class, 'detail'])->name('data-anak.detail');
+    Route::put('data-anak/{id}/update-imunisasi', [App\Http\Controllers\DataAnakController::class, 'updateImunisasi'])->name('data-anak.updateImunisasi');
+
 
     // route buat halaman data imunisasi
     Route::get('/data-imunisasi', [App\Http\Controllers\DataImunisasiController::class, 'index'])->name('data-imunisasi.index');

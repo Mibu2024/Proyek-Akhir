@@ -97,6 +97,53 @@ class DataAnakController extends Controller
         return view('data-catatan-anak/edit-data-anak', compact('data_anaks', 'data_ibu_hamils'));
     }
 
+    public function updateImunisasi(Request $request, $id)
+    {
+        // Validate incoming request data
+        $request->validate([
+            'imunisasi_column' => 'required|string', // Expecting a single column name
+            'tanggal_imunisasi' => 'required|date', // Expecting a single date
+        ], [
+            'imunisasi_column.required' => 'Imunisasi column is required.',
+            'tanggal_imunisasi.required' => 'Tanggal field is required.',
+        ]);
+
+        // Fetch the DataAnak record
+        $dataAnak = DataAnak::find($id);
+
+        // Check if the record exists
+        if (!$dataAnak) {
+            return redirect()->back()->with('error', 'Data Anak not found.');
+        }
+
+        // Get the immunization column name from the request
+        $imunisasiColumn = $request->imunisasi_column;
+
+        // Check if the field exists in the fillable array
+        if (in_array($imunisasiColumn, $dataAnak->getFillable())) {
+            // Update the imunisasi name to "Sudah"
+            $dataAnak->{$imunisasiColumn} = "Sudah";
+
+            // Construct the date field name
+            $tanggalField = 'tanggal_imunisasi_' . $imunisasiColumn;
+
+            // Update the corresponding date
+            $dataAnak->{$tanggalField} = $request->tanggal_imunisasi;
+
+            // Save the updated record
+            $dataAnak->save();
+
+            toast('Imunisasi data successfully updated', 'success');
+        } else {
+            return redirect()->back()->with('error', 'Invalid immunization name.');
+        }
+
+        return redirect()->route('data-anak.detail', ['id' => $dataAnak->id]);
+    }
+
+    
+
+
     public function update(Request $request, $id)
     {
         $request->validate([
