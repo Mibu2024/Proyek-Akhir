@@ -1,6 +1,53 @@
 @extends('layouts.app')
 
 @section('content')
+
+<!-- Modal -->
+<div class="modal fade" id="kbRecordModal" tabindex="-1" aria-labelledby="healthRecordModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="healthRecordModalLabel">Health Record Details</h5>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <!-- First Column -->
+            <div class="col-md-6">
+              <p><strong>Tanggal Praktik:</strong> <span id="modalTanggalKb"></span></p>
+              <p><strong>Nama Ibu:</strong> <span id="modalNamaIbuKb"></span></p>
+              <p><strong>Tekanan Darah:</strong> <span id="modalTekananDarahKb"></span></p>
+              <p><strong>Berat Badan:</strong> <span id="modalBeratBadanKb"></span></p>
+            </div>
+            <!-- Second Column -->
+            <div class="col-md-6">
+              <p><strong>Jenis KB:</strong> <span id="modalJenisKb"></span></p>
+              <p><strong>Tanggal Kembali:</strong> <span id="modalTanggalKembaliKb"></span></p>
+              <p><strong>Keluhan:</strong> <span id="modalKeluhanKb"></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- modal script -->
+<script>
+    function setHealthData(record) {
+    document.getElementById('modalTanggalKb').textContent = record.tanggal_praktik;
+    document.getElementById('modalNamaIbuKb').textContent = record.nama_ibu;
+    document.getElementById('modalKeluhanKb').textContent = record.keluhan;
+    document.getElementById('modalTekananDarahKb').textContent = record.tekanan_darah;
+    document.getElementById('modalBeratBadanKb').textContent = record.berat_badan;
+    document.getElementById('modalJenisKb').textContent = record.jenis_kb;
+    document.getElementById('modalTanggalKembaliKb').textContent = record.tanggal_kembali;
+}
+</script>
+
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
     <div class="container">
         <div class="card card-custom">
@@ -32,7 +79,17 @@
                                     <td>{{ $dlk->jenis_kb }}</td>
                                     <td>{{ $dlk->tanggal_kembali }}</td>
                                     <td>{{ $dlk->keluhan }}</td>
-                                    <td><button class="btn btn-m btn-primary view-detail-btn" style="background-color: #E7FFEA; color: #45A350; outline: none; box-shadow: none; border: 1px solid transparent;" data-id="{{ $dlk->id }}" data-toggle="modal"><b>Lihat Detail</b></button>
+                                    <td>
+                                        <button 
+                                            class="btn btn-m btn-primary view-detail-btn" 
+                                            data-toggle="modal" 
+                                            data-target="#kbRecordModal" 
+                                            style="background-color: #E7FFEA; color: #45A350; outline: none; box-shadow: none; border: 1px solid transparent;" 
+                                            data-id="{{ $dlk->id }}" 
+                                            onclick="setHealthData({{ json_encode($dlk) }})"
+                                            data-toggle="modal">
+                                            <b>Lihat Detail</b>
+                                        </button>
                                     </td>
                                     <td>
                                         @include('data-layanan-kb.components.action_buttons', ['dlk' => $dlk])
