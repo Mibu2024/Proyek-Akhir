@@ -110,6 +110,10 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::delete('/data-artikel/{id}', [App\Http\Controllers\DataArtikelController::class, 'delete'])->name('data-artikel.delete');
     Route::get('/data-artikel/view-foto-usg/{id}', [App\Http\Controllers\DataArtikelController::class, 'viewFotoArtikel'])->name('data-artikel.view-foto-artikel');
 
+
+    //route settings
+    Route::get('/settings/{id}', [App\Http\Controllers\SettingsController::class, 'detailUser'])->name('settings.index');
+    
 });    
 
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');

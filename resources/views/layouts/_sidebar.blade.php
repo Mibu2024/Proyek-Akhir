@@ -131,11 +131,6 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{ Request::is('data-imunisasi*') ? 'active' : '' }}" href="{{ route('data-imunisasi.index') }}">
-                <i class="fas fa-clock"></i> <span>Catatan Imunisasi</span>
-            </a>
-        </li>
-        <li class="nav-item">
             <a class="nav-link {{ Request::is('data-anak*') ? 'active' : '' }}" href="{{ route('data-anak.index') }}">
                 <i class="fas fa-child"></i> <span>Catatan Anak</span>
             </a>
@@ -149,7 +144,7 @@
 
     <ul class="nav flex-column">
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link {{ Request::is('settings*') ? 'active' : '' }}" href="{{ route('settings.index', $user->id) }}">
                 <i class="fas fa-cog"></i> <span>Settings</span>
             </a>
         </li>
