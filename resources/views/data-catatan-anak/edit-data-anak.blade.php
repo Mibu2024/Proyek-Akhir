@@ -201,7 +201,7 @@
                     </div>
 
                     <div class="text-right mt-4">
-                        <a href="{{ route('data-anak.index') }}" class="btn btn-outline-danger btn-lg mr-2" role="button">Batal</a>
+                        <a href="{{ route('data-ibu-hamil.detail', $data_anaks->id_ibu) }}" class="btn btn-outline-danger btn-lg mr-2" role="button">Batal</a>
                         <button type="submit" class="btn btn-success btn-lg">Simpan</button>
                     </div>
                 </form>

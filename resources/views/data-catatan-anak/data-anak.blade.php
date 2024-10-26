@@ -26,7 +26,14 @@
                                     <td>{{ $da->nama_anak }}</td>
                                     <td>{{ $da->nama_ibu }}</td>
                                     <td>{{ $da->tanggal_lahir }}</td>
-                                    <td><button class="btn btn-m btn-primary view-detail-btn" style="background-color: #E7FFEA; color: #45A350; outline: none; box-shadow: none; border: 1px solid transparent;" data-id="{{ $da->id }}" data-toggle="modal"><b>Lihat Detail</b></button>
+                                    <td>
+                                        <button 
+                                            class="btn btn-m btn-primary view-detail-btn" 
+                                            style="background-color: #E7FFEA; color: #45A350; outline: none; box-shadow: none; border: 1px solid transparent;" 
+                                            data-id="{{ $da->id }}" 
+                                            onclick="window.location.href='{{ route('data-anak.detail', $da->id) }}'">
+                                            <b>Lihat Detail</b>
+                                        </button>
                                     </td>
                                     <td>
                                         @include('data-catatan-anak.components.action_buttons', ['da' => $da])

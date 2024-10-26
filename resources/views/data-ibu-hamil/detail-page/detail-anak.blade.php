@@ -139,6 +139,18 @@
                                     <h1>{{ $anakRecords->tinggi_badan }}</h1>
                                 </div>
                             </div>
+
+                            <div class="row mt-4">
+                                <div class="col text-right">
+                                    <a href="{{ route('data-anak.edit', [$anakRecords->id, $anakRecords->id_ibu]) }}" class="btn btn-info">Edit</a>
+
+                                    <form action="{{ route('data-anak.delete', $anakRecords->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
