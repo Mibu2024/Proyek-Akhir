@@ -95,7 +95,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/create-data-layanan-kb/{id}', [App\Http\Controllers\DataLayananKbController::class, 'create'])->name('data-layanan-kb.create');
     Route::post('/store-data-layanan-kb', [App\Http\Controllers\DataLayananKbController::class, 'store'])->name('data-layanan-kb.store');
     Route::get('data-layanan-kb/download', [App\Http\Controllers\DataLayananKbController::class, 'download'])->name('data-layanan-kb.download');
-    Route::get('/data-layanan-kb/{id}/edit', [App\Http\Controllers\DataLayananKbController::class, 'edit'])->name('data-layanan-kb.edit');
+    Route::get('/data-layanan-kb/edit/{id}/{id_ibu}', [App\Http\Controllers\DataLayananKbController::class, 'edit'])->name('data-layanan-kb.edit');
     Route::put('/data-layanan-kb/{id}', [App\Http\Controllers\DataLayananKbController::class, 'update'])->name('data-layanan-kb.update');
     Route::delete('/data-layanan-kb/{id}', [App\Http\Controllers\DataLayananKbController::class, 'delete'])->name('data-layanan-kb.delete');
 

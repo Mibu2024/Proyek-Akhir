@@ -80,9 +80,9 @@ class DataLayananKbController extends Controller
         return redirect()->route('data-ibu-hamil.detail', ['id' => $request->id_ibu]);
     }
 
-    public function edit($id)
+    public function edit($id, $id_ibu)
     {
-        $data_ibu_hamils = DataIbuHamil::all();
+        $data_ibu_hamils = DataIbuHamil::find($id_ibu);
         $data_layanan_kbs = DataLayananKb::find($id);
         return view('data-layanan-kb/edit-data-layanan-kb', compact('data_layanan_kbs', 'data_ibu_hamils'));
     }

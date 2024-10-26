@@ -31,6 +31,40 @@
    </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="kbRecordModal" tabindex="-1" aria-labelledby="healthRecordModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="healthRecordModalLabel">Health Record Details</h5>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <!-- First Column -->
+            <div class="col-md-6">
+              <p><strong>Tanggal Praktik:</strong> <span id="modalTanggalKb"></span></p>
+              <p><strong>Nama Ibu:</strong> <span id="modalNamaIbuKb"></span></p>
+              <p><strong>Tekanan Darah:</strong> <span id="modalTekananDarahKb"></span></p>
+              <p><strong>Berat Badan:</strong> <span id="modalBeratBadanKb"></span></p>
+            </div>
+            <!-- Second Column -->
+            <div class="col-md-6">
+              <p><strong>Jenis KB:</strong> <span id="modalJenisKb"></span></p>
+              <p><strong>Tanggal Kembali:</strong> <span id="modalTanggalKembaliKb"></span></p>
+              <p><strong>Keluhan:</strong> <span id="modalKeluhanKb"></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 @if ($kbRecords->isEmpty())
     <p style="text-align: center;">No record found</p>
 @else
@@ -52,7 +86,15 @@
                     <span class="status-badge">Jenis KB: {{ $record->jenis_kb }}</span>
                 </div>
                 <div class="col-sm-1 text-end">
-                    <button type="button" class="btn btn-outline-info status-badge" style="font-size: 12px; border-radius: 8px;">View</button>
+                <button 
+                    data-toggle="modal" 
+                    data-target="#kbRecordModal" 
+                    type="button" 
+                    class="btn btn-outline-info status-badge"
+                    onclick="setHealthData({{ json_encode($record) }})"
+                    >
+                        View
+                    </button>
                 </div>
 
                 <div class="dropdown ml-2">
@@ -62,7 +104,6 @@
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton{{ $record->id }}">
                         <a class="dropdown-item" href="#">Edit</a>
                         <a class="dropdown-item" href="#">Delete</a>
-                        <a class="dropdown-item" href="#">More Info</a>
                     </div>
                 </div>
             </div>
@@ -71,6 +112,19 @@
         </div>
     @endforeach
 @endif
+
+<!-- modal script -->
+<script>
+    function setHealthData(record) {
+    document.getElementById('modalTanggalKb').textContent = record.tanggal_praktik;
+    document.getElementById('modalNamaIbuKb').textContent = record.nama_ibu;
+    document.getElementById('modalKeluhanKb').textContent = record.keluhan;
+    document.getElementById('modalTekananDarahKb').textContent = record.tekanan_darah;
+    document.getElementById('modalBeratBadanKb').textContent = record.berat_badan;
+    document.getElementById('modalJenisKb').textContent = record.jenis_kb;
+    document.getElementById('modalTanggalKembaliKb').textContent = record.tanggal_kembali;
+}
+</script>
 
 <head>
     <style>
