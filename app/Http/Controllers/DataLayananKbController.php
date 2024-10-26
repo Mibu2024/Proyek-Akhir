@@ -91,7 +91,6 @@ class DataLayananKbController extends Controller
     {
         $request->validate([
             'tanggal_praktik'      => 'required',
-            'nama_ibu'             => 'required',
             'id_ibu'               => 'required|exists:data_ibu_hamils,id',
             'tekanan_darah'        => 'required|integer',
             'berat_badan'          => 'required|integer',
@@ -100,7 +99,6 @@ class DataLayananKbController extends Controller
             'keluhan'              => 'required'
         ], [
             'tanggal_praktik.required'      => 'Tanggal Praktik wajib diisi.',
-            'nama_ibu.required'             => 'Nama Ibu wajib diisi.',
             'tekanan_darah.required'        => 'Tekanan darah wajib diisi.',
             'tekanan_darah.integer'         => 'Tekanan darah harus berupa angka.',
             'berat_badan.required'          => 'Berat badan wajib diisi.',
@@ -112,7 +110,6 @@ class DataLayananKbController extends Controller
         
         $data_layanan_kbs                       = DataLayananKb::find($id);
         $data_layanan_kbs->tanggal_praktik      = $request->tanggal_praktik;
-        $data_layanan_kbs->nama_ibu             = $request->nama_ibu;
         $data_layanan_kbs->id_ibu               = $request->id_ibu;
         $data_layanan_kbs->tekanan_darah        = $request->tekanan_darah;
         $data_layanan_kbs->berat_badan          = $request->berat_badan;
@@ -123,7 +120,7 @@ class DataLayananKbController extends Controller
 
         
         toast('Data Berhasil Diubah','success');
-        return redirect()->route('data-layanan-kb.index');
+        return redirect()->route('data-ibu-hamil.detail', ['id' => $request->id_ibu]);
     }
 
     public function delete($id)
@@ -131,7 +128,7 @@ class DataLayananKbController extends Controller
         $data_layanan_kbs = DataLayananKb::find($id);
         $data_layanan_kbs->delete();
         toast('Data Berhasil Dihapus','success');
-        return redirect(route('data-layanan-kb.index'));
+        return redirect(route('data-ibu-hamil.detail', ['id' => $data_layanan_kbs->id_ibu]));
     }
 
     public function download()

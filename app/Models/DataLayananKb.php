@@ -11,8 +11,10 @@ class DataLayananKb extends Model
     use HasFactory;
 
     protected $table = 'data_layanan_kbs';
+    protected $primaryKey = 'id';
     
     protected $fillable =  [
+        'id',
         'tanggal_praktik',
         'nama_ibu',
         'tekanan_darah',
