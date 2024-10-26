@@ -66,9 +66,9 @@ class DataNifasController extends Controller
         return redirect()->route('data-kehamilan.detail', ['id' => $request->id_ibu, 'id_kehamilan' => $request->id_kehamilan]);
     }
 
-    public function edit($id)
+    public function edit($id, $id_ibu)
     {
-        $data_ibu_hamils = DataIbuHamil::all();
+        $data_ibu_hamils = DataIbuHamil::find($id_ibu);
         $data_nifas = DataNifas::find($id);
         return view('data-catatan-nifas/edit-data-nifas', compact('data_nifas', 'data_ibu_hamils'));
     }
@@ -77,7 +77,6 @@ class DataNifasController extends Controller
     {
         $request->validate([
             'tanggal'                   => 'required',
-            'nama_ibu'                  => 'required',
             'id_ibu'                    => 'required|exists:data_ibu_hamils,id',
             'kunjungan_nifas'           => 'required',
             'hasil_periksa_payudara'    => 'required',
@@ -88,7 +87,6 @@ class DataNifasController extends Controller
             'tindakan'                  => 'required',
         ], [
             'tanggal.required'                   => 'Tanggal wajib diisi.',
-            'nama_ibu.required'                  => 'Nama Ibu wajib diisi.',
             'kunjungan_nifas.required'           => 'Kunjungan Nifas wajib diisi.',
             'hasil_periksa_payudara.required'    => 'Hasil Periksa Payudara wajib diisi.',
             'hasil_periksa_pendarahan.required'  => 'Hasil Periksa Pendarahan wajib diisi.',
@@ -100,7 +98,6 @@ class DataNifasController extends Controller
         
         $data_nifas                            = DataNifas::find($id);
         $data_nifas->tanggal                   = $request->tanggal;
-        $data_nifas->nama_ibu                  = $request->nama_ibu;
         $data_nifas->id_ibu                    = $request->id_ibu;
         $data_nifas->kunjungan_nifas           = $request->kunjungan_nifas;
         $data_nifas->hasil_periksa_payudara    = $request->hasil_periksa_payudara;
@@ -112,7 +109,7 @@ class DataNifasController extends Controller
         $data_nifas->save();
 
         toast('Data Berhasil Diubah','success');
-        return redirect()->route('data-nifas.index');
+        return redirect()->route('data-kehamilan.detail', ['id' => $request->id_ibu, 'id_kehamilan' => $data_nifas->id_kehamilan]);
     }
 
     public function delete($id)
@@ -120,7 +117,7 @@ class DataNifasController extends Controller
         $data_nifas = DataNifas::find($id);
         $data_nifas->delete();
         toast('Data Berhasil Dihapus','success');
-        return redirect(route('data-nifas.index'));
+        return redirect(route('data-kehamilan.detail', ['id' => $data_nifas->id_ibu, 'id_kehamilan' => $data_nifas->id_kehamilan]));
     }
 
     public function download()

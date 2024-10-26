@@ -66,7 +66,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/data-nifas', [App\Http\Controllers\DataNifasController::class, 'index'])->name('data-nifas.index');
     Route::get('/create-data-nifas/{id}/{id_kehamilan}', [App\Http\Controllers\DataNifasController::class, 'create'])->name('data-nifas.create');
     Route::post('/store-data-nifas', [App\Http\Controllers\DataNifasController::class, 'store'])->name('data-nifas.store');
-    Route::get('/data-nifas/{id}/edit', [App\Http\Controllers\DataNifasController::class, 'edit'])->name('data-nifas.edit');
+    Route::get('/data-nifas/edit/{id}/{id_ibu}', [App\Http\Controllers\DataNifasController::class, 'edit'])->name('data-nifas.edit');
     Route::put('/data-nifas/{id}', [App\Http\Controllers\DataNifasController::class, 'update'])->name('data-nifas.update');
     Route::delete('/data-nifas/{id}', [App\Http\Controllers\DataNifasController::class, 'delete'])->name('data-nifas.delete');
     Route::get('data-nifas/download', [App\Http\Controllers\DataNifasController::class, 'download'])->name('data-nifas.download');
