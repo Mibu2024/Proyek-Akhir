@@ -141,7 +141,7 @@ class DataAnakController extends Controller
         $data_anaks = DataAnak::find($id);
         $data_anaks->delete();
         toast('Data Berhasil Dihapus','success');
-        return redirect(route('data-anak.index'));
+        return redirect(route('data-ibu-hamil.detail', ['id' => $data_anaks->id_ibu]));
     }
 
     public function download()
