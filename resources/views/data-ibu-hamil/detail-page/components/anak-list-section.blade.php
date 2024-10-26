@@ -66,9 +66,8 @@
                         <i class="fas fa-ellipsis-v"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton{{ $record->id }}">
-                        <a class="dropdown-item" href="#">Edit</a>
+                        <a class="dropdown-item" href="{{ route('data-anak.edit', [$record -> id, $record->id_ibu]) }}">Edit</a>
                         <a class="dropdown-item" href="#">Delete</a>
-                        <a class="dropdown-item" href="#">More Info</a>
                     </div>
                 </div>
             </div>

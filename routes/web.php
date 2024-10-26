@@ -75,7 +75,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/data-anak', [App\Http\Controllers\DataAnakController::class, 'index'])->name('data-anak.index');
     Route::get('/create-data-anak/{id}', [App\Http\Controllers\DataAnakController::class, 'create'])->name('data-anak.create');
     Route::post('/store-data-anak', [App\Http\Controllers\DataAnakController::class, 'store'])->name('data-anak.store');
-    Route::get('/data-anak/{id}/edit', [App\Http\Controllers\DataAnakController::class, 'edit'])->name('data-anak.edit');
+    Route::get('/data-anak/edit/{id}/{id_ibu}', [App\Http\Controllers\DataAnakController::class, 'edit'])->name('data-anak.edit');
     Route::put('/data-anak/{id}', [App\Http\Controllers\DataAnakController::class, 'update'])->name('data-anak.update');
     Route::delete('/data-anak/{id}', [App\Http\Controllers\DataAnakController::class, 'delete'])->name('data-anak.delete');
     Route::get('data-anak/download', [App\Http\Controllers\DataAnakController::class, 'download'])->name('data-anak.download');

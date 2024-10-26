@@ -90,9 +90,9 @@ class DataAnakController extends Controller
         return redirect()->route('data-ibu-hamil.detail', ['id' => $request->id_ibu]);
     }
 
-    public function edit($id)
+    public function edit($id, $id_ibu)
     {
-        $data_ibu_hamils = DataIbuHamil::all();
+        $data_ibu_hamils = DataIbuHamil::find($id_ibu);
         $data_anaks = DataAnak::find($id);
         return view('data-catatan-anak/edit-data-anak', compact('data_anaks', 'data_ibu_hamils'));
     }
@@ -101,7 +101,6 @@ class DataAnakController extends Controller
     {
         $request->validate([
             'tanggal'        => 'required',
-            'nama_ibu'       => 'required',
             'id_ibu'         => 'required|exists:data_ibu_hamils,id',
             'nama_anak'      => 'required',
             'tanggal_lahir'  => 'required',
@@ -111,7 +110,6 @@ class DataAnakController extends Controller
             'lingkar_kepala' => 'required',
         ], [
             'tanggal.required'        => 'Tanggal Periksa wajib diisi.',
-            'nama_ibu.required'       => 'Nama Ibu wajib diisi.',
             'nama_anak.required'      => 'Nama Anak wajib diisi.',
             'tanggal_lahir.required'  => 'Tanggal Lahir wajib diisi.',
             'umur.required'           => 'Umur wajib diisi.',
@@ -123,7 +121,6 @@ class DataAnakController extends Controller
         
         $data_anaks                 = DataAnak::find($id);
         $data_anaks->tanggal        = $request->tanggal;
-        $data_anaks->nama_ibu       = $request->nama_ibu;
         $data_anaks->id_ibu         = $request->id_ibu;
         $data_anaks->nama_anak      = $request->nama_anak;
         $data_anaks->tanggal_lahir  = $request->tanggal_lahir;
@@ -136,7 +133,7 @@ class DataAnakController extends Controller
     
 
         toast('Data Berhasil Diubah','success');
-        return redirect()->route('data-anak.index');
+        return redirect()->route('data-ibu-hamil.detail', ['id' => $request->id_ibu]);
     }
 
     public function delete($id)

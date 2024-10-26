@@ -1,4 +1,4 @@
-<a href="{{ route('data-anak.edit', $da->id) }}" class="btn btn-sm btn-icon btn-light btn-hover-primary mr-2" title="Edit">
+<a href="{{ route('data-anak.edit', [$da->id, $da->id_ibu]) }}" class="btn btn-sm btn-icon btn-light btn-hover-primary mr-2" title="Edit">
     <i class="flaticon2-edit"></i>
 </a>
 <a href="#" class="btn btn-sm btn-icon btn-light btn-hover-danger" title="Delete" data-toggle="modal" data-target="#deleteModal-{{ $da->id }}">
