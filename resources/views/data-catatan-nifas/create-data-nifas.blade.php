@@ -199,8 +199,8 @@
                         </div>
 
                         <div class="text-right mt-4">
-                            <a href="{{ route('data-kehamilan.detail', [$data_ibu_hamils->id, $kehamilan->id_kehamilan]) }}" class="btn btn-outline-danger btn-lg mr-2" role="button">Batal</a>
-                            <button type="submit" class="btn btn-success btn-lg">Simpan</button>
+                            <a href="{{ route('data-kehamilan.detail', [$data_ibu_hamils->id, $kehamilan->id_kehamilan]) }}" class="btn btn-outline-primary btn-lg mr-2" role="button">Batal</a>
+                            <button type="submit" class="btn btn-primary btn-lg">Simpan</button>
                         </div>
                     </form>
 

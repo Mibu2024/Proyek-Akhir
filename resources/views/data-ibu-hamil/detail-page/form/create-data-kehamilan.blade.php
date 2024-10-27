@@ -146,9 +146,9 @@
                                 </div>    
 
                                 <div class="text-right">
-                                    <a href="{{ route('data-ibu-hamil.detail', $ibuHamil->id) }}" class="btn btn-outline-danger mr-2"
+                                    <a href="{{ route('data-ibu-hamil.detail', $ibuHamil->id) }}" class="btn btn-outline-primary mr-2"
                                     role="button">Batal</a>
-                                    <button type="submit" class="btn btn-success">Simpan</button>
+                                    <button type="submit" class="btn btn-primary">Simpan</button>
                                 </div>
 
                             </div>

@@ -143,18 +143,6 @@
                         @csrf
 
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group mt-5">
-                                    <label for="tanggal"><strong>Tanggal</strong></label>
-                                    <input type="date" name="tanggal" id="tanggal" class="form-control @error('tanggal') is-invalid @enderror"
-                                        placeholder="Pilih Tanggal">
-                                    @error('tanggal')
-                                    <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
 
                             <div class="col-md-6">
                                 <div class="form-group mt-5">
@@ -162,18 +150,6 @@
                                     <input type="text" name="judul" id="judul" class="form-control @error('judul') is-invalid @enderror"
                                         placeholder="Masukkan judul">
                                     @error('judul')
-                                    <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-group mt-5">
-                                    <label for="isi"><strong>Isi Artikel</strong></label>
-                                    <textarea name="isi" id="isi" class="form-control @error('isi') is-invalid @enderror" placeholder="Masukkan isi artikel" rows="5"></textarea>
-                                    @error('isi')
                                     <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                     </span>
@@ -196,6 +172,19 @@
 
                             <div class="col-md-12">
                                 <div class="form-group mt-5">
+                                    <label for="tanggal"><strong>Tanggal</strong></label>
+                                    <input type="date" name="tanggal" id="tanggal" class="form-control @error('tanggal') is-invalid @enderror"
+                                        placeholder="Pilih Tanggal">
+                                    @error('tanggal')
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>              
+
+                            <div class="col-md-12">
+                                <div class="form-group mt-5">
                                     <label class="d-flex justify-content-center"><strong>Tambah Gambar</strong></label>
                                     <div class="upload-box border border-dashed rounded p-3 text-center cursor-pointer">
                                         <input type="file" name="image" id="image" class="d-none @error('image') is-invalid @enderror" accept="image/*" onchange="showFileName(this)">
@@ -215,6 +204,18 @@
                                     @error('image')
                                     <span class="invalid-feedback d-block" role="alert">
                                         <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group mt-5">
+                                    <label for="isi"><strong>Isi Artikel</strong></label>
+                                    <textarea name="isi" id="isi" class="form-control @error('isi') is-invalid @enderror" placeholder="Masukkan isi artikel" rows="5"></textarea>
+                                    @error('isi')
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
