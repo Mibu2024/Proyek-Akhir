@@ -87,7 +87,6 @@ class HomeController extends Controller
             'email'              => 'required|email',
             'nik'                => 'required|numeric',
             'no_telepon'         => 'required|numeric',
-            'kehamilan_ke'       => 'required|integer',
             'nama_suami'         => 'required',
             'umur_suami'         => 'required|integer',
             'password'           => 'required|min:8',
@@ -107,8 +106,6 @@ class HomeController extends Controller
             'nik.numeric'                 => 'NIK harus berupa angka.',
             'no_telepon.required'         => 'Nomor Telepon wajib diisi.',
             'no_telepon.numeric'          => 'Nomor Telepon harus berupa angka.',
-            'kehamilan_ke.required'       => 'Kehamilan Ke Berapa wajib diisi.',
-            'kehamilan_ke.integer'        => 'Kehamilan Ke Berapa harus berupa angka.',
             'nama_suami.required'         => 'Nama Suami wajib diisi.',
             'umur_suami.required'         => 'Umur Suami wajib diisi.',
             'umur_suami.integer'          => 'Umur Suami harus berupa angka.',
@@ -146,7 +143,6 @@ class HomeController extends Controller
             'email'              => 'required|email',
             'nik'                => 'required|numeric',
             'no_telepon'         => 'required|numeric',
-            'kehamilan_ke'       => 'required|integer',
             'nama_suami'         => 'required',
             'umur_suami'         => 'required|integer',
             'no_jkn_faskes_tk_1' => 'required',
@@ -165,8 +161,6 @@ class HomeController extends Controller
             'nik.numeric'                 => 'NIK harus berupa angka.',
             'no_telepon.required'         => 'Nomor Telepon wajib diisi.',
             'no_telepon.numeric'          => 'Nomor Telepon harus berupa angka.',
-            'kehamilan_ke.required'       => 'Kehamilan Ke Berapa wajib diisi.',
-            'kehamilan_ke.integer'        => 'Kehamilan Ke Berapa harus berupa angka.',
             'nama_suami.required'         => 'Nama Suami wajib diisi.',
             'umur_suami.required'         => 'Umur Suami wajib diisi.',
             'umur_suami.integer'          => 'Umur Suami harus berupa angka.',
@@ -185,14 +179,12 @@ class HomeController extends Controller
         $data_ibu_hamils->email              = $request->email;
         $data_ibu_hamils->nik                = $request->nik;
         $data_ibu_hamils->no_telepon         = $request->no_telepon;
-        $data_ibu_hamils->kehamilan_ke       = $request->kehamilan_ke;
         $data_ibu_hamils->nama_suami         = $request->nama_suami;
         $data_ibu_hamils->umur_suami         = $request->umur_suami;
         $data_ibu_hamils->no_jkn_faskes_tk_1 = $request->no_jkn_faskes_tk_1;
         $data_ibu_hamils->no_jkn_rujukan     = $request->no_jkn_rujukan;
         $data_ibu_hamils->gol_darah          = $request->gol_darah;
         $data_ibu_hamils->pekerjaan          = $request->pekerjaan;
-        $data_ibu_hamils->tanggal_hpl        = $request->tanggal_hpl;
         $data_ibu_hamils->user_id            = $request->user_id;
         $data_ibu_hamils->save();
 
@@ -225,24 +217,31 @@ class HomeController extends Controller
     private function generateCSV($data)
     {
         $csv = '';
-
-        $csv .= "Data Ibu Hamil - MIBU \n \n";
-
-        $csv .= "No,Nama Ibu,Umur Ibu,Alamat,Email,NIK,Nomor Telepon,Kehamilan Ke,Nama Suami,Umur Suami,No JKN Faskes TK 1,No JKN Rujukan,Gol Darah,Pekerjaan\n";
-
+    
+        // Header
+        $csv .= "Data Ibu Hamil - MIBU \n\n";
+        $csv .= "No,Nama Ibu,Umur Ibu,Alamat,Email,NIK,Nomor Telepon,Nama Suami,Umur Suami,"
+              . "No JKN Faskes TK 1,No JKN Rujukan,Gol Darah,Pekerjaan\n";
+    
         $counter = 1;
-
+    
         foreach ($data as $row) {
-            $umur_ibu             = $row->umur_ibu . " Tahun";
-            $umur_suami           = $row->umur_suami . " Tahun";
-
-            $csv .= "{$counter},{$row->nama_ibu},{$umur_ibu},{$row->alamat},{$row->email},{$row->email},{$row->no_telepon},{$row->kehamilan_ke},{$row->nama_suami},{$umur_suami},{$row->no_jkn_faskes_tk_1},{$row->no_jkn_rujukan},{$row->gol_darah},{$row->pekerjaan}\n";
-            
+            // Format fields with units where applicable
+            $umur_ibu = $row->umur_ibu . " Tahun";
+            $umur_suami = $row->umur_suami . " Tahun";
+    
+            // Add quotes to each value to handle commas and special characters within fields
+            $csv .= "{$counter},\"{$row->nama_ibu}\",\"{$umur_ibu}\",\"{$row->alamat}\",\"{$row->email}\",\"{$row->nik}\",\"{$row->no_telepon}\","
+                  . "\"{$row->nama_suami}\",\"{$umur_suami}\","
+                  . "\"{$row->no_jkn_faskes_tk_1}\",\"{$row->no_jkn_rujukan}\",\"{$row->gol_darah}\",\"{$row->pekerjaan}\"\n";
+    
             $counter++;
         }
-
+    
         return $csv;
     }
+    
+
     
     public function uploadHpl(Request $request)
     {

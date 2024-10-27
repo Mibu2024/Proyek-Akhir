@@ -166,13 +166,15 @@
                                 </div>
 
                                 <div class="form-group mt-4">
-                                    <label><strong>Kehamilan Ke</strong></label>
-                                    <input type="text" name="kehamilan_ke" id="kehamilan_ke" class="form-control form-control-lg @error('kehamilan_ke') is-invalid @enderror"
-                                        placeholder="Masukkan Kehamilan Ke Berapa (Hanya Angka Saja)" value="{{ old('kehamilan_ke') }}">
-                                    @error('kehamilan_ke')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                    <label for="user_id"><strong>Pilih Puskesmas</strong></label>
+                                    <select name="user_id" id="user_id" class="form-control form-control-lg @error('user_id') is-invalid @enderror">
+                                        <option value="">Pilih Puskesmas</option>
+                                        @foreach($users as $user)
+                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('user_id')
+                                        <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
@@ -254,26 +256,13 @@
                                         </span>
                                     @enderror
                                 </div>
-
-                                <div class="form-group mt-4">
-                                    <label for="user_id"><strong>Pilih Puskesmas</strong></label>
-                                    <select name="user_id" id="user_id" class="form-control form-control-lg @error('user_id') is-invalid @enderror">
-                                        <option value="">Pilih Puskesmas</option>
-                                        @foreach($users as $user)
-                                            <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('user_id')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
                             </div>
                         </div>
 
                         <div class="row mt-4">
                             <div class="col-12 text-right">
-                                <a href="{{ route('home') }}" class="btn btn-outline-danger mr-2" role="button">Batal</a>
-                                <button type="submit" class="btn btn-success">Simpan</button>
+                                <a href="{{ route('home') }}" class="btn btn-outline-primary mr-2" role="button">Batal</a>
+                                <button type="submit" class="btn btn-primary">Simpan</button>
                             </div>
                         </div>
                     </form>

@@ -126,17 +126,10 @@
             color: #6c757d;
             font-weight: 500;
             font-size: 14px;
-            padding-top: 20px;
+
             display: grid;
             grid-template-columns: 40px 1fr;
             align-items: center;
-            transition: background-color 0.3s ease;
-        }
-
-        .profile-info:hover {
-            background-color: #f8f9fa;
-            border-left: 3px solid #007bff;
-            color: #007bff;
         }
 
         .profile-info h6,

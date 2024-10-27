@@ -24,7 +24,6 @@ class DataIbuHamil extends Authenticatable implements MustVerifyEmail
         'email',
         'nik',
         'no_telepon',
-        'kehamilan_ke',
         'nama_suami',
         'umur_suami',
         'password',
@@ -33,7 +32,6 @@ class DataIbuHamil extends Authenticatable implements MustVerifyEmail
         'no_jkn_rujukan',
         'gol_darah',
         'pekerjaan',
-        'tanggal_hpl',
         'user_id',
     ];
 

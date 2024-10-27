@@ -209,23 +209,48 @@ class DataAnakController extends Controller
     {
         $csv = '';
 
-        $csv .= "Data Anak - MIBU \n \n";
-
-        $csv .= "No,Tanggal Periksa,Nama Ibu,Nama Anak,Tanggal Lahir,Umur,Berat Badan, Tinggi Badan, Lingkar Kepala\n";
+        // Header
+        $csv .= "Data Anak - MIBU \n\n";
+        $csv .= "No,Tanggal Periksa,Nama Ibu,Nama Anak,Tanggal Lahir,Umur,Berat Badan,Tinggi Badan,Lingkar Kepala,"
+            . "Hepatitis B,Tanggal Imunisasi Hepatitis B,BCG,Tanggal Imunisasi BCG,Polio Tetes 1,Tanggal Imunisasi Polio Tetes 1,"
+            . "DPT-HB-HIB 1,Tanggal Imunisasi DPT-HB-HIB 1,Polio Tetes 2,Tanggal Imunisasi Polio Tetes 2,"
+            . "Rota Virus 1,Tanggal Imunisasi Rota Virus 1,PCV 1,Tanggal Imunisasi PCV 1,DPT-HB-HIB 2,"
+            . "Tanggal Imunisasi DPT-HB-HIB 2,Polio Tetes 3,Tanggal Imunisasi Polio Tetes 3,Rota Virus 2,"
+            . "Tanggal Imunisasi Rota Virus 2,PCV 2,Tanggal Imunisasi PCV 2,DPT-HB-HIB 3,Tanggal Imunisasi DPT-HB-HIB 3,"
+            . "Polio Tetes 4,Tanggal Imunisasi Polio Tetes 4,Polio Suntik 1,Tanggal Imunisasi Polio Suntik 1,"
+            . "Rota Virus 3,Tanggal Imunisasi Rota Virus 3,Campak Rubella,Tanggal Imunisasi Campak Rubella,"
+            . "Polio Suntik 2,Tanggal Imunisasi Polio Suntik 2,Japanese Encephalitis,Tanggal Imunisasi Japanese Encephalitis,"
+            . "PCV 3,Tanggal Imunisasi PCV 3,DPT-HB-HIB Lanjutan,Tanggal Imunisasi DPT-HB-HIB Lanjutan,"
+            . "Campak Rubella Lanjutan,Tanggal Imunisasi Campak Rubella Lanjutan\n";
 
         $counter = 1;
 
         foreach ($data as $row) {
-            $berat_badan          = $row->berat_badan . " Kg";
-            $tinggi_badan         = $row->tinggi_badan . " Cm";
-            $lingkar_kepala         = $row->lingkar_kepala . " Cm";
+            // Format fields
+            $berat_badan = $row->berat_badan . " Kg";
+            $tinggi_badan = $row->tinggi_badan . " Cm";
+            $lingkar_kepala = $row->lingkar_kepala . " Cm";
 
-            $csv .= "{$counter},{$row->tanggal},{$row->nama_ibu},{$row->nama_anak},{$row->tanggal_lahir},{$row->umur},{$berat_badan},{$tinggi_badan},{$lingkar_kepala}\n";
-            
+            // CSV row
+            $csv .= "{$counter},{$row->tanggal},{$row->nama_ibu},{$row->nama_anak},{$row->tanggal_lahir},{$row->umur},"
+                . "{$berat_badan},{$tinggi_badan},{$lingkar_kepala},{$row->hepatitis_b},{$row->tanggal_imunisasi_hepatitis_b},"
+                . "{$row->bcg},{$row->tanggal_imunisasi_bcg},{$row->polio_tetes_1},{$row->tanggal_imunisasi_polio_tetes_1},"
+                . "{$row->dpt_hb_hib_1},{$row->tanggal_imunisasi_dpt_hb_hib_1},{$row->polio_tetes_2},{$row->tanggal_imunisasi_polio_tetes_2},"
+                . "{$row->rota_virus_1},{$row->tanggal_imunisasi_rota_virus_1},{$row->pcv_1},{$row->tanggal_imunisasi_pcv_1},"
+                . "{$row->dpt_hb_hib_2},{$row->tanggal_imunisasi_dpt_hb_hib_2},{$row->polio_tetes_3},{$row->tanggal_imunisasi_polio_tetes_3},"
+                . "{$row->rota_virus_2},{$row->tanggal_imunisasi_rota_virus_2},{$row->pcv_2},{$row->tanggal_imunisasi_pcv_2},"
+                . "{$row->dpt_hb_hib_3},{$row->tanggal_imunisasi_dpt_hb_hib_3},{$row->polio_tetes_4},{$row->tanggal_imunisasi_polio_tetes_4},"
+                . "{$row->polio_suntik_1},{$row->tanggal_imunisasi_polio_suntik_1},{$row->rota_virus_3},{$row->tanggal_imunisasi_rota_virus_3},"
+                . "{$row->campak_rubella},{$row->tanggal_imunisasi_campak_rubella},{$row->polio_suntik_2},{$row->tanggal_imunisasi_polio_suntik_2},"
+                . "{$row->japanese_encephalitis},{$row->tanggal_imunisasi_japanese_encephalitis},{$row->pcv_3},{$row->tanggal_imunisasi_pcv_3},"
+                . "{$row->dpt_hb_hib_lanjutan},{$row->tanggal_imunisasi_dpt_hb_hib_lanjutan},{$row->campak_rubella_lanjutan},"
+                . "{$row->tanggal_imunisasi_campak_rubella_lanjutan}\n";
+
             $counter++;
         }
 
         return $csv;
     }
+
 
 }

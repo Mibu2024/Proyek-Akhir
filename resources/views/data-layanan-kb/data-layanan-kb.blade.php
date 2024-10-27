@@ -52,7 +52,7 @@
     <div class="container">
         <div class="card card-custom">
             <div class="card-body">
-                @include('data-catatan-nifas.components.search_and_actions')
+                @include('data-layanan-kb.components.search_and_actions')
                 
                 <div class="table-responsive">
                     <table class="table text-center">

@@ -211,30 +211,33 @@ class DataKesehatanController extends Controller
     {
         $csv = '';
 
-        $csv .= "Data Kesehatan - MIBU \n \n";
-
-        $csv .= "No,Tanggal Periksa,Nama Pemeriksa,Nama Ibu,Keluhan,Tekanan Darah,Berat Badan,Umur Kehamilan,Tinggi Fundus,Letak Janin,Denyut Jantung Janin,Hasil Lab,Tindakan,Kaki Bengkak,Nasihat, Tinggi Badan, Lingkar Perut, Lingkar Lengan Atas\n";
+        // Header
+        $csv .= "Data Kesehatan - MIBU \n\n";
+        $csv .= "No,Tanggal Periksa,Nama Pemeriksa,Nama Ibu,Keluhan,Tekanan Darah,Berat Badan,Umur Kehamilan,Tinggi Fundus,"
+            . "Letak Janin,Denyut Jantung Janin,Hasil Lab,Tindakan,Kaki Bengkak,Nasihat,Tinggi Badan,Lingkar Perut,"
+            . "Lingkar Lengan Atas,Foto USG\n";
 
         $counter = 1;
 
         foreach ($data as $row) {
-            $tekanan_darah        = $row->tekanan_darah . " mmHg";
-            $berat_badan          = $row->berat_badan . " Kg";
-            $tinggi_fundus        = $row->tinggi_fundus . " Cm";
+            // Format fields with units where applicable
+            $tekanan_darah = $row->tekanan_darah . " mmHg";
+            $berat_badan = $row->berat_badan . " Kg";
+            $tinggi_fundus = $row->tinggi_fundus . " Cm";
             $denyut_jantung_janin = $row->denyut_jantung_janin . " BPM";
 
-            $csv .= "{$counter},{$row->tanggal},
-            {$row->nama_pemeriksa},{$row->nama_ibu},
-            {$row->keluhan},{$tekanan_darah},{$berat_badan},
-            {$row->umur_kehamilan},{$tinggi_fundus},{$row->letak_janin},
-            {$denyut_jantung_janin},{$row->hasil_lab},{$row->tindakan},
-            {$row->kaki_bengkak},{$row->nasihat},{$row->tinggi_badan},{$row->lingkar_perut},{$row->lingkar_lengan_atas}\n";
-            
+            // CSV row
+            $csv .= "{$counter},{$row->tanggal},{$row->nama_pemeriksa},{$row->nama_ibu},{$row->keluhan},"
+                . "{$tekanan_darah},{$berat_badan},{$row->umur_kehamilan},{$tinggi_fundus},{$row->letak_janin},"
+                . "{$denyut_jantung_janin},{$row->hasil_lab},{$row->tindakan},{$row->kaki_bengkak},{$row->nasihat},"
+                . "{$row->tinggi_badan},{$row->lingkar_perut},{$row->lingkar_lengan_atas},{$row->foto_usg}\n";
+
             $counter++;
         }
 
         return $csv;
     }
+
 
     public function viewFotoUsg($id)
     {
