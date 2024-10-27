@@ -47,11 +47,16 @@ class DataArtikelController extends Controller
             'judul'                => 'required',
             'isi'                  => 'required',
             'author'               => 'required',
+            'image'                => 'required|mimes:jpeg,png,jpg,gif|max:10240',
         ], [
             'tanggal.required'              => 'Pilih tanggal',
             'judul.required'                => 'Isi Judul',
             'isi.required'                  => 'Masukkkan Isi artikel',
             'author.required'               => 'Masukkan nama author',
+            'image.required'                => 'Upload foto artikel', // Add image error message
+            'image.image'                   => 'File harus berupa gambar',
+            'image.mimes'                   => 'Format gambar harus jpeg, png, jpg, atau gif',
+            'image.max'                     => 'Ukuran gambar maksimal 10MB',
         ]);
 
         $data = $request->all();
@@ -59,7 +64,7 @@ class DataArtikelController extends Controller
         if ($request->hasFile('image')) {
             $imageName = time().'.'.$request->file('image')->extension();  
             $request->file('image')->move(public_path('foto_artikel'), $imageName);
-            $data['foto'] = url('foto_artikel/' . $imageName);
+            $data['foto'] = 'foto_artikel/' . $imageName;
         }
 
         DataArtikel::create($data);

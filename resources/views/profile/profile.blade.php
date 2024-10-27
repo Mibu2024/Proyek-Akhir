@@ -69,7 +69,7 @@
                                 
                                 <!-- Header Text -->
                                 <div class="logout-text">
-                                    <h4>Detail Anak</h4>
+                                    <strong>{{ $user->name }}</strong>
                                 </div>
                                 
                                 <!-- Logout Button -->
@@ -104,8 +104,8 @@
                                 </div>
 
                                 <div class="kode-puskesmas">
-                                    <strong>Kode Puskesmas</strong>
-                                    <p>{{ $user->kode_puskesmas }}</p>
+                                    <strong>Kode Layanan Fasilitas Kesehatan</strong>
+                                    <p>{{ $user->kode_yankes }}</p>
                                 </div>
                             </div>
                         </div>

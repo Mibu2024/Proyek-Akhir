@@ -5,7 +5,7 @@ use App\Models\User;
 
 use Illuminate\Http\Request;
 
-class SettingsController extends Controller
+class ProfileController extends Controller
 {
     public function detailUser($id)
     {
@@ -18,6 +18,6 @@ class SettingsController extends Controller
         }
 
         // Pass the data to the view
-        return view('settings/settings', compact( 'user'));
+        return view('profile/profile', compact( 'user'));
     }
 }

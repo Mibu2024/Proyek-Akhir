@@ -111,8 +111,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/data-artikel/view-foto-usg/{id}', [App\Http\Controllers\DataArtikelController::class, 'viewFotoArtikel'])->name('data-artikel.view-foto-artikel');
 
 
-    //route settings
-    Route::get('/settings/{id}', [App\Http\Controllers\SettingsController::class, 'detailUser'])->name('settings.index');
+    //route profile
+    Route::get('/profile/{id}', [App\Http\Controllers\ProfileController::class, 'detailUser'])->name('profile.index');
     
 });    
 

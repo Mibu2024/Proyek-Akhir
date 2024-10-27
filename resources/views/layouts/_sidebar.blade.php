@@ -35,6 +35,10 @@
             margin: 0 auto 10px;
         }
 
+        .row {
+            
+        }
+
         .sidebar .nav-link {
             display: grid;
             grid-template-columns: 30px 1fr;
@@ -97,6 +101,50 @@
                 display: block; /* Show the toggle button */
             }
         }
+
+        .sidebar-divider {
+            margin: 0;
+            border-top: 1px solid rgba(0,0,0,.1);
+        }
+
+        .profile-details {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: calc(100% - 55px); /* Ensures text doesn't overflow sidebar */
+        }
+
+        .profile-details h6 {
+            font-size: 14px;
+        }
+
+        .profile-details small {
+            font-size: 12px;
+        }
+
+        .profile-info {
+            color: #6c757d;
+            font-weight: 500;
+            font-size: 14px;
+            padding-top: 20px;
+            display: grid;
+            grid-template-columns: 40px 1fr;
+            align-items: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .profile-info:hover {
+            background-color: #f8f9fa;
+            border-left: 3px solid #007bff;
+            color: #007bff;
+        }
+
+        .profile-info h6,
+        .profile-info small {
+            margin: 0;
+            padding: 0;
+        }
+
     </style>
 </head>
 <body>
@@ -106,7 +154,7 @@
     <i class="fas fa-bars"></i>
 </div>
 
-<div class="sidebar">
+<div class="sidebar d-flex flex-column min-vh-100">
     <img src="assets/media/logos/logomibu.png" alt="User Avatar" class="img-fluid">
     
     <ul class="nav flex-column">
@@ -142,13 +190,34 @@
         </li>
     </ul>
 
-    <ul class="nav flex-column">
+    <ul class="nav flex-column mt-auto mb-7"> 
         <li class="nav-item">
-            <a class="nav-link {{ Request::is('settings*') ? 'active' : '' }}" href="{{ route('settings.index', $user->id) }}">
-                <i class="fas fa-cog"></i> <span>Settings</span>
+            <a class="nav-link {{ Request::is('profile*') ? 'active' : '' }}" 
+               href="{{ route('profile.index', $user->id) }}">
+                <i class="fas fa-user"></i> <span>Profile</span>
             </a>
         </li>
     </ul>
+
+    <hr class="sidebar-divider my-0">
+
+    <!-- Profile Info Section -->
+    <div class="profile-info p-3">
+        <div class="profile-image-container d-flex justify-content-center align-items-center">
+            <img 
+                src="assets/media/logos/logoMibu.png" 
+                alt="Profile Picture" 
+                class="rounded-circle profile-image"
+                style="width: 40px; height: 40px; margin: auto;"
+            >
+        </div>
+        <div class="profile-details d-flex flex-column justify-content-center ml-3">
+            <h6 class="mb-0">{{ auth()->user()->name }}</h6>
+            <small class="text-muted">{{ auth()->user()->kode_yankes }}</small>
+        </div>
+    </div>
+
+
 </div>
 
 

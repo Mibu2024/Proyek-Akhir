@@ -76,7 +76,52 @@
         .col-sm-3 h1{
             font-size: 18px;
         }
+
+        .border-dashed {
+            border-style: dashed !important;
+        }
+
+        .cursor-pointer {
+            cursor: pointer;
+        }
+
+        .upload-box {
+            transition: all 0.3s ease;
+        }
+
+        .upload-box:hover {
+            background-color: rgba(0, 123, 255, 0.05);
+        }
+
+        .upload-box i {
+            font-size: 24px;
+            display: block;
+            text-align: center;
+        }
+
+        .selected-filename {
+            word-break: break-all;
+            margin: 8px 0;
+        }
     </style>
+
+    <script>
+        function showFileName(input) {
+            const uploadContent = document.getElementById('upload-content');
+            const fileSelected = document.getElementById('file-selected');
+            const fileNameElement = fileSelected.querySelector('.selected-filename');
+            
+            if (input.files && input.files[0]) {
+                const fileName = input.files[0].name;
+                fileNameElement.textContent = fileName;
+                uploadContent.classList.add('d-none');
+                fileSelected.classList.remove('d-none');
+            } else {
+                uploadContent.classList.remove('d-none');
+                fileSelected.classList.add('d-none');
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
@@ -280,23 +325,38 @@
                                     </span>
                                 @enderror
                             </div>
-
-                            <div class="form-group mt-4">
-                                <label for="image"><strong>Upload Foto USG</strong></label>
-                                <input type="file" name="image" id="image" class="form-control form-control-lg @error('image') is-invalid @enderror">
-                                @error('image')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
                         </div>
+                        <div class="col-md-12">
+                            <div class="form-group mt-5">
+                                <label class="d-flex justify-content-center"><strong>Tambah USG</strong></label>
+                                <div class="upload-box border border-dashed rounded p-3 text-center cursor-pointer">
+                                    <input type="file" name="image" id="image" class="d-none @error('image') is-invalid @enderror" accept="image/*" onchange="showFileName(this)">
+                                    <label for="image" class="mb-0 cursor-pointer w-100">
+                                        <div id="upload-content">
+                                            <i class="fas fa-image text-primary mb-2"></i>
+                                            <div class="text-primary text-center">Tambahkan Gambar Disini</div>
+                                            <small class="text-muted d-block text-center">Maksimal 10MB</small>
+                                        </div>
+                                        <div id="file-selected" class="d-none">
+                                            <i class="fas fa-file-image text-primary mb-2"></i>
+                                            <div class="selected-filename text-primary text-center"></div>
+                                            <small class="text-muted d-block text-center">Klik untuk mengganti file</small>
+                                        </div>
+                                    </label>
+                                 </div>
+                                @error('image')
+                                <span class="invalid-feedback d-block" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                             </div>
+                            </div>
                     </div>
 
                     <div class="row mt-4">
                         <div class="col-12 text-right">
-                            <a href="{{ route('data-kehamilan.detail', [$data_ibu_hamils->id, $kehamilan->id_kehamilan]) }}" class="btn btn-outline-danger mr-2" role="button">Batal</a>
-                            <button type="submit" class="btn btn-success">Simpan</button>
+                            <a href="{{ route('data-kehamilan.detail', [$data_ibu_hamils->id, $kehamilan->id_kehamilan]) }}" class="btn btn-outline-primary mr-2" role="button">Batal</a>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
                     </div>
                 </form>
