@@ -77,7 +77,7 @@ class DataArtikelController extends Controller
     {
         $data_artikels = DataArtikel::find($id);
 
-        return view('edit-data-artikel', compact('data_artikels'));
+        return view('data-artikel/edit-data-artikel', compact('data_artikels'));
     }
 
     public function update(Request $request, $id)

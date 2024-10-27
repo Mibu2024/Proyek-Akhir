@@ -109,7 +109,18 @@
                                 <td>{{ $da->tanggal }}</td>
                                 <td>{{ $da->author }}</td>
                                 <td>
-                                    <a href="#" class="options-icon">⋮</a>
+                                    <!-- Dropdown for options icon -->
+                                    <div class="dropdown">
+                                        <a href="#" class="options-icon" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">⋮</a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="{{ route('data-artikel.edit', $da->id) }}">Edit</a>
+                                            <form action="{{ route('data-artikel.delete', $da->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this article?');">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="dropdown-item text-danger">Delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         @empty
@@ -119,6 +130,7 @@
                         @endforelse
                     </tbody>
                 </table>
+
 
 
                 </div>
