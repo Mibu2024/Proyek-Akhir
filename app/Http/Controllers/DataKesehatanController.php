@@ -30,18 +30,35 @@ class DataKesehatanController extends Controller
     {
         $search = $request->input('search');
         $perPage = $request->input('per_page', 5);
-        
+        $sort = $request->input('sort', 'Paling Baru'); // Default to 'latest'
+    
         $userId = auth()->user()->id;
-
         $ibuHamilIds = DataIbuHamil::where('user_id', $userId)->pluck('id');
-
-        $data_kesehatans = DataKesehatan::whereIn('id_ibu', $ibuHamilIds)
-            ->where('nama_ibu', 'like', "%$search%")
-            ->paginate($perPage);
-
+    
+        $query = DataKesehatan::whereIn('id_ibu', $ibuHamilIds)
+            ->where('nama_ibu', 'like', "%$search%");
+    
+        // Sort based on selected option
+        switch ($sort) {
+            case 'oldest':
+                $query->orderBy('created_at', 'asc');
+                break;
+            case 'a-z':
+                $query->orderBy('nama_ibu', 'asc');
+                break;
+            case 'z-a':
+                $query->orderBy('nama_ibu', 'desc');
+                break;
+            default: // 'latest'
+                $query->orderBy('created_at', 'desc');
+        }
+    
+        $data_kesehatans = $query->paginate($perPage);
         $currentPage = $data_kesehatans->currentPage();
-        return view('data-catatan-kesehatan/data-kesehatan', compact('data_kesehatans', 'currentPage'));
+        
+        return view('data-catatan-kesehatan/data-kesehatan', compact('data_kesehatans', 'currentPage', 'sort'));
     }
+    
 
     public function create($id, $id_kehamilan)
     {

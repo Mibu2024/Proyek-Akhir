@@ -14,18 +14,34 @@ class DataNifasController extends Controller
     {
         $search = $request->input('search');
         $perPage = $request->input('per_page', 5);
-        
-        $userId = auth()->user()->id;
+        $sort = $request->input('sort', 'Paling Baru');
 
+        $userId = auth()->user()->id;
         $ibuHamilIds = DataIbuHamil::where('user_id', $userId)->pluck('id');
 
-        $data_nifas = DataNifas::whereIn('id_ibu', $ibuHamilIds)
-            ->where('nama_ibu', 'like', "%$search%")
-            ->paginate($perPage);
+        $query = DataNifas::whereIn('id_ibu', $ibuHamilIds)
+            ->where('nama_ibu', 'like', "%$search%");
 
+        switch ($sort) {
+            case 'oldest':
+                $query->orderBy('created_at', 'asc');
+                break;
+            case 'a-z':
+                $query->orderBy('nama_ibu', 'asc');
+                break;
+            case 'z-a':
+                $query->orderBy('nama_ibu', 'desc');
+                break;
+            default:
+                $query->orderBy('created_at', 'desc');
+        }
+
+        $data_nifas = $query->paginate($perPage);
         $currentPage = $data_nifas->currentPage();
-        return view('data-catatan-nifas/data-nifas', compact('data_nifas', 'currentPage'));
+        
+        return view('data-catatan-nifas/data-nifas', compact('data_nifas', 'currentPage', 'sort'));
     }
+
 
     public function create($id, $id_kehamilan)
     {

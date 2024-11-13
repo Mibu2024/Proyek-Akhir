@@ -9,24 +9,25 @@
         
         <div class="btn-group me-2">
             <button type="button" class="btn btn-sort dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span>{{ request('month', 'Bulan') }}</span>
+                <span>{{ $kehamilanMonthName ?? 'Bulan' }}</span>
             </button>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['month' => '']) }}">Semua</a>
-                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['month' => '1']) }}">Januari</a>
-                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['month' => '2']) }}">Februari</a>
-                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['month' => '3']) }}">Maret</a>
-                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['month' => '4']) }}">April</a>
-                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['month' => '5']) }}">Mei</a>
-                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['month' => '6']) }}">Juni</a>
-                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['month' => '7']) }}">Juli</a>
-                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['month' => '8']) }}">Agustus</a>
-                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['month' => '9']) }}">September</a>
-                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['month' => '10']) }}">Oktober</a>
-                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['month' => '11']) }}">November</a>
-                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['month' => '12']) }}">Desember</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['kehamilan_month' => '']) }}">Semua</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['kehamilan_month' => '1']) }}">Januari</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['kehamilan_month' => '2']) }}">Februari</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['kehamilan_month' => '3']) }}">Maret</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['kehamilan_month' => '4']) }}">April</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['kehamilan_month' => '5']) }}">Mei</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['kehamilan_month' => '6']) }}">Juni</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['kehamilan_month' => '7']) }}">Juli</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['kehamilan_month' => '8']) }}">Agustus</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['kehamilan_month' => '9']) }}">September</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['kehamilan_month' => '10']) }}">Oktober</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['kehamilan_month' => '11']) }}">November</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['kehamilan_month' => '12']) }}">Desember</a>
             </div>
         </div>
+
 
          <a href="{{ route('data-kehamilan.create', $ibuHamil -> id) }}" class="btn btn-create-data-kehamilan ml-2 d-flex align-items-center justify-content-center">
          <i class="flaticon2-add-1"></i>

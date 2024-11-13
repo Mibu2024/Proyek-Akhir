@@ -14,25 +14,35 @@ class DataImunisasiController extends Controller
     {
         $search = $request->input('search');
         $perPage = $request->input('per_page', 5);
-
-        // Mendapatkan id user saat ini
+        $sort = $request->input('sort', 'Paling Baru');
+    
         $userId = auth()->user()->id;
-
-        // Mendapatkan data ibu hamil yang terkait dengan user
         $ibuHamilIds = DataIbuHamil::where('user_id', $userId)->pluck('id');
-
-        // Mendapatkan data anak yang terkait dengan ibu hamil
         $anakIds = DataAnak::whereIn('id_ibu', $ibuHamilIds)->pluck('id');
-
-        // Mengambil data imunisasi hanya untuk anak yang terhubung dengan ibu hamil terkait user
-        $data_imunisasis = DataImunisasi::whereIn('id_anak', $anakIds)
-            ->where('nama_anak', 'like', "%$search%")
-            ->paginate($perPage);
-
+    
+        $query = DataImunisasi::whereIn('id_anak', $anakIds)
+            ->where('nama_anak', 'like', "%$search%");
+    
+        switch ($sort) {
+            case 'oldest':
+                $query->orderBy('created_at', 'asc');
+                break;
+            case 'a-z':
+                $query->orderBy('nama_anak', 'asc');
+                break;
+            case 'z-a':
+                $query->orderBy('nama_anak', 'desc');
+                break;
+            default:
+                $query->orderBy('created_at', 'desc');
+        }
+    
+        $data_imunisasis = $query->paginate($perPage);
         $currentPage = $data_imunisasis->currentPage();
-        return view('data-catatan-imunisasi/data-imunisasi', compact('data_imunisasis', 'currentPage'));
+        
+        return view('data-catatan-imunisasi/data-imunisasi', compact('data_imunisasis', 'currentPage', 'sort'));
     }
-
+    
     public function create()
     {
         $data_anaks = DataAnak::all();

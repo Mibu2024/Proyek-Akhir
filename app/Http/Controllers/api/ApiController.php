@@ -137,21 +137,21 @@ public function apiIbuHamil(Request $request)
         }
     }
 
-    public function apiBidan(Request $request)
+    public function apiFaskes(Request $request)
     {
         try {
             $search     = $request->input('search');
-            $data_bidans = User::where('name', 'like', "%$search%")->get();
+            $data_faskes = User::where('name', 'like', "%$search%")->get();
 
             return response()->json([
                 'success' => true,
-                'message' => 'bidan retrieved successfully',
-                'data_bidan' => $data_bidans,
+                'message' => 'faskes retrieved successfully',
+                'data_bidan' => $data_faskes,
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Failed to retrieve bidan list',
+                'message' => 'Failed to retrieve faskes list',
                 'error' => $e->getMessage(),
             ], 500);
         }
@@ -183,6 +183,7 @@ public function apiIbuHamil(Request $request)
             'nama_ibu' => 'required',
             'alamat' => 'required',
             'email' => 'required|email|unique:data_ibu_hamils,email',
+            'user_id' => 'required',
             'no_telepon' => 'required',
             'password' => 'required',
             'umur_ibu' => 'required',
@@ -230,7 +231,7 @@ public function apiIbuHamil(Request $request)
 
         return response()->json([
             'success' => true,
-            'message' => 'Registration Successful.',
+            'message' => 'Registration Success.',
             'data' => [
                 'user' => $user,
                 'token' => $token,

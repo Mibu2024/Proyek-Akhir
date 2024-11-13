@@ -25,24 +25,37 @@ class DataLayananKbController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(Request $request)
-    {                   
+    {
         $search = $request->input('search');
         $perPage = $request->input('per_page', 5);
-        
-        // Mendapatkan id user saat ini
-        $userId = auth()->user()->id;
+        $sort = $request->input('sort', 'Paling Baru');
 
-        // Mendapatkan data ibu hamil yang terkait dengan user
+        $userId = auth()->user()->id;
         $ibuHamilIds = DataIbuHamil::where('user_id', $userId)->pluck('id');
 
-        // Mengambil data layanan KB hanya untuk ibu hamil yang terhubung dengan user
-        $data_layanan_kbs = DataLayananKb::whereIn('id_ibu', $ibuHamilIds)
-            ->where('nama_ibu', 'like', "%$search%")
-            ->paginate($perPage);
+        $query = DataLayananKb::whereIn('id_ibu', $ibuHamilIds)
+            ->where('nama_ibu', 'like', "%$search%");
 
+        switch ($sort) {
+            case 'oldest':
+                $query->orderBy('created_at', 'asc');
+                break;
+            case 'a-z':
+                $query->orderBy('nama_ibu', 'asc');
+                break;
+            case 'z-a':
+                $query->orderBy('nama_ibu', 'desc');
+                break;
+            default:
+                $query->orderBy('created_at', 'desc');
+        }
+
+        $data_layanan_kbs = $query->paginate($perPage);
         $currentPage = $data_layanan_kbs->currentPage();
-        return view('data-layanan-kb/data-layanan-kb', compact('data_layanan_kbs', 'currentPage'));
-    } 
+        
+        return view('data-layanan-kb/data-layanan-kb', compact('data_layanan_kbs', 'currentPage', 'sort'));
+    }
+
 
     public function create($id)
     {

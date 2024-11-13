@@ -21,7 +21,7 @@ Route::middleware('auth:sanctum')->group(function () {
     
 });
 
-Route::get('ibu-hamil', [App\Http\Controllers\api\ApiController::class, 'apiIbuHamil']);
+    Route::get('ibu-hamil', [App\Http\Controllers\api\ApiController::class, 'apiIbuHamil']);
     Route::get('anak', [App\Http\Controllers\api\ApiController::class, 'apiAnak']);
     Route::get('imunisasi', [App\Http\Controllers\api\ApiController::class, 'apiImunisasi']);
     Route::get('nifas', [App\Http\Controllers\api\ApiController::class, 'apiNifas']);

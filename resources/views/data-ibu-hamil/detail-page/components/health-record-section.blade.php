@@ -6,24 +6,25 @@
       </div>
       <div class="col-sm-6 d-flex justify-content-end align-items-center">
          <div class="btn-group me-2">
-            <a type="button" class="btn btn-sort dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span>Bulan</span>
-            </a>
+            <button type="button" class="btn btn-sort dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span>{{ $healthMonthName }}</span>
+            </button>
             <div class="dropdown-menu">
-               <a class="dropdown-item" href="#">Januari</a>
-               <a class="dropdown-item" href="#">Februari</a>
-               <a class="dropdown-item" href="#">Maret</a>
-               <a class="dropdown-item" href="#">April</a>
-               <a class="dropdown-item" href="#">Mei</a>
-               <a class="dropdown-item" href="#">Juni</a>
-               <a class="dropdown-item" href="#">Juli</a>
-               <a class="dropdown-item" href="#">Agustus</a>
-               <a class="dropdown-item" href="#">September</a>
-               <a class="dropdown-item" href="#">Oktober</a>
-               <a class="dropdown-item" href="#">November</a>
-               <a class="dropdown-item" href="#">Desember</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['healthMonth' => '']) }}">Semua</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['healthMonth' => '1']) }}">Januari</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['healthMonth' => '2']) }}">Februari</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['healthMonth' => '3']) }}">Maret</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['healthMonth' => '4']) }}">April</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['healthMonth' => '5']) }}">Mei</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['healthMonth' => '6']) }}">Juni</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['healthMonth' => '7']) }}">Juli</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['healthMonth' => '8']) }}">Agustus</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['healthMonth' => '9']) }}">September</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['healthMonth' => '10']) }}">Oktober</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['healthMonth' => '11']) }}">November</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['healthMonth' => '12']) }}">Desember</a>
             </div>
-         </div>
+        </div>
          <a href="{{ route('data-kesehatan.create', [$ibuHamil->id, $kehamilan->id_kehamilan]) }}" class="btn btn-create-data-kesehatan ml-2 d-flex align-items-center justify-content-center">
          <i class="flaticon2-add-1"></i>
          <span>Tambah Catatan Kesehatan</span> 

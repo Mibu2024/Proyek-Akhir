@@ -78,15 +78,15 @@
     <!-- Sort By Dropdown Button -->
     <div class="col-md-4">
         <div class="btn-group">
-        <button type="button" class="btn btn-sort dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span>Paling Baru</span>
-        </button>
-        <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Paling Baru</a>
-            <a class="dropdown-item" href="#">Paling Lama</a>
-            <a class="dropdown-item" href="#">A-Z</a>
-            <a class="dropdown-item" href="#">Z-A</a>
-        </div>
+            <button type="button" class="btn btn-sort dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span>{{ ucfirst($sort) }}</span>
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['sort' => 'latest']) }}">Paling Baru</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['sort' => 'oldest']) }}">Paling Lama</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['sort' => 'a-z']) }}">A-Z</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['sort' => 'z-a']) }}">Z-A</a>
+            </div>
         </div>
     </div>
 </div>

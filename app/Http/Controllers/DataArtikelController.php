@@ -26,12 +26,32 @@ class DataArtikelController extends Controller
      */
     public function index(Request $request)
     {
-        $search          = $request->input('search');
-        $perPage         = $request->input('per_page', 5);
-        $data_artikels   = DataArtikel::where('judul', 'like', "%$search%")->paginate($perPage);
+        $search = $request->input('search');
+        $perPage = $request->input('per_page', 5);
+        $sort = $request->input('sort', 'Paling Baru');
+
+        $query = DataArtikel::where('judul', 'like', "%$search%");
+
+        switch ($sort) {
+            case 'oldest':
+                $query->orderBy('created_at', 'asc');
+                break;
+            case 'a-z':
+                $query->orderBy('judul', 'asc');
+                break;
+            case 'z-a':
+                $query->orderBy('judul', 'desc');
+                break;
+            default:
+                $query->orderBy('created_at', 'desc');
+        }
+
+        $data_artikels = $query->paginate($perPage);
         $currentPage = $data_artikels->currentPage();
-        return view('data-artikel/data-artikel', compact('data_artikels', 'currentPage'));
+        
+        return view('data-artikel/data-artikel', compact('data_artikels', 'currentPage', 'sort'));
     }
+
 
     public function create()
     {

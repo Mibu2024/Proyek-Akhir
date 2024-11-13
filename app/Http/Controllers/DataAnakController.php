@@ -14,24 +14,37 @@ class DataAnakController extends Controller
     {
         $search = $request->input('search');
         $perPage = $request->input('per_page', 5);
+        $sort = $request->input('sort', 'Paling Baru');
 
-        // Mendapatkan id user saat ini
         $userId = auth()->user()->id;
-
-        // Mendapatkan data ibu hamil yang terkait dengan user
         $ibuHamilIds = DataIbuHamil::where('user_id', $userId)->pluck('id');
 
-        // Mengambil data anak hanya untuk ibu hamil yang terhubung dengan user
-        $data_anaks = DataAnak::whereIn('id_ibu', $ibuHamilIds)
+        $query = DataAnak::whereIn('id_ibu', $ibuHamilIds)
             ->where(function ($query) use ($search) {
                 $query->where('nama_ibu', 'like', "%$search%")
                     ->orWhere('nama_anak', 'like', "%$search%");
-            })
-            ->paginate($perPage);
+            });
 
+        switch ($sort) {
+            case 'oldest':
+                $query->orderBy('created_at', 'asc');
+                break;
+            case 'a-z':
+                $query->orderBy('nama_anak', 'asc');
+                break;
+            case 'z-a':
+                $query->orderBy('nama_anak', 'desc');
+                break;
+            default:
+                $query->orderBy('created_at', 'desc');
+        }
+
+        $data_anaks = $query->paginate($perPage);
         $currentPage = $data_anaks->currentPage();
-        return view('data-catatan-anak/data-anak', compact('data_anaks', 'currentPage'));
+        
+        return view('data-catatan-anak/data-anak', compact('data_anaks', 'currentPage', 'sort'));
     }
+
 
     public function detail($id)
     {

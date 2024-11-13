@@ -33,16 +33,34 @@ class HomeController extends Controller
     {
         $search = $request->input('search');
         $perPage = $request->input('per_page', 5);
+        $sort = $request->input('sort', 'Paling Baru'); // Default to 'latest' if no sort option is selected
 
-        $data_ibu_hamils = DataIbuHamil::where('user_id', auth()->id())
-            ->where('nama_ibu', 'like', "%$search%")
-            ->paginate($perPage);
+        // Sort based on the selected option
+        $query = DataIbuHamil::where('user_id', auth()->id())
+            ->where('nama_ibu', 'like', "%$search%");
 
+        switch ($sort) {
+            case 'oldest':
+                $query->orderBy('created_at', 'asc');
+                break;
+            case 'a-z':
+                $query->orderBy('nama_ibu', 'asc');
+                break;
+            case 'z-a':
+                $query->orderBy('nama_ibu', 'desc');
+                break;
+            default: // 'latest'
+                $query->orderBy('created_at', 'desc');
+        }
+
+        $data_ibu_hamils = $query->paginate($perPage);
         $currentPage = $data_ibu_hamils->currentPage();
-        return view('data-ibu-hamil/home', compact('data_ibu_hamils', 'currentPage'));
+        
+        return view('data-ibu-hamil/home', compact('data_ibu_hamils', 'currentPage', 'sort'));
     }
 
-    public function detail($id)
+
+    public function detail($id, Request $request)
     {
         // Fetch the record based on the ID from the 'DataIbuHamil' model
         $ibuHamil = DataIbuHamil::find($id);
@@ -52,21 +70,66 @@ class HomeController extends Controller
             return redirect()->route('data-ibu-hamil.index')->with('error', 'Data not found.');
         }
 
-        // Fetch health records that match the id_ibu from ibuHamil
-        $kehamilanRecords = DataKehamilan::where('id_ibu', $ibuHamil->id)->get();
+        // Define month names
+        $monthNames = [
+            1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April',
+            5 => 'Mei', 6 => 'Juni', 7 => 'Juli', 8 => 'Agustus',
+            9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember'
+        ];
 
-        // Fetch nifas records that match the id_ibu from ibuHamil
-        $nifasRecords = DataNifas::where('id_ibu', $ibuHamil->id)->get();
+        // Fetch and name each month filter separately
+        $kehamilanMonth = $request->input('kehamilan_month');
+        $nifasMonth = $request->input('nifas_month');
+        $anakMonth = $request->input('anak_month');
+        $kbMonth = $request->input('kb_month');
 
-        // Fetch anak  records that match the id_ibu from ibuHamil
-        $anakRecords = DataAnak::where('id_ibu', $ibuHamil->id)->get();
+        // Get the names for each month filter
+        $kehamilanMonthName = $kehamilanMonth ? $monthNames[$kehamilanMonth] : 'Bulan';
+        $nifasMonthName = $nifasMonth ? $monthNames[$nifasMonth] : 'Bulan';
+        $anakMonthName = $anakMonth ? $monthNames[$anakMonth] : 'Bulan';
+        $kbMonthName = $kbMonth ? $monthNames[$kbMonth] : 'Bulan';
 
-        // Fetch kb records that match the id_ibu from ibuHamil
-        $kbRecords = DataLayananKb::where('id_ibu', $ibuHamil->id)->get();
+        // Fetch kehamilan records with month filtering
+        $kehamilanRecords = DataKehamilan::where('id_ibu', $ibuHamil->id)
+            ->when($kehamilanMonth, function ($query) use ($kehamilanMonth) {
+                $query->whereMonth('tanggal_kehamilan', $kehamilanMonth); // Replace 'tanggal' with the actual date column
+            })
+            ->get();
+
+        // Fetch nifas records with month filtering
+        $nifasRecords = DataNifas::where('id_ibu', $ibuHamil->id)
+            ->when($nifasMonth, function ($query) use ($nifasMonth) {
+                $query->whereMonth('tanggal', $nifasMonth); // Replace 'tanggal' with the actual date column
+            })
+            ->get();
+
+        // Fetch anak records with month filtering
+        $anakRecords = DataAnak::where('id_ibu', $ibuHamil->id)
+            ->when($anakMonth, function ($query) use ($anakMonth) {
+                $query->whereMonth('tanggal', $anakMonth); // Replace 'tanggal' with the actual date column
+            })
+            ->get();
+
+        // Fetch KB records with month filtering
+        $kbRecords = DataLayananKb::where('id_ibu', $ibuHamil->id)
+            ->when($kbMonth, function ($query) use ($kbMonth) {
+                $query->whereMonth('tanggal_praktik', $kbMonth); // Replace 'tanggal' with the actual date column
+            })
+            ->get();
 
         // Pass the data to the view
-        return view('data-ibu-hamil/detail-page/detail-ibu', compact('ibuHamil', 'kehamilanRecords', 'nifasRecords', 'anakRecords', 'kbRecords'));
+        return view('data-ibu-hamil/detail-page/detail-ibu', compact(
+            'ibuHamil', 
+            'kehamilanRecords', 'kehamilanMonthName',
+            'nifasRecords', 'nifasMonthName',
+            'anakRecords', 'anakMonthName',
+            'kbRecords', 'kbMonthName'
+        ));
     }
+
+
+
+
 
 
 

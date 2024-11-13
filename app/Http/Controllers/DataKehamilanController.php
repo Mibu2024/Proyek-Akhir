@@ -35,11 +35,23 @@ class DataKehamilanController extends Controller
         return view('', compact('data_kehamilans', 'currentPage'));
     }
 
-    public function detail($id, $id_kehamilan)
+    public function detail($id, $id_kehamilan, Request $request)
     {
         // Fetch the record based on the ID from the 'DataIbuHamil' model
         $ibuHamil = DataIbuHamil::find($id);
         $kehamilan = DataKehamilan::find($id_kehamilan);
+
+
+        $monthNames = [
+            1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April',
+            5 => 'Mei', 6 => 'Juni', 7 => 'Juli', 8 => 'Agustus',
+            9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember'
+        ];
+        $nifasMonth = $request->input('nifasMonth');
+        $nifasMonthName = $nifasMonth ? $monthNames[$nifasMonth] : 'Bulan';
+
+        $healthMonth = $request->input('healthMonth');
+        $healthMonthName = $healthMonth ? $monthNames[$healthMonth] : 'Bulan';
 
         // Check if the record exists
         if (!$ibuHamil) {
@@ -51,13 +63,21 @@ class DataKehamilanController extends Controller
                                             ->where('id_kehamilan', $id_kehamilan)
                                             ->get();
 
+        $healthRecords = DataKesehatan::where('id_ibu', $ibuHamil->id)
+            ->when($healthMonth, function ($query) use ($healthMonth) {
+                $query->whereMonth('tanggal', $healthMonth);
+            })
+            ->get();
+
         // Fetch nifas records that match the id_ibu from ibuHamil
         $nifasRecords = DataNifas::where('id_ibu', $ibuHamil->id)
-                                            ->where('id_kehamilan', $id_kehamilan)
-                                            ->get();
+            ->when($nifasMonth, function ($query) use ($nifasMonth) {
+                $query->whereMonth('tanggal', $nifasMonth);
+            })
+            ->get();
 
         // Pass the data to the view
-        return view('data-ibu-hamil/detail-page/detail-kehamilan', compact(  'kehamilan', 'ibuHamil', 'healthRecords', 'nifasRecords'));
+        return view('data-ibu-hamil/detail-page/detail-kehamilan', compact(  'kehamilan', 'ibuHamil', 'healthRecords', 'nifasRecords', 'nifasMonthName', 'healthMonthName'));
     }
 
     public function create($id)
