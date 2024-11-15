@@ -18,9 +18,6 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 // API routes requiring authentication
 Route::middleware('auth:sanctum')->group(function () {
-    
-});
-
     Route::get('ibu-hamil', [App\Http\Controllers\api\ApiController::class, 'apiIbuHamil']);
     Route::get('anak', [App\Http\Controllers\api\ApiController::class, 'apiAnak']);
     Route::get('imunisasi', [App\Http\Controllers\api\ApiController::class, 'apiImunisasi']);
@@ -33,6 +30,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+});
+
+    
 
 // Authentication routes for API
 Route::post('register', [App\Http\Controllers\api\ApiController::class, 'registerIbu']);
