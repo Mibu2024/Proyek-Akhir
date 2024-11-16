@@ -27,7 +27,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('nifas', [App\Http\Controllers\api\ApiController::class, 'apiNifas']);
     Route::get('artikel', [App\Http\Controllers\api\ApiController::class, 'apiArtikel']);
     Route::get('catatan-kesehatan', [App\Http\Controllers\api\ApiController::class, 'apiKesehatan']);
-    Route::get('bidan', [App\Http\Controllers\api\ApiController::class, 'apiBidan']);
+    Route::get('faskes', [App\Http\Controllers\api\ApiController::class, 'apiFaskes']);
     Route::get('layanan-kb', [App\Http\Controllers\api\ApiController::class, 'apiKb']);
     Route::put('update-profile', [App\Http\Controllers\api\ApiController::class, 'updateProfileImage']);
     Route::get('/user', function (Request $request) {
