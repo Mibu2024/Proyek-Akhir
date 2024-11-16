@@ -146,7 +146,7 @@ public function apiIbuHamil(Request $request)
             return response()->json([
                 'success' => true,
                 'message' => 'faskes retrieved successfully',
-                'data_bidan' => $data_faskes,
+                'data_faskes' => $data_faskes,
             ]);
         } catch (\Exception $e) {
             return response()->json([
