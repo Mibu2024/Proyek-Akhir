@@ -12,6 +12,7 @@
                         <thead>
                             <tr>
                                 <th><b>No</b></th>
+                                <th><b>NIK</b></th>
                                 <th><b>Nama Ibu</b></th>
                                 <th><b>Umur Ibu</b></th>
                                 <th><b>Nomor Telepon</b></th>
@@ -24,6 +25,7 @@
                             @forelse ($data_ibu_hamils as $index => $dih)
                                 <tr>
                                     <td>{{ $index + 1 + ($data_ibu_hamils->currentPage() - 1) * $data_ibu_hamils->perPage() }}</td>
+                                    <td>{{ $dih->nik }}</td>
                                     <td>{{ $dih->nama_ibu }}</td>
                                     <td>{{ $dih->umur_ibu }} Tahun</td>
                                     <td>{{ $dih->no_telepon }}</td>
