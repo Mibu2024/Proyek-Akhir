@@ -134,20 +134,16 @@
                                     <h1>{{ $ibuHamil->no_telepon }}</h1>
                                 </div>
                                 <div class="col-sm-3">
-                                    Kehamilan Ke
-                                    <h1>{{ $ibuHamil->kehamilan_ke }}</h1>
-                                </div>
-                                <div class="col-sm-3">
                                     Nama Suami
                                     <h1>{{ $ibuHamil->nama_suami }}</h1>
                                 </div>
-                            </div>
-
-                            <div class="row">
                                 <div class="col-sm-3">
                                     Umur Suami
                                     <h1>{{ $ibuHamil->umur_suami }} Tahun</h1>
                                 </div>
+                            </div>
+
+                            <div class="row">
                                 <div class="col-sm-3">
                                     No. JKN TK 1
                                     <h1>{{ $ibuHamil->no_jkn_faskes_tk_1 }}</h1>
