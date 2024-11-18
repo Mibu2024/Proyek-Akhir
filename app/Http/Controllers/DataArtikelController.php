@@ -81,14 +81,9 @@ class DataArtikelController extends Controller
         $data = $request->all();
 
         if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->extension();
-
-            // Store the image in the 'public/foto_artikel' directory
-            $imagePath = $image->storeAs('foto_artikel', $imageName);
-
-            // Generate the full URL for the image
-            $data['foto'] = asset('foto_artikel/' . $imageName);
+            $imageName = time().'.'.$request->file('image')->extension();  
+            $request->file('image')->move(public_path('foto_artikel'), $imageName);
+            $data['foto'] = url('foto_artikel/' . $imageName);
         }
 
         DataArtikel::create($data);
