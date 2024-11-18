@@ -183,61 +183,57 @@ public function apiIbuHamil(Request $request)
             'nama_ibu' => 'required',
             'alamat' => 'required',
             'email' => 'required|email|unique:data_ibu_hamils,email',
-            'user_id' => 'required',
+            'user_id' => 'required|integer',
             'no_telepon' => 'required',
-            'password' => 'required',
-            'umur_ibu' => 'required',
-            'kehamilan_ke' => 'required',
+            'password' => 'required|min:6',
+            'umur_ibu' => 'required|integer',
+            'kehamilan_ke' => 'required|integer',
             'nama_suami' => 'required',
-            'umur_suami' => 'required',
-            'nik' => 'required',
+            'umur_suami' => 'required|integer',
+            'nik' => 'required|unique:data_ibu_hamils,nik',
+            'no_jkn_faskes_tk_1' => 'nullable|string',
+            'no_jkn_rujukan' => 'nullable|string',
+            'gol_darah' => 'nullable|string',
+            'pekerjaan' => 'nullable|string',
         ]);
-
+    
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
                 'message' => 'Validation Error.',
-                'data' => $validator->errors()
+                'data' => $validator->errors(),
             ], 422);
         }
-
-        // Check for existing email
-        $existingUser = DataIbuHamil::where('email', $request->email)->first();
-        if ($existingUser) {
+    
+        try {
+            $input = $request->all();
+    
+            // Hash password
+            $input['password'] = bcrypt($input['password']);
+    
+            // Create user
+            $user = DataIbuHamil::create($input);
+    
+            // Generate token
+            $token = $user->createToken('auth_token')->plainTextToken;
+    
+            return response()->json([
+                'success' => true,
+                'message' => 'Registration Success.',
+                'data' => [
+                    'user' => $user,
+                    'token' => $token,
+                ],
+            ], 201); // 201 Created
+        } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
-                'message' => 'Email already exists.',
-                'data' => ['email' => 'This email is already registered.']
-            ], 409); // 409 Conflict
+                'message' => 'Registration failed.',
+                'error' => $e->getMessage(),
+            ], 500); // 500 Internal Server Error
         }
-
-        $input = $request->all();
-        $input['password'] = bcrypt($input['password']);
-        $input['nama_ibu'] = $input['nama_ibu'] ?? 'default_username';
-        $user = DataIbuHamil::create($input);
-
-        $success['remember_token'] = $user->createToken('remember_token')->plainTextToken;
-        $success['nama_ibu'] = $user->nama_ibu;
-        $success['email'] = $user->email;
-        $success['alamat'] = $user->alamat;
-        $success['no_telepon'] = $user->no_telepon;
-        $success['umur_ibu'] = $user->umur_ibu;
-        $success['kehamilan_ke'] = $user->umur_suami;
-        $success['nama_suami'] = $user->nama_suami;
-        $success['umur_suami'] = $user->umur_suami;
-        $success['nik'] = $user->nik;
-
-        $token = $user->createToken('auth_token')->plainTextToken;
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Registration Success.',
-            'data' => [
-                'user' => $user,
-                'token' => $token,
-            ]
-        ]);
     }
+    
 
 
 
