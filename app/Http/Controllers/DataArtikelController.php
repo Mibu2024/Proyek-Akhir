@@ -88,7 +88,7 @@ class DataArtikelController extends Controller
             $imagePath = $image->storeAs('public/foto_artikel', $imageName);
 
             // Generate the full URL for the image
-            $data['foto'] = asset('storage/foto_artikel/' . $imageName);
+            $data['foto'] = asset('public/foto_artikel/' . $imageName);
         }
 
         DataArtikel::create($data);
