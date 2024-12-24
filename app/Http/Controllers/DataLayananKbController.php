@@ -72,6 +72,7 @@ class DataLayananKbController extends Controller
             'tekanan_darah'        => 'required|integer',
             'berat_badan'          => 'required|integer',
             'jenis_kb'             => 'required',
+            'merk_kb'              => 'required',
             'tanggal_kembali'      => 'required',
             'keluhan'              => 'required'
         ], [
@@ -81,6 +82,7 @@ class DataLayananKbController extends Controller
             'berat_badan.required'          => 'Berat badan wajib diisi.',
             'berat_badan.integer'           => 'Berat badan harus berupa angka.',
             'jenis_kb.required'             => 'Pilih Jenis Kontrasepsi',
+            'merk_kb.required'              => 'Isi Merk KB',
             'tanggal_kembali.required'      => 'Pilih tanggal kembali',
             'keluhan.required'              => 'Isi Keluhan Pasien'
         ]);
@@ -108,6 +110,7 @@ class DataLayananKbController extends Controller
             'tekanan_darah'        => 'required|integer',
             'berat_badan'          => 'required|integer',
             'jenis_kb'             => 'required',
+            'merk_kb'              => 'required',
             'tanggal_kembali'      => 'required',
             'keluhan'              => 'required'
         ], [
@@ -117,6 +120,7 @@ class DataLayananKbController extends Controller
             'berat_badan.required'          => 'Berat badan wajib diisi.',
             'berat_badan.integer'           => 'Berat badan harus berupa angka.',
             'jenis_kb.required'             => 'Pilih Jenis KB',
+            'merk_kb.required'              => 'Isi Merk KB',
             'tanggal_kembali'               => 'Pilih Tanggal Kembali',
             'keluhan.required'              => 'Isi Keluhan Pasien'
         ]);
@@ -127,6 +131,7 @@ class DataLayananKbController extends Controller
         $data_layanan_kbs->tekanan_darah        = $request->tekanan_darah;
         $data_layanan_kbs->berat_badan          = $request->berat_badan;
         $data_layanan_kbs->jenis_kb             = $request->jenis_kb;
+        $data_layanan_kbs->merk_kb              = $request->merk_kb;
         $data_layanan_kbs->tanggal_kembali      = $request->tanggal_kembali;
         $data_layanan_kbs->keluhan              = $request->keluhan;
         $data_layanan_kbs->save();
@@ -164,7 +169,7 @@ class DataLayananKbController extends Controller
 
         $csv .= "Data Layanan KB - MIBU \n \n";
 
-        $csv .= "No,Tanggal Praktik,Nama Ibu,Tekanan Darah,Berat Badan,Jenis KB,Tanggal Kembali,Keluhan\n";
+        $csv .= "No,Tanggal Praktik,Nama Ibu,Tekanan Darah,Berat Badan,Jenis KB, Merk KB, Tanggal Kembali,Keluhan\n";
 
         $counter = 1;
 
@@ -174,7 +179,7 @@ class DataLayananKbController extends Controller
             $tanggal_praktik = \Carbon\Carbon::parse($row->tanggal_praktik)->format('Y/m/d');
             $tanggal_kembali = \Carbon\Carbon::parse($row->tanggal_kembali)->format('Y/m/d');
 
-            $csv .= "{$counter},{$tanggal_praktik},{$row->nama_ibu},{$tekanan_darah},{$berat_badan},{$row->jenis_kb},{$tanggal_kembali},{$row->keluhan}\n";
+            $csv .= "{$counter},{$tanggal_praktik},{$row->nama_ibu},{$tekanan_darah},{$berat_badan},{$row->jenis_kb}, {$row->merk_kb}, {$tanggal_kembali},{$row->keluhan}\n";
             
             $counter++;
         }

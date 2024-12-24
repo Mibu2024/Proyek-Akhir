@@ -52,6 +52,7 @@
             <!-- Second Column -->
             <div class="col-md-6">
               <p><strong>Jenis KB:</strong> <span id="modalJenisKb"></span></p>
+                <p><strong>Merk KB:</strong> <span id="modalMerkKb"></span></p>
               <p><strong>Tanggal Kembali:</strong> <span id="modalTanggalKembaliKb"></span></p>
               <p><strong>Keluhan:</strong> <span id="modalKeluhanKb"></span></p>
             </div>
@@ -153,6 +154,7 @@
     document.getElementById('modalTekananDarahKb').textContent = record.tekanan_darah;
     document.getElementById('modalBeratBadanKb').textContent = record.berat_badan;
     document.getElementById('modalJenisKb').textContent = record.jenis_kb;
+    document.getElementById('modalMerkKb').textContent = record.merk_kb;
     document.getElementById('modalTanggalKembaliKb').textContent = record.tanggal_kembali;
 }
 </script>

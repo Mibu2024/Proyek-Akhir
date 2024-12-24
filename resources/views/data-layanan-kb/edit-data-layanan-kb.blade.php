@@ -150,6 +150,17 @@
                             @enderror
                         </div>
 
+                        <!-- Merk KB -->
+                        <div class="form-group col-md-6 mt-5">
+                            <label for="merk_kb"><strong>Merk KB</strong></label>
+                            <input type="text" name="merk_kb" id="merk_kb" class="form-control form-control-lg @error('merk_kb') is-invalid @enderror" value="{{ $data_layanan_kbs->merk_kb }}" placeholder="Masukkan Merk KB">
+                            @error('merk_kb')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+
                         <!-- Tanggal Kembali -->
                         <div class="form-group col-md-6 mt-5">
                             <label for="tanggal_kembali"><strong>Tanggal Kembali</strong></label>

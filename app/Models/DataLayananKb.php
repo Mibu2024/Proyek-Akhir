@@ -20,6 +20,7 @@ class DataLayananKb extends Model
         'tekanan_darah',
         'berat_badan',
         'jenis_kb',
+        'merk_kb',
         'tanggal_kembali',
         'id_ibu',
         'keluhan'

@@ -149,8 +149,8 @@
                                             @enderror
                                         </div>
                                     </div>
-                                </div>  
-                                
+                                </div> 
+                         
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group mt-5">
@@ -177,7 +177,23 @@
                                             @enderror
                                         </div>
                                     </div>
-                                </div> 
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                            <div class="form-group mt-5">
+                                                <label for=""><strong>Merk KB</strong></label>
+                                                <input type="text" name="merk_kb" id="merk_kb" class="form-control form-control-lg @error('merk_kb') is-invalid @enderror"
+                                                    placeholder="Masukkan Merk KB">
+                                                @error('merk_kb')
+                                                <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>  
 
                                 <div class="text-right">
                                     <a href="{{ route('data-ibu-hamil.detail', $data_ibu_hamils->id) }}" class="btn btn-outline-primary mr-2"

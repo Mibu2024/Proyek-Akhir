@@ -177,6 +177,11 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link {{ Request::is('data-imunisasi*') ? 'active' : '' }}" href="{{ route('data-imunisasi.index') }}">
+                <i class="fas fa-child"></i> <span>Catatan Imunisasi</span>
+            </a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link {{ Request::is('data-artikel*') ? 'active' : '' }}" href="{{ route('data-artikel.index') }}">
                 <i class="fas fa-newspaper"></i> <span>Artikel</span>
             </a>
