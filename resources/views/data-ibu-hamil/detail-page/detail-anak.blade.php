@@ -29,6 +29,17 @@
             box-shadow: 0 0px 8px rgba(0, 0, 0, 0.2);
         }
 
+        .history-pemeriksaan-container {
+            position: relative;
+            max-width: 100%;
+            height: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 40px;
+            padding: 10px;
+            box-shadow: 0 0px 8px rgba(0, 0, 0, 0.2);
+        }
+
         .banner-background {
             background: linear-gradient(to right, #34B28D, #0399AF, #2AAD94, #7DD957); /* Change colors as needed */
             height: 100%;
@@ -75,6 +86,10 @@
 
         .col-sm-3 h1{
             font-size: 18px;
+        }
+        .table-responsive {
+        max-height: 200px; 
+        overflow-y: auto;
         }
     </style>
 </head>
@@ -149,6 +164,45 @@
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger">Delete</button>
                                     </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container-title-status-imunisasi mb-n4">
+                        <div class="row align-items-center">
+                           <div class="col-sm-6">
+                              <h3>History Pemeriksaan</h3>
+                           </div>
+                        </div>
+                     </div>
+
+                    <!-- History Pemeriksaan Section -->
+                    <div class="history-pemeriksaan-container">
+                        <div class="container">
+                            <div class="table-responsive my-3">
+                                <table class="table table-bordered-secondary">
+                                    <thead>
+                                        <tr>
+                                            <th>Tanggal Pemeriksaan</th>
+                                            <th>Berat Badan (Kg)</th>
+                                            <th>Tinggi Badan (Cm)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ $anakRecords->tanggal_lahir }}</td>
+                                            <td>{{ $anakRecords->berat_badan }}</td>
+                                            <td>{{ $anakRecords->tinggi_badan }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row my-3">
+                                <div class="col text-right">
+                                    <a href="{{ route('data-anak.edit', [$anakRecords->id, $anakRecords->id_ibu]) }}" class="btn btn-success">New Data</a>
+
+                
                                 </div>
                             </div>
                         </div>
