@@ -81,6 +81,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('data-anak/download', [App\Http\Controllers\DataAnakController::class, 'download'])->name('data-anak.download');
     Route::get('/data-ibu-hamil/detail-anak/{id}', [App\Http\Controllers\DataAnakController::class, 'detail'])->name('data-anak.detail');
     Route::put('data-anak/{id}/update-imunisasi', [App\Http\Controllers\DataAnakController::class, 'updateImunisasi'])->name('data-anak.updateImunisasi');
+    Route::post('/data-anak/history/store', [App\Http\Controllers\DataAnakController::class, 'storeHistory'])->name('data-anak.history.store');
 
 
     // route buat halaman data imunisasi

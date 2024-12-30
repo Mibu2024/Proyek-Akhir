@@ -8,6 +8,7 @@ use App\Models\DataImunisasi;
 use App\Models\HistoryPemeriksaanAnak;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Log;
 
 class DataAnakController extends Controller
 {
@@ -49,7 +50,7 @@ class DataAnakController extends Controller
 
         public function detail($id)
     {
-        
+
         $anakRecords = DataAnak::find($id);
 
         if (!$anakRecords) {
@@ -104,6 +105,36 @@ class DataAnakController extends Controller
         DataAnak::create($data);
         toast('Data Berhasil Ditambahkan','success');
         return redirect()->route('data-ibu-hamil.detail', ['id' => $request->id_ibu]);
+    }
+
+    // Fungsi untuk menyimpan data ke tabel history_pemeriksaan_anak
+    public function storeHistory(Request $request)
+    {
+        
+    Log::info('Fungsi storeHistory dijalankan', $request->all());
+
+        $request->validate([
+            'tgl_pemeriksaan' => 'required',
+            'berat_badan' => 'required',
+            'tinggi_badan' => 'required',
+            'catatan' => 'nullable',
+        ], [
+            'tgl_pemeriksaan.required' => 'Tanggal pemeriksaan wajib diisi.',
+            'berat_badan.required' => 'Berat badan wajib diisi.',
+            'tinggi_badan.required' => 'Tinggi badan wajib diisi.',
+        ]);
+
+        // Simpan data ke dalam tabel history_pemeriksaan_anak
+        HistoryPemeriksaanAnak::create([
+            'id_anak' => $request->id_anak,
+            'tgl_pemeriksaan' => $request->tgl_pemeriksaan,
+            'berat_badan' => $request->berat_badan,
+            'tinggi_badan' => $request->tinggi_badan,
+            'catatan' => $request->catatan,
+        ]);
+
+        toast('Data pemeriksaan berhasil disimpan', 'success');
+        return redirect()->route('data-anak.detail', ['id' => $request->id_anak]);
     }
 
     public function edit($id, $id_ibu)
