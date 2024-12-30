@@ -180,7 +180,7 @@
                     <!-- History Pemeriksaan Section -->
                     <div class="history-pemeriksaan-container">
                         <div class="container">
-                            <div class="table-responsive my-3">
+                            <div class="table-responsive my-3 text-center">
                                 <table class="table table-bordered-secondary">
                                     <thead>
                                         <tr>
@@ -190,19 +190,23 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>{{ $anakRecords->tanggal_lahir }}</td>
-                                            <td>{{ $anakRecords->berat_badan }}</td>
-                                            <td>{{ $anakRecords->tinggi_badan }}</td>
-                                        </tr>
+                                        @forelse ($historyRecords as $history)
+                                            <tr>
+                                                <td>{{ $history->tgl_pemeriksaan }}</td>
+                                                <td>{{ $history->berat_badan }}</td>
+                                                <td>{{ $history->tinggi_badan }}</td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="3" class="text-center">Tidak Ada History Pemeriksaan</td>
+                                            </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>
                             <div class="row my-3">
                                 <div class="col text-right">
-                                    <a href="{{ route('data-anak.edit', [$anakRecords->id, $anakRecords->id_ibu]) }}" class="btn btn-success">New Data</a>
-
-                
+                                    <a href="" class="btn btn-success">New Data</a>
                                 </div>
                             </div>
                         </div>

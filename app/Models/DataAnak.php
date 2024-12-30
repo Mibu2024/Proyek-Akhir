@@ -78,4 +78,9 @@ class DataAnak extends Model
     {
         return $this->belongsTo(DataIbuHamil::class, 'id_ibu');
     }
+
+    public function historyPemeriksaan()
+    {
+        return $this->hasMany(HistoryPemeriksaanAnak::class, 'id_anak');
+    }
 }
