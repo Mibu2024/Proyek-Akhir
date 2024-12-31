@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\DataIbuHamil;
 use App\Models\DataImunisasi;
+use App\Models\HistoryPemeriksaanAnak;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -77,5 +78,10 @@ class DataAnak extends Model
     public function ibuHamil()
     {
         return $this->belongsTo(DataIbuHamil::class, 'id_ibu');
+    }
+
+    public function historyPemeriksaan()
+    {
+        return $this->hasMany(HistoryPemeriksaanAnak::class, 'id_anak');
     }
 }
