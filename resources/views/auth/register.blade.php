@@ -98,7 +98,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="name"
-                                            class="font-size-h6 font-weight-bolder text-dark">{{ __('Nama Faskes') }}</label>
+                                            class="font-size-h6 font-weight-bolder text-dark">{{ __('Nama') }}</label>
                                         <input id="name" type="text"
                                             class="form-control form-control-solid h-auto py-7 px-6 rounded-lg @error('name') is-invalid @enderror"
                                             name="name" value="{{ old('name') }}" autocomplete="name" autofocus />
@@ -133,12 +133,12 @@
                                         @enderror
                                     </div>
                                     <div class="form-group">
-                                        <label for="kode_yankes"
-                                            class="font-size-h6 font-weight-bolder text-dark">{{ __('Kode Fasilitas Layanan Kesehatan') }}</label>
-                                        <input id="kode_yankes" type="text"
-                                            class="form-control form-control-solid h-auto py-7 px-6 rounded-lg @error('kode_yankes') is-invalid @enderror"
-                                            name="kode_yankes" value="{{ old('kode_yankes') }}" autocomplete="kode_yankes" autofocus />
-                                        @error('kode_yankes')
+                                        <label for="no_str"
+                                            class="font-size-h6 font-weight-bolder text-dark">{{ __('Nomor STR') }}</label>
+                                        <input id="no_str" type="text"
+                                            class="form-control form-control-solid h-auto py-7 px-6 rounded-lg @error('no_str') is-invalid @enderror"
+                                            name="no_str" value="{{ old('no_str') }}" autocomplete="no_str" autofocus />
+                                        @error('no_str')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>

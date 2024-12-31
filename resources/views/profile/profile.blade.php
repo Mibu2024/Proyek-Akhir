@@ -104,8 +104,8 @@
                                 </div>
 
                                 <div class="kode-puskesmas">
-                                    <strong>Kode Layanan Fasilitas Kesehatan</strong>
-                                    <p>{{ $user->kode_yankes }}</p>
+                                    <strong>Nomor STR</strong>
+                                    <p>{{ $user->no_str }}</p>
                                 </div>
                             </div>
                         </div>

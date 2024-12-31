@@ -61,7 +61,7 @@ class RegisterController extends Controller
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
                 'alamat'   => ['required', 'string', 'max:255'],
                 'no_telepon'   => ['required', 'string', 'max:255', new NoLeadingZero],
-                'kode_yankes'   => ['required', 'string', 'max:255'],
+                'no_str'   => ['required', 'string', 'max:255'],
 
             ],
             $messages,
@@ -82,7 +82,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'alamat'    => $data['alamat'],
             'no_telepon'    => $data['no_telepon'],
-            'kode_yankes'    => $data['kode_yankes'],
+            'no_str'    => $data['no_str'],
         ]);
     }
 }

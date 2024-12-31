@@ -26,7 +26,7 @@ class User extends Authenticatable
         'password',
         'alamat',
         'no_telepon',
-        'kode_yankes',
+        'no_str',
     ];
 
     /**
