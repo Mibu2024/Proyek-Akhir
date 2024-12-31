@@ -176,92 +176,17 @@
                             </div>
                         </div>
 
-                        <div class="container-title-status-imunisasi mb-n4">
+                        <!-- <div class="container-title-status-imunisasi mb-n4">
                             <div class="row align-items-center">
                                 <div class="col-sm-6">
                                     <h3>History Pemeriksaan</h3>
                                 </div>
                             </div>
-                        </div>
-
-                        <!-- History Pemeriksaan Section -->
-                        <div class="history-pemeriksaan-container">
-                            <div class="container">
-                                <div class="table-responsive my-3 text-center">
-                                    <table class="table table-bordered-secondary">
-                                        <thead>
-                                            <tr>
-                                                <th>Tanggal Pemeriksaan</th>
-                                                <th>Berat Badan (Kg)</th>
-                                                <th>Tinggi Badan (Cm)</th>
-                                                <th>Catatan</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @forelse ($historyRecords as $history)
-                                                <tr>
-                                                    <td>{{ $history->tgl_pemeriksaan }}</td>
-                                                    <td>{{ $history->berat_badan }}</td>
-                                                    <td>{{ $history->tinggi_badan }}</td>
-                                                    <td>{{ $history->catatan }}</td>
-                                                </tr>
-                                            @empty
-                                                <tr>
-                                                    <td colspan="3" class="text-center">Tidak Ada History Pemeriksaan
-                                                    </td>
-                                                </tr>
-                                            @endforelse
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="row my-3">
-                                    <div class="col text-right">
-                                        <button class="btn btn-primary" data-toggle="modal" data-target="#modalTambahPemeriksaan">Tambah Pemeriksaan</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Modal new data history pemeriksaan anak -->
-                        <div class="modal fade" id="modalTambahPemeriksaan" tabindex="-1" role="dialog" aria-labelledby="modalTambahPemeriksaanLabel" aria-hidden="true">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <form action="{{ route('data-anak.history.store') }}" method="POST">
-                                        @csrf
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="modalTambahPemeriksaanLabel">Tambah Pemeriksaan Anak</h5>
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                        </div>
-                                        <div class="modal-body">
-                                            <input type="hidden" name="id_anak" value="{{ $anakRecords->id }}">
-                                            <div class="form-group">
-                                                <label for="tgl_pemeriksaan">Tanggal Pemeriksaan</label>
-                                                <input type="date" name="tgl_pemeriksaan" class="form-control" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="berat_badan">Berat Badan (kg)</label>
-                                                <input type="number" name="berat_badan" step="0.01" class="form-control" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="tinggi_badan">Tinggi Badan (cm)</label>
-                                                <input type="number" name="tinggi_badan" step="0.01" class="form-control" required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="catatan">Catatan</label>
-                                                <textarea name="catatan" class="form-control" rows="3"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
-                                            <button type="submit" class="btn btn-primary">Simpan</button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+                        </div> -->
                         
+                        @include('data-ibu-hamil.detail-page.components.history-pemeriksaan-section', [
+                            'historyPemeriksaan' => $historyRecords,
+                        ])
 
                         @include('data-ibu-hamil.detail-page.components.status-imunisasi-section', [
                             'imunisasiRecords' => $imunisasiRecords,

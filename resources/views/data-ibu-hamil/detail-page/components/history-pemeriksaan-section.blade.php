@@ -1,73 +1,38 @@
-<div class="container-title-riwayat-kb">
+<div class="container-title-riwayat-anak">
    <div class="row align-items-center">
       <div class="col-sm-6">
-         <h3>Riwayat Layanan KB</h3>
+         <h3>List Pemeriksaan</h3>
       </div>
       <div class="col-sm-6 d-flex justify-content-end align-items-center">
         <div class="btn-group me-2">
             <button type="button" class="btn btn-sort dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span>{{ $kbMonthName }}</span>
+                <span>{{$pemeriksaanMonthName}}  </span>
             </button>
             <div class="dropdown-menu">
-                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['kb_month' => '']) }}">Semua</a>
-                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['kb_month' => '1']) }}">Januari</a>
-                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['kb_month' => '2']) }}">Februari</a>
-                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['kb_month' => '3']) }}">Maret</a>
-                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['kb_month' => '4']) }}">April</a>
-                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['kb_month' => '5']) }}">Mei</a>
-                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['kb_month' => '6']) }}">Juni</a>
-                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['kb_month' => '7']) }}">Juli</a>
-                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['kb_month' => '8']) }}">Agustus</a>
-                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['kb_month' => '9']) }}">September</a>
-                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['kb_month' => '10']) }}">Oktober</a>
-                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['kb_month' => '11']) }}">November</a>
-                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['kb_month' => '12']) }}">Desember</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['pemeriksaan_month' => '']) }}">Semua</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['pemeriksaan_month' => '1']) }}">Januari</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['pemeriksaan_month' => '2']) }}">Februari</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['pemeriksaan_month' => '3']) }}">Maret</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['pemeriksaan_month' => '4']) }}">April</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['pemeriksaan_month' => '5']) }}">Mei</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['pemeriksaan_month' => '6']) }}">Juni</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['pemeriksaan_month' => '7']) }}">Juli</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['pemeriksaan_month' => '8']) }}">Agustus</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['pemeriksaan_month' => '9']) }}">September</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['pemeriksaan_month' => '10']) }}">Oktober</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['pemeriksaan_month' => '11']) }}">November</a>
+                <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['pemeriksaan_month' => '12']) }}">Desember</a>
             </div>
         </div>
-         <a href="{{ route('data-layanan-kb.create', $ibuHamil->id) }}" class="btn btn-create-data-kb ml-2 d-flex align-items-center justify-content-center">
+         <a href="{{ route('data-anak.history.create', $ibuHamil -> id) }}" class="btn btn-create-data-anak ml-2 d-flex align-items-center justify-content-center">
          <i class="flaticon2-add-1"></i>
-         <span>Tambah Layanan KB</span> 
+         <span>Tambah Pemeriksaan</span> 
          </a>
       </div>
    </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="kbRecordModal" tabindex="-1" aria-labelledby="healthRecordModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="healthRecordModalLabel">Health Record Details</h5>
-      </div>
-      <div class="modal-body">
-        <div class="container">
-          <div class="row">
-            <!-- First Column -->
-            <div class="col-md-6">
-              <p><strong>Tanggal Praktik:</strong> <span id="modalTanggalKb"></span></p>
-              <p><strong>Nama Ibu:</strong> <span id="modalNamaIbuKb"></span></p>
-              <p><strong>Tekanan Darah:</strong> <span id="modalTekananDarahKb"></span></p>
-              <p><strong>Berat Badan:</strong> <span id="modalBeratBadanKb"></span></p>
-            </div>
-            <!-- Second Column -->
-            <div class="col-md-6">
-              <p><strong>Jenis KB:</strong> <span id="modalJenisKb"></span></p>
-                <p><strong>Merk KB:</strong> <span id="modalMerkKb"></span></p>
-              <p><strong>Tanggal Kembali:</strong> <span id="modalTanggalKembaliKb"></span></p>
-              <p><strong>Keluhan:</strong> <span id="modalKeluhanKb"></span></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-@if ($kbRecords->isEmpty())
+@if ($historyRecords->isEmpty())
     <p 
     style="text-align: center; 
     width: 100%; 
@@ -76,31 +41,29 @@
     margin-top: 20px;
     box-shadow: 0 0px 8px rgba(0, 0, 0, 0.2);">-- No record found --</p>
 @else
-    @foreach ($kbRecords as $record)
-<!-- card list layanan kb -->
-        <div class="card-list-kb">
+    @foreach ($historyRecords as $record)
+<!-- card list riwayat anak -->
+        <div class="card-list-anak">
         <div class="container">
             
             <div class="row">
                 <!-- Margin for spacing -->
                 <div class="col-sm-5">
-                    <p>{{ \Carbon\Carbon::parse($record->tanggal_praktik)->format('l') }}</p>
-                    <h4>{{ \Carbon\Carbon::parse($record->tanggal_praktik)->format('d F Y') }}</h4>
+                    <p>{{ \Carbon\Carbon::parse($record->tgl_pemeriksaan)->format('l') }}</p>
+                    <h4>{{ \Carbon\Carbon::parse($record->tgl_pemeriksaan)->format('d F Y') }}</h4>
                 </div>
                 <div class="col-sm-2">
-                    <span class="status-badge">Tanggal Kembali: {{ $record->tanggal_kembali }}</span>
+                    <span class="status-badge">Berat Badan: {{ $record->berat_badan }}</span>
                 </div>
                 <div class="col-sm">
-                    <span class="status-badge">Jenis KB: {{ $record->jenis_kb }}</span>
+                    <span class="status-badge">Tinggi Badan: {{ $record->tinggi_badan }}</span>
                 </div>
                 <div class="col-sm-1 text-end">
-                <button 
-                    data-toggle="modal" 
-                    data-target="#kbRecordModal" 
+                    <button 
                     type="button" 
-                    class="btn btn-outline-info status-badge"
-                    onclick="setKbData({{ json_encode($record) }})"
-                    >
+                    class="btn btn-outline-info status-badge" 
+                    onclick="window.location.href='{{ route('data-anak.history.detail', $record->id) }}'" 
+                    style="font-size: 12px; border-radius: 8px;">
                         View
                     </button>
                 </div>
@@ -110,7 +73,7 @@
                         <i class="fas fa-ellipsis-v"></i>
                     </button>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton{{ $record->id }}">
-                        <a class="dropdown-item" href="{{ route('data-layanan-kb.edit', [$record -> id, $record->id_ibu]) }}">Edit</a>
+                        <a class="dropdown-item" href="{{ route('data-anak.history.edit', [$record -> id, $record->id_anak]) }}">Edit</a>
                         <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteModal-{{ $record->id }}">Delete</a>
                     </div>
                 </div>
@@ -129,7 +92,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <form id="deleteForm-{{ $record->id }}" action="{{ route('data-layanan-kb.delete', $record->id) }}" method="POST">
+                                <form id="deleteForm-{{ $record->id }}" action="{{ route('data-anak.history.delete', $record->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger">Delete</button>
@@ -139,29 +102,15 @@
                     </div>
                 </div>
             </div>
-
+            
         </div>
         </div>
     @endforeach
 @endif
 
-<!-- modal script -->
-<script>
-    function setKbData(record) {
-    document.getElementById('modalTanggalKb').textContent = record.tanggal_praktik;
-    document.getElementById('modalNamaIbuKb').textContent = record.nama_ibu;
-    document.getElementById('modalKeluhanKb').textContent = record.keluhan;
-    document.getElementById('modalTekananDarahKb').textContent = record.tekanan_darah;
-    document.getElementById('modalBeratBadanKb').textContent = record.berat_badan;
-    document.getElementById('modalJenisKb').textContent = record.jenis_kb;
-    document.getElementById('modalMerkKb').textContent = record.merk_kb;
-    document.getElementById('modalTanggalKembaliKb').textContent = record.tanggal_kembali;
-}
-</script>
-
 <head>
     <style>
-        .card-list-kb {
+        .card-list-anak {
             position: relative;
             max-width: 100%;
             border-radius: 8px;
@@ -172,16 +121,16 @@
             background-color: #f8f9fa;
         }
 
-        .card-list-kb .row {
+        .card-list-anak .row {
             align-items: center;
         }
 
-        .card-list-kb p {
+        .card-list-anak p {
             margin-bottom: 0;
             color: #6c757d;
         }
 
-        .card-list-kb h4 {
+        .card-list-anak h4 {
             margin-bottom: 0;
             font-weight: bold;
             color: #495057;
@@ -205,7 +154,7 @@
             }
         }
 
-        .btn-create-data-kb {
+        .btn-create-data-anak {
             align-items: center;
             border-radius: 8px;
             height: 50px;
@@ -214,7 +163,7 @@
             color: #4DBEFF;
         }
 
-        .btn-create-data-kb:hover {
+        .btn-create-data-anak:hover {
             align-items: center;
             border-radius: 8px;
             height: 50px;
@@ -223,7 +172,7 @@
             color: white;
         }
 
-        .btn-create-data-kb:hover .flaticon2-add-1 {
+        .btn-create-data-anak:hover .flaticon2-add-1 {
             align-items: center;
             border-radius: 8px;
             height: 50px;
@@ -236,7 +185,7 @@
             color: #4DBEFF;
         }
 
-        .container-title-riwayat-kb {
+        .container-title-riwayat-anak {
             margin-top: 30px;
         }
 
@@ -257,10 +206,9 @@
             margin-left: 10px;
         }
 
-        .card-list-kb, .container, .row {
+        .card-list-anak, .container, .row {
             overflow: visible !important;
         }
-
 
     </style>
 </head>

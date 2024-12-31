@@ -81,7 +81,16 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('data-anak/download', [App\Http\Controllers\DataAnakController::class, 'download'])->name('data-anak.download');
     Route::get('/data-ibu-hamil/detail-anak/{id}', [App\Http\Controllers\DataAnakController::class, 'detail'])->name('data-anak.detail');
     Route::put('data-anak/{id}/update-imunisasi', [App\Http\Controllers\DataAnakController::class, 'updateImunisasi'])->name('data-anak.updateImunisasi');
+    
+    // route history pemeriksaan anak
+    Route::get('/data-anak/history/{id}', [App\Http\Controllers\DataAnakController::class, 'index'])->name('data-anak.history');
+    Route::get('/data-anak/history/create/{id}', [App\Http\Controllers\DataAnakController::class, 'createPemeriksaan'])->name('data-anak.history.create');
     Route::post('/data-anak/history/store', [App\Http\Controllers\DataAnakController::class, 'storeHistory'])->name('data-anak.history.store');
+    Route::get('/data-anak/history/edit/{id}', [App\Http\Controllers\DataAnakController::class, 'editPemeriksaan'])->name('data-anak.history.edit');
+    Route::put('/data-anak/history/update/{id}', [App\Http\Controllers\DataAnakController::class, 'updatePemeriksaan'])->name('data-anak.history.update');
+    Route::delete('/data-anak/history/delete/{id}', [App\Http\Controllers\DataAnakController::class, 'deletePemeriksaan'])->name('data-anak.history.delete');
+    Route::get('/data-anak/history/detail/{id}', [App\Http\Controllers\DataAnakController::class, 'detailPemeriksaan'])->name('data-anak.history.detail');
+    
 
 
     // route buat halaman data imunisasi

@@ -94,19 +94,19 @@
     margin-top: 20px;
     box-shadow: 0 0px 8px rgba(0, 0, 0, 0.2);">-- No record found --</p>
 @else
-    @foreach ($healthRecords as $record)
+    @foreach ($healthRecords as $health)
         <div class="card-list-kesehatan">
         <div class="container">
             <div class="row">
                 <div class="col-sm-5">
-                    <p>{{ \Carbon\Carbon::parse($record->tanggal)->format('l') }}</p>
-                    <h4>{{ \Carbon\Carbon::parse($record->tanggal)->format('d F Y') }}</h4>
+                    <p>{{ \Carbon\Carbon::parse($health->tanggal)->format('l') }}</p>
+                    <h4>{{ \Carbon\Carbon::parse($health->tanggal)->format('d F Y') }}</h4>
                 </div>
                 <div class="col-sm-2">
-                    <span class="status-badge">Pemeriksa: {{ $record->nama_pemeriksa}}</span>
+                    <span class="status-badge">Pemeriksa: {{ $health->nama_pemeriksa}}</span>
                 </div>
                 <div class="col-sm col-hpl">
-                    <span class="status-badge">Tindakan: {{ $record->tindakan }}</span>
+                    <span class="status-badge">Tindakan: {{ $health->tindakan }}</span>
                 </div>
                 <div class="col-sm-1 justify-content-end">
                     <button 
@@ -114,23 +114,23 @@
                     data-target="#healthRecordModal" 
                     type="button" 
                     class="btn btn-outline-info status-badge"
-                    onclick="setHealthData({{ json_encode($record) }})"
+                    onclick="setHealthData({{ json_encode($health) }})"
                     >
                         View
                     </button>
                 </div>
 
                 <div class="dropdown ml-2">
-                    <button class="btn btn-light" type="button" id="dropdownMenuButton{{ $record->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-light" type="button" id="dropdownMenuButton{{ $health->id }}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-ellipsis-v"></i>
                     </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton{{ $record->id }}">
-                        <a class="dropdown-item" href="{{ route('data-kesehatan.edit', [$record -> id, $record->id_ibu]) }}">Edit</a>
-                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteModal-{{ $record->id }}">Delete</a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton{{ $health->id }}">
+                        <a class="dropdown-item" href="{{ route('data-kesehatan.edit', [$health -> id, $health->id_ibu]) }}">Edit</a>
+                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteModal-{{ $health->id }}">Delete</a>
                     </div>
                 </div>
 
-                <div class="modal fade" id="deleteModal-{{ $record->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                <div class="modal fade" id="deleteModal-{{ $health->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -144,7 +144,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <form id="deleteForm-{{ $record->id }}" action="{{ route('data-kesehatan.delete', $record->id) }}" method="POST">
+                                <form id="deleteForm-{{ $health->id }}" action="{{ route('data-kesehatan.delete', $health->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger">Delete</button>

@@ -48,7 +48,7 @@ class DataAnakController extends Controller
     }
 
 
-        public function detail($id)
+        public function detail($id, Request $request)
     {
 
         $anakRecords = DataAnak::find($id);
@@ -57,15 +57,42 @@ class DataAnakController extends Controller
             return redirect()->route('data-ibu-hamil.index')->with('error', 'Data Anak not found.');
         }
 
+        // pemeriksaan anak
+        $monthNames = [
+            1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 
+            4 => 'April', 5 => 'Mei', 6 => 'Juni',
+            7 => 'Juli', 8 => 'Agustus', 9 => 'September',
+            10 => 'Oktober', 11 => 'November', 12 => 'Desember'
+        ];
+
+        $pemeriksaanMonth = $request->input('pemeriksaan_month');
+        $pemeriksaanMonthName = $pemeriksaanMonth ? $monthNames[$pemeriksaanMonth] : 'Semua Bulan';
+
+        $pemeriksaanAnak = HistoryPemeriksaanAnak::where('id_anak', $id)
+            ->when($pemeriksaanMonth, function ($query) use ($pemeriksaanMonth) {
+                return $query->whereMonth('tgl_pemeriksaan', $pemeriksaanMonth);
+            })
+            ->orderBy('tgl_pemeriksaan', 'desc')
+            ->get();
+
         $ibuHamil = DataIbuHamil::find($anakRecords->id_ibu);
 
         $imunisasiRecords = DataImunisasi::find($anakRecords->id_anak);
 
-        $historyRecords = \App\Models\HistoryPemeriksaanAnak::where('id_anak', $anakRecords->id)->get();
+        $historyRecords = HistoryPemeriksaanAnak::where('id_anak', $anakRecords->id)->get();
 
         return view(
             'data-ibu-hamil/detail-page/detail-anak',
-            compact('anakRecords', 'ibuHamil', 'imunisasiRecords', 'historyRecords')
+            compact(
+                'anakRecords', 
+                'ibuHamil', 
+                'imunisasiRecords', 
+                'historyRecords',
+                'pemeriksaanAnak',
+                'pemeriksaanMonthName',
+                'pemeriksaanMonth',
+                'monthNames'
+                )
         );
     }
 
@@ -105,36 +132,6 @@ class DataAnakController extends Controller
         DataAnak::create($data);
         toast('Data Berhasil Ditambahkan','success');
         return redirect()->route('data-ibu-hamil.detail', ['id' => $request->id_ibu]);
-    }
-
-    // Fungsi untuk menyimpan data ke tabel history_pemeriksaan_anak
-    public function storeHistory(Request $request)
-    {
-        
-    Log::info('Fungsi storeHistory dijalankan', $request->all());
-
-        $request->validate([
-            'tgl_pemeriksaan' => 'required',
-            'berat_badan' => 'required',
-            'tinggi_badan' => 'required',
-            'catatan' => 'nullable',
-        ], [
-            'tgl_pemeriksaan.required' => 'Tanggal pemeriksaan wajib diisi.',
-            'berat_badan.required' => 'Berat badan wajib diisi.',
-            'tinggi_badan.required' => 'Tinggi badan wajib diisi.',
-        ]);
-
-        // Simpan data ke dalam tabel history_pemeriksaan_anak
-        HistoryPemeriksaanAnak::create([
-            'id_anak' => $request->id_anak,
-            'tgl_pemeriksaan' => $request->tgl_pemeriksaan,
-            'berat_badan' => $request->berat_badan,
-            'tinggi_badan' => $request->tinggi_badan,
-            'catatan' => $request->catatan,
-        ]);
-
-        toast('Data pemeriksaan berhasil disimpan', 'success');
-        return redirect()->route('data-anak.detail', ['id' => $request->id_anak]);
     }
 
     public function edit($id, $id_ibu)
@@ -297,6 +294,129 @@ class DataAnakController extends Controller
         }
 
         return $csv;
+    }
+
+
+
+    // Fungsi untuk menyimpan data ke tabel history_pemeriksaan_anak
+    public function storeHistory(Request $request)
+    {
+        
+    Log::info('Fungsi storeHistory dijalankan', $request->all());
+
+        $request->validate([
+            'tgl_pemeriksaan' => 'required',
+            'berat_badan' => 'required',
+            'tinggi_badan' => 'required',
+            'catatan' => 'nullable',
+        ], [
+            'tgl_pemeriksaan.required' => 'Tanggal pemeriksaan wajib diisi.',
+            'berat_badan.required' => 'Berat badan wajib diisi.',
+            'tinggi_badan.required' => 'Tinggi badan wajib diisi.',
+        ]);
+
+        // Simpan data ke dalam tabel history_pemeriksaan_anak
+        HistoryPemeriksaanAnak::create([
+            'id_anak' => $request->id_anak,
+            'tgl_pemeriksaan' => $request->tgl_pemeriksaan,
+            'berat_badan' => $request->berat_badan,
+            'tinggi_badan' => $request->tinggi_badan,
+            'catatan' => $request->catatan,
+        ]);
+
+        toast('Data pemeriksaan berhasil disimpan', 'success');
+        return redirect()->route('data-anak.detail', ['id' => $request->id_anak]);
+    }
+
+    //detail pemeriksaan
+    public function detailPemeriksaan($id)
+    {
+
+        $anakId = DataAnak::find($id);
+
+        if (!$anakId) {
+            return redirect()->route('data-anak.index')->with('error', 'Data Anak not found.');
+        }
+
+        $historyRecords = HistoryPemeriksaanAnak::where('id_anak', $anakId->id)->get();
+
+        return view(
+            'data-ibu-hamil/detail-page/detail-anak',
+            compact('anakRecords', 'ibuHamil', 'imunisasiRecords', 'historyRecords')
+        );
+    }
+
+    // create pemeriksaan
+    public function createPemeriksaan($id)
+    {
+        $data_anak = DataAnak::findOrFail($id);
+        
+        return view('data-ibu-hamil/detail-page/components/create-history-pemeriksaan-anak', [
+            'data_anak' => $data_anak
+        ]);
+    }
+
+    public function storePemeriksaan(Request $request)
+    {
+        $request->validate([
+            'tgl_pemeriksaan' => 'required',
+            'berat_badan' => 'required',
+            'tinggi_badan' => 'required',
+            'catatan' => 'nullable',
+        ], [
+            'tgl_pemeriksaan.required' => 'Tanggal pemeriksaan wajib diisi.',
+            'berat_badan.required' => 'Berat badan wajib diisi.',
+            'tinggi_badan.required' => 'Tinggi badan wajib diisi.',
+        ]);
+
+        // Simpan data ke dalam tabel history_pemeriksaan_anak
+        HistoryPemeriksaanAnak::create([
+            'id_anak' => $request->id_anak,
+            'tgl_pemeriksaan' => $request->tgl_pemeriksaan,
+            'berat_badan' => $request->berat_badan,
+            'tinggi_badan' => $request->tinggi_badan,
+            'catatan' => $request->catatan,
+        ]);
+
+        toast('Data pemeriksaan berhasil disimpan', 'success');
+        return redirect()->route('data-anak.detail', ['id' => $request->id_anak]);
+    }
+
+    public function editPemeriksaan($id)
+    {
+        $pemeriksaan = HistoryPemeriksaanAnak::findOrFail($id);
+
+        return view('data-ibu-hamil/detail-page/components/edit-history-pemeriksaan-anak', compact('pemeriksaan'));
+    }
+
+    public function updatePemeriksaan(Request $request, $id)
+    {
+        $request->validate([
+            'tgl_pemeriksaan' => 'required|date',
+            'berat_badan'     => 'required|integer',
+            'tinggi_badan'    => 'required|integer',
+            'catatan'         => 'nullable|string',
+        ], [
+            'tgl_pemeriksaan.required' => 'Tanggal pemeriksaan wajib diisi.',
+            'tgl_pemeriksaan.date'     => 'Tanggal pemeriksaan harus berupa tanggal yang valid.',
+            'berat_badan.required'     => 'Berat badan wajib diisi.',
+            'tinggi_badan.required'    => 'Tinggi badan wajib diisi.',
+        ]);
+
+        $pemeriksaan = HistoryPemeriksaanAnak::findOrFail($id);
+
+        $pemeriksaan->update($request->all());
+
+        toast('Data Pemeriksaan Anak Berhasil Diperbarui', 'success');
+        return redirect()->route('data-anak.detail', ['id' => $pemeriksaan->id_anak]);
+    }
+
+    public function deletePemeriksaan($id)
+    {
+        $data_pemeriksaan = HistoryPemeriksaanAnak::find($id);
+        $data_pemeriksaan->delete();
+        toast('Data Berhasil Dihapus','success');
+        return redirect(route('data-anak.detail', ['id' => $data_pemeriksaan->id_anak]));
     }
 
 
