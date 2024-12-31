@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ asset('data-ibu-hamil/detail-page/detail-ibu.css') }}"> 
+    <link rel="stylesheet" href="{{ asset('data-ibu-hamil/detail-page/detail-ibu.css') }}">
     <style>
         .banner-container {
             position: relative;
@@ -76,6 +76,15 @@
         .col-sm-3 h1{
             font-size: 18px;
         }
+
+        .link-ibu {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .link-ibu:hover {
+            color: blue;
+        }
     </style>
 </head>
 <body>
@@ -113,7 +122,11 @@
                                 </div>
                                 <div class="col-sm-3">
                                     Nama Ibu
-                                    <h1>{{ $anakRecords->nama_ibu }} Tahun</h1>
+                                    <h1>
+                                        <a href="{{ route('data-ibu-hamil.detail', $anakRecords->id_ibu) }}" class="link-ibu">
+                                            {{ $anakRecords->nama_ibu }}
+                                        </a>
+                                    </h1>
                                 </div>
                                 <div class="col-sm-3">
                                     Tanggal Lahir

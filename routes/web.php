@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Http\Controllers\Auth\VerificationController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -113,8 +114,11 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     //route profile
     Route::get('/profile/{id}', [App\Http\Controllers\ProfileController::class, 'detailUser'])->name('profile.index');
-    
-});    
+
+    // Route untuk jenis imunisasi
+    Route::get('/data-jenis-imunisasi', [App\Http\Controllers\JenisImunisasiController::class, 'index'])->name('data-jenis-imunisasi.index');
+    Route::get('/data-jenis-imunisasi/{id}', [App\Http\Controllers\JenisImunisasiController::class, 'show'])->name('data-jenis-imunisasi.show');
+});
 
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 

@@ -41,7 +41,7 @@ class DataAnakController extends Controller
 
         $data_anaks = $query->paginate($perPage);
         $currentPage = $data_anaks->currentPage();
-        
+
         return view('data-catatan-anak/data-anak', compact('data_anaks', 'currentPage', 'sort'));
     }
 
@@ -96,7 +96,7 @@ class DataAnakController extends Controller
 
         $data = $request->all();
         $data['nama_ibu'] = DataIbuHamil::find($request->id_ibu)->nama_ibu;
-        
+
 
         DataAnak::create($data);
         toast('Data Berhasil Ditambahkan','success');
@@ -154,7 +154,7 @@ class DataAnakController extends Controller
         return redirect()->route('data-anak.detail', ['id' => $dataAnak->id]);
     }
 
-    
+
 
 
     public function update(Request $request, $id)
@@ -178,7 +178,7 @@ class DataAnakController extends Controller
             'tinggi_badan.required'   => 'Tinggi badan wajib diisi',
             'lingkar_kepala.required' => 'Lingkar kepala wajib diisi',
         ]);
-        
+
         $data_anaks                 = DataAnak::find($id);
         $data_anaks->tanggal        = $request->tanggal;
         $data_anaks->id_ibu         = $request->id_ibu;
@@ -190,7 +190,7 @@ class DataAnakController extends Controller
         $data_anaks->lingkar_kepala = $request->lingkar_kepala;
         $data_anaks->save();
 
-    
+
 
         toast('Data Berhasil Diubah','success');
         return redirect()->route('data-ibu-hamil.detail', ['id' => $request->id_ibu]);
