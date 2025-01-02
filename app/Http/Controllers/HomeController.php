@@ -36,8 +36,7 @@ class HomeController extends Controller
         $sort = $request->input('sort', 'Paling Baru'); // Default to 'latest' if no sort option is selected
 
         // Sort based on the selected option
-        $query = DataIbuHamil::where('user_id', auth()->id())
-            ->where('nama_ibu', 'like', "%$search%");
+        $query = DataIbuHamil::where('nama_ibu', 'like', "%$search%");
 
         switch ($sort) {
             case 'oldest':
