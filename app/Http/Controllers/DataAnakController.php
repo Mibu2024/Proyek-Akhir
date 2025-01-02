@@ -23,8 +23,7 @@ class DataAnakController extends Controller
         $userId = auth()->user()->id;
         $ibuHamilIds = DataIbuHamil::where('user_id', $userId)->pluck('id');
 
-        $query = DataAnak::whereIn('id_ibu', $ibuHamilIds)
-            ->where(function ($query) use ($search) {
+        $query = DataAnak::where(function ($query) use ($search) {
                 $query->where('nama_ibu', 'like', "%$search%")
                     ->orWhere('nama_anak', 'like', "%$search%");
             });
