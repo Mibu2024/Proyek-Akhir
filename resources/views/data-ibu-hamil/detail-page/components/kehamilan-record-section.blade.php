@@ -6,7 +6,7 @@
       </div>
 
       <div class="col-sm-6 d-flex justify-content-end align-items-center">
-        
+
         <div class="btn-group me-2">
             <button type="button" class="btn btn-sort dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span>{{ $kehamilanMonthName ?? 'Bulan' }}</span>
@@ -28,23 +28,20 @@
             </div>
         </div>
 
-
          <a href="{{ route('data-kehamilan.create', $ibuHamil -> id) }}" class="btn btn-create-data-kehamilan ml-2 d-flex align-items-center justify-content-center">
          <i class="flaticon2-add-1"></i>
-         <span>Tambah Kehamilan</span> 
+         <span>Tambah Kehamilan</span>
          </a>
       </div>
    </div>
 </div>
 
-
-
 <!-- card list riwayat kehamilan -->
 @if ($kehamilanRecords->isEmpty())
-    <p 
-    style="text-align: center; 
-    width: 100%; 
-    padding: 30px; 
+    <p
+    style="text-align: center;
+    width: 100%;
+    padding: 30px;
     border-radius: 8px;
     margin-top: 20px;
     box-shadow: 0 0px 8px rgba(0, 0, 0, 0.2);">-- No record found --</p>
@@ -63,11 +60,11 @@
                 <div class="col-sm col-hpl">
                     <span class="status-badge">HPL: {{ \Carbon\Carbon::parse($record->tanggal_hpl)->format('d F Y') }}</span>
                 </div>
-                <div class="col-sm-1 justify-content-end">  
-                <button 
-                    type="button" 
-                    class="btn btn-outline-info status-badge" 
-                    onclick="window.location.href='{{ route('data-kehamilan.detail', [$record->id_ibu, $record->id_kehamilan]) }}'" 
+                <div class="col-sm-1 justify-content-end">
+                <button
+                    type="button"
+                    class="btn btn-outline-info status-badge"
+                    onclick="window.location.href='{{ route('data-kehamilan.detail', [$record->id_ibu, $record->id_kehamilan]) }}'"
                     style="font-size: 12px; border-radius: 8px;">
                         View
                 </button>
@@ -106,7 +103,7 @@
                     </div>
                 </div>
 
-            </div>  
+            </div>
         </div>
         </div>
     @endforeach

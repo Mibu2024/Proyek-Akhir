@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\DataAnak;
 use App\Models\DataIbuHamil;
 use App\Models\DataImunisasi;
+use App\Models\AnakImunisasi;
+use App\Models\JenisImunisasi;
 use App\Models\HistoryPemeriksaanAnak;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -43,58 +45,64 @@ class DataAnakController extends Controller
 
         $data_anaks = $query->paginate($perPage);
         $currentPage = $data_anaks->currentPage();
-        
+
         return view('data-catatan-anak/data-anak', compact('data_anaks', 'currentPage', 'sort'));
     }
 
 
-        public function detail($id, Request $request)
-    {
+    public function detail($id, Request $request)
+{
+    $anakRecords = DataAnak::find($id);
 
-        $anakRecords = DataAnak::find($id);
-
-        if (!$anakRecords) {
-            return redirect()->route('data-ibu-hamil.index')->with('error', 'Data Anak not found.');
-        }
-
-        // pemeriksaan anak
-        $monthNames = [
-            1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 
-            4 => 'April', 5 => 'Mei', 6 => 'Juni',
-            7 => 'Juli', 8 => 'Agustus', 9 => 'September',
-            10 => 'Oktober', 11 => 'November', 12 => 'Desember'
-        ];
-
-        $pemeriksaanMonth = $request->input('pemeriksaan_month');
-        $pemeriksaanMonthName = $pemeriksaanMonth ? $monthNames[$pemeriksaanMonth] : 'Semua Bulan';
-
-        $pemeriksaanAnak = HistoryPemeriksaanAnak::where('id_anak', $id)
-            ->when($pemeriksaanMonth, function ($query) use ($pemeriksaanMonth) {
-                return $query->whereMonth('tgl_pemeriksaan', $pemeriksaanMonth);
-            })
-            ->orderBy('tgl_pemeriksaan', 'desc')
-            ->get();
-
-        $ibuHamil = DataIbuHamil::find($anakRecords->id_ibu);
-
-        $imunisasiRecords = DataImunisasi::find($anakRecords->id_anak);
-
-        $historyRecords = HistoryPemeriksaanAnak::where('id_anak', $anakRecords->id)->get();
-
-        return view(
-            'data-ibu-hamil/detail-page/detail-anak',
-            compact(
-                'anakRecords', 
-                'ibuHamil', 
-                'imunisasiRecords', 
-                'historyRecords',
-                'pemeriksaanAnak',
-                'pemeriksaanMonthName',
-                'pemeriksaanMonth',
-                'monthNames'
-                )
-        );
+    if (!$anakRecords) {
+        return redirect()->route('data-ibu-hamil.index')->with('error', 'Data Anak not found.');
     }
+
+    // pemeriksaan anak
+    $monthNames = [
+        1 => 'Januari', 2 => 'Februari', 3 => 'Maret',
+        4 => 'April', 5 => 'Mei', 6 => 'Juni',
+        7 => 'Juli', 8 => 'Agustus', 9 => 'September',
+        10 => 'Oktober', 11 => 'November', 12 => 'Desember'
+    ];
+
+    $pemeriksaanMonth = $request->input('pemeriksaan_month');
+    $pemeriksaanMonthName = $pemeriksaanMonth ? $monthNames[$pemeriksaanMonth] : 'Semua Bulan';
+
+    $pemeriksaanAnak = HistoryPemeriksaanAnak::where('id_anak', $id)
+        ->when($pemeriksaanMonth, function ($query) use ($pemeriksaanMonth) {
+            return $query->whereMonth('tgl_pemeriksaan', $pemeriksaanMonth);
+        })
+        ->orderBy('tgl_pemeriksaan', 'desc')
+        ->get();
+
+    $ibuHamil = DataIbuHamil::find($anakRecords->id_ibu);
+
+    // Menambahkan data imunisasi berdasarkan id_anak
+    $imunisasiRecords = AnakImunisasi::with('jenisImunisasi')->where('id_anak', $anakRecords->id)->get();
+
+    // Mengambil history pemeriksaan anak
+    $historyRecords = HistoryPemeriksaanAnak::where('id_anak', $anakRecords->id)->get();
+
+    // Ambil data jenis imunisasi
+    $jenisImunisasi = JenisImunisasi::all();
+
+    // Mengembalikan tampilan dengan data yang relevan
+    return view(
+        'data-ibu-hamil/detail-page/detail-anak',
+        compact(
+            'anakRecords',
+            'ibuHamil',
+            'imunisasiRecords',   // Data imunisasi ditambahkan di sini
+            'historyRecords',
+            'pemeriksaanAnak',
+            'pemeriksaanMonthName',
+            'pemeriksaanMonth',
+            'monthNames',
+            'jenisImunisasi'
+        )
+    );
+}
 
 
     public function create($id)
@@ -127,7 +135,7 @@ class DataAnakController extends Controller
 
         $data = $request->all();
         $data['nama_ibu'] = DataIbuHamil::find($request->id_ibu)->nama_ibu;
-        
+
 
         DataAnak::create($data);
         toast('Data Berhasil Ditambahkan','success');
@@ -185,7 +193,7 @@ class DataAnakController extends Controller
         return redirect()->route('data-anak.detail', ['id' => $dataAnak->id]);
     }
 
-    
+
 
 
     public function update(Request $request, $id)
@@ -209,7 +217,7 @@ class DataAnakController extends Controller
             'tinggi_badan.required'   => 'Tinggi badan wajib diisi',
             'lingkar_kepala.required' => 'Lingkar kepala wajib diisi',
         ]);
-        
+
         $data_anaks                 = DataAnak::find($id);
         $data_anaks->tanggal        = $request->tanggal;
         $data_anaks->id_ibu         = $request->id_ibu;
@@ -221,7 +229,7 @@ class DataAnakController extends Controller
         $data_anaks->lingkar_kepala = $request->lingkar_kepala;
         $data_anaks->save();
 
-    
+
 
         toast('Data Berhasil Diubah','success');
         return redirect()->route('data-ibu-hamil.detail', ['id' => $request->id_ibu]);
@@ -301,7 +309,7 @@ class DataAnakController extends Controller
     // Fungsi untuk menyimpan data ke tabel history_pemeriksaan_anak
     public function storeHistory(Request $request)
     {
-        
+
     Log::info('Fungsi storeHistory dijalankan', $request->all());
 
         $request->validate([
@@ -350,7 +358,7 @@ class DataAnakController extends Controller
     public function createPemeriksaan($id)
     {
         $data_anak = DataAnak::findOrFail($id);
-        
+
         return view('data-ibu-hamil/detail-page/components/create-history-pemeriksaan-anak', [
             'data_anak' => $data_anak
         ]);

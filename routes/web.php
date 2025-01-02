@@ -81,7 +81,7 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('data-anak/download', [App\Http\Controllers\DataAnakController::class, 'download'])->name('data-anak.download');
     Route::get('/data-ibu-hamil/detail-anak/{id}', [App\Http\Controllers\DataAnakController::class, 'detail'])->name('data-anak.detail');
     Route::put('data-anak/{id}/update-imunisasi', [App\Http\Controllers\DataAnakController::class, 'updateImunisasi'])->name('data-anak.updateImunisasi');
-    
+
     // route history pemeriksaan anak
     Route::get('/data-anak/history/{id}', [App\Http\Controllers\DataAnakController::class, 'index'])->name('data-anak.history');
     Route::get('/data-anak/history/create/{id}', [App\Http\Controllers\DataAnakController::class, 'createPemeriksaan'])->name('data-anak.history.create');
@@ -90,8 +90,6 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::put('/data-anak/history/update/{id}', [App\Http\Controllers\DataAnakController::class, 'updatePemeriksaan'])->name('data-anak.history.update');
     Route::delete('/data-anak/history/delete/{id}', [App\Http\Controllers\DataAnakController::class, 'deletePemeriksaan'])->name('data-anak.history.delete');
     Route::get('/data-anak/history/detail/{id}', [App\Http\Controllers\DataAnakController::class, 'detailPemeriksaan'])->name('data-anak.history.detail');
-    
-
 
     // route buat halaman data imunisasi
     Route::get('/data-imunisasi', [App\Http\Controllers\DataImunisasiController::class, 'index'])->name('data-imunisasi.index');
@@ -99,8 +97,11 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::post('/store-data-imunisasi', [App\Http\Controllers\DataImunisasiController::class, 'store'])->name('data-imunisasi.store');
     Route::get('/data-imunisasi/{id}/edit', [App\Http\Controllers\DataImunisasiController::class, 'edit'])->name('data-imunisasi.edit');
     Route::put('/data-imunisasi/{id}', [App\Http\Controllers\DataImunisasiController::class, 'update'])->name('data-imunisasi.update');
-    Route::delete('/data-imunisasi/{id}', [App\Http\Controllers\DataImunisasiController::class, 'delete'])->name('data-imunisasi.delete');
     Route::get('data-imunisasi/download', [App\Http\Controllers\DataImunisasiController::class, 'download'])->name('data-imunisasi.download');
+    Route::post('/imunisasi', [App\Http\Controllers\ImunisasiController::class, 'store'])->name('imunisasi.store');
+    Route::get('/jenis-imunisasi', [App\Http\Controllers\JenisImunisasiController::class, 'index'])->name('jenis-imunisasi.index');
+    Route::delete('/imunisasi/{id}', [App\Http\Controllers\ImunisasiController::class, 'delete'])->name('imunisasi.delete');
+
 
     // route layanan kb
     Route::get('/data-layanan-kb', [App\Http\Controllers\DataLayananKbController::class, 'index'])->name('data-layanan-kb.index');
@@ -123,8 +124,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
 
     //route profile
     Route::get('/profile/{id}', [App\Http\Controllers\ProfileController::class, 'detailUser'])->name('profile.index');
-    
-});    
+
+});
 
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
