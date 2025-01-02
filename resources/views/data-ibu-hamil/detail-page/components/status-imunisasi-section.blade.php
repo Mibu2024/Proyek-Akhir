@@ -2,7 +2,7 @@
 <div class="container-title-status-imunisasi">
     <div class="row align-items-center">
        <div class="col-sm-6">
-          <h3>Status Imunisasi</h3>
+            <h3>Status Imunisasi</h3>
        </div>
        <div class="col-sm-6 d-flex justify-content-end align-items-center">
             <a
@@ -16,14 +16,14 @@
             </a>
         </div>
     </div>
- </div>
+</div>
 
-<!-- Modal for Adding Immunization Date -->
+<!-- Modal Tambah Imunisasi -->
 <div class="modal fade" id="imunisasiModal" tabindex="-1" aria-labelledby="imunisasiModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <form action="{{ route('imunisasi.store') }}" method="POST">
             @csrf
-            <input type="hidden" name="id_anak" value="{{ $anakRecords->id }}"> <!-- ID anak -->
+            <input type="hidden" name="id_anak" value="{{ $anakRecords->id }}">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="imunisasiModalLabel">Tambah Imunisasi</h5>
@@ -64,58 +64,16 @@
     </div>
 </div>
 
-<!-- Modal for Viewing Immunization Details -->
-<div class="modal fade" id="viewImunisasiModal" tabindex="-1" aria-labelledby="viewImunisasiModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="viewImunisasiModalLabel">Detail Imunisasi</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="imunisasi_type_detail">Jenis Imunisasi</label>
-                    <input type="text" class="form-control" id="imunisasi_type_detail" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="tanggal_imunisasi_detail">Tanggal Imunisasi</label>
-                    <input type="text" class="form-control" id="tanggal_imunisasi_detail" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="merek_detail">Merek Imunisasi</label>
-                    <input type="text" class="form-control" id="merek_detail" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="nama_pemeriksa_detail">Nama Pemeriksa</label>
-                    <input type="text" class="form-control" id="nama_pemeriksa_detail" readonly>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- card list imunisasi-->
 @if ($imunisasiRecords->isEmpty())
-    <p
-    style="text-align: center;
-    width: 100%;
-    padding: 30px;
-    border-radius: 8px;
-    margin-top: 20px;
-    box-shadow: 0 0px 8px rgba(0, 0, 0, 0.2);">-- No record found --</p>
+    <p style="text-align: center; width: 100%; padding: 30px; border-radius: 8px; margin-top: 20px; box-shadow: 0 0px 8px rgba(0, 0, 0, 0.2);">-- No record found --</p>
 @else
     @foreach($imunisasiRecords as $imunisasi)
         <div class="card-list-imunisasi mb-3">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-sm-5">
-                        <p>Tanggal Imunisasi</p>
-                        <h4>{{ \Carbon\Carbon::parse($imunisasi->tanggal)->format('d F Y') }}</h4>
+                        <p>Tanggal Imunisasi</p><h4>{{ \Carbon\Carbon::parse($imunisasi->tanggal)->format('d F Y') }}</h4>
                     </div>
                     <div class="col-sm-2">
                         <span class="status-badge">
@@ -133,7 +91,12 @@
                         <button
                             type="button"
                             class="btn btn-outline-info status-badge"
-                            onclick=""
+                            data-toggle="modal"
+                            data-target="#viewImunisasiModal"
+                            data-tanggal="{{ \Carbon\Carbon::parse($imunisasi->tanggal)->format('d F Y') }}"
+                            data-jenis="{{ $imunisasi->jenisImunisasi->jenis_imunisasi }}"
+                            data-merek="{{ $imunisasi->merek }}"
+                            data-pemeriksa="{{ $imunisasi->nama_pemeriksa }}"
                             style="font-size: 12px; border-radius: 8px;">
                                 View
                         </button>
@@ -143,15 +106,97 @@
                             <i class="fas fa-ellipsis-v"></i>
                         </button>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="">Edit</a>
-                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#deleteModal-{{ $imunisasi->id }}">Delete</a>
+                            <a
+                                class="dropdown-item edit-imunisasi"
+                                data-id="{{ $imunisasi->id }}"
+                                data-jenis="{{ $imunisasi->jenisImunisasi->id }}"
+                                data-tanggal="{{ $imunisasi->tanggal }}" data-merek="{{ $imunisasi->merek }}"
+                                data-pemeriksa="{{ $imunisasi->nama_pemeriksa }}"
+                            >
+                                Edit</a>
+                            <a class="dropdown-item" data-toggle="modal" data-target="#deleteModal-{{ $imunisasi->id }}">Delete</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Modal for Deleting Immunization -->
+        <!-- Modal View Imunisasi -->
+        <div class="modal fade" id="viewImunisasiModal" tabindex="-1" aria-labelledby="viewImunisasiModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="viewImunisasiModalLabel">Detail Imunisasi</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div>
+                                    <p><strong>Jenis Imunisasi:</strong> <span id="modalJenisImunisasi"></span></p>
+                                    <p><strong>Tanggal Imunisasi:</strong> <span id="modalTanggalImunisasi"></span></p>
+                                    <p><strong>Merek Imunisasi:</strong> <span id="modalMerekImunisasi"></span></p>
+                                    <p><strong>Nama Pemeriksa:</strong> <span id="modalNamaPemeriksa"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Edit Imunisasi-->
+        <div class="modal fade" id="editImunisasiModal" tabindex="-1" aria-labelledby="editImunisasiModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <form action="{{ route('imunisasi.update', 'imunisasi_id_placeholder') }}" method="POST" id="editImunisasiForm">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" name="id_anak" value="{{ $anakRecords->id }}"> <!-- ID anak -->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editImunisasiModalLabel">Edit Imunisasi</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="edit_imunisasi_type">Jenis Imunisasi</label>
+                                <select name="jenis_imunisasi" id="edit_imunisasi_type" class="form-control" required>
+                                    <option value="" disabled>Pilih Jenis Imunisasi</option>
+                                    @foreach ($jenisImunisasi as $jenis)
+                                        <option value="{{ $jenis->id }}">{{ $jenis->jenis_imunisasi }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="edit_tanggal_imunisasi">Tanggal Imunisasi</label>
+                                <input type="date" name="tanggal_imunisasi" id="edit_tanggal_imunisasi" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit_merek">Merek Imunisasi</label>
+                                <input type="text" name="merek" id="edit_merek" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit_nama_pemeriksa">Nama Pemeriksa</label>
+                                <input type="text" name="nama_pemeriksa" id="edit_nama_pemeriksa" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Update</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Modal Delete Imunisasi -->
         <div class="modal fade" id="deleteModal-{{ $imunisasi->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -175,6 +220,7 @@
                 </div>
             </div>
         </div>
+
     @endforeach
 @endif
 
@@ -294,18 +340,39 @@
          }
     </style>
 
-   <script>
-      $('#imunisasiModal').on('show.bs.modal', function (event) {
-         var button = $(event.relatedTarget);
-         var imunisasiType = button.data('imunisasi');
-         var imunisasiColumn = button.data('column');
+<script>
+    // Event listener untuk view detail imunisasi
+    $('#viewImunisasiModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var tanggalImunisasi = button.data('tanggal');
+        var jenisImunisasi = button.data('jenis');
+        var merekImunisasi = button.data('merek');
+        var namaPemeriksa = button.data('pemeriksa');
 
-         var modal = $(this);
-         modal.find('#imunisasi_type').val(imunisasiType);
-         modal.find('#imunisasi_name').val(imunisasiType); // Update this line
-         modal.find('#imunisasi_column').val(imunisasiColumn);
-      });
-   </script>
+        var modal = $(this);
+        modal.find('#modalTanggalImunisasi').text(tanggalImunisasi);
+        modal.find('#modalJenisImunisasi').text(jenisImunisasi);
+        modal.find('#modalMerekImunisasi').text(merekImunisasi);
+        modal.find('#modalNamaPemeriksa').text(namaPemeriksa);
+    });
+
+    // Event listener untuk edit imunisasi
+    $('.edit-imunisasi').on('click', function(event) {
+        event.preventDefault();
+        var imunisasiId = $(this).data('id');
+        var imunisasiType = $(this).data('jenis');
+        var tanggal = $(this).data('tanggal');
+        var merek = $(this).data('merek');
+        var namaPemeriksa = $(this).data('pemeriksa');
+
+        $('#editImunisasiForm').attr('action', '{{ url("imunisasi") }}/' + imunisasiId);
+        $('#edit_imunisasi_type').val(imunisasiType);
+        $('#edit_tanggal_imunisasi').val(tanggal);
+        $('#edit_merek').val(merek);
+        $('#edit_nama_pemeriksa').val(namaPemeriksa);
+        $('#editImunisasiModal').modal('show');
+    });
+</script>
 
 </head>
 

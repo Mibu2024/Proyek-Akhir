@@ -15,7 +15,6 @@ class JenisImunisasi extends Model
 
     public $timestamps = false;
 
-    // Relasi dengan AnakImunisasi
     public function imunisasi()
     {
         return $this->hasMany(AnakImunisasi::class, 'id_jenis');

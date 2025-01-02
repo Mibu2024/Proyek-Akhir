@@ -78,13 +78,10 @@ class DataAnakController extends Controller
 
     $ibuHamil = DataIbuHamil::find($anakRecords->id_ibu);
 
-    // Menambahkan data imunisasi berdasarkan id_anak
     $imunisasiRecords = AnakImunisasi::with('jenisImunisasi')->where('id_anak', $anakRecords->id)->get();
 
-    // Mengambil history pemeriksaan anak
     $historyRecords = HistoryPemeriksaanAnak::where('id_anak', $anakRecords->id)->get();
 
-    // Ambil data jenis imunisasi
     $jenisImunisasi = JenisImunisasi::all();
 
     // Mengembalikan tampilan dengan data yang relevan
@@ -93,7 +90,7 @@ class DataAnakController extends Controller
         compact(
             'anakRecords',
             'ibuHamil',
-            'imunisasiRecords',   // Data imunisasi ditambahkan di sini
+            'imunisasiRecords',
             'historyRecords',
             'pemeriksaanAnak',
             'pemeriksaanMonthName',
@@ -228,8 +225,6 @@ class DataAnakController extends Controller
         $data_anaks->tinggi_badan   = $request->tinggi_badan;
         $data_anaks->lingkar_kepala = $request->lingkar_kepala;
         $data_anaks->save();
-
-
 
         toast('Data Berhasil Diubah','success');
         return redirect()->route('data-ibu-hamil.detail', ['id' => $request->id_ibu]);

@@ -22,13 +22,11 @@ class AnakImunisasi extends Model
         'nama_pemeriksa',
     ];
 
-    // Relasi ke model Anak
     public function anak()
     {
         return $this->belongsTo(DataAnak::class, 'id_anak');
     }
 
-    // Relasi ke model JenisImunisasi
     public function jenisImunisasi()
     {
         return $this->belongsTo(JenisImunisasi::class, 'id_jenis');
