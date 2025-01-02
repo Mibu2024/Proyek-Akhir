@@ -93,6 +93,13 @@
                 max-height: 200px;
                 overflow-y: auto;
             }
+            .link-ibu {
+                color: inherit;
+                text-decoration: none;
+            }
+            .link-ibu:hover {
+                color: blue;
+            }
         </style>
     </head>
 
@@ -132,7 +139,11 @@
                                     </div>
                                     <div class="col-sm-3">
                                         Nama Ibu
-                                        <h1>{{ $anakRecords->nama_ibu }} Tahun</h1>
+                                        <h1>
+                                            <a href="{{ route('data-ibu-hamil.detail', $anakRecords->id_ibu) }}" class="link-ibu">
+                                                {{ $anakRecords->nama_ibu }}
+                                            </a>
+                                        </h1>
                                     </div>
                                     <div class="col-sm-3">
                                         Tanggal Lahir
@@ -183,7 +194,7 @@
                                 </div>
                             </div>
                         </div> -->
-                        
+
                         @include('data-ibu-hamil.detail-page.components.history-pemeriksaan-section', [
                             'historyPemeriksaan' => $historyRecords,
                         ])

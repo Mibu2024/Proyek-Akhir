@@ -1,19 +1,29 @@
-<!-- title riwayat kesehatan -->
+<!-- title status imunisasi -->
 <div class="container-title-status-imunisasi">
-   <div class="row align-items-center">
-      <div class="col-sm-6">
-         <h3>Status Imunisasi</h3>
-      </div>
-   </div>
+    <div class="row align-items-center">
+       <div class="col-sm-6">
+            <h3>Status Imunisasi</h3>
+       </div>
+       <div class="col-sm-6 d-flex justify-content-end align-items-center">
+            <a
+                href="#"
+                class="btn btn-create-data-imunisasi ml-2 d-flex align-items-center justify-content-center"
+                data-toggle="modal"
+                data-target="#imunisasiModal"
+            >
+                <i class="flaticon2-add-1"></i>
+                <span>Tambah Imunisasi</span>
+            </a>
+        </div>
+    </div>
 </div>
 
-<!-- Modal for Adding Immunization Date -->
+<!-- Modal Tambah Imunisasi -->
 <div class="modal fade" id="imunisasiModal" tabindex="-1" aria-labelledby="imunisasiModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-        <form action="{{ route('data-anak.updateImunisasi', $anakRecords->id) }}" method="POST">
+        <form action="{{ route('imunisasi.store') }}" method="POST">
             @csrf
-            @method('PUT')
-            <input type="hidden" name="imunisasi_column" id="imunisasi_column">
+            <input type="hidden" name="id_anak" value="{{ $anakRecords->id }}">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="imunisasiModalLabel">Tambah Imunisasi</h5>
@@ -24,11 +34,25 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="imunisasi_type">Jenis Imunisasi</label>
-                        <input type="text" id="imunisasi_type" class="form-control" readonly>
+                        <select name="jenis_imunisasi" id="imunisasi_type" class="form-control" required>
+                            <option value="" disabled selected>Pilih Jenis Imunisasi</option>
+                            @foreach ($jenisImunisasi as $jenis)
+                                <option value="{{ $jenis->id }}">{{ $jenis->jenis_imunisasi }}</option>
+                            @endforeach
+                        </select>
                     </div>
+
                     <div class="form-group">
                         <label for="tanggal_imunisasi">Tanggal Imunisasi</label>
                         <input type="date" name="tanggal_imunisasi" id="tanggal_imunisasi" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="merek">Merek Imunisasi</label>
+                        <input type="text" name="merek" id="merek" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nama_pemeriksa">Nama Pemeriksa</label>
+                        <input type="text" name="nama_pemeriksa" id="nama_pemeriksa" class="form-control" required>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -40,638 +64,165 @@
     </div>
 </div>
 
-
-<div class="container">
-    <!-- Hepatitis B -->
-    <div class="card-list-imunisasi mb-3">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-sm-5">
-                    <h4>Hepatitis B</h4>
+<!-- card list imunisasi-->
+@if ($imunisasiRecords->isEmpty())
+    <p style="text-align: center; width: 100%; padding: 30px; border-radius: 8px; margin-top: 20px; box-shadow: 0 0px 8px rgba(0, 0, 0, 0.2);">-- No record found --</p>
+@else
+    @foreach($imunisasiRecords as $imunisasi)
+        <div class="card-list-imunisasi mb-3">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-sm-5">
+                        <p>Tanggal Imunisasi</p><h4>{{ \Carbon\Carbon::parse($imunisasi->tanggal)->format('d F Y') }}</h4>
+                    </div>
+                    <div class="col-sm-2">
+                        <span class="status-badge">
+                            Jenis:
+                            <br>
+                            {{ $imunisasi->jenisImunisasi->jenis_imunisasi }}
+                        </span>
+                    </div>
+                    <div class="col-sm">
+                        <span class="status-badge">
+                            Pemeriksa: {{ $imunisasi->nama_pemeriksa }}
+                        </span>
+                    </div>
+                    <div class="col-sm-1 justify-content-end">
+                        <button
+                            type="button"
+                            class="btn btn-outline-info status-badge"
+                            data-toggle="modal"
+                            data-target="#viewImunisasiModal"
+                            data-tanggal="{{ \Carbon\Carbon::parse($imunisasi->tanggal)->format('d F Y') }}"
+                            data-jenis="{{ $imunisasi->jenisImunisasi->jenis_imunisasi }}"
+                            data-merek="{{ $imunisasi->merek }}"
+                            data-pemeriksa="{{ $imunisasi->nama_pemeriksa }}"
+                            style="font-size: 12px; border-radius: 8px;">
+                                View
+                        </button>
+                    </div>
+                    <div class="dropdown ml-2">
+                        <button class="btn btn-light" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                            <a
+                                class="dropdown-item edit-imunisasi"
+                                data-id="{{ $imunisasi->id }}"
+                                data-jenis="{{ $imunisasi->jenisImunisasi->id }}"
+                                data-tanggal="{{ $imunisasi->tanggal }}" data-merek="{{ $imunisasi->merek }}"
+                                data-pemeriksa="{{ $imunisasi->nama_pemeriksa }}"
+                            >
+                                Edit</a>
+                            <a class="dropdown-item" data-toggle="modal" data-target="#deleteModal-{{ $imunisasi->id }}">Delete</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-sm-2">
-                    <span class="status-badge {{ $anakRecords->tanggal_imunisasi_hepatitis_b ? 'sudah' : 'belum' }}">
-                        Status: {{ $anakRecords->tanggal_imunisasi_hepatitis_b ? 'Sudah' : 'Belum' }}
-                    </span>
-                </div>
-                <div class="col-sm">
-                    @if($anakRecords->tanggal_imunisasi_hepatitis_b)
-                        <span class="status-badge">Tanggal: {{ $anakRecords->tanggal_imunisasi_hepatitis_b }}</span>
-                    @endif
-                </div>
-
-                <div class="col-sm">
-                  @if(!$anakRecords->tanggal_imunisasi_hepatitis_b) <!-- Check if the status is not 'Sudah' -->
-                     <button class="btn btn-primary" data-toggle="modal" data-target="#imunisasiModal" 
-                              data-imunisasi="Hepatitis B" data-column="hepatitis_b">
-                           Tambah Imunisasi
-                     </button>
-                  @endif
-               </div>
             </div>
         </div>
-    </div>
 
-    <!-- BCG -->
-    <div class="card-list-imunisasi mb-3">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-sm-5">
-                    <h4>BCG</h4>
+        <!-- Modal View Imunisasi -->
+        <div class="modal fade" id="viewImunisasiModal" tabindex="-1" aria-labelledby="viewImunisasiModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="viewImunisasiModalLabel">Detail Imunisasi</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                            <div class="row">
+                                <div>
+                                    <p><strong>Jenis Imunisasi:</strong> <span id="modalJenisImunisasi"></span></p>
+                                    <p><strong>Tanggal Imunisasi:</strong> <span id="modalTanggalImunisasi"></span></p>
+                                    <p><strong>Merek Imunisasi:</strong> <span id="modalMerekImunisasi"></span></p>
+                                    <p><strong>Nama Pemeriksa:</strong> <span id="modalNamaPemeriksa"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
-                <div class="col-sm-2">
-                    <span class="status-badge {{ $anakRecords->tanggal_imunisasi_bcg ? 'sudah' : 'belum' }}">
-                        Status: {{ $anakRecords->tanggal_imunisasi_bcg ? 'Sudah' : 'Belum' }}
-                    </span>
-                </div>
-                <div class="col-sm">
-                    @if($anakRecords->tanggal_imunisasi_bcg)
-                        <span class="status-badge">Tanggal: {{ $anakRecords->tanggal_imunisasi_bcg }}</span>
-                    @endif
-                </div>
-
-                <div class="col-sm">
-                  @if(!$anakRecords->tanggal_imunisasi_bcg) <!-- Check if the status is not 'Sudah' -->
-                     <button class="btn btn-primary" data-toggle="modal" data-target="#imunisasiModal" 
-                              data-imunisasi="BCG" data-column="bcg">
-                           Tambah Imunisasi
-                     </button>
-                  @endif
-               </div>
             </div>
         </div>
-    </div>
+        <!-- Modal Edit Imunisasi-->
+        <div class="modal fade" id="editImunisasiModal" tabindex="-1" aria-labelledby="editImunisasiModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <form action="{{ route('imunisasi.update', 'imunisasi_id_placeholder') }}" method="POST" id="editImunisasiForm">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" name="id_anak" value="{{ $anakRecords->id }}"> <!-- ID anak -->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editImunisasiModalLabel">Edit Imunisasi</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="edit_imunisasi_type">Jenis Imunisasi</label>
+                                <select name="jenis_imunisasi" id="edit_imunisasi_type" class="form-control" required>
+                                    <option value="" disabled>Pilih Jenis Imunisasi</option>
+                                    @foreach ($jenisImunisasi as $jenis)
+                                        <option value="{{ $jenis->id }}">{{ $jenis->jenis_imunisasi }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
 
-    <!-- Polio Tetes 1 -->
-    <div class="card-list-imunisasi mb-3">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-sm-5">
-                    <h4>Polio Tetes 1</h4>
-                </div>
-                <div class="col-sm-2">
-                    <span class="status-badge {{ $anakRecords->tanggal_imunisasi_polio_tetes_1 ? 'sudah' : 'belum' }}">
-                        Status: {{ $anakRecords->tanggal_imunisasi_polio_tetes_1 ? 'Sudah' : 'Belum' }}
-                    </span>
-                </div>
-                <div class="col-sm">
-                    @if($anakRecords->tanggal_imunisasi_polio_tetes_1)
-                        <span class="status-badge">Tanggal: {{ $anakRecords->tanggal_imunisasi_polio_tetes_1 }}</span>
-                    @endif
-                </div>
-
-                <div class="col-sm">
-                  @if(!$anakRecords->tanggal_imunisasi_polio_tetes_1) <!-- Check if the status is not 'Sudah' -->
-                     <button class="btn btn-primary" data-toggle="modal" data-target="#imunisasiModal" 
-                              data-imunisasi="Polio Tetes 1" data-column="polio_tetes_1">
-                           Tambah Imunisasi
-                     </button>
-                  @endif
-               </div>
+                            <div class="form-group">
+                                <label for="edit_tanggal_imunisasi">Tanggal Imunisasi</label>
+                                <input type="date" name="tanggal_imunisasi" id="edit_tanggal_imunisasi" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit_merek">Merek Imunisasi</label>
+                                <input type="text" name="merek" id="edit_merek" class="form-control" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="edit_nama_pemeriksa">Nama Pemeriksa</label>
+                                <input type="text" name="nama_pemeriksa" id="edit_nama_pemeriksa" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success">Update</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
-    </div>
 
-    <!-- DPT-HB-Hib 1 -->
-    <div class="card-list-imunisasi mb-3">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-sm-5">
-                    <h4>DPT-HB-Hib 1</h4>
+        <!-- Modal Delete Imunisasi -->
+        <div class="modal fade" id="deleteModal-{{ $imunisasi->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Confirm Delete</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete this record?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <form action="{{ route('imunisasi.delete', $imunisasi->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
                 </div>
-                <div class="col-sm-2">
-                    <span class="status-badge {{ $anakRecords->tanggal_imunisasi_dpt_hb_hib_1 ? 'sudah' : 'belum' }}">
-                        Status: {{ $anakRecords->tanggal_imunisasi_dpt_hb_hib_1 ? 'Sudah' : 'Belum' }}
-                    </span>
-                </div>
-                <div class="col-sm">
-                    @if($anakRecords->tanggal_imunisasi_dpt_hb_hib_1)
-                        <span class="status-badge">Tanggal: {{ $anakRecords->tanggal_imunisasi_dpt_hb_hib_1 }}</span>
-                    @endif
-                </div>
-
-                <div class="col-sm">
-                  @if(!$anakRecords->tanggal_imunisasi_dpt_hb_hib_1) <!-- Check if the status is not 'Sudah' -->
-                     <button class="btn btn-primary" data-toggle="modal" data-target="#imunisasiModal" 
-                              data-imunisasi="DPT-HB-Hib 1" data-column="dpt_hb_hib_1">
-                           Tambah Imunisasi
-                     </button>
-                  @endif
-               </div>
             </div>
         </div>
-    </div>
 
-    <!-- Polio Tetes 2 -->
-    <div class="card-list-imunisasi mb-3">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-sm-5">
-                    <h4>Polio Tetes 2</h4>
-                </div>
-                <div class="col-sm-2">
-                    <span class="status-badge {{ $anakRecords->polio_tetes_2 ? 'sudah' : 'belum' }}">
-                        Status: {{ $anakRecords->polio_tetes_2 ? 'Sudah' : 'Belum' }}
-                    </span>
-                </div>
-                <div class="col-sm">
-                    @if($anakRecords->tanggal_imunisasi_polio_tetes_2)
-                        <span class="status-badge">Tanggal: {{ $anakRecords->tanggal_imunisasi_polio_tetes_2 }}</span>
-                    @endif
-                </div>
-
-                <div class="col-sm">
-                  @if(!$anakRecords->tanggal_imunisasi_polio_tetes_2) <!-- Check if the status is not 'Sudah' -->
-                     <button class="btn btn-primary" data-toggle="modal" data-target="#imunisasiModal" 
-                              data-imunisasi="Polio Tetes 2" data-column="polio_tetes_2">
-                           Tambah Imunisasi
-                     </button>
-                  @endif
-               </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Rota Virus 1 -->
-    <div class="card-list-imunisasi mb-3">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-sm-5">
-                    <h4>Rota Virus 1</h4>
-                </div>
-                <div class="col-sm-2">
-                    <span class="status-badge {{ $anakRecords->rota_virus_1 ? 'sudah' : 'belum' }}">
-                        Status: {{ $anakRecords->rota_virus_1 ? 'Sudah' : 'Belum' }}
-                    </span>
-                </div>
-                <div class="col-sm">
-                    @if($anakRecords->tanggal_imunisasi_rota_virus_1)
-                        <span class="status-badge">Tanggal: {{ $anakRecords->tanggal_imunisasi_rota_virus_1 }}</span>
-                    @endif
-                </div>
-
-                <div class="col-sm">
-                  @if(!$anakRecords->tanggal_imunisasi_rota_virus_1) <!-- Check if the status is not 'Sudah' -->
-                     <button class="btn btn-primary" data-toggle="modal" data-target="#imunisasiModal" 
-                              data-imunisasi="Rota Virus 1" data-column="rota_virus_1">
-                           Tambah Imunisasi
-                     </button>
-                  @endif
-               </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- PCV 1 -->
-    <div class="card-list-imunisasi mb-3">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-sm-5">
-                    <h4>PCV 1</h4>
-                </div>
-                <div class="col-sm-2">
-                    <span class="status-badge {{ $anakRecords->pcv_1 ? 'sudah' : 'belum' }}">
-                        Status: {{ $anakRecords->pcv_1 ? 'Sudah' : 'Belum' }}
-                    </span>
-                </div>
-                <div class="col-sm">
-                    @if($anakRecords->tanggal_imunisasi_pcv_1)
-                        <span class="status-badge">Tanggal: {{ $anakRecords->tanggal_imunisasi_pcv_1 }}</span>
-                    @endif
-                </div>
-
-                <div class="col-sm">
-                  @if(!$anakRecords->tanggal_imunisasi_pcv_1) <!-- Check if the status is not 'Sudah' -->
-                     <button class="btn btn-primary" data-toggle="modal" data-target="#imunisasiModal" 
-                              data-imunisasi="PCV 1" data-column="pcv_1">
-                           Tambah Imunisasi
-                     </button>
-                  @endif
-               </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- DPT-HB-HIB 2 -->
-    <div class="card-list-imunisasi mb-3">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-sm-5">
-                    <h4>DPT-HB-HIB 2</h4>
-                </div>
-                <div class="col-sm-2">
-                    <span class="status-badge {{ $anakRecords->dpt_hb_hib_2 ? 'sudah' : 'belum' }}">
-                        Status: {{ $anakRecords->dpt_hb_hib_2 ? 'Sudah' : 'Belum' }}
-                    </span>
-                </div>
-                <div class="col-sm">
-                    @if($anakRecords->tanggal_imunisasi_dpt_hb_hib_2)
-                        <span class="status-badge">Tanggal: {{ $anakRecords->tanggal_imunisasi_dpt_hb_hib_2 }}</span>
-                    @endif
-                </div>
-
-                <div class="col-sm">
-                  @if(!$anakRecords->tanggal_imunisasi_dpt_hb_hib_2) <!-- Check if the status is not 'Sudah' -->
-                     <button class="btn btn-primary" data-toggle="modal" data-target="#imunisasiModal" 
-                              data-imunisasi="DPT-HB-HIB 2" data-column="dpt_hb_hib_2">
-                           Tambah Imunisasi
-                     </button>
-                  @endif
-               </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Polio Tetes 3 -->
-    <div class="card-list-imunisasi mb-3">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-sm-5">
-                    <h4>Polio Tetes 3</h4>
-                </div>
-                <div class="col-sm-2">
-                    <span class="status-badge {{ $anakRecords->polio_tetes_3 ? 'sudah' : 'belum' }}">
-                        Status: {{ $anakRecords->polio_tetes_3 ? 'Sudah' : 'Belum' }}
-                    </span>
-                </div>
-                <div class="col-sm">
-                    @if($anakRecords->tanggal_imunisasi_polio_tetes_3)
-                        <span class="status-badge">Tanggal: {{ $anakRecords->tanggal_imunisasi_polio_tetes_3 }}</span>
-                    @endif
-                </div>
-
-                <div class="col-sm">
-                  @if(!$anakRecords->tanggal_imunisasi_polio_tetes_3) <!-- Check if the status is not 'Sudah' -->
-                     <button class="btn btn-primary" data-toggle="modal" data-target="#imunisasiModal" 
-                              data-imunisasi="Polio Tetes 3" data-column="polio_tetes_3">
-                           Tambah Imunisasi
-                     </button>
-                  @endif
-               </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Rota Virus 2 -->
-    <div class="card-list-imunisasi mb-3">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-sm-5">
-                    <h4>Rota Virus 2</h4>
-                </div>
-                <div class="col-sm-2">
-                    <span class="status-badge {{ $anakRecords->rota_virus_2 ? 'sudah' : 'belum' }}">
-                        Status: {{ $anakRecords->rota_virus_2 ? 'Sudah' : 'Belum' }}
-                    </span>
-                </div>
-                <div class="col-sm">
-                    @if($anakRecords->tanggal_imunisasi_rota_virus_2)
-                        <span class="status-badge">Tanggal: {{ $anakRecords->tanggal_imunisasi_rota_virus_2 }}</span>
-                    @endif
-                </div>
-                <div class="col-sm">
-                  @if(!$anakRecords->tanggal_imunisasi_rota_virus_2) <!-- Check if the status is not 'Sudah' -->
-                     <button class="btn btn-primary" data-toggle="modal" data-target="#imunisasiModal" 
-                              data-imunisasi="Rota Virus 2" data-column="rota_virus_2">
-                           Tambah Imunisasi
-                     </button>
-                  @endif
-               </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- PCV 2 -->
-   <div class="card-list-imunisasi mb-3">
-      <div class="container">
-         <div class="row align-items-center">
-               <div class="col-sm-5">
-                  <h4>PCV 2</h4>
-               </div>
-               <div class="col-sm-2">
-                  <span class="status-badge {{ $anakRecords->pcv_2 ? 'sudah' : 'belum' }}">
-                     Status: {{ $anakRecords->pcv_2 ? 'Sudah' : 'Belum' }}
-                  </span>
-               </div>
-               <div class="col-sm">
-                  @if($anakRecords->tanggal_imunisasi_pcv_2)
-                     <span class="status-badge">Tanggal: {{ $anakRecords->tanggal_imunisasi_pcv_2 }}</span>
-                  @endif
-               </div>
-
-               <div class="col-sm">
-                  @if(!$anakRecords->tanggal_imunisasi_pcv_2) <!-- Check if the status is not 'Sudah' -->
-                     <button class="btn btn-primary" data-toggle="modal" data-target="#imunisasiModal" 
-                              data-imunisasi="PCV 2" data-column="pcv_2">
-                           Tambah Imunisasi
-                     </button>
-                  @endif
-               </div>
-         </div>
-      </div>
-   </div>
-
-   <!-- DPT-HB-HIB 3 -->
-   <div class="card-list-imunisasi mb-3">
-      <div class="container">
-         <div class="row align-items-center">
-               <div class="col-sm-5">
-                  <h4>DPT-HB-HIB 3</h4>
-               </div>
-               <div class="col-sm-2">
-                  <span class="status-badge {{ $anakRecords->dpt_hb_hib_3 ? 'sudah' : 'belum' }}">
-                     Status: {{ $anakRecords->dpt_hb_hib_3 ? 'Sudah' : 'Belum' }}
-                  </span>
-               </div>
-               <div class="col-sm">
-                  @if($anakRecords->tanggal_imunisasi_dpt_hb_hib_3)
-                     <span class="status-badge">Tanggal: {{ $anakRecords->tanggal_imunisasi_dpt_hb_hib_3 }}</span>
-                  @endif
-               </div>
-
-               <div class="col-sm">
-                  @if(!$anakRecords->tanggal_imunisasi_dpt_hb_hib_3) <!-- Check if the status is not 'Sudah' -->
-                     <button class="btn btn-primary" data-toggle="modal" data-target="#imunisasiModal" 
-                              data-imunisasi="DPT-HB-HIB 3" data-column="dpt_hb_hib_3">
-                           Tambah Imunisasi
-                     </button>
-                  @endif
-               </div>
-         </div>
-      </div>
-   </div>
-
-   <!-- Polio Tetes 4 -->
-   <div class="card-list-imunisasi mb-3">
-      <div class="container">
-         <div class="row align-items-center">
-               <div class="col-sm-5">
-                  <h4>Polio Tetes 4</h4>
-               </div>
-               <div class="col-sm-2">
-                  <span class="status-badge {{ $anakRecords->polio_tetes_4 ? 'sudah' : 'belum' }}">
-                     Status: {{ $anakRecords->polio_tetes_4 ? 'Sudah' : 'Belum' }}
-                  </span>
-               </div>
-               <div class="col-sm">
-                  @if($anakRecords->tanggal_imunisasi_polio_tetes_4)
-                     <span class="status-badge">Tanggal: {{ $anakRecords->tanggal_imunisasi_polio_tetes_4 }}</span>
-                  @endif
-               </div>
-
-               <div class="col-sm">
-                  @if(!$anakRecords->tanggal_imunisasi_polio_tetes_4) <!-- Check if the status is not 'Sudah' -->
-                     <button class="btn btn-primary" data-toggle="modal" data-target="#imunisasiModal" 
-                              data-imunisasi="Polio Tetes 4" data-column="polio_tetes_4">
-                           Tambah Imunisasi
-                     </button>
-                  @endif
-               </div>
-         </div>
-      </div>
-   </div>
-
-   <!-- Polio Suntik 1 -->
-   <div class="card-list-imunisasi mb-3">
-      <div class="container">
-         <div class="row align-items-center">
-               <div class="col-sm-5">
-                  <h4>Polio Suntik 1</h4>
-               </div>
-               <div class="col-sm-2">
-                  <span class="status-badge {{ $anakRecords->polio_suntik_1 ? 'sudah' : 'belum' }}">
-                     Status: {{ $anakRecords->polio_suntik_1 ? 'Sudah' : 'Belum' }}
-                  </span>
-               </div>
-               <div class="col-sm">
-                  @if($anakRecords->tanggal_imunisasi_polio_suntik_1)
-                     <span class="status-badge">Tanggal: {{ $anakRecords->tanggal_imunisasi_polio_suntik_1 }}</span>
-                  @endif
-               </div>
-
-               <div class="col-sm">
-                  @if(!$anakRecords->tanggal_imunisasi_polio_suntik_1) <!-- Check if the status is not 'Sudah' -->
-                     <button class="btn btn-primary" data-toggle="modal" data-target="#imunisasiModal" 
-                              data-imunisasi="Polio Suntik 1" data-column="polio_suntik_1">
-                           Tambah Imunisasi
-                     </button>
-                  @endif
-               </div>
-         </div>
-      </div>
-   </div>
-
-   <!-- Rota Virus 3 -->
-   <div class="card-list-imunisasi mb-3">
-      <div class="container">
-         <div class="row align-items-center">
-               <div class="col-sm-5">
-                  <h4>Rota Virus 3</h4>
-               </div>
-               <div class="col-sm-2">
-                  <span class="status-badge {{ $anakRecords->rota_virus_3 ? 'sudah' : 'belum' }}">
-                     Status: {{ $anakRecords->rota_virus_3 ? 'Sudah' : 'Belum' }}
-                  </span>
-               </div>
-               <div class="col-sm">
-                  @if($anakRecords->tanggal_imunisasi_rota_virus_3)
-                     <span class="status-badge">Tanggal: {{ $anakRecords->tanggal_imunisasi_rota_virus_3 }}</span>
-                  @endif
-               </div>
-
-               <div class="col-sm">
-                  @if(!$anakRecords->tanggal_imunisasi_rota_virus_3) <!-- Check if the status is not 'Sudah' -->
-                     <button class="btn btn-primary" data-toggle="modal" data-target="#imunisasiModal" 
-                              data-imunisasi="Rota Virus 3" data-column="rota_virus_3">
-                           Tambah Imunisasi
-                     </button>
-                  @endif
-               </div>
-         </div>
-      </div>
-   </div>
-
-   <!-- Campak Rubella -->
-   <div class="card-list-imunisasi mb-3">
-      <div class="container">
-         <div class="row align-items-center">
-               <div class="col-sm-5">
-                  <h4>Campak Rubella</h4>
-               </div>
-               <div class="col-sm-2">
-                  <span class="status-badge {{ $anakRecords->campak_rubella ? 'sudah' : 'belum' }}">
-                     Status: {{ $anakRecords->campak_rubella ? 'Sudah' : 'Belum' }}
-                  </span>
-               </div>
-               <div class="col-sm">
-                  @if($anakRecords->tanggal_imunisasi_campak_rubella)
-                     <span class="status-badge">Tanggal: {{ $anakRecords->tanggal_imunisasi_campak_rubella }}</span>
-                  @endif
-               </div>
-
-               <div class="col-sm">
-                  @if(!$anakRecords->tanggal_imunisasi_campak_rubella) <!-- Check if the status is not 'Sudah' -->
-                     <button class="btn btn-primary" data-toggle="modal" data-target="#imunisasiModal" 
-                              data-imunisasi="Campak Rubella" data-column="campak_rubella">
-                           Tambah Imunisasi
-                     </button>
-                  @endif
-               </div>
-         </div>
-      </div>
-   </div>
-
-   <!-- Polio Suntik 2 -->
-   <div class="card-list-imunisasi mb-3">
-      <div class="container">
-         <div class="row align-items-center">
-               <div class="col-sm-5">
-                  <h4>Polio Suntik 2</h4>
-               </div>
-               <div class="col-sm-2">
-                  <span class="status-badge {{ $anakRecords->polio_suntik_2 ? 'sudah' : 'belum' }}">
-                     Status: {{ $anakRecords->polio_suntik_2 ? 'Sudah' : 'Belum' }}
-                  </span>
-               </div>
-               <div class="col-sm">
-                  @if($anakRecords->tanggal_imunisasi_polio_suntik_2)
-                     <span class="status-badge">Tanggal: {{ $anakRecords->tanggal_imunisasi_polio_suntik_2 }}</span>
-                  @endif
-               </div>
-
-               <div class="col-sm">
-                  @if(!$anakRecords->tanggal_imunisasi_polio_suntik_2) <!-- Check if the status is not 'Sudah' -->
-                     <button class="btn btn-primary" data-toggle="modal" data-target="#imunisasiModal" 
-                              data-imunisasi="Polio Suntik 2" data-column="polio_suntik_2">
-                           Tambah Imunisasi
-                     </button>
-                  @endif
-               </div>
-         </div>
-      </div>
-   </div>
-
-   <!-- Japanese Encephalitis -->
-   <div class="card-list-imunisasi mb-3">
-      <div class="container">
-         <div class="row align-items-center">
-               <div class="col-sm-5">
-                  <h4>Japanese Encephalitis</h4>
-               </div>
-               <div class="col-sm-2">
-                  <span class="status-badge {{ $anakRecords->japanese_encephalitis ? 'sudah' : 'belum' }}">
-                     Status: {{ $anakRecords->japanese_encephalitis ? 'Sudah' : 'Belum' }}
-                  </span>
-               </div>
-               <div class="col-sm">
-                  @if($anakRecords->tanggal_imunisasi_japanese_encephalitis)
-                     <span class="status-badge">Tanggal: {{ $anakRecords->tanggal_imunisasi_japanese_encephalitis }}</span>
-                  @endif
-               </div>
-
-               <div class="col-sm">
-                  @if(!$anakRecords->tanggal_imunisasi_japanese_encephalitis) <!-- Check if the status is not 'Sudah' -->
-                     <button class="btn btn-primary" data-toggle="modal" data-target="#imunisasiModal" 
-                              data-imunisasi="Japanese Encephalitis" data-column="japanese_encephalitis">
-                           Tambah Imunisasi
-                     </button>
-                  @endif
-               </div>
-         </div>
-      </div>
-   </div>
-
-   <!-- PCV 3 -->
-   <div class="card-list-imunisasi mb-3">
-      <div class="container">
-         <div class="row align-items-center">
-               <div class="col-sm-5">
-                  <h4>PCV 3</h4>
-               </div>
-               <div class="col-sm-2">
-                  <span class="status-badge {{ $anakRecords->pcv_3 ? 'sudah' : 'belum' }}">
-                     Status: {{ $anakRecords->pcv_3 ? 'Sudah' : 'Belum' }}
-                  </span>
-               </div>
-               <div class="col-sm">
-                  @if($anakRecords->tanggal_imunisasi_pcv_3)
-                     <span class="status-badge">Tanggal: {{ $anakRecords->tanggal_imunisasi_pcv_3 }}</span>
-                  @endif
-               </div>
-
-               <div class="col-sm">
-                  @if(!$anakRecords->tanggal_imunisasi_pcv_3) <!-- Check if the status is not 'Sudah' -->
-                     <button class="btn btn-primary" data-toggle="modal" data-target="#imunisasiModal" 
-                              data-imunisasi="PCV 3" data-column="pcv_3">
-                           Tambah Imunisasi
-                     </button>
-                  @endif
-               </div>
-         </div>
-      </div>
-   </div>
-
-   <!-- DPT-HB-HIB Lanjutan -->
-   <div class="card-list-imunisasi mb-3">
-      <div class="container">
-         <div class="row align-items-center">
-               <div class="col-sm-5">
-                  <h4>DPT-HB-HIB Lanjutan</h4>
-               </div>
-               <div class="col-sm-2">
-                  <span class="status-badge {{ $anakRecords->dpt_hb_hib_lanjutan ? 'sudah' : 'belum' }}">
-                     Status: {{ $anakRecords->dpt_hb_hib_lanjutan ? 'Sudah' : 'Belum' }}
-                  </span>
-               </div>
-               <div class="col-sm">
-                  @if($anakRecords->tanggal_imunisasi_dpt_hb_hib_lanjutan)
-                     <span class="status-badge">Tanggal: {{ $anakRecords->tanggal_imunisasi_dpt_hb_hib_lanjutan }}</span>
-                  @endif
-               </div>
-
-               <div class="col-sm">
-                  @if(!$anakRecords->tanggal_imunisasi_dpt_hb_hib_lanjutan) <!-- Check if the status is not 'Sudah' -->
-                     <button class="btn btn-primary" data-toggle="modal" data-target="#imunisasiModal" 
-                              data-imunisasi="DPT-HB-HIB Lanjutan" data-column="dpt_hb_hib_lanjutan">
-                           Tambah Imunisasi
-                     </button>
-                  @endif
-               </div>
-         </div>
-      </div>
-   </div>
-
-   <!-- Campak Rubella Lanjutan -->
-   <div class="card-list-imunisasi mb-3">
-      <div class="container">
-         <div class="row align-items-center">
-               <div class="col-sm-5">
-                  <h4>Campak Rubella Lanjutan</h4>
-               </div>
-               <div class="col-sm-2">
-                  <span class="status-badge {{ $anakRecords->campak_rubella_lanjutan ? 'sudah' : 'belum' }}">
-                     Status: {{ $anakRecords->campak_rubella_lanjutan ? 'Sudah' : 'Belum' }}
-                  </span>
-               </div>
-               <div class="col-sm">
-                  @if($anakRecords->tanggal_imunisasi_campak_rubella_lanjutan)
-                     <span class="status-badge">Tanggal: {{ $anakRecords->tanggal_imunisasi_campak_rubella_lanjutan }}</span>
-                  @endif
-               </div>
-
-               <div class="col-sm">
-                  @if(!$anakRecords->tanggal_imunisasi_campak_rubella_lanjutan) <!-- Check if the status is not 'Sudah' -->
-                     <button class="btn btn-primary" data-toggle="modal" data-target="#imunisasiModal" 
-                              data-imunisasi="Campak Rubella Lanjutan" data-column="campak_rubella_lanjutan">
-                           Tambah Imunisasi
-                     </button>
-                  @endif
-               </div>
-         </div>
-      </div>
-   </div>
-</div>
-
+    @endforeach
+@endif
 
 <head>
     <style>
@@ -781,24 +332,47 @@
          }
 
          .status-badge.belum {
-            background-color: #F44336;  
+            background-color: #F44336;
             color: white;
          }
-
+         .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.5);
+         }
     </style>
 
-   <script>
-      $('#imunisasiModal').on('show.bs.modal', function (event) {
-         var button = $(event.relatedTarget);
-         var imunisasiType = button.data('imunisasi');
-         var imunisasiColumn = button.data('column');
+<script>
+    // Event listener untuk view detail imunisasi
+    $('#viewImunisasiModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+        var tanggalImunisasi = button.data('tanggal');
+        var jenisImunisasi = button.data('jenis');
+        var merekImunisasi = button.data('merek');
+        var namaPemeriksa = button.data('pemeriksa');
 
-         var modal = $(this);
-         modal.find('#imunisasi_type').val(imunisasiType);
-         modal.find('#imunisasi_name').val(imunisasiType); // Update this line
-         modal.find('#imunisasi_column').val(imunisasiColumn);
-      });
-   </script>
+        var modal = $(this);
+        modal.find('#modalTanggalImunisasi').text(tanggalImunisasi);
+        modal.find('#modalJenisImunisasi').text(jenisImunisasi);
+        modal.find('#modalMerekImunisasi').text(merekImunisasi);
+        modal.find('#modalNamaPemeriksa').text(namaPemeriksa);
+    });
+
+    // Event listener untuk edit imunisasi
+    $('.edit-imunisasi').on('click', function(event) {
+        event.preventDefault();
+        var imunisasiId = $(this).data('id');
+        var imunisasiType = $(this).data('jenis');
+        var tanggal = $(this).data('tanggal');
+        var merek = $(this).data('merek');
+        var namaPemeriksa = $(this).data('pemeriksa');
+
+        $('#editImunisasiForm').attr('action', '{{ url("imunisasi") }}/' + imunisasiId);
+        $('#edit_imunisasi_type').val(imunisasiType);
+        $('#edit_tanggal_imunisasi').val(tanggal);
+        $('#edit_merek').val(merek);
+        $('#edit_nama_pemeriksa').val(namaPemeriksa);
+        $('#editImunisasiModal').modal('show');
+    });
+</script>
 
 </head>
 

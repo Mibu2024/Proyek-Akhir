@@ -14,7 +14,7 @@ class DataAnak extends Model
 
     protected $table = 'data_anaks';
     protected $primaryKey = 'id';
-    
+
     protected $fillable =  [
         'id',
         'tanggal',
@@ -72,7 +72,7 @@ class DataAnak extends Model
 
     public function imunisasi()
     {
-        return $this->hasMany(DataImunisasi::class, 'nama_anak');
+        return $this->hasMany(AnakImunisasi::class, 'nama_anak');
     }
 
     public function ibuHamil()
