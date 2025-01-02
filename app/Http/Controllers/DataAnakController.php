@@ -354,7 +354,7 @@ class DataAnakController extends Controller
     {
         $data_anak = DataAnak::findOrFail($id);
 
-        return view('data-ibu-hamil/detail-page/components/create-history-pemeriksaan-anak', [
+        return view('data-ibu-hamil\detail-page\components\create-history-pemeriksaan-anak', [
             'data_anak' => $data_anak
         ]);
     }

@@ -24,12 +24,39 @@
                 <a class="dropdown-item" href="{{ request()->fullUrlWithQuery(['pemeriksaan_month' => '12']) }}">Desember</a>
             </div>
         </div>
-         <a href="{{ route('data-anak.history.create', $ibuHamil -> id) }}" class="btn btn-create-data-anak ml-2 d-flex align-items-center justify-content-center">
+         <a href="{{ route('data-anak.history.create', $anakRecords -> id) }}" class="btn btn-create-data-anak ml-2 d-flex align-items-center justify-content-center">
          <i class="flaticon2-add-1"></i>
          <span>Tambah Pemeriksaan</span> 
          </a>
       </div>
    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="pemeriksaanRecordModal" tabindex="-1" aria-labelledby="pemeriksaanRecordModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="pemeriksaan">Examination Record Details</h5>
+      </div>
+      <div class="modal-body">
+        <div class="container">
+          <div class="row">
+            <!-- First Column -->
+            <div class="col-md-6">
+              <p><strong>Tanggal Periksa:</strong> <span id="tglModal"></span></p>
+              <p><strong>Tinggi Badan:</strong> <span id="tbModal"></span></p>
+              <p><strong>Berat Badan:</strong> <span id="bbModal"></span></p>
+              <p><strong>Catatan:</strong> <span id="catatanModal"></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 @if ($historyRecords->isEmpty())
@@ -60,11 +87,13 @@
                 </div>
                 <div class="col-sm-1 text-end">
                     <button 
-                    type="button" 
-                    class="btn btn-outline-info status-badge" 
-                    onclick="window.location.href='{{ route('data-anak.history.detail', $record->id) }}'" 
-                    style="font-size: 12px; border-radius: 8px;">
-                        View
+                        data-toggle="modal" 
+                        data-target="#pemeriksaanRecordModal" 
+                        type="button" 
+                        class="btn btn-outline-info status-badge"
+                        onclick="setDataPemeriksaan({{ json_encode($record) }})"
+                        >
+                            View
                     </button>
                 </div>
 
@@ -107,6 +136,17 @@
         </div>
     @endforeach
 @endif
+
+
+<!-- modal script -->
+<script>
+    function setDataPemeriksaan(record) {
+    document.getElementById('tglModal').textContent = record.tgl_pemeriksaan;
+    document.getElementById('tbModal').textContent = record.tinggi_badan;
+    document.getElementById('bbModal').textContent = record.berat_badan;
+    document.getElementById('catatanModal').textContent = record.catatan;
+}
+</script>
 
 <head>
     <style>

@@ -94,14 +94,14 @@
                     <span class="status-badge">Jenis KB: {{ $record->jenis_kb }}</span>
                 </div>
                 <div class="col-sm-1 text-end">
-                <button 
-                    data-toggle="modal" 
-                    data-target="#kbRecordModal" 
-                    type="button" 
-                    class="btn btn-outline-info status-badge"
-                    onclick="setKbData({{ json_encode($record) }})"
-                    >
-                        View
+                    <button 
+                        data-toggle="modal" 
+                        data-target="#kbRecordModal" 
+                        type="button" 
+                        class="btn btn-outline-info status-badge"
+                        onclick="setKbData({{ json_encode($record) }})"
+                        >
+                            View
                     </button>
                 </div>
 
