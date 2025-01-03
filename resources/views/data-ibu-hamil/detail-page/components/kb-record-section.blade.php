@@ -37,7 +37,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="healthRecordModalLabel">Health Record Details</h5>
+        <h5 class="modal-title" id="healthRecordModalLabel">KB Record Details</h5>
       </div>
       <div class="modal-body">
         <div class="container">
