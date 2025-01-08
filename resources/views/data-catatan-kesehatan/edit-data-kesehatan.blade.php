@@ -88,7 +88,7 @@
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="{{ route('home') }}">Data Ibu Hamil</a></li>
-                            <li class="breadcrumb-item"><a href="{{ route('data-ibu-hamil.detail', $data_ibu_hamils->id) }}">Detail Ibu Hamil</a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('data-ibu-hamil.detail', $data_kesehatans->id, $data_kesehatans->id_ibu) }}">Detail Ibu Hamil</a></li>
                             <li class="breadcrumb-item active" aria-current="page">Create Data Kehamilan</li>
                         </ol>
                     </nav>
@@ -99,7 +99,7 @@
                     @csrf
                     @method('PUT')
                     
-                    <input type="hidden" name="id_ibu" value="{{ $data_ibu_hamils -> id }}">
+                    <input type="hidden" name="id_ibu" value="{{ $data_kesehatans -> id_ibu }}">
     
                         <div class="row">
                             <div class="col-md-6">
@@ -326,7 +326,7 @@
                         </div>
 
                         <div class="text-right">
-                            <a href="{{ route('data-ibu-hamil.detail', $data_ibu_hamils->id) }}" class="btn btn-outline-primary mr-2"
+                            <a href="{{ route('data-ibu-hamil.detail', $data_kesehatans->id_ibu) }}" class="btn btn-outline-primary mr-2"
                             role="button">Batal</a>
                             <button type="submit" class="btn btn-primary">Simpan</button>
                         </div>
