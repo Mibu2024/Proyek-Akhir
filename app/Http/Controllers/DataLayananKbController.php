@@ -33,8 +33,7 @@ class DataLayananKbController extends Controller
         $userId = auth()->user()->id;
         $ibuHamilIds = DataIbuHamil::where('user_id', $userId)->pluck('id');
 
-        $query = DataLayananKb::whereIn('id_ibu', $ibuHamilIds)
-            ->where('nama_ibu', 'like', "%$search%");
+        $query = DataLayananKb::where('nama_ibu', 'like', "%$search%");
 
         switch ($sort) {
             case 'oldest':
