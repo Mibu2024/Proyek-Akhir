@@ -35,8 +35,7 @@ class DataKesehatanController extends Controller
         $userId = auth()->user()->id;
         $ibuHamilIds = DataIbuHamil::where('user_id', $userId)->pluck('id');
     
-        $query = DataKesehatan::whereIn('id_ibu', $ibuHamilIds)
-            ->where('nama_ibu', 'like', "%$search%");
+        $query = DataKesehatan::where('nama_ibu', 'like', "%$search%");
     
         // Sort based on selected option
         switch ($sort) {
